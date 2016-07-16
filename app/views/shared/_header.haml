@@ -1,0 +1,19 @@
+%nav#main-nav.navbar.navbar-default.navbar-static-top
+  .container-fluid
+    .navbar-header
+      %button.navbar-toggle.collapsed{'data-target' => '#bs-example-navbar-collapse-1', 'data-toggle' => 'collapse', type: 'button'}
+        %span.sr-only Toggle navigation
+        Menu
+      = link_to root_path, class: 'navbar-brand' do
+        %i.header-logo
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          %a.page-scroll{href: 'javascript: void(0);'} Become a performer
+        - if false
+          %li
+            %a.page-scroll{href: 'javascript: void(0);'} Create Services
+        %li
+          %a.page-scroll{href: 'javascript: void(0);'} About
+        %li
+          %a.page-scroll{href: 'javascript: void(0);'} Sign in

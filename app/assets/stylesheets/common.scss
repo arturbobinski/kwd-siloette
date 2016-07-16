@@ -1,0 +1,26 @@
+.bg-cover {
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.text-center-m {
+  @media (max-width: $screen-xs-max) {
+    text-align: center;
+  }
+}
+
+.text-white {
+  color: white;
+}
+
+.text-upper {
+  text-transform: uppercase;
+}
+
+.logo {
+  text-transform: uppercase;
+}

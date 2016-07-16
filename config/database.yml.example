@@ -1,0 +1,20 @@
+default: &default
+  adapter: mysql2
+  host: localhost
+  username: root
+  password:
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: silotte_dev
+
+test:
+  <<: *default
+  database: silotte_test
+
+production:
+  <<: *default
+  database: silotte
+  socket: /tmp/mysql.sock

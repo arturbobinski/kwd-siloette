@@ -1,0 +1,38 @@
+.home-index {
+  #main-nav {
+    background-color: transparent;
+    border-color: transparent;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    .navbar-nav > li > a {
+      color: white;
+    }
+  }
+
+  .jumbotron {
+    @extend .bg-cover;
+    color: white;
+
+    @media (max-width: $screen-xs-max) {
+      background-image: image-url('main-bg-small.jpg');
+    }
+
+    @media (min-width: $screen-sm-min) {
+      background-image: image-url('main-bg.jpg');
+      height: 0;
+      padding-bottom: 56.25%;
+      padding-top: 0;
+    }
+
+    .container {
+      padding-top: 270px;
+    }
+  }
+}
+
+#how-it-works {
+  
+}

@@ -1,0 +1,34 @@
+.navbar {
+  margin-bottom: 0;
+}
+
+.navbar-brand {
+  text-transform: uppercase;
+  padding: 9px;
+}
+
+.header-logo {
+  @extend .bg-cover;
+  display: block;
+  height: 34px;
+  min-width: 20px;
+
+  @media (max-width: $screen-xs-max) {
+    background-image: image-url('logo-small.png');
+  }
+
+  @media (min-width: $screen-sm-min) {
+    background-image: image-url('logo.png');
+    width: 160px;
+  }
+
+  .home-index & {
+    @media (max-width: $screen-xs-max) {
+      background-image: image-url('logo-small-white.png');
+    }
+
+    @media (min-width: $screen-sm-min) {
+      background-image: image-url('logo-white.png');
+    }
+  }
+}

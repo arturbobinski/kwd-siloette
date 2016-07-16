@@ -1,0 +1,24 @@
+footer {
+  background-color: white;
+  margin-top: 3em;
+  padding: 1em;
+
+  a {
+    color: $navbar-default-link-color;
+
+    &:hover {
+      color: $navbar-default-link-hover-color;
+    }
+  }
+
+  ul {
+    li {
+      display: inline-block;
+      margin-right: 1em;
+    }
+  }
+
+  .social a {
+    font-size: 23px;
+  }
+}

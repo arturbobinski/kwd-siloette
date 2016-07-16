@@ -1,0 +1,25 @@
+%footer
+  .container
+    .row
+      .col-sm-2.text-center
+        = link_to root_path do
+          = image_tag 'logo-small.png', alt: 'Siloette', height: 32, class: 'logo'
+      .col-sm-8.text-center
+        %ul.list-unstyled
+          %li= link_to t('layouts.infos.terms'), 'javascript: void(0);'
+          %li= link_to t('layouts.infos.register_details'), 'javascript: void(0);'
+          %li= link_to t('layouts.infos.faqs'), 'javascript: void(0);'
+          %li= link_to t('layouts.infos.about'), 'javascript: void(0);'
+          %li= link_to t('layouts.infos.contact_us'), 'javascript: void(0);'
+          %li= link_to t('layouts.infos.blog'), 'javascript: void(0);'
+      .col-sm-2.text-center
+        %ul.list-unstyled.social
+          %li
+            = link_to 'javascript: void(0);' do
+              = fa_icon 'twitter'
+          %li
+            = link_to 'javascript: void(0);' do
+              = fa_icon 'google-plus'
+          %li
+            = link_to 'javascript: void(0);' do
+              = fa_icon 'facebook'
