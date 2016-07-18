@@ -1,0 +1,25 @@
+input.parsley-error,
+select.parsley-error,
+textarea.parsley-error {
+  border: 1px solid $brand-danger;
+}
+
+.parsley-errors-list {
+  color: $brand-danger;
+  margin: 2px 0 3px 0;
+  padding: 0;
+  list-style-type: none;
+  opacity: 0;
+  -moz-opacity: 0;
+  -webkit-opacity: 0;
+
+  transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  -ms-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+}
+
+.parsley-errors-list.filled {
+  opacity: 1;
+}

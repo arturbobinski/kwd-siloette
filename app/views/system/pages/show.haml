@@ -1,0 +1,10 @@
+- if params[:full].present?
+  .container
+    %h4= @page.title
+    = @page.body.html_safe
+- else
+  .modal-header
+    %button.close(type='button' aria-hidden='true' data-dismiss='modal') &times;
+    %h4.modal-title= @page.title
+  .modal-body
+    = @page.body.html_safe

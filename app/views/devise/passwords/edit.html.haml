@@ -1,0 +1,13 @@
+.row
+  .col-sm-6.col-sm-offset-3
+    .panel.panel-default
+      .panel-heading
+        = t('.new_password')
+      .panel-body
+        = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'form-horizontal', 'data-parsley-validate' => true }) do |f|
+          =# devise_error_messages!
+          = f.hidden_field :reset_password_token
+          = f.input :password, autofocus: true, autocomplete: 'off', required: true, input_html: { 'parsley-equalto' => 6 }
+          = f.input :password_confirmation, autocomplete: 'off', required: true, input_html: { 'parsley-equalto' => '#user_password' }
+          .actions
+            = f.submit t('.submit'), class: 'btn btn-primary btn-block'

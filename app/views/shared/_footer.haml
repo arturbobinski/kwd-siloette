@@ -6,11 +6,8 @@
           = image_tag 'logo-small.png', alt: 'Siloette', height: 32, class: 'logo'
       .col-sm-8.text-center
         %ul.list-unstyled
-          %li= link_to t('layouts.infos.terms'), 'javascript: void(0);'
-          %li= link_to t('layouts.infos.register_details'), 'javascript: void(0);'
-          %li= link_to t('layouts.infos.faqs'), 'javascript: void(0);'
-          %li= link_to t('layouts.infos.about'), 'javascript: void(0);'
-          %li= link_to t('layouts.infos.contact_us'), 'javascript: void(0);'
+          - @pages.each do |page|
+            %li= link_to page.title, system_page_path(page.slug, full: true)
           %li= link_to t('layouts.infos.blog'), 'javascript: void(0);'
       .col-sm-2.text-center
         %ul.list-unstyled.social

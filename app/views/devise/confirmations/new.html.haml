@@ -1,0 +1,10 @@
+.row
+  .col-sm-6.col-sm-offset-3
+    .panel.panel-default
+      .panel-heading
+        = t('.resend_confirmation_instructions')
+      .panel-body
+        = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { class: 'form-horizontal', 'data-parsley-validate' => true }) do |f|
+          = f.input :email, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), autofocus: true, required: true, input_html: { 'data-parsley-type' => :email }
+          .actions
+            = f.submit t('.submit'), class: 'btn btn-primary btn-block'

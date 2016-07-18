@@ -1,10 +1,14 @@
-.navbar {
-  margin-bottom: 0;
+#main-nav {
+  padding: 9px 0;
+}
+
+.navbar-nav > li > a {
+  line-height: 32px;
 }
 
 .navbar-brand {
+  height: auto;
   text-transform: uppercase;
-  padding: 9px;
 }
 
 .header-logo {
@@ -30,5 +34,11 @@
     @media (min-width: $screen-sm-min) {
       background-image: image-url('logo-white.png');
     }
+  }
+}
+
+.navbar-collapse {
+  @media (max-width: $screen-xs-max) {
+    background-color: $navbar-collapse-bg;
   }
 }

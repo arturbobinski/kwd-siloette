@@ -2,6 +2,28 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: $montserrat;
 }
 
+a:focus {
+  outline: none;
+}
+
+.form-horizontal .form-group {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.form-control {
+  box-shadow: none;
+}
+
+.panel-body {
+  padding-top: $grid-gutter-width;
+  padding-bottom: $grid-gutter-width;
+}
+
+.panel-default .panel-heading {
+  background-color: white;
+}
+
 .bg-cover {
   background-repeat: no-repeat;
   background-position: center center;
@@ -25,6 +47,15 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   text-transform: uppercase;
 }
 
+.btn-facebook {
+  @include button-variant($btn-primary-color, $btn-facebook-bg, $btn-default-border);
+  text-transform: uppercase;
+}
+
 .logo {
   text-transform: uppercase;
+}
+
+.round {
+  border-radius: 50%;
 }

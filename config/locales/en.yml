@@ -1,23 +1,44 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  common:
+    menu: Menu
+    accept_terms: I accept the %{link}
+    terms_of_use: terms of use
+    sign_in: Sign in
+    sign_out: Log out
+    sign_up: Sign up
+    sign_up_with_facebook: Sign Up with Facebook
+  activerecord:
+    attributes:
+    models:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: Email already taken
+            accept_terms:
+              blank: You should accept terms of use.
+  links:
+    work_with_us: Work with Us
+    create_service: Create Service
+  home:
+    index:
+      slogan: EXOTIC DANCERS. MODELS. HOSTS
+      description: Book them for your party, event or club
+      browse_all_services: Browse All Services
+      how_it_works:
+        title: How it works
+        description: Know exactly what you’re getting. No middleman.
+        content:
+          - icon: user-plus
+            title: Performers Sign Up
+            text: Professional performers create profiles and services.
+          - icon: search
+            title: Search For Services
+            text: Search through hundreds of services in your desired location.
+          - icon: shopping-cart
+            title: Select A Service
+            text: Select your desired service, alternative options (in case your first preference is unavailable).
+          - icon: credit-card-alt
+            title: Payment and Review
+            text: Payment is processed at the time of the service. Rate the performer based on the quality of their performance.

@@ -1,0 +1,28 @@
+.row
+  .col-sm-6.col-sm-offset-3
+    .panel.panel-default
+      .panel-heading
+        = t('common.sign_in')
+      .panel-body
+        = link_to fa_icon('facebook', text: t('common.sign_up_with_facebook')), 'javascript: void(0);', class: 'btn btn-block btn-facebook'
+
+        %br
+        = t('.or_with_email')
+        .clearfix
+        %br
+
+        = simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal', 'data-parsley-validate' => true }) do |f|
+          = f.input :email, autofocus: true, label: false, required: true, input_html: { 'data-parsley-type' => :email }
+          = f.input :password, label: false, required: true
+          .row
+            - if devise_mapping.rememberable?
+              .col-sm-6
+                = f.input :remember_me, as: :boolean
+            - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+              .col-sm-6.text-right
+                = link_to t('.forgot_password'), new_password_path(resource_name)
+          .actions
+            = f.submit t('common.sign_in'), class: 'btn btn-primary btn-block'
+        %br
+        .text-center
+          = t('.create_account', link: new_user_registration_path).html_safe

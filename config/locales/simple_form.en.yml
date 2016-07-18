@@ -1,0 +1,23 @@
+en:
+  simple_form:
+    'yes': 'Yes'
+    'no': 'No'
+    required:
+      text: required
+      mark: '*'
+      html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: 'Please review the problems below:'
+    labels:
+      user:
+        email: Email
+        password: Password
+        password_confirmation: Confirm new password
+        remember_me: Remember me
+    placeholders:
+      user:
+        email: Email
+        first_name: First name
+        last_name: Last name
+        password: Password
+        password_confirmation: Confirm password

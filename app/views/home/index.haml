@@ -3,37 +3,22 @@
     .row
       .col-sm-5.col-sm-offset-6
         .text-center-m
-          %h2.text-upper EXOTIC DANCERS. MODELS. HOSTS
-          %p Book them for your party, event or club
+          %h2.text-upper= t('.slogan')
+          %p= t('.description')
         .row
           .col-sm-7
-            = link_to 'Browse All Services', 'javascript: void(0);', class: 'btn btn-lg btn-primary btn-block text-upper'
+            = link_to t('.browse_all_services'), 'javascript: void(0);', class: 'btn btn-lg btn-primary btn-block text-upper'
 
 %section#how-it-works
   .container
     .row
       .col-lg-12.text-center
-        %h2.section-heading How it works
-        %p.lead Know exactly what you’re getting. No middleman.
+        %h2.section-heading= t('.how_it_works.title')
+        %p.lead= t('.how_it_works.description')
     .row
-      .col-lg-3.col-md-6.text-center
-        .service-box
-          %h1.text-primary= fa_icon 'user-plus'
-          %p.lead Performers Sign Up
-          %p.text-muted Professional performers create profiles and services.
-      .col-lg-3.col-md-6.text-center
-        .service-box
-          %h1.text-primary= fa_icon 'search'
-          %p.lead Search For Services
-          %p.text-muted Search through hundreds of services in your desired location.
-      .col-lg-3.col-md-6.text-center
-        .service-box
-          %h1.text-primary= fa_icon 'shopping-cart'
-          %p.lead Select A Service
-          %p.text-muted Select your desired service, alternative options (in case your first preference is unavailable).
-      .col-lg-3.col-md-6.text-center
-        .service-box
-          %h1.text-primary= fa_icon 'credit-card-alt'
-          %p.lead Payment and Review
-          %p.text-muted Payment is processed at the time of the service. Rate the performer based on the quality of their performance.
-
+      - 4.times do |i|
+        .col-lg-3.col-md-6.text-center
+          .service-box
+            %h1.text-primary= fa_icon t('.how_it_works.content')[i][:icon]
+            %p.lead= t('.how_it_works.content')[i][:title]
+            %p.text-muted= t('.how_it_works.content')[i][:text]
