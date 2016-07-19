@@ -1,6 +1,8 @@
 default_admin_passowrd: password
 host: siloette.com
 
+googlemap_api_key: googlemap_api_key
+
 smtp_email_address: smtp_email_address
 smtp_email_port: '587'
 smtp_email_user_name: smtp_email_user_name

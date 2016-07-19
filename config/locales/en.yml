@@ -2,6 +2,10 @@ en:
   common:
     menu: Menu
     accept_terms: I accept the %{link}
+    female: Female
+    male: Male
+    save: Save
+    settings: Settings
     terms_of_use: terms of use
     sign_in: Sign in
     sign_out: Log out
@@ -12,6 +16,10 @@ en:
     models:
     errors:
       models:
+        profile:
+          attributes:
+            perform_name:
+              taken: Name already taken
         user:
           attributes:
             email:
@@ -21,6 +29,8 @@ en:
   links:
     work_with_us: Work with Us
     create_service: Create Service
+    profile: Profile
+    edit_profile: Edit profile
   home:
     index:
       slogan: EXOTIC DANCERS. MODELS. HOSTS
@@ -42,3 +52,17 @@ en:
           - icon: credit-card-alt
             title: Payment and Review
             text: Payment is processed at the time of the service. Rate the performer based on the quality of their performance.
+  system:
+    users:
+      edit:
+        siloette_is_all_about: Siloette is all about SERVICES…
+        step1:
+          title: Step 1
+          description: Create your profile. All photos added to your <b>services</b> are added to your profile automatically.
+        step2:
+          title: Step 2
+          description: Create your <b>Services</b>. Select from Party Host, Topless Waitress, Nude Waitress, Fantasy Dance. Create as many as you want!
+        basic_information: Basic information
+        click_to_change: Click to change
+        not_visible_on_profile: This information is <b>not visible</b> on your profile
+        visible_on_profile: This information is <b>visible</b> on your profile

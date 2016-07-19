@@ -14,6 +14,7 @@ en:
         password: Password
         password_confirmation: Confirm new password
         remember_me: Remember me
+        gender: Gender
     placeholders:
       user:
         email: Email
@@ -21,3 +22,14 @@ en:
         last_name: Last name
         password: Password
         password_confirmation: Confirm password
+        description: About you(max. 250 characters)
+      location:
+        address: Location
+      profile:
+        birth_date: Birth date
+        phone_number: Phone number
+        perform_name: Perform name
+        ethnicity: Ethnicity
+        height: height
+        weight: Weight
+        bust: Bust

@@ -14,9 +14,20 @@
     /[if lt IE 9]
       <script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script>
       <script src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js'></script>
+    - if content_for :head_script
+      = content_for :head_script
 
   %body#page-top(class="#{controller_name}-#{action_name}")
     = render 'shared/header'
-    #main-content= yield
+    #main-content
+      - if content_for :sidebar
+        .container
+          .row
+            .col-sm-3
+              = yield :sidebar
+            .col-sm-9
+              = yield
+      - else
+        = yield
     = render 'shared/modal'
     = render 'shared/footer'

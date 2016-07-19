@@ -1,10 +1,10 @@
 class AvatarUploader < ImageUploader
 
   version :mini do
-    process :resize_to_fill => [32, 32]
+    process :resize_to_fill => [80, 80]
   end
 
-  version :thumb do
+  version :medium do
     process :resize_to_fill => [250, 250]
   end
 end

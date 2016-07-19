@@ -6,10 +6,11 @@ class Ability
 
     if user.admin?
       can :manage, :all
-    elsif user.dancer?
-      can :manager, User, id: user.id
     else
+      can :read, User
+      can [:edit, :update], User, id: user.id
 
+      can :read, Page
     end
   end
 end

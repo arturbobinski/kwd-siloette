@@ -6,9 +6,13 @@ Rails.application.routes.draw do
     resources :users, only: [] do
       get :check_email, on: :collection
     end
+    resources :profiles, only: [] do
+      get :check_perform_name, on: :collection
+    end
   end
 
-  namespace :system do
+  namespace :system, path: '/' do
+    resources :users, only: [:show, :edit, :update]
     resources :pages, only: [:show]
   end
 

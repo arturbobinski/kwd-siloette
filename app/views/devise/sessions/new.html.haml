@@ -17,7 +17,9 @@
           .row
             - if devise_mapping.rememberable?
               .col-sm-6
-                = f.input :remember_me, as: :boolean
+                .form-group
+                  = f.check_box :remember_me, value: 1
+                  = f.label :remember_me, t('simple_form.labels.user.remember_me')
             - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
               .col-sm-6.text-right
                 = link_to t('.forgot_password'), new_password_path(resource_name)
