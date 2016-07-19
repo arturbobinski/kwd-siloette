@@ -14,6 +14,6 @@ class ApplicationController < ActionController::Base
   private
 
   def load_pages
-    @pages = Page.order(:id).active
+    @pages = Page.order(:id).active.general
   end
 end

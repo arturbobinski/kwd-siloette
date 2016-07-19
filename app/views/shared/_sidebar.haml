@@ -1,0 +1,11 @@
+#sidebar
+  .panel.panel-default
+    .panel-heading
+      = t('common.settings')
+    .panel-body
+      %ul.list-unstyled
+        %li(class="#{'active' if controller_name == 'users' && action_name == 'edit'}")
+          = link_to fa_icon('circle', text: t('links.profile')), edit_system_user_path(current_user)
+        - Page.for_dancer.each do |page|
+          %li(class="#{'active' if controller_name == 'pages' && params[:id] == page.slug}")
+            = link_to fa_icon('circle', text: page.title), system_page_path(page)

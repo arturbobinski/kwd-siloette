@@ -1,0 +1,18 @@
+.container
+  .panel-default
+    .panel-heading
+      = link_to fa_icon('angle-double-left', text: t('common.back')), :back
+    .panel-body
+      .row
+        .col-sm-6.col-sm-offset-1
+          .user-avatar.text-center
+            = image_tag avatar_url(@user, :medium), alt: @user.name, class: 'round'
+        .col-sm-4
+          - if @user.dancer?
+            = render 'profile'
+          - else
+            %h2= @user.name
+
+          %dl
+            %dt #{t('common.description')}:
+            %dl= @user.description

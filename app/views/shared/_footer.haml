@@ -7,7 +7,7 @@
       .col-sm-8.text-center
         %ul.list-unstyled
           - @pages.each do |page|
-            %li= link_to page.title, system_page_path(page.slug, full: true)
+            %li= link_to page.title, system_page_path(page.slug)
           %li= link_to t('layouts.infos.blog'), 'javascript: void(0);'
       .col-sm-2.text-center
         %ul.list-unstyled.social

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160719031636) do
+ActiveRecord::Schema.define(version: 20160719155642) do
 
   create_table "locations", force: :cascade do |t|
     t.string   "address",       limit: 255
@@ -33,8 +33,9 @@ ActiveRecord::Schema.define(version: 20160719031636) do
     t.text     "body",       limit: 65535
     t.string   "slug",       limit: 255
     t.boolean  "active",                   default: true
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.boolean  "for_dancer",               default: false
   end
 
   add_index "pages", ["active"], name: "index_pages_on_active", using: :btree

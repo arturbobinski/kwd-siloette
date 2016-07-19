@@ -16,8 +16,7 @@ a:focus {
 }
 
 .panel-body {
-  padding-top: $grid-gutter-width;
-  padding-bottom: $grid-gutter-width;
+  background-color: white;
 }
 
 .panel-default .panel-heading {
@@ -58,4 +57,30 @@ a:focus {
 
 .round {
   border-radius: 50%;
+}
+
+.btn-bordered {
+  margin: $grid-gutter-width/2 auto;
+  padding-left: 2.5em;
+  padding-right: 2.5em;
+  position: relative;
+
+  &:before, &:after {
+    content: " ";
+    position: absolute;
+    width: 180px;
+    height: 1px;
+    background: $border-color;
+    top: 50%;
+  }
+
+  &:before {
+    left: -webkit-calc(-180px - 1.5em);
+    left: calc(-180px - 1.5em);
+  }
+
+  &:after {
+    left: -webkit-calc(100% + 1.5em);
+    left: calc(100% + 1.5em);
+  }
 }

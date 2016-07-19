@@ -2,6 +2,8 @@ en:
   common:
     menu: Menu
     accept_terms: I accept the %{link}
+    back: Back
+    description: Description
     female: Female
     male: Male
     save: Save
@@ -66,3 +68,11 @@ en:
         click_to_change: Click to change
         not_visible_on_profile: This information is <b>not visible</b> on your profile
         visible_on_profile: This information is <b>visible</b> on your profile
+      update:
+        success: Profile updated successfully.
+      profile:
+        performer_profile: Performer profile
+        height: Height
+        weight: Weight
+        bust: Bust
+        ethnicity: Ethnicity

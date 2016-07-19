@@ -1,0 +1,69 @@
+- content_for :head_script do
+  = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Figaro.env.googlemap_api_key}&libraries=places&callback=initAutocomplete", async: true, defer: true
+
+- content_for :sidebar do
+  = render 'shared/sidebar'
+
+.panel.panel-default
+  .panel-body.text-center
+    %h5= t('.siloette_is_all_about')
+    .row
+      .col-sm-6
+        %h5= t('.step1.title')
+        %p= t('.step1.description').html_safe
+      .col-sm-6
+        %h5= t('.step2.title')
+        %p= t('.step2.description').html_safe
+
+.panel.panel-default
+  .panel-heading
+    = t('.basic_information')
+  .panel-body
+    = simple_form_for [:system, @user], html: { class: 'form-horizontal', 'data-parsley-validate' => true } do |f|
+      .row
+        .col-sm-3.text-center
+          .avatar-field-container.round
+            = image_tag avatar_url(@user), alt: '', size: '80x80', class: 'round', title: t('.click_to_change')
+            = f.input :avatar, as: :file, label: false
+            = f.hidden_field :avatar_cache
+          %em
+            %small= t('.click_to_change')
+        .col-sm-9
+          %h2.full-name= @user.name
+      %hr
+      %p.text-muted= fa_icon 'info-circle', text: t('.not_visible_on_profile').html_safe
+      .user-gender.form-group
+        - User.genders.keys.each do |gender|
+          %span
+            = f.radio_button :gender, gender, required: true
+            = f.label "gender_#{gender}", gender
+      .row
+        = f.input :first_name, label: false, input_html: { 'data-parsley-maxlength' => 50 }, wrapper_html: { class: 'col-sm-6' }
+        = f.input :last_name, label: false, input_html: { 'data-parsley-maxlength' => 50 }, wrapper_html: { class: 'col-sm-6' }
+      .row
+        = f.input :email, label: false, input_html: { data: { 'parsley-type' => :email, 'parsley-maxlength' => 50, 'parsley-remote' => check_email_api_users_path, 'parsley-remote-message' => t('activerecord.errors.models.user.attributes.email.taken') } }, wrapper_html: { class: 'col-sm-6' }
+        - if @user.dancer?
+          .col-sm-6.location-fields
+            = f.fields_for :location do |l|
+              = l.hidden_field :country
+              = l.hidden_field :postal_code
+              = l.hidden_field :lat
+              = l.hidden_field :lng
+              = l.input :address, label: false, input_html: { class: 'geocomplete', data: { prefix: 'user_location_attributes_' } }
+      - if @user.dancer?
+        = f.fields_for :profile do |p|
+          .row
+            = p.input :birth_date, as: :string, label: false, input_html: { class: 'datepicker' }, wrapper_html: { class: 'col-sm-6' }
+            = p.input :phone_number, label: false, input_html: { data: { 'parsley-maxlength' => 20, 'parsley-pattern' => '^(1-?)?(\s+)?(\([2-9]\d{2}\)|[2-9]\d{2})(\s+)?-?[2-9]\d{2}-?\d{4}$' } }, wrapper_html: { class: 'col-sm-6' }
+          %p.text-muted= fa_icon 'info-circle', text: t('.visible_on_profile').html_safe
+          .row
+            = p.input :perform_name, label: false, input_html: { data: { 'parsley-maxlength' => 20, 'parsley-remote' => check_perform_name_api_profiles_path, 'parsley-remote-message' => t('activerecord.errors.models.profile.attributes.perform_name.taken') } }, wrapper_html: { class: 'col-sm-6' }
+            = p.input :ethnicity, as: :select, label: false, collection: Profile.ethnicities.keys, prompt: t('simple_form.placeholders.profile.ethnicity'), wrapper_html: { class: 'col-sm-6' }
+          .row
+            = p.input :height, as: :select, label: false, collection: Profile::HEIGHTS.map { |x| [humanized_height(x), x] }, prompt: t('simple_form.placeholders.profile.height'), wrapper_html: { class: 'col-sm-4' }
+            = p.input :weight, as: :select, label: false, collection: Profile::WEIGHTS.map { |x| [humanized_weight(x), x.to_f] }, prompt: t('simple_form.placeholders.profile.weight'), wrapper_html: { class: 'col-sm-4' }
+            = p.input :bust, as: :select, label: false, collection: Profile.busts.keys, prompt: t('simple_form.placeholders.profile.bust'), wrapper_html: { class: 'col-sm-4' }
+      = f.input :description, as: :text, label: false, required: true, input_html: { rows: 5, 'data-parsley-maxlength' => 250 }
+
+      .actions.text-center
+        = f.button :button, t('common.save'), class: 'btn btn-primary btn-bordered'

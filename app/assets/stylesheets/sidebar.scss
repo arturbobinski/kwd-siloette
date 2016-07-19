@@ -1,0 +1,19 @@
+#sidebar {
+  li {
+    padding: 6px;
+
+    &.active {
+      i.fa {
+        color: $brand-primary;
+      }
+    }
+
+    a {
+      color: $text-color;
+    }
+
+    i.fa {
+      color: $body-bg;
+    }
+  }
+}

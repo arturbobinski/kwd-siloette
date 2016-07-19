@@ -1,10 +1,14 @@
-- if params[:full].present?
-  .container
-    %h4= @page.title
-    = @page.body.html_safe
-- else
+- if params[:md].present?
   .modal-header
     %button.close(type='button' aria-hidden='true' data-dismiss='modal') &times;
     %h4.modal-title= @page.title
   .modal-body
     = @page.body.html_safe
+- else
+  .container
+    %h4= @page.title
+    = @page.body.html_safe
+
+  - if @page.for_dancer
+    - content_for :sidebar do
+      = render 'shared/sidebar'
