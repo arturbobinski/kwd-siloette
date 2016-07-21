@@ -40,23 +40,6 @@
     line-height: 80px;
     position: absolute;
     top: 0;
-    opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-  }
-}
-
-.user-gender {
-  position: relative;
-
-  > span {
-    margin-right: $grid-gutter-width;
-  }
-
-  .parsley-errors-list {
-    left: 190px;
-    position: absolute;
-    top: 0;
-    width: 200px;
+    @include opacity(0);
   }
 }

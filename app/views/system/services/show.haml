@@ -1,0 +1,50 @@
+- is_owner = @service.user == current_user
+
+.container
+  .panel.panel-default
+    .panel-heading
+      = link_to fa_icon('angle-double-left', text: t('common.back')), :back
+    .panel-body
+      .row
+        .col-sm-6
+        .col-sm-6
+          .row
+            .col-sm-7
+              %h3.service-category.m-center= @service.category
+            .col-sm-5
+              .service-score{'data-score' => @service.performers_count}
+          .row
+            .col-sm-7
+              %h4.service-price
+                = humanized_money_with_symbol(@service.price)
+                %small= t('common.per_hour')
+            .col-sm-5.text-right
+              - unless is_owner
+                = link_to t('common.book'), 'javascript: void(0);', class: 'btn btn-primary'
+          .row
+            .col-sm-12
+              = @service.description
+              %p
+              .service-location
+                %b #{t('common.location')}:
+                %span= @service.address
+              %br
+              - if (performers = @service.performers).count > 0
+                %h5= t('.performers')
+                %ul.performers.list-unstyled
+                  - performers.each do |performer|
+                    %li.performer
+                      .performer-avatar
+                        = image_tag avatar_url(performer), alt: '', size: '48x48', class: 'round'
+                      .performer-name
+                        = link_to performer.perform_name, system_user_path(performer)
+              .clearfix
+              %br
+              - if is_owner
+                %ul.list-unstyled
+                  %li= link_to fa_icon('pencil', text: t('.edit_service')), edit_system_service_path(@service)
+                  - if @service.open
+                    %li= link_to fa_icon('lock', text: t('.close_service')), close_system_service_path(@service)
+                  - else
+                    %li= link_to fa_icon('unlock', text: t('.open_service')), open_system_service_path(@service)
+

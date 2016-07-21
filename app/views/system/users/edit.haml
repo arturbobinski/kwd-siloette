@@ -32,7 +32,7 @@
           %h2.full-name= @user.name
       %hr
       %p.text-muted= fa_icon 'info-circle', text: t('.not_visible_on_profile').html_safe
-      .user-gender.form-group
+      .inline-checkboxes.form-group
         - User.genders.keys.each do |gender|
           %span
             = f.radio_button :gender, gender, required: true

@@ -7,7 +7,18 @@
           %p= t('.description')
         .row
           .col-sm-7
-            = link_to t('.browse_all_services'), 'javascript: void(0);', class: 'btn btn-lg btn-primary btn-block text-upper'
+            = link_to t('.browse_all_services'), search_path, class: 'btn btn-lg btn-primary btn-block text-upper'
+
+- if @top_services.count > 0
+  %section#top-services
+    .container
+      .panel.panel-default
+        .text-center
+          %h3= t('.top-services')
+          .thumbnail-grid-wide
+            .thumbnail-grid
+              = render partial: 'home/service', collection: @top_services
+          %hr.invisible
 
 %section#how-it-works
   .container

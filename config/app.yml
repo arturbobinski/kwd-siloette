@@ -1,0 +1,12 @@
+# config/app.yml for rails-settings-cached
+defaults: &defaults
+  commission_from_seller: 25
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

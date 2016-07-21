@@ -1,0 +1,6 @@
+.upload-image-placeholder.nested-fields
+  .fileupload-text(style="#{'visibility: hidden;' if f.object.uploaded?}")= t('common.upload_picture')
+  = image_tag f.object.file.url(:medium), alt: '', class: 'img-responsive'
+  = f.file_field :file, class: 'fileupload'
+  = f.hidden_field :file_cache
+  = link_to_remove_association fa_stacked_icon('close inverse', base: 'circle', class: 'fa-1x'), f

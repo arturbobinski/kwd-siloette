@@ -1,0 +1,16 @@
+.thumbnail-grid-item
+  = link_to system_service_path(service), class: 'thumbnail-grid-inner' do
+    = image_tag service.primary_image.file.url(:medium), alt: service.category, class: 'thumbnail-grid-image'
+    .thumbnail-grid-overlay
+      .overlay-top
+        = service.category
+        %br
+        %small
+          = performer_names(service)
+
+      .overlay-bottom
+        .clearfix
+          .col-sm-6
+            .service-price= price_with_unit(service)
+          .col-sm-6
+            %button.btn.btn-sm.btn-primary.btn-block= t('common.book')

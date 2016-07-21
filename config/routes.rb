@@ -12,9 +12,25 @@ Rails.application.routes.draw do
   end
 
   namespace :system, path: '/' do
-    resources :users, only: [:show, :edit, :update]
+    resources :services do
+      member do
+        get :close
+        get :open
+      end
+    end
+    resources :users, only: [:show, :edit, :update] do
+      get :become_dancer, on: :member
+    end
+    resources :service_invitations, only: [:destroy] do
+      member do
+        get :accept
+        get :decline
+      end
+    end
     resources :pages, only: [:show]
   end
+
+  get :search, to: 'home#search', as: :search
 
   root to: 'home#index'
 end

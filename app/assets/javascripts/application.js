@@ -28,4 +28,6 @@
 //= require bootstrap/popover
 //= require parsley
 //= require parsley.remote
+//= require cocoon
+//= require select2
 //= require_tree .

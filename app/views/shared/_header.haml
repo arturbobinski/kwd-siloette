@@ -9,11 +9,14 @@
         %i.header-logo
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-right
-        - if current_user.nil? || !current_user.dancer?
+        - if current_user.nil?
           %li= link_to t('links.work_with_us'), new_user_registration_path(bd: true)
-        - if current_user&.dancer?
-          %li= link_to t('links.create_service'), 'javascript: void(0);'
-        - if current_user
+          %li= link_to t('common.sign_in'), new_user_session_path
+        - else
+          - if current_user.dancer?
+            %li= link_to t('links.create_service'), new_system_service_path
+          - else
+            %li= link_to t('links.work_with_us'), become_dancer_system_user_path(current_user)
           %li.dropdown
             %a(data-toggle='dropdown' aria-haspopup='true' aria-expanded='true' href='#')
               = image_tag avatar_url(current_user), size: '32x32', alt: '', class: 'round'
@@ -23,5 +26,3 @@
               %li= link_to fa_icon('user', text: t('links.profile')), system_user_path(current_user)
               %li= link_to fa_icon('cog', text: t('links.edit_profile')), edit_system_user_path(current_user)
               %li= link_to fa_icon('sign-out', text: t('common.sign_out')), destroy_user_session_path
-        - else current_user
-          %li= link_to t('common.sign_in'), new_user_session_path

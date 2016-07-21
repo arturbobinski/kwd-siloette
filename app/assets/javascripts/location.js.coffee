@@ -45,7 +45,7 @@ fillInAddress = (e) ->
 
 window.initAutocomplete = ->
   $input = $('.geocomplete')
-  return unless $input
+  return if $input is undefined or $input.length is 0
 
   input = document.getElementById($input.attr('id'))
   autocomplete = new (google.maps.places.Autocomplete)(input, types: ['geocode'])

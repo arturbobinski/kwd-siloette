@@ -1,0 +1,22 @@
+- has_services = false
+
+- content_for :sidebar do
+  = render 'shared/sidebar'
+
+- if @personal_services.count > 0
+  = render partial: 'services', locals: { services: @personal_services, context: :personal }
+  - has_services = true
+- if @invited_services.count > 0
+  = render partial: 'services', locals: { services: @invited_services, context: :invited }
+  - has_services = true
+- if @performing_services.count > 0
+  = render partial: 'services', locals: { services: @performing_services, context: :performing }
+  - has_services = true
+
+- unless has_services
+  .panel
+    .panel-body
+      = t('.empty_services')
+
+.text-center
+  = link_to t('.create_new_service'), new_system_service_path, class: 'btn btn-primary btn-bordered'

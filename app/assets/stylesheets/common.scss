@@ -23,13 +23,21 @@ a:focus {
   background-color: white;
 }
 
+.select2-container {
+  display: block;
+  width: 100% !important;
+}
+
+.select2-container--default, .select2-container--default.select2-container--focus {
+  .select2-selection--multiple {
+    border-color: $border-color;
+  }
+}
+
 .bg-cover {
   background-repeat: no-repeat;
   background-position: center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  @include background-size(cover);
 }
 
 .text-center-m {
@@ -51,12 +59,51 @@ a:focus {
   text-transform: uppercase;
 }
 
+.btn-pink {
+  @include button-variant($btn-primary-color, $pink-color, transparent);
+}
+
 .logo {
   text-transform: uppercase;
 }
 
 .round {
-  border-radius: 50%;
+  @include border-radius(50%);
+}
+
+.embed-container {
+  height: 0;
+  margin-bottom: $grid-gutter-width / 2;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  position: relative;
+  width: 100%;
+
+  iframe, object, embed {
+    @include border-radius($border-radius-base);
+    border: none;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+.inline-checkboxes {
+  position: relative;
+
+  > span {
+    margin-right: $grid-gutter-width;
+  }
+
+  .parsley-errors-list {
+    left: 190px;
+    position: absolute;
+    top: 0;
+    width: 200px;
+  }
 }
 
 .btn-bordered {

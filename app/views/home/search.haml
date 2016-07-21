@@ -1,0 +1,31 @@
+.container
+  .row
+    .col-sm-12
+      .panel.panel-default
+        .panel-body
+          = select_tag :sort, nil, include_blank: t('common.select'), class: 'form-control'
+  .row
+    .col-sm-3
+      .panel.panel-default
+        .panel-heading
+          = t('.style')
+        .panel-body
+
+      .panel.panel-default
+        .panel-heading
+          = t('.price-range')
+        .panel-body
+
+      .panel.panel-default
+        .panel-heading
+          = t('.number_of_performers')
+        .panel-body
+
+      .panel.panel-default
+        .panel-heading
+          = t('.ethnicity')
+        .panel-body
+    .col-sm-9
+      .thumbnail-grid-narrow
+        .thumbnail-grid
+          = render partial: 'home/service', collection: @services

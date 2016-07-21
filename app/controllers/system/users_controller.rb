@@ -14,11 +14,15 @@ module System
 
     def update
       if @user.update(user_params)
-        redirect_to :back, notice: t('.success')
+        redirect_to (@user.dancer? ? new_system_service_path : :back), notice: t('.notice')
       else
-        puts @user.errors
         render :edit
       end
+    end
+
+    def become_dancer
+      @user.dancer!
+      redirect_to edit_system_user_path(current_user)
     end
 
     private

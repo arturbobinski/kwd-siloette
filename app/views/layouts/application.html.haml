@@ -16,6 +16,8 @@
       <script src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js'></script>
     - if content_for :head_script
       = content_for :head_script
+    - if content_for :extra_script
+      = content_for :extra_script
 
   %body#page-top(class="#{controller_name}-#{action_name}")
     = render 'shared/header'

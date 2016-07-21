@@ -1,11 +1,21 @@
 en:
   common:
-    menu: Menu
+    accept: Accept
     accept_terms: I accept the %{link}
+    add_more: Add more
     back: Back
+    book: Book
+    commission_fee: 'Siloette fee ($<span class="commission-fee"></span>) will be added.'
+    decline: Decline
+    delete: Delete
     description: Description
+    edit: Edit
     female: Female
+    leave_service: Leave service
+    location: Location
     male: Male
+    menu: Menu
+    per_hour: /hr
     save: Save
     settings: Settings
     terms_of_use: terms of use
@@ -13,6 +23,7 @@ en:
     sign_out: Log out
     sign_up: Sign up
     sign_up_with_facebook: Sign Up with Facebook
+    upload_picture: Upload picture
   activerecord:
     attributes:
     models:
@@ -33,6 +44,7 @@ en:
     create_service: Create Service
     profile: Profile
     edit_profile: Edit profile
+    services: Services
   home:
     index:
       slogan: EXOTIC DANCERS. MODELS. HOSTS
@@ -54,6 +66,11 @@ en:
           - icon: credit-card-alt
             title: Payment and Review
             text: Payment is processed at the time of the service. Rate the performer based on the quality of their performance.
+    search:
+      style: Style
+      price_range: Price range
+      number_of_performers: Number of performers
+      ethnicity: Ethnicity
   system:
     users:
       edit:
@@ -69,10 +86,36 @@ en:
         not_visible_on_profile: This information is <b>not visible</b> on your profile
         visible_on_profile: This information is <b>visible</b> on your profile
       update:
-        success: Profile updated successfully.
+        notice: Profile updated successfully.
       profile:
         performer_profile: Performer profile
         height: Height
         weight: Weight
         bust: Bust
         ethnicity: Ethnicity
+    services:
+      index:
+        create_new_service: Create a New Service
+        empty_services: No services yet.
+      show:
+        performers: Performers
+        edit_service: Edit service
+        close_service: Close service
+        open_service: Open service
+      new:
+        new_service: New service
+      create:
+        notice: Service created successfully.
+      edit:
+        edit_service: Edit service
+      update:
+        notice: Service updated successfully.
+      services:
+        invited_services: Invited services
+        personal_services: Personal services
+        performing_services: Performing services
+      close:
+        notice: Service closed successfully.
+      open:
+        notice: Service opened successfully.
+

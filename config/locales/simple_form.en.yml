@@ -15,6 +15,15 @@ en:
         password_confirmation: Confirm new password
         remember_me: Remember me
         gender: Gender
+      service:
+        category_id: What type of service are you performing?
+        invitee_ids: Invite other performers by their perform name
+        description: Description
+        price: How much do you want to earn?
+      location:
+        address: Location
+      video:
+        link: Video
     placeholders:
       user:
         email: Email
@@ -33,3 +42,9 @@ en:
         height: height
         weight: Weight
         bust: Bust
+      service:
+        category_id: Please select…
+        description: Max. 250 characters
+        price: 0
+      video:
+        link: http://

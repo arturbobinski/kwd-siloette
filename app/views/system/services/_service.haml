@@ -1,0 +1,29 @@
+.thumbnail-grid-item
+  .thumbnail-grid-inner
+    = image_tag service.primary_image.file.url(:medium), alt: service.category, class: 'thumbnail-grid-image'
+    .thumbnail-grid-overlay
+      .overlay-top
+        = service.category
+        %br
+        %small
+          - if context == :personal
+            = price_with_unit(service)
+          - elsif context == :invited
+            with #{performer_names_without_me(service)}
+
+      .overlay-bottom
+        .clearfix
+          - case context
+          - when :personal
+            .col-sm-6
+              = link_to t('common.edit'), edit_system_service_path(service), class: 'btn btn-sm btn-primary btn-block'
+            .col-sm-6
+              = link_to t('common.delete'), system_service_path(service, service: { open: false }), method: :put, class: 'btn btn-sm btn-block btn-pink'
+          - when :invited
+            .col-sm-6
+              = link_to t('common.accept'), accept_system_service_invitation_path(service.id), class: 'btn btn-sm btn-primary btn-block'
+            .col-sm-6
+              = link_to t('common.decline'), decline_system_service_invitation_path(service.id), class: 'btn btn-sm btn-block btn-pink'
+          - when :performing
+            .col-sm-12
+              = link_to t('.leave_service'), system_service_invitation_path(service.id), method: :delete, class: 'btn btn-sm btn-pink'

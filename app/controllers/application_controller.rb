@@ -5,6 +5,24 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_filter :load_pages
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to main_app.root_url, alert: exception.message
+  end
+
+  def after_sign_in_path_for(resource)
+    if resource.dancer? && resource.profile.nil?
+      edit_system_user_path(resource)
+    elsif request.env['omniauth.origin']
+      request.env['omniauth.origin']
+    elsif stored_location_for(resource)
+      stored_location_for(resource)
+    elsif request.referer == new_user_session_url
+      super
+    else
+      root_path
+    end
+  end
+
   protected
 
   def configure_permitted_parameters

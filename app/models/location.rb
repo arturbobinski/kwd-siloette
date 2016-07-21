@@ -1,5 +1,7 @@
 class Location < ActiveRecord::Base
 
+  acts_as_paranoid
+
   belongs_to :owner, polymorphic: true
 
   validates :address, presence: true, length: { maximum: 255 }

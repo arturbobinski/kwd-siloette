@@ -18,19 +18,26 @@ gem 'haml', '~> 4.0.7'
 gem 'font-awesome-rails', '~> 4.6.3.1'
 gem 'friendly_id', '~> 5.1.0'
 gem 'figaro', '~> 1.1.1'
+gem 'rails-settings-cached', '~> 0.6.5'
+gem 'ransack', '~> 1.8.0'
 gem 'devise', '~> 4.2.0'
 gem 'cancancan', '~> 1.10'
+gem 'paranoia', '~> 2.1.5'
 gem 'fog-aws', '~> 0.10.0'
 gem 'rmagick', '~> 2.15.4'
 gem 'carrierwave', '~> 0.11.2'
+gem 'file_validators', '~> 2.1.0'
 gem 'simple_form', '~> 3.2.1'
 gem 'parsley-rails', '~> 2.0.7.0'
+gem 'money-rails', '~> 1.6.2'
+gem 'cocoon', '~> 1.2.9'
+gem 'select2-rails', '~> 4.0.3'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
   gem 'puma', '~> 2.11.3'
-  gem 'byebug', '~> 9.0.5'
+  gem 'pry-rails', '~> 0.3.4'
 end
 
 group :development do

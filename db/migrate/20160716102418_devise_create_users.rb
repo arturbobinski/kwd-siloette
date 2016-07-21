@@ -38,7 +38,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :avatar
       t.integer :gender
       t.text :description
-      t.timestamp :deleted_at
+      t.datetime :deleted_at
 
       t.timestamps null: false
     end

@@ -1,0 +1,7 @@
+.panel.panel-default
+  .panel-heading
+    = t(".#{context}_services")
+  .panel-body
+    .thumbnail-grid-narrow
+      .thumbnail-grid
+        = render services, context: context

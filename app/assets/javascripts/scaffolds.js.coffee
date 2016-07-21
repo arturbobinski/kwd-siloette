@@ -8,12 +8,16 @@ initializePlugins = ->
 
   today = new Date()
   legalAge = 21
+  legalYear = today.getFullYear() - legalAge
 
   $('.datepicker').datepicker
-    changeMonth: true,
-    changeYear: true,
-    yearRange: '1970:' + (today.getFullYear() - legalAge),
-    dateFormat: 'yy-mm-dd',
+    changeMonth: true
+    changeYear: true
+    yearRange: '1970:' + legalYear
+    dateFormat: 'yy-mm-dd'
+    defaultDate: legalYear + '-1-1'
+
+  $('.select2').select2()
 
 $(document).ready initializePlugins
 $(document).on 'turbolinks:load', ->
