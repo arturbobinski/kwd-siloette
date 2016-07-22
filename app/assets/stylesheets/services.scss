@@ -1,6 +1,10 @@
 .uploader-container {
   margin-right: -15px;
   overflow: hidden;
+
+  .parsley-errors-list {
+    display: none;
+  }
 }
 
 .upload-image-placeholder {

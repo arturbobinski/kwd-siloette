@@ -19,7 +19,10 @@ Rails.application.routes.draw do
       end
     end
     resources :users, only: [:show, :edit, :update] do
-      get :become_dancer, on: :member
+      member do
+        get :become_dancer
+        get :media
+      end
     end
     resources :service_invitations, only: [:destroy] do
       member do

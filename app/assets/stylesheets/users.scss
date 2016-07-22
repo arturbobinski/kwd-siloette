@@ -43,3 +43,36 @@
     @include opacity(0);
   }
 }
+
+.profile-image-status {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.profile-image-select {
+  &:hover, &.active {
+    .profile-image-status {
+      display: block;
+    }
+  }
+
+  input[type="checkbox"] {
+    cursor: pointer;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    top: 0;
+    visibility: visible;
+    width: 100%;
+
+    &:checked + .profile-image-status {
+      display: block;
+    }
+  }
+}

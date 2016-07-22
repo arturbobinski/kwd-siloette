@@ -5,8 +5,13 @@
     .panel-body
       .row
         .col-sm-6.col-sm-offset-1
-          .user-avatar.text-center
-            = image_tag avatar_url(@user, :medium), alt: @user.name, class: 'round'
+          - if @user.profile_images.any?
+            = render 'shared/slider', images: @user.profile_images
+          - elsif @user.service_images.any?
+            = render 'shared/slider', images: @user.service_images.limit(4)
+          - else
+            .user-avatar.text-center
+              = image_tag avatar_url(@user, :medium), alt: @user.name, class: 'round'
         .col-sm-4
           - if @user.dancer?
             = render 'profile'

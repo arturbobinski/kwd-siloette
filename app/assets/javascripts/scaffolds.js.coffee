@@ -33,6 +33,19 @@ initializePlugins = ->
         $('#price_min').val ui.values[0]
         $('#price_max').val ui.values[1]
 
+   $('.slider-for').slick
+    slidesToShow: 1
+    slidesToScroll: 1
+    fade: true
+    asNavFor: '.slider-nav'
+  $('.slider-nav').slick
+    arrows: false
+    slidesToShow: 3
+    slidesToScroll: 1
+    asNavFor: '.slider-for'
+    focusOnSelect: true
+    vertical: true
+
 $(document).ready initializePlugins
 $(document).on 'turbolinks:load', ->
   initializePlugins()

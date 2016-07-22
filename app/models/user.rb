@@ -26,6 +26,8 @@ class User < ActiveRecord::Base
   has_many :invited_services, through: :pending_invitations, source: :service
   has_many :accepted_invitations, -> { accepted }, class_name: 'ServiceInvitation'
   has_many :performing_services, through: :accepted_invitations, source: :service
+  has_many :service_images, foreign_key: :author_id
+  has_many :profile_images, -> { where(profile: true) }, foreign_key: :author_id, class_name: 'ServiceImage'
 
   delegate :perform_name, :height, :weight, :bust, :ethnicity, :birth_date, :phone_number, to: :profile
   delegate :address, to: :location
@@ -39,6 +41,7 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :profile, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :service_images, reject_if: :all_blank, allow_destroy: true
 
   def name
     [first_name, last_name].reject(&:blank?).join(' ')

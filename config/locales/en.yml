@@ -50,6 +50,7 @@ en:
     create_service: Create Service
     profile: Profile
     edit_profile: Edit profile
+    profile_photos: Profile photos
     services: Services
   home:
     index:

@@ -9,7 +9,15 @@ class ServiceImage < ActiveRecord::Base
 
   validates :file, presence: true, file_size: { less_than_or_equal_to: MAX_ATTACHMENT_SIZE.to_i }, file_content_type: { allow: /^image\/.*/ }
 
+  before_save :assign_author
+
   def uploaded?
     !!file.file
+  end
+
+  private
+
+  def assign_author
+    self.author = service.user
   end
 end

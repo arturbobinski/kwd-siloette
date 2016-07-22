@@ -1,0 +1,12 @@
+#slider
+  .slider-inner
+    .slider-nav-wrap.pull-left
+      .slider.slider-nav
+        - images.each do |img|
+          %div
+            = image_tag img.file.url(:small), alt: '', class: 'img-responsive'
+    .slider-for-wrap.pull-right
+      .slider.slider-for
+        - images.each do |img|
+          %div
+            = image_tag img.file.url(:large), alt: '', class: 'img-responsive'

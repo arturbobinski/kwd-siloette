@@ -31,4 +31,5 @@
 //= require parsley.remote
 //= require cocoon
 //= require select2
+//= require slick
 //= require_tree .
