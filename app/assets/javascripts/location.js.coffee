@@ -26,6 +26,7 @@ geolocate = ->
 fillInAddress = (e) ->
   place = autocomplete.getPlace()
   prefix = $input.data('prefix')
+  return if prefix is undefined
 
   for component of componentForm
     document.getElementById(prefix + component).value = ''

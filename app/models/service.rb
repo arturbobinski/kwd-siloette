@@ -4,6 +4,8 @@ class Service < ActiveRecord::Base
 
   enum status: %i(active inactive)
 
+  self.per_page = 24
+
   monetize :price_cents, allow_nil: false,
     numericality: {
       greater_than_or_equal_to: 0,

@@ -15,14 +15,20 @@ en:
     location: Location
     male: Male
     menu: Menu
+    number_of_performers: Number of performers
     per_hour: /hr
+    price_cents: Price
+    rating: Rating
     save: Save
+    select: Select…
     settings: Settings
+    sort: Sort
     terms_of_use: terms of use
     sign_in: Sign in
     sign_out: Log out
     sign_up: Sign up
     sign_up_with_facebook: Sign Up with Facebook
+    submit: Submit
     upload_picture: Upload picture
   activerecord:
     attributes:
@@ -69,8 +75,8 @@ en:
     search:
       style: Style
       price_range: Price range
-      number_of_performers: Number of performers
       ethnicity: Ethnicity
+      no_results: Your search returned no results.
   system:
     users:
       edit:

@@ -1,5 +1,9 @@
 module ServicesHelper
 
+  def sort_options
+    %i(rating price_cents performers_count)
+  end
+
   def price_with_unit(service)
     "#{humanized_money_with_symbol(service.price)}#{t('common.per_hour')}"
   end

@@ -1,31 +1,74 @@
+- content_for :head_script do
+  = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Figaro.env.googlemap_api_key}&libraries=places&callback=initAutocomplete", async: true, defer: true
+
 .container
-  .row
-    .col-sm-12
-      .panel.panel-default
-        .panel-body
-          = select_tag :sort, nil, include_blank: t('common.select'), class: 'form-control'
-  .row
-    .col-sm-3
-      .panel.panel-default
-        .panel-heading
-          = t('.style')
-        .panel-body
+  = search_form_for @q, url: search_path, method: :get do |f|
+    .panel.panel-default
+      .panel-body
+        .row
+          .col-sm-3
+            .col-xs-3
+              = f.label t('common.sort')
+            .col-xs-9
+              .dropdown.filter-sort
+                %a(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                  = t('common.select')
+                  %span.caret
+                %ul.dropdown-menu
+                  - sort_options.each do |option|
+                    %li= sort_link @q, option, t("common.#{option}"), default_order: :desc#, hide_indicator: true
+          .col-sm-6
+            = f.text_field :location_address_cont, placeholder: t('common.location'), class: 'geocomplete form-control'
 
-      .panel.panel-default
-        .panel-heading
-          = t('.price-range')
-        .panel-body
+    .row
+      .col-sm-3
+        .panel.panel-default
+          .panel-heading
+            = t('.style')
+          .panel-body
+            - @categories.each do |category|
+              .check-box
+                = check_box_tag 'q[category_id_in][]', category.id, params[:q] && params[:q][:category_id_in] && params[:q][:category_id_in].include?(category.id.to_s), id: "q_category_id_in_#{category.id}"
+                = f.label "category_id_in_#{category.id}", category
 
-      .panel.panel-default
-        .panel-heading
-          = t('.number_of_performers')
-        .panel-body
+        .panel.panel-default
+          .panel-heading
+            = t('.price-range')
+          .panel-body
+            .price-range-input.row
+              .col-xs-6.text-left
+                %span $
+                = text_field_tag :price_min, params[:price_min] || 0, class: 'form-control'
+              .col-xs-6.text-right
+                %span $
+                = text_field_tag :price_max, params[:price_max] || 2000, class: 'form-control'
+            #price-range
 
-      .panel.panel-default
-        .panel-heading
-          = t('.ethnicity')
-        .panel-body
-    .col-sm-9
-      .thumbnail-grid-narrow
-        .thumbnail-grid
-          = render partial: 'home/service', collection: @services
+        .panel.panel-default
+          .panel-heading
+            = t('common.number_of_performers')
+          .panel-body
+            .text-center
+              - (1..4).each do |i|
+                %span.hide_symbol
+                  = f.radio_button :performers_count_eq, i, checked: params[:q] && params[:q][:performers_count_eq] && params[:q][:performers_count_eq] == i.to_s
+                  = f.label "performers_count_eq_#{i}", i, 'data-value': i
+            %hr.invisible
+
+        .panel.panel-default
+          .panel-heading
+            = t('.ethnicity')
+          .panel-body
+            = f.select :ethnicity_eq, Profile.ethnicities.map { |k,v| [k, v] }, { include_blank: I18n.t('common.select') }, selected: (params[:q][:ethnicity_eq] if params[:q]), class: 'form-control'
+
+        = f.submit t('common.submit'), class: 'btn btn-primary btn-block'
+
+      .col-sm-9
+        - if @services.count > 0
+          .thumbnail-grid-narrow
+            .thumbnail-grid
+              = render partial: 'home/service', collection: @services
+          .text-right= will_paginate @services
+
+        - else
+          = t('.no_results')

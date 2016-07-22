@@ -19,6 +19,20 @@ initializePlugins = ->
 
   $('.select2').select2()
 
+  $priceSlider = $('#price-range')
+  if $priceSlider.length > 0
+    min = parseInt $('#price_min').val()
+    max = parseInt $('#price_max').val()
+
+    $priceSlider.slider
+      range: true
+      min: 0
+      max: 2000
+      values: [min, max]
+      slide: (event, ui) ->
+        $('#price_min').val ui.values[0]
+        $('#price_max').val ui.values[1]
+
 $(document).ready initializePlugins
 $(document).on 'turbolinks:load', ->
   initializePlugins()
