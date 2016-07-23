@@ -37,7 +37,7 @@ class Service < ActiveRecord::Base
   scope :recent, -> { order(created_at: :desc) }
 
   before_validation :generate_title
-  before_save :assign_extra
+  before_save :assign_ethnicity
 
   accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :images, reject_if: :all_blank, allow_destroy: true
@@ -54,8 +54,7 @@ class Service < ActiveRecord::Base
     self.title = category.name
   end
 
-  def assign_extra
-    self.performers_count = performers.count
+  def assign_ethnicity
     self.ethnicity = user.ethnicity
   end
 end

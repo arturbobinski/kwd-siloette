@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160721080024) do
+ActiveRecord::Schema.define(version: 20160723112135) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -22,6 +22,22 @@ ActiveRecord::Schema.define(version: 20160721080024) do
   end
 
   add_index "categories", ["kind"], name: "index_categories_on_kind", using: :btree
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   limit: 4,     default: 0, null: false
+    t.integer  "attempts",   limit: 4,     default: 0, null: false
+    t.text     "handler",    limit: 65535,             null: false
+    t.text     "last_error", limit: 65535
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by",  limit: 255
+    t.string   "queue",      limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string   "address",       limit: 255

@@ -33,6 +33,7 @@ gem 'parsley-rails', '~> 2.0.7.0'
 gem 'money-rails', '~> 1.6.2'
 gem 'cocoon', '~> 1.2.9'
 gem 'select2-rails', '~> 4.0.3'
+gem 'delayed_job_active_record', '~> 4.1.1'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 
@@ -45,4 +46,9 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring', '~> 1.7.2'
   gem 'letter_opener', '~> 1.4.1'
+  gem 'rspec-rails', '~> 3.5'
+end
+
+group :production, :staging do
+  gem 'daemons', '~> 1.2.3'
 end

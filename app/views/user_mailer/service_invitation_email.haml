@@ -1,0 +1,7 @@
+%h3 Hi,
+
+%p #{@user.name} has invited you to #{link_to @service.title, system_service_url(@service), target: '_blank'}
+%br
+
+= render 'button', url: system_services_url, text: 'Join now'
+

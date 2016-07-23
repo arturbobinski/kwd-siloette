@@ -17,4 +17,12 @@ class Profile < ActiveRecord::Base
   validates :ethnicity, presence: true, inclusion: { in: Profile.ethnicities.keys }
   validates :birth_date, presence: true
   validates :phone_number, presence: true, length: { maximum: 20 }
+
+  after_save :update_services
+
+  private
+
+  def update_services
+    user.services.update_all(ethnicity: self[:ethnicity])
+  end
 end

@@ -4,4 +4,25 @@ class ServiceInvitation < ActiveRecord::Base
 
   belongs_to :service, touch: true
   belongs_to :user
+
+  after_save :update_counter_cache
+  before_destroy :decrease_counter_cache
+  after_create :send_invitaton_email
+
+  private
+
+  def update_counter_cache
+    service.update_column(:performers_count, service.performers.count)
+  end
+
+  def decrease_counter_cache
+    if accepted?
+      service.decrement!(:performers_count)
+    end
+  end
+
+  def send_invitaton_email
+    UserMailer.service_invitation_email(user, service).deliver_now
+  end
+  handle_asynchronously :send_invitaton_email
 end

@@ -1,6 +1,7 @@
 module System
   class ServicesController < System::BaseController
 
+    skip_before_filter :authenticate_user!, only: [:show]
     before_filter :build_association, only: [:new, :edit]
 
     def index
