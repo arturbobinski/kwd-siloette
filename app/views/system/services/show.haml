@@ -12,15 +12,15 @@
         .col-sm-6
           .row
             .col-sm-7
-              %h3.service-category.m-center= @service.category
+              %h3.service-category.text-center.text-left-sm.no-top= @service.category
             .col-sm-5
-              .service-score{'data-score' => @service.performers_count}
+              .service-score.text-center.text-right-sm{'data-score' => @service.rating}
           .row
-            .col-sm-7
+            .col-xs-7
               %h4.service-price
                 = humanized_money_with_symbol(@service.price)
                 %small= t('common.per_hour')
-            .col-sm-5.text-right
+            .col-xs-5.text-right
               - unless is_owner
                 = link_to t('common.book'), 'javascript: void(0);', class: 'btn btn-primary'
           .row

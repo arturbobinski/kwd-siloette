@@ -46,6 +46,11 @@ initializePlugins = ->
     focusOnSelect: true
     vertical: true
 
+  $('[data-score]').raty
+    readOnly: true
+    score: ->
+      return $(this).attr('data-score')
+
 $(document).ready initializePlugins
 $(document).on 'turbolinks:load', ->
   initializePlugins()

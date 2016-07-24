@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui/datepicker
 //= require jquery-ui/slider
+//= require jquery.raty
 // require turbolinks
 //= require bootstrap/alert
 //= require bootstrap/button

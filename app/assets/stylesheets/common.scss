@@ -71,6 +71,24 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   @include border-radius(50%);
 }
 
+.no-top {
+  @media (min-width: $screen-sm-min) {
+    margin-top: 0;
+  }
+}
+
+.text-left-sm {
+  @media (min-width: $screen-sm-min) {
+    text-align: left;
+  }
+}
+
+.text-right-sm {
+  @media (min-width: $screen-sm-min) {
+    text-align: right;
+  }
+}
+
 .embed-container {
   height: 0;
   margin-bottom: $grid-gutter-width / 2;
