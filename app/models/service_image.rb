@@ -18,6 +18,6 @@ class ServiceImage < ActiveRecord::Base
   private
 
   def assign_author
-    self.author = service.user
+    self.author = service.try(:user)
   end
 end

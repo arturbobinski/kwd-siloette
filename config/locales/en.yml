@@ -11,6 +11,7 @@ en:
     description: Description
     edit: Edit
     female: Female
+    images: Images
     leave_service: Leave service
     location: Location
     male: Male
@@ -45,6 +46,10 @@ en:
               taken: Email already taken
             accept_terms:
               blank: You should accept terms of use.
+        services:
+          attributes:
+            images_count:
+              min: Required at least 4 images
   links:
     work_with_us: Work with Us
     create_service: Create Service

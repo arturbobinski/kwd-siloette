@@ -34,6 +34,7 @@ gem 'money-rails', '~> 1.6.2'
 gem 'cocoon', '~> 1.2.9'
 gem 'select2-rails', '~> 4.0.3'
 gem 'delayed_job_active_record', '~> 4.1.1'
+gem 'jquery-fileupload-rails', '~> 0.4.7'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 

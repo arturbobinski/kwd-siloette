@@ -12,6 +12,8 @@ class Service < ActiveRecord::Base
       less_than_or_equal_to: 2000
     }
 
+  attr_accessor :images_count
+
   belongs_to :user
   belongs_to :category
   has_one :location, as: :owner, dependent: :destroy

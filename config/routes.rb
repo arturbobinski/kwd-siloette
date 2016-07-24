@@ -30,6 +30,8 @@ Rails.application.routes.draw do
         get :decline
       end
     end
+    resources :service_images, only: [:create, :update, :destroy]
+    patch :service_images, to: 'service_images#create'
     resources :pages, only: [:show]
   end
 

@@ -18,6 +18,8 @@ class Ability
         can [:create], Service
         can [:manage], Service, user_id: user.id
         can [:media], User, id: user.id
+        can [:create], ServiceImage
+        can [:update, :destroy], ServiceImage, author_id: user.id
       end
     end
   end

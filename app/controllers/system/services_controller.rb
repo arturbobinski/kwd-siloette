@@ -1,6 +1,7 @@
 module System
   class ServicesController < System::BaseController
 
+    before_filter :get_image_ids, only: [:create]
     skip_before_filter :authenticate_user!, only: [:show]
     before_filter :build_association, only: [:new, :edit]
 
@@ -20,6 +21,7 @@ module System
       @service = current_user.services.new(service_params)
 
       if @service.save
+        @service.image_ids = @image_ids
         accept_invitation
         redirect_to system_service_path(@service)
       else
@@ -60,7 +62,7 @@ module System
       params.require(:service).permit(
         :category_id, :description, :price, :status, invitee_ids: [],
         location_attributes: [:id, :address, :country, :postal_code, :lat, :lng],
-        images_attributes: [:id, :file, :file_cache, :_destroy],
+        images_attributes: (action_name == 'create' ? [] : [:id, :_destroy]),
         video_attributes: [:id, :link]
       )
     end
@@ -87,6 +89,11 @@ module System
 
     def build_video
       @service.build_video unless @service.video
+    end
+
+    def get_image_ids
+      @image_ids = []
+      params[:service][:images_attributes].values.each { |x| @image_ids << x[:id] if x[:_destroy] == 'false' }
     end
   end
 end
