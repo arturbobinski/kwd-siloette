@@ -32,6 +32,15 @@ class ApplicationController < ActionController::Base
   private
 
   def load_pages
+    return if request.path =~ /admin/
     @pages = Page.order(:id).active.general
+  end
+
+  def authenticate_admin_user!
+    authenticate_user!
+    unless current_user.admin?
+      flash[:error] = t('common.admin_required')
+      redirect_to root_path
+    end
   end
 end

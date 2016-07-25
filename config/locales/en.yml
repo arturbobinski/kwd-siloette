@@ -3,6 +3,7 @@ en:
     accept: Accept
     accept_terms: I accept the %{link}
     add_more: Add more
+    admin_required: You need admin privilege to continue. Please login as admin and try again.
     back: Back
     book: Book
     commission_fee: 'Siloette fee ($<span class="commission-fee"></span>) will be added.'

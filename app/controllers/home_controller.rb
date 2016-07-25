@@ -10,7 +10,7 @@ class HomeController < ApplicationController
     @q = Service.open.active.search(params[:q])
     @q.sorts = 'rating desc' if @q.sorts.empty?
 
-    @services = @q.result.includes(:category, :primary_image, performers: :profile).paginate(page: params[:page])
+    @services = @q.result.includes(:category, :primary_image, performers: :profile).page(params[:page])
   end
 
   private

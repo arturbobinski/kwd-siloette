@@ -68,7 +68,7 @@
           .thumbnail-grid-narrow
             .thumbnail-grid
               = render partial: 'home/service', collection: @services
-          .text-right= will_paginate @services
+          .text-center= paginate @services
 
         - else
           = t('.no_results')
