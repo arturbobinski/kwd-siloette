@@ -109,6 +109,9 @@ en:
       index:
         create_new_service: Create a New Service
         empty_services: No services yet.
+        invited: Invited
+        personal: Personal
+        performing: Performing
       show:
         performers: Performers
         edit_service: Edit service
@@ -122,10 +125,6 @@ en:
         edit_service: Edit service
       update:
         notice: Service updated successfully.
-      services:
-        invited_services: Invited services
-        personal_services: Personal services
-        performing_services: Performing services
       close:
         notice: Service closed successfully.
       open:

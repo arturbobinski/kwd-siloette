@@ -6,9 +6,15 @@ module System
     before_filter :build_association, only: [:new, :edit]
 
     def index
-      @personal_services    = current_user.services.recent.includes(:category, :primary_image, performers: :profile)
-      @invited_services     = current_user.invited_services.recent.includes(:category, :primary_image, performers: :profile)
-      @performing_services  = current_user.performing_services.recent.includes(:category, :primary_image, performers: :profile)
+      params[:scope] ||= 'personal'
+
+      if params[:scope] == 'personal'
+        @services = current_user.services
+      else
+        @services = current_user.send("#{params[:scope]}_services")
+      end
+
+      @services = @services.recent.includes(:category, :primary_image, performers: :profile)
     end
 
     def show

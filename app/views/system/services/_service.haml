@@ -6,14 +6,14 @@
         = service.category
         %br
         %small
-          - if context == :personal
+          - if params[:scope].to_sym == :personal
             = price_with_unit(service)
-          - elsif context == :invited
+          - elsif params[:scope].to_sym == :invited
             with #{performer_names_without_me(service)}
 
       .overlay-bottom
         .clearfix
-          - case context
+          - case params[:scope].to_sym
           - when :personal
             .col-sm-6
               = link_to t('common.edit'), edit_system_service_path(service), class: 'btn btn-sm btn-primary btn-block'

@@ -50,6 +50,10 @@ class Service < ActiveRecord::Base
   #   "#{title} #{id}".parameterize
   # end
 
+  def booking_price
+    price * (100 + Setting.commission_from_seller) / 100
+  end
+
   private
 
   def generate_title

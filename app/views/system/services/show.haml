@@ -62,8 +62,7 @@
           .row
             .col-xs-7
               %h4.service-price
-                = humanized_money_with_symbol(@service.price)
-                %small= t('common.per_hour')
+                = price_with_unit(@service)
             .col-xs-5.text-right
               - unless is_owner
                 = link_to t('common.book'), 'javascript: void(0);', class: 'btn btn-primary'
