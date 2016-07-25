@@ -25,7 +25,7 @@ class Service < ActiveRecord::Base
   has_one :primary_image, -> { order(:created_at) }, class_name: 'ServiceImage'
   has_one :video, as: :owner
 
-  delegate :address, to: :location
+  delegate :address, :country, :lat, :lng, :postal_code, to: :location
 
   validates :category, presence: true
   validates :user, presence: true

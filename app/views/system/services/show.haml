@@ -1,3 +1,47 @@
+- title = @service.title
+- description = @service.description
+- url = system_service_url(@service)
+
+- content_for :title do
+  = title
+
+- content_for :meta_tags do
+  %meta{name: 'title', content: @service.title}
+  %meta{name: 'description', content: description}
+  %link{rel: 'canonical', href: url}
+  %meta{property: 'og:title', content: @service.title}
+  %meta{property: 'og:description', content: description}
+  %meta{property: 'og:url', content: url}
+  %meta{property: 'og:latitude', content: @service.lat}
+  %meta{property: 'og:longitude', content: @service.lng}
+  %meta{property: 'og:street-address', content: @service.address}
+  %meta{property: 'og:locality', content: @service.country}
+  %meta{property: 'og:region', content: @service.country}
+  %meta{property: 'og:postal-code', content: @service.postal_code}
+  %meta{name: 'twitter:card', content: 'summary'}
+  %meta{name: 'twitter:site', content: '@services7'}
+  %meta{name: 'twitter:title', content: @service.title}
+  %meta{name: 'twitter:description', content: description}
+  %meta{name: 'robots', content: 'index, follow'}
+  %meta{name: 'googlebot', content: 'index, follow'}
+  - if primary_image = @service.primary_image
+    %meta{property: 'og:image', content: primary_image.file.url(:large)}
+    %meta{property: 'og:image:width', content: '420'}
+    %meta{property: 'og:image:height', content: '560'}
+    %meta{name: 'twitter:card', content: 'photo'}
+    %meta{name: 'twitter:image', content: primary_image.file.url(:large)}
+    %meta{name: 'twitter:image:width', content: '420'}
+    %meta{name: 'twitter:image:height', content: '560'}
+  - if (images = @service.images).count > 0
+    - images.each do |image|
+      %meta{property: 'og:image', content: image.file.url(:medium)}
+      %meta{property: 'og:image:width', content: '210'}
+      %meta{property: 'og:image:height', content: '280'}
+      %meta{name: 'twitter:card', content: 'photo'}
+      %meta{name: 'twitter:image', content: image.file.url(:medium)}
+      %meta{name: 'twitter:image:width', content: '210'}
+      %meta{name: 'twitter:image:height', content: '280'}
+
 - is_owner = @service.user == current_user
 
 .container
