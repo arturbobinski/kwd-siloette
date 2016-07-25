@@ -5,6 +5,7 @@ ruby '2.3.1'
 gem 'rails', '~> 4.2.6'
 gem 'mysql2', '~> 0.3.20'
 
+gem 'therubyracer', '~> 0.12.2'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -48,6 +49,11 @@ group :development do
   gem 'spring', '~> 1.7.2'
   gem 'letter_opener', '~> 1.4.1'
   gem 'rspec-rails', '~> 3.5'
+  gem 'capistrano', '~> 3.5'
+  gem 'capistrano-rvm', '~> 0.1.2'
+  gem 'capistrano-passenger', '~> 0.2.0'
+  gem 'capistrano-rails', '~> 1.1.7'
+  gem 'airbrussh', '~> 1.0.2', require: false
 end
 
 group :production, :staging do
