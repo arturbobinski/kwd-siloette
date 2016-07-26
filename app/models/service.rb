@@ -51,7 +51,7 @@ class Service < ActiveRecord::Base
   # end
 
   def booking_price
-    price * (100 + Setting.commission_from_seller) / 100
+    price * (100 + Setting.commission_from_seller.to_f) / 100
   end
 
   private

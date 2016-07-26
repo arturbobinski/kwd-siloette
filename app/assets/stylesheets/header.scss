@@ -1,5 +1,17 @@
 #main-nav {
-  padding: 9px 0;
+  .nav .open {
+    > a, > a:hover, > a:focus {
+      background-color: transparent;
+    }
+  }
+
+  .navbar-nav .open {
+    .dropdown-menu {
+      > li > a, .dropdown-header {
+        padding: 8px 15px 8px 25px;
+      }
+    }
+  }
 }
 
 .navbar-nav > li > a {
@@ -37,8 +49,35 @@
   }
 }
 
-.navbar-collapse {
-  @media (max-width: $screen-xs-max) {
-    background-color: $navbar-collapse-bg;
+@media (max-width: $screen-xs-max) {
+  .navbar-header {
+    display: inline-block;
+  }
+
+  .navbar-nav {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .navbar-nav .open {
+    .dropdown-menu {
+      background-color: $navbar-collapse-bg;
+      position: absolute;
+      right: 0;
+      top: 59px;
+    }
+  }
+
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: white;
+  }
+
+  .navbar-right {
+    float: right;
+
+    > li {
+      display: inline-block;
+      vertical-align: top;
+    }
   }
 }

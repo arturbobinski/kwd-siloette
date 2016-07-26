@@ -1,4 +1,5 @@
 %section.jumbotron
+  .overlay.bg-half-grey
   .container
     .row
       .col-sm-5.col-sm-offset-6
@@ -6,7 +7,7 @@
           %h2.text-upper= t('.slogan')
           %p= t('.description')
         .row
-          .col-sm-7
+          .col-sm-9
             = link_to t('.browse_all_services'), search_path, class: 'btn btn-lg btn-primary btn-block text-upper'
 
 - if @top_services.count > 0
@@ -18,18 +19,57 @@
           .thumbnail-grid-wide
             .thumbnail-grid
               = render partial: 'home/service', collection: @top_services
-          %hr.invisible
+
+%section#whats-new
+  .container
+    .row
+      .col-sm-10.col-sm-offset-1
+        .section-content.text-center
+          %p.lead.text-light= t('.whats_new')
+          %p.lead.text-light= t('.why')
 
 %section#how-it-works
   .container
     .row
       .col-lg-12.text-center
-        %h2.section-heading= t('.how_it_works.title')
-        %p.lead= t('.how_it_works.description')
+        %h3.text-upper= t('.how_it_works.title')
+        %br
     .row
-      - 4.times do |i|
-        .col-lg-3.col-md-6.text-center
-          .service-box
-            %h1.text-primary= fa_icon t('.how_it_works.content')[i][:icon]
-            %p.lead= t('.how_it_works.content')[i][:title]
-            %p.text-muted= t('.how_it_works.content')[i][:text]
+      - 3.times do |i|
+        - content = t('.how_it_works.content')[i]
+        .col-sm-4.text-center
+          .box
+            = image_tag content[:image], alt: '', class: 'img-responsive'
+            %h4= content[:title]
+            %p.text-light.text-light-grey= content[:text]
+    %hr.invisible
+
+%section#performers
+  .banner
+    .overlay.bg-half-grey
+      .container.text-center
+        %h1.title= t('.safty&benefit')
+        %p.lead.text-upper.text-light-grey= t('.for_performers')
+  .container
+    .row
+      .col-sm-8.col-sm-offset-2
+        .section-content.text-center
+          %h2.text-light= t('.performers_first')
+          %p.text-light= t('.performers_benefit')
+
+%section#customers
+  .banner
+    .overlay.bg-half-grey
+      .container.text-center
+        %h1.title= t('.choice&transparency')
+        %p.lead.text-upper.text-light-grey= t('.for_customers')
+  .container
+    .row
+      .col-sm-8.col-sm-offset-2
+        .section-content.text-center
+          %h2.text-light= t('.choice')
+          %p.text-light= t('.transparency')
+    .row
+      .col-sm-12
+        = image_tag 'performance.jpg', alt: '', class: 'img-responsive'
+    %hr.invisible

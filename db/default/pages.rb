@@ -21,7 +21,7 @@ pages = [
   },
   {
     title: 'Contact Us',
-    slug: 'contact_us',
+    slug: 'contact-us',
     body: 'Please edit me <a href="/admin/pages/privacy/edit">here</a>.'
   },
   {

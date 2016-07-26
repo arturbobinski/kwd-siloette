@@ -24,7 +24,7 @@ en:
     save: Save
     select: Select…
     settings: Settings
-    sort: Sort
+    sort_by: Sort by
     terms_of_use: terms of use
     sign_in: Sign in
     sign_out: Log out
@@ -63,22 +63,28 @@ en:
       slogan: EXOTIC DANCERS. MODELS. HOSTS
       description: Book them for your party, event or club
       browse_all_services: Browse All Services
+      whats_new: Siloette is reforming the industry by providing exotic dancers, models and hosts with professional marketing, the opportunity to earn what they want, without paying huge agency fees.
+      why: We created an online platform that allows exotic performers to safely manage their careers on their own terms.
       how_it_works:
         title: How it works
-        description: Know exactly what you’re getting. No middleman.
         content:
-          - icon: user-plus
-            title: Performers Sign Up
-            text: Professional performers create profiles and services.
-          - icon: search
-            title: Search For Services
-            text: Search through hundreds of services in your desired location.
-          - icon: shopping-cart
-            title: Select A Service
-            text: Select your desired service, alternative options (in case your first preference is unavailable).
-          - icon: credit-card-alt
-            title: Payment and Review
-            text: Payment is processed at the time of the service. Rate the performer based on the quality of their performance.
+          - image: profile.jpg
+            title: CREATE A PROFILE
+            text: Performers can sign up and create profile in 3 minutes. We verify identification and all profiles prior to publicity.
+          - image: service.jpg
+            title: CREATE SERVICES
+            text: Performers add services to their profile. They can choose from Party Host, Topless Waitress, Nude Waitress and Exotic Dancer. They can create as many as they want.
+          - image: booking.jpg
+            title: BOOKINGS
+            text: Performers are sent booking requests directly to their device. They can screen the customer and accept or decline.
+      safty&benefit: Safty & Benefit
+      for_perormers: For Performers
+      performers_first: We are putting performers first
+      performers_benefit: Performers have access to technology that can monitor their location at all times. Performance start and finish times are always recorded and performers can contact us discretely in case of emergency. We are also offering performers benefits through partnerships with brands that will assist them to be the best they can be.
+      choice&transparency: RANGE OF CHOICE & TRANSPARENCY
+      for_customers: For Customers
+      choice: "Know exactly what you're getting"
+      transparency: We have a transparent booking process and payment policies. We complete background checks on performers and they are rated on their performances. We have a wide range of choice.
     search:
       style: Style
       price_range: Price range

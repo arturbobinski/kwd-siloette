@@ -6,6 +6,14 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   outline: none;
 }
 
+.container {
+  max-width: 970px;
+
+  .home-index & {
+    max-width: 1020px;
+  }
+}
+
 .form-horizontal .form-group {
   margin-left: 0;
   margin-right: 0;
@@ -13,6 +21,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .form-control {
   box-shadow: none;
+}
+
+.panel {
+  margin-bottom: $grid-gutter-width / 2;
 }
 
 .panel-body {
@@ -40,14 +52,26 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   @include background-size(cover);
 }
 
+.bg-half-grey {
+  background-color: rgba(32, 32, 32, .6);
+}
+
 .text-center-m {
   @media (max-width: $screen-xs-max) {
     text-align: center;
   }
 }
 
+.text-light {
+  font-family: $montserrat-ultra-light;
+}
+
 .text-white {
   color: white;
+}
+
+.text-light-grey {
+  color: $text-light-grey;
 }
 
 .text-upper {
@@ -101,6 +125,19 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .tab-pane {
   padding-bottom: $grid-gutter-width;
   padding-top: $grid-gutter-width;
+}
+
+.overlay {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.banner {
+  @extend .bg-cover;
+  position: relative;
 }
 
 .embed-container {
