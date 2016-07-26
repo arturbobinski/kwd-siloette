@@ -3,7 +3,7 @@ module System
 
     before_filter :get_image_ids, only: [:create]
     skip_before_filter :authenticate_user!, only: [:show]
-    before_filter :build_association, only: [:new, :edit]
+    before_filter :check_profile, :build_association, only: [:new, :edit]
 
     def index
       params[:scope] ||= 'personal'
@@ -71,6 +71,13 @@ module System
         images_attributes: (action_name == 'create' ? [] : [:id, :_destroy]),
         video_attributes: [:id, :link]
       )
+    end
+
+    def check_profile
+      if current_user.dancer? && current_user.profile.blank?
+        flash[:warning] = t('common.update_profile_first')
+        redirect_to edit_system_user_path(current_user) and return
+      end
     end
 
     def build_association

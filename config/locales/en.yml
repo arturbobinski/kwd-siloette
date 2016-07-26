@@ -28,11 +28,13 @@ en:
     sort_by: Sort by
     terms_of_use: terms of use
     sign_in: Sign in
+    sign_in_with_facebook: Sign In with Facebook
     sign_out: Log out
     sign_up: Sign up
     sign_up_with_facebook: Sign Up with Facebook
     submit: Submit
     upload_picture: Upload picture
+    update_profile_first: You need to update profile first.
   activerecord:
     attributes:
     models:

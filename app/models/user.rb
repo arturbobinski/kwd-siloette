@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
   mount_uploader :avatar, AvatarUploader
@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   has_many :performing_services, through: :accepted_invitations, source: :service
   has_many :service_images, foreign_key: :author_id
   has_many :profile_images, -> { where(profile: true) }, foreign_key: :author_id, class_name: 'ServiceImage'
+  has_many :authentications, dependent: :destroy
 
   delegate :perform_name, :height, :weight, :bust, :ethnicity, :birth_date, :phone_number, to: :profile
   delegate :address, to: :location
@@ -43,8 +44,34 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :service_images, reject_if: :all_blank, allow_destroy: true
 
+  def self.from_omniauth(auth)
+    if authentication = Authentication.where(provider: auth.provider, uid: auth.uid).first
+      authentication.user
+    else
+      password = Devise.friendly_token[0, 20]
+      user = where(email: auth.info.email).first_or_create do |u|
+        u.password = password
+        u.password_confirmation = password
+        u.name = auth.info.name
+        u.avatar = URI.parse(auth.info.image)
+        u.is_admin = true
+      end
+
+      if user
+        user.authentications.create(provider: auth.provider, uid: auth.uid, token: auth.credentials.token, secret: auth.credentials.try(:secret), username: auth.info.try(:nickname))
+        user
+      end
+    end
+  end
+
   def name
     [first_name, last_name].reject(&:blank?).join(' ')
+  end
+
+  def name=(value)
+    splitted = value.split(' ')
+    self.first_name = splitted.first
+    self.last_name = splitted[1..-1].join(' ')
   end
 
   def slug_candidates

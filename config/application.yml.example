@@ -9,6 +9,9 @@ smtp_email_user_name: smtp_email_user_name
 smtp_email_password: smtp_email_password
 smtp_email_domain: smtp_email_domain
 
+facebook_id: facebook_id
+facebook_secret: facebook_secret
+
 aws_bucket: aws_bucket
 aws_access_key_id: aws_access_key_id
 aws_secret_access_key: aws_secret_access_key

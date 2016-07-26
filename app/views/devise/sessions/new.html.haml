@@ -4,7 +4,7 @@
       .panel-heading
         = t('common.sign_in')
       .panel-body
-        = link_to fa_icon('facebook', text: t('common.sign_up_with_facebook')), 'javascript: void(0);', class: 'btn btn-block btn-facebook'
+        = link_to fa_icon('facebook', text: t('common.sign_in_with_facebook')), user_facebook_omniauth_authorize_path, class: 'btn btn-block btn-facebook'
 
         %br
         = t('.or_with_email')
