@@ -5,6 +5,7 @@ en:
     add_more: Add more
     admin_required: You need admin privilege to continue. Please login as admin and try again.
     back: Back
+    blog: Blog
     book: Book
     commission_fee: 'Siloette fee ($<span class="commission-fee"></span>) will be added.'
     decline: Decline
@@ -136,4 +137,7 @@ en:
         notice: Service closed successfully.
       open:
         notice: Service opened successfully.
+    posts:
+      index:
+        no_posts: No posts yet.
 

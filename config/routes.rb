@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :service_images, only: [:create, :update, :destroy]
     patch :service_images, to: 'service_images#create'
     resources :pages, only: [:show]
+    resources :posts, only: [:index, :show], path: '/blog'
   end
 
   get :search, to: 'home#search', as: :search

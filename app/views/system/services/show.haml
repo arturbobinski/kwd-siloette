@@ -6,10 +6,10 @@
   = title
 
 - content_for :meta_tags do
-  %meta{name: 'title', content: @service.title}
+  %meta{name: 'title', content: title}
   %meta{name: 'description', content: description}
   %link{rel: 'canonical', href: url}
-  %meta{property: 'og:title', content: @service.title}
+  %meta{property: 'og:title', content: title}
   %meta{property: 'og:description', content: description}
   %meta{property: 'og:url', content: url}
   %meta{property: 'og:latitude', content: @service.lat}
@@ -19,8 +19,8 @@
   %meta{property: 'og:region', content: @service.country}
   %meta{property: 'og:postal-code', content: @service.postal_code}
   %meta{name: 'twitter:card', content: 'summary'}
-  %meta{name: 'twitter:site', content: '@services7'}
-  %meta{name: 'twitter:title', content: @service.title}
+  %meta{name: 'twitter:site', content: '@silloete'}
+  %meta{name: 'twitter:title', content: title}
   %meta{name: 'twitter:description', content: description}
   %meta{name: 'robots', content: 'index, follow'}
   %meta{name: 'googlebot', content: 'index, follow'}

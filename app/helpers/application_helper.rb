@@ -12,4 +12,13 @@ module ApplicationHelper
         flash_type.to_s
     end
   end
+
+  def first_words(content, count=9)
+    splitted = strip_tags(content).split(' ')
+    ret = splitted[0..count].join(' ')
+    if splitted.length > count
+      ret << '...'
+    end
+    ret
+  end
 end

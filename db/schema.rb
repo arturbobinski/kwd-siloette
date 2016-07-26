@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725190922) do
+ActiveRecord::Schema.define(version: 20160726101704) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -84,6 +84,20 @@ ActiveRecord::Schema.define(version: 20160725190922) do
 
   add_index "pages", ["active"], name: "index_pages_on_active", using: :btree
   add_index "pages", ["slug"], name: "index_pages_on_slug", using: :btree
+
+  create_table "posts", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.text     "content",    limit: 65535
+    t.integer  "author_id",  limit: 4
+    t.string   "slug",       limit: 255
+    t.boolean  "published",                default: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree
+  add_index "posts", ["published"], name: "index_posts_on_published", using: :btree
+  add_index "posts", ["slug"], name: "index_posts_on_slug", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id",      limit: 4
