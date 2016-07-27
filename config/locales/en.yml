@@ -107,6 +107,9 @@ en:
         click_to_change: Click to change
         not_visible_on_profile: This information is <b>not visible</b> on your profile
         visible_on_profile: This information is <b>visible</b> on your profile
+      show:
+        open_services: Open services
+        no_open_services: No open services yet.
       update:
         notice: Profile updated successfully.
       profile:
@@ -127,6 +130,7 @@ en:
         edit_service: Edit service
         close_service: Close service
         open_service: Open service
+        you_might_like: You might also like
       new:
         new_service: New service
       create:

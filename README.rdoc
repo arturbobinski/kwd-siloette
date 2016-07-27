@@ -1,28 +1,34 @@
-== README
+== Siloette
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+== Description
 
-Things you may want to cover:
+== System dependencies
 
-* Ruby version
+You should have ruby 2.3.1 and mysql installed on your machine
 
-* System dependencies
+== Setup for development
 
-* Configuration
+1. Copy config/database.yml.example to config/database.yml and change database credentials.
 
-* Database creation
+2. Copy config/applicatoin.yml.example to config/application.yml and change the settings.
 
-* Database initialization
+3. Run 'bundle' and 'rake db:create db:migrate' and 'rake db:seed'.
 
-* How to run the test suite
+4. Install imagemgick for image processing.
+    ubuntu: sudo apt-get install imagemagick
+    Mac OS X: brew install imagemagick
 
-* Services (job queues, cache servers, search engines, etc.)
+5. Run delayed job.
+    bin/delayed_job start
 
-* Deployment instructions
+6. Run rails server.
+    rails server
 
-* ...
+7. Visit http://localhost:3000/ with your favourite browser.
 
+That's all yet. ;)
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+== Deployment instructions
+    cap production deploy
+
+All Rights Reserved, Siloette

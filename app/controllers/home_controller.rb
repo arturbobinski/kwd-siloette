@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   before_filter :load_categories, :tweak_price_params, only: [:search]
   
   def index
-    @top_services = Service.top.includes(:category, :primary_image, performers: :profile)
+    @top_services = Service.top_rated.limit(4).includes(:category, :primary_image, performers: :profile)
   end
 
   def search

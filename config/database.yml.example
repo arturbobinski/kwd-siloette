@@ -1,9 +1,20 @@
-production:
+default: &default
   adapter: mysql2
   host: localhost
-  database: siloette
-  username: siloette
-  password: siloette
-  pool: 20
+  username: root
+  password:
+  pool: 5
   timeout: 5000
+
+development:
+  <<: *default
+  database: siloette_dev
+
+test:
+  <<: *default
+  database: siloette_test
+
+production:
+  <<: *default
+  database: siloette
   socket: /tmp/mysql.sock

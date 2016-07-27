@@ -35,7 +35,7 @@ class Service < ActiveRecord::Base
 
   scope :open, -> { where(open: true) }
   scope :closed, -> { where(open: false) }
-  scope :top, -> { open.active.order(:rating).limit(4) }
+  scope :top_rated, -> { open.active.order(:rating) }
   scope :recent, -> { order(created_at: :desc) }
 
   before_validation :generate_title

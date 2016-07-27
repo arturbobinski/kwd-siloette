@@ -18,6 +18,7 @@ module System
     end
 
     def show
+      @similar_shows = Service.top_rated.where(category_id: @service.category_id).where.not(id: @service.id).limit(3)
     end
 
     def new

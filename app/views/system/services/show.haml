@@ -92,4 +92,21 @@
                     %li= link_to fa_icon('lock', text: t('.close_service')), close_system_service_path(@service)
                   - else
                     %li= link_to fa_icon('unlock', text: t('.open_service')), open_system_service_path(@service)
+      - video = @service.video
+      - if video && video.link.present?
+        %br
+        .row
+          .col-sm-12
+            .embed-container
+              = youtube_embed(video.link) if video.youtube?
+              = vimeo_embed(video.link) if video.vimeo?
 
+  - if @similar_shows.count > 0
+    .panel.panel-default
+      .panel-body
+        %h4.text-center= t('.you_might_like')
+        .row
+          .col-sm-10.col-sm-offset-1
+            .thumbnail-grid-narrow
+              .thumbnail-grid
+                = render partial: 'home/service', collection: @similar_shows
