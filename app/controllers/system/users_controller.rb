@@ -1,9 +1,11 @@
 module System
   class UsersController < System::BaseController
 
+    skip_before_filter :authenticate_user!, only: [:show]
+
     def show
       @profile = @user.profile if @user.dancer?
-      @services = current_user.services.active.open.recent.includes(:category, :primary_image, performers: :profile).limit(6)
+      @services = @user.services.active.open.recent.includes(:category, :primary_image, performers: :profile).limit(6)
     end
 
     def edit
