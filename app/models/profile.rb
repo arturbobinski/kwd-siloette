@@ -15,7 +15,6 @@ class Profile < ActiveRecord::Base
   validates :weight, presence: true, inclusion: { in: WEIGHTS }
   validates :bust, presence: true, inclusion: { in: Profile.busts.keys }
   validates :ethnicity, presence: true, inclusion: { in: Profile.ethnicities.keys }
-  validates :birth_date, presence: true
   validates :phone_number, presence: true, length: { maximum: 20 }
 
   after_save :update_services

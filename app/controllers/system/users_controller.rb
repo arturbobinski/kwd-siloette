@@ -35,8 +35,8 @@ module System
 
     def user_params
       params.require(:user).permit(
-        :first_name, :last_name, :email, :gender, :description, :avatar, :avatar_cache,
-        profile_attributes: [:id, :perform_name, :height, :weight, :bust, :ethnicity, :birth_date, :phone_number],
+        :first_name, :last_name, :email, :gender, :description, :birth_date, :avatar, :avatar_cache,
+        profile_attributes: [:id, :perform_name, :height, :weight, :bust, :ethnicity, :phone_number],
         location_attributes: [:id, :address, :country, :postal_code, :lat, :lng],
         service_images_attributes: [:id, :profile]
       )

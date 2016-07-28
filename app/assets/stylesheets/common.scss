@@ -80,7 +80,18 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .btn-facebook {
   @include button-variant($btn-primary-color, $btn-facebook-bg, $btn-default-border);
-  text-transform: uppercase;
+}
+
+.btn-instagram {
+  @include button-variant($btn-primary-color, $btn-instagram-bg, $btn-default-border);
+}
+
+.btn-google {
+  @include button-variant($btn-primary-color, $btn-google-bg, $btn-default-border);
+}
+
+.btn-twitter {
+  @include button-variant($btn-primary-color, $btn-twitter-bg, $btn-default-border);
 }
 
 .btn-pink {

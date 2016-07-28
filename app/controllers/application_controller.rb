@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
       request.env['omniauth.origin']
     elsif !(referer = stored_location_for(resource)).blank?
       referer
+    elsif resource.admin?
+      admin_dashboard_path
     elsif resource.dancer? && resource.profile.nil?
       edit_system_user_path(resource)
     elsif request.referer == new_user_session_url
@@ -37,10 +39,9 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_admin_user!
-    authenticate_user!
-    unless current_user.admin?
+    unless current_user && current_user.admin?
       flash[:error] = t('common.admin_required')
-      redirect_to root_path
+      redirect_to new_user_session_path(role: :admin)
     end
   end
 end

@@ -30,11 +30,11 @@ class User < ActiveRecord::Base
   has_many :profile_images, -> { where(profile: true) }, foreign_key: :author_id, class_name: 'ServiceImage'
   has_many :authentications, dependent: :destroy
 
-  delegate :perform_name, :height, :weight, :bust, :ethnicity, :birth_date, :phone_number, to: :profile
+  delegate :perform_name, :height, :weight, :bust, :ethnicity, :phone_number, to: :profile
   delegate :address, to: :location
 
   validates :first_name, presence: true, length: { maximum: 50 }
-  validates :last_name, presence: true, length: { maximum: 50 }
+  validates :last_name, length: { maximum: 50 }
   validates :role, inclusion: { in: User.roles.keys[0..-2] }, if: 'is_admin.blank?'
   validates :description, length: { maximum: 250 }
   validates :avatar, file_size: { less_than_or_equal_to: MAX_AVATAR_SIZE.to_i }, file_content_type: { allow: /^image\/.*/ }
@@ -43,24 +43,36 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :profile, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :service_images, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :authentications, reject_if: :all_blank, allow_destroy: true
 
   def self.from_omniauth(auth)
     if authentication = Authentication.where(provider: auth.provider, uid: auth.uid).first
+      authentication.update(token: auth.credentials.token, secret: auth.credentials.try(:secret))
       authentication.user
     else
+      email = auth.info.email || "#{auth.info.try(:nickname)}@#{auth.provider}.com"
       password = Devise.friendly_token[0, 20]
-      user = where(email: auth.info.email).first_or_create do |u|
+
+      user = where(email: email).first_or_create do |u|
         u.password = password
         u.password_confirmation = password
         u.name = auth.info.name
-        u.avatar = URI.parse(auth.info.image)
+        u.remote_avatar_url = auth.info.image.gsub('http://', 'https://')
+        u.birth_date = auth.extra.raw_info.try(:birthday)
+        u.gender = auth.extra.raw_info.try(:gender)
+        u.authentications_attributes = {
+          '0' => {
+            provider: auth.provider,
+            uid: auth.uid,
+            token: auth.credentials.token,
+            secret: auth.credentials.try(:secret),
+            username: auth.info.try(:nickname)
+          }
+        }
         u.is_admin = true
       end
 
-      if user
-        user.authentications.create(provider: auth.provider, uid: auth.uid, token: auth.credentials.token, secret: auth.credentials.try(:secret), username: auth.info.try(:nickname))
-        user
-      end
+      user
     end
   end
 

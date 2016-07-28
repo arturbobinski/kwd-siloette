@@ -23,15 +23,18 @@ en:
     price_cents: Price
     rating: Rating
     save: Save
+    secure_privacy: We will not post any information to your profile
     select: Select…
     settings: Settings
     sort_by: Sort by
     terms_of_use: terms of use
     sign_in: Sign in
-    sign_in_with_facebook: Sign In with Facebook
+    facebook: Facebook
+    instagram: Instagram
+    google: Google
+    twitter: Twitter
     sign_out: Log out
     sign_up: Sign up
-    sign_up_with_facebook: Sign Up with Facebook
     submit: Submit
     upload_picture: Upload picture
     update_profile_first: You need to update profile first.
@@ -63,7 +66,8 @@ en:
     services: Services
   home:
     index:
-      slogan: EXOTIC DANCERS. MODELS. HOSTS
+      launching_soon: LAUNCHING SOON IN MIAMI
+      slogan: Exotic Dancers. Models. Hosts.
       description: Book them for your party, event or club
       browse_all_services: Browse All Services
       whats_new: Siloette is reforming the industry by providing exotic dancers, models and hosts with professional marketing, the opportunity to earn what they want, without paying huge agency fees.

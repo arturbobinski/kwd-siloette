@@ -1,25 +1,35 @@
+- state = params[:bd].present? ? { state: 'dancer' } : {}
+
 .row
   .col-sm-4.col-sm-offset-4
     .panel.panel-default
       .panel-heading
         = t('common.sign_up')
       .panel-body
-        = link_to fa_icon('facebook', text: t('common.sign_up_with_facebook')), 'javascript: void(0);', class: 'btn btn-block btn-facebook'
+        = link_to fa_icon('instagram', text: t('common.instagram')), user_instagram_omniauth_authorize_path(state), class: 'btn btn-block btn-instagram text-upper'
+        = link_to fa_icon('facebook', text: t('common.facebook')), omniauth_authorize_path(:user, :facebook, state), class: 'btn btn-block btn-facebook text-upper'
+        = link_to fa_icon('google', text: t('common.google')), user_google_oauth2_omniauth_authorize_path(state), class: 'btn btn-block btn-google text-upper'
+        = link_to fa_icon('twitter', text: t('common.twitter')), user_twitter_omniauth_authorize_path(state), class: 'btn btn-block btn-twitter text-upper'
 
-        .horizontal-line
-          .inner or
+        %br
+        %p.text-center.text-muted= fa_icon 'info-circle', text: t('common.secure_privacy')
 
-        = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-horizontal', 'data-parsley-validate' => true }) do |f|
-          =# devise_error_messages!
-          - if params[:bd].present?
-            = f.hidden_field :role, value: 'dancer'
-          = f.input :first_name, label: false, required: true, input_html: { 'data-parsley-maxlength' => 50 }
-          = f.input :last_name, label: false, required: true, input_html: { 'data-parsley-maxlength' => 50 }
-          = f.input :email, label: false, required: true, input_html: { data: { 'parsley-type' => :email, 'parsley-maxlength' => 50, 'parsley-remote' => check_email_api_users_path, 'parsley-remote-message' => t('activerecord.errors.models.user.attributes.email.taken') } }
-          = f.input :password, label: false, required: true, input_html: { 'data-parsley-minlength' => 6 }
-          = f.input :password_confirmation, label: false, required: true, input_html: { data: { 'parsley-minlength' => 6, 'parsley-equalto' => '#user_password' } }
-          .form-group
-            = f.check_box :accept_terms, value: 1, required: true, 'data-parsley-required-message' => I18n.t('activerecord.errors.models.user.attributes.accept_terms.blank')
-            = f.label :accept_terms, t('common.accept_terms', link: link_to(t('common.terms_of_use'), system_page_path('terms-of-use', md: 1), data: { toggle: 'modal', target: '#common-modal' })).html_safe
-          .actions
-            = f.submit t('common.sign_up'), class: 'btn btn-primary btn-block'
+        - if false
+          .horizontal-line
+            .inner or
+
+        - if false
+          = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-horizontal', 'data-parsley-validate' => true }) do |f|
+            =# devise_error_messages!
+            - if params[:bd].present?
+              = f.hidden_field :role, value: 'dancer'
+            = f.input :first_name, label: false, required: true, input_html: { 'data-parsley-maxlength' => 50 }
+            = f.input :last_name, label: false, required: true, input_html: { 'data-parsley-maxlength' => 50 }
+            = f.input :email, label: false, required: true, input_html: { data: { 'parsley-type' => :email, 'parsley-maxlength' => 50, 'parsley-remote' => check_email_api_users_path, 'parsley-remote-message' => t('activerecord.errors.models.user.attributes.email.taken') } }
+            = f.input :password, label: false, required: true, input_html: { 'data-parsley-minlength' => 6 }
+            = f.input :password_confirmation, label: false, required: true, input_html: { data: { 'parsley-minlength' => 6, 'parsley-equalto' => '#user_password' } }
+            .form-group
+              = f.check_box :accept_terms, value: 1, required: true, 'data-parsley-required-message' => I18n.t('activerecord.errors.models.user.attributes.accept_terms.blank')
+              = f.label :accept_terms, t('common.accept_terms', link: link_to(t('common.terms_of_use'), system_page_path('terms-of-use', md: 1), data: { toggle: 'modal', target: '#common-modal' })).html_safe
+            .actions
+              = f.submit t('common.sign_up'), class: 'btn btn-primary btn-block'

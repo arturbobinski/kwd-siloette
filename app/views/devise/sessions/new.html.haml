@@ -4,27 +4,34 @@
       .panel-heading
         = t('common.sign_in')
       .panel-body
-        = link_to fa_icon('facebook', text: t('common.sign_in_with_facebook')), user_facebook_omniauth_authorize_path, class: 'btn btn-block btn-facebook'
+        - if params[:role].present? && params[:role] == 'admin'
+          = simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal', 'data-parsley-validate' => true }) do |f|
+            = f.input :email, autofocus: true, label: false, required: true, input_html: { 'data-parsley-type' => :email }
+            = f.input :password, label: false, required: true
+            .row
+              - if devise_mapping.rememberable?
+                .col-sm-6
+                  .form-group
+                    = f.check_box :remember_me, value: 1
+                    = f.label :remember_me, t('simple_form.labels.user.remember_me')
+              - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+                .col-sm-6.text-right
+                  = link_to t('.forgot_password'), new_password_path(resource_name)
+            .actions
+              = f.submit t('common.sign_in'), class: 'btn btn-primary btn-block'
+        - else
+          = link_to fa_icon('instagram', text: t('common.instagram')), user_instagram_omniauth_authorize_path, class: 'btn btn-block btn-instagram text-upper'
+          = link_to fa_icon('facebook', text: t('common.facebook')), user_facebook_omniauth_authorize_path, class: 'btn btn-block btn-facebook text-upper'
+          = link_to fa_icon('google', text: t('common.google')), user_google_oauth2_omniauth_authorize_path, class: 'btn btn-block btn-google text-upper'
+          = link_to fa_icon('twitter', text: t('common.twitter')), user_twitter_omniauth_authorize_path, class: 'btn btn-block btn-twitter text-upper'
 
-        %br
-        = t('.or_with_email')
-        .clearfix
-        %br
+          - if false
+            %br
+            = t('.or_with_email')
+            .clearfix
+            %br
 
-        = simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal', 'data-parsley-validate' => true }) do |f|
-          = f.input :email, autofocus: true, label: false, required: true, input_html: { 'data-parsley-type' => :email }
-          = f.input :password, label: false, required: true
-          .row
-            - if devise_mapping.rememberable?
-              .col-sm-6
-                .form-group
-                  = f.check_box :remember_me, value: 1
-                  = f.label :remember_me, t('simple_form.labels.user.remember_me')
-            - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
-              .col-sm-6.text-right
-                = link_to t('.forgot_password'), new_password_path(resource_name)
-          .actions
-            = f.submit t('common.sign_in'), class: 'btn btn-primary btn-block'
-        %br
-        .text-center
-          = t('.create_account', link: new_user_registration_path).html_safe
+        - if false
+          %br
+          .text-center
+            = t('.create_account', link: new_user_registration_path).html_safe
