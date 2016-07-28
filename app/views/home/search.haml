@@ -18,7 +18,7 @@
                   %ul.dropdown-menu
                     - sort_options.each do |option|
                       %li= sort_link @q, option, t("common.#{option}"), default_order: :desc#, hide_indicator: true
-          .col-sm-4.hidden-md.hidden-lg
+          .col-sm-4.hidden-sm.hidden-md.hidden-lg
             = link_to t('common.filter'), '#filters', class: 'btn btn-primary btn-block', role: 'button', data: { toggle: 'collapse' }, aria: { expanded: false, controls: '#filters' }
 
     .row

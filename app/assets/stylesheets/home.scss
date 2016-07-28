@@ -62,6 +62,12 @@
 }
 
 .home-search {
+  @media (min-width: $screen-sm-min) {
+    #filters {
+      display: block;
+    }
+  }
+
   .sort-by {
     .col-xs-4 {
       padding-right: 0;
