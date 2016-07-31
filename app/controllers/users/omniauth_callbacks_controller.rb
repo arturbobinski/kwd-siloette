@@ -2,7 +2,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def callback(provider)
     auth = request.env['omniauth.auth']
-    @user = User.from_omniauth(auth)
+    @user = User.from_omniauth(auth, current_user)
 
     if @user.persisted?
       original_params = request.env['omniauth.params']
@@ -10,7 +10,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         @user.dancer!
       end
 
-      sign_in_and_redirect @user, event: :authentication
+      url = if @user.admin?
+        admin_dashboard_path
+      elsif provider == :stripe_connect
+        stripe_account_user_path(@user)
+      else
+        @user
+      end
+
+      sign_in_and_redirect url, event: :authentication
       set_flash_message(:notice, :success, kind: provider.to_s.humanize) if is_navigational_format?
     else
       session['devise.omauth_data'] = auth
@@ -32,6 +40,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def twitter
     callback(:twitter)
+  end
+
+  def stripe_connect
+    callback(:stripe_connect)
   end
 
   def failure

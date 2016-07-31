@@ -1,0 +1,8 @@
+%tr
+  %td= booking.event_type
+  %td= booking.venue_type
+  %td= link_to booking.service.title, service_path(booking.service)
+  %td= booking.number_of_guests
+  %td= datetime_format(booking.start_at)
+  %td
+    %span.label.label-info= t("activerecord.attributes.booking.states.#{booking.state}")

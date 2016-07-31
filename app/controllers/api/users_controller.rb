@@ -9,5 +9,14 @@ module Api
         render nothing: true, status: 200
       end
     end
+
+    def check_slug
+      user = User.find_by(slug: params[:user][:slug])
+      if user && user != current_user
+        render nothing: true, status: 422
+      else
+        render nothing: true, status: 200
+      end
+    end
   end
 end

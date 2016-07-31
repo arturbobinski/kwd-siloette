@@ -1,0 +1,36 @@
+.container
+  .panel.panel-default
+    .panel-heading
+      = link_to fa_icon('angle-double-left', text: t('common.back')), :back
+    .panel-body
+      .row
+        .col-sm-6.col-sm-offset-1
+          - if @user.profile_images.any?
+            = render 'shared/slider', images: @user.profile_images
+          - elsif @user.service_images.any?
+            = render 'shared/slider', images: @user.service_images.limit(4)
+          - else
+            .user-avatar.text-center
+              = image_tag avatar_url(@user, :medium), alt: @user.name, class: 'round'
+        .col-sm-4
+          - if @user.dancer?
+            = render 'profile'
+          - else
+            %h2= @user.name
+
+          %dl
+            %dt #{t('common.description')}:
+            %dl= @user.description
+
+  - if @user.dancer?
+    .panel.panel-defult
+      .panel-body
+        %h4.text-center= t('.open_services')
+        .row
+          .col-sm-10.col-sm-offset-1
+            - if @services.count > 0
+              .thumbnail-grid-narrow
+                .thumbnail-grid
+                  = render partial: 'services/service', collection: @services
+            - else
+              %p.alert.alert-warning= t('.no_open_services')

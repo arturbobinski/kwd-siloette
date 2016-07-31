@@ -9,15 +9,15 @@
         %li= link_to t('common.sign_in'), new_user_session_path
       - else
         - if current_user.dancer?
-          %li= link_to t('links.create_service'), new_system_service_path
+          %li= link_to t('links.create_service'), new_performer_service_path
         - else
-          %li= link_to t('links.work_with_us'), become_dancer_system_user_path(current_user)
+          %li= link_to t('links.work_with_us'), become_dancer_user_path(current_user)
         %li.dropdown
           %a(data-toggle='dropdown' aria-haspopup='true' aria-expanded='true' href='#')
             = image_tag avatar_url(current_user), size: '32x32', alt: '', class: 'round'
             = current_user.first_name
             %span.caret
           %ul.dropdown-menu
-            %li= link_to fa_icon('user', text: t('links.profile')), system_user_path(current_user)
-            %li= link_to fa_icon('cog', text: t('links.edit_profile')), edit_system_user_path(current_user)
+            %li= link_to fa_icon('user', text: t('links.profile')), user_path(current_user)
+            %li= link_to fa_icon('cog', text: t('links.edit_profile')), edit_user_path(current_user)
             %li= link_to fa_icon('sign-out', text: t('common.sign_out')), destroy_user_session_path

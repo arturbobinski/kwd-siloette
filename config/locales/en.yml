@@ -3,15 +3,25 @@ en:
     accept: Accept
     accept_terms: I accept the %{link}
     add_more: Add more
+    address: Address
     admin_required: You need admin privilege to continue. Please login as admin and try again.
+    agree_terms_conditions: 'By signing up, I agree to Siloette’s <a href="/pages/terms-of-use" target="_blank">Terms of Service</a>, <a href="javascript: void(0);">Content Policy</a>, <a href="javascript: void(0);">Privacy Policy</a> and <a href="javascript: void(0);">Software License Agreement</a>.'
+    all: All
     back: Back
     blog: Blog
     book: Book
+    bookings: Bookings
+    book_unavailable: Sorry this performer has no payment setup. Please try another.
+    calendar: Calendar
     commission_fee: 'Siloette fee ($<span class="commission-fee"></span>) will be added.'
+    confirm: Are your sure?
+    day: Day
     decline: Decline
     delete: Delete
     description: Description
     edit: Edit
+    end: End
+    empty_bookings: No bookings yet.
     female: Female
     images: Images
     leave_service: Leave service
@@ -19,16 +29,23 @@ en:
     male: Male
     menu: Menu
     number_of_performers: Number of performers
+    on_off: On/Off
+    payment: Payment
     per_hour: /hr
     price_cents: Price
     rating: Rating
     save: Save
-    secure_privacy: We will not post any information to your profile
+    save_and_continue: Save and Continue
     select: Select…
     settings: Settings
-    sort_by: Sort by
-    terms_of_use: terms of use
     sign_in: Sign in
+    sort_by: Sort by
+    something_went_wrong: Something went wrong, please try later.
+    start: Start
+    state: State
+    status: Status
+    terms_of_use: terms of use
+    today: Today
     facebook: Facebook
     instagram: Instagram
     google: Google
@@ -36,13 +53,35 @@ en:
     sign_out: Log out
     sign_up: Sign up
     submit: Submit
+    undo: Undo
     upload_picture: Upload picture
     update_profile_first: You need to update profile first.
   activerecord:
     attributes:
+      booking:
+        event_type: Event
+        number_of_guests: Guests
+        phone: Phone
+        service: Service
+        start_at: Start at
+        states:
+          accepted: Accepted
+          address: Address
+          canceled: Canceled
+          completed: Completed
+          declined: Declined
+          initial: Initial
+          payment: Payment
+          paying: Paying
+          pending: Pending
+        venue_type: Venue
     models:
     errors:
       models:
+        booking:
+          attributes:
+            end_at:
+              invalid_datetime: End time is invalid datetime.
         profile:
           attributes:
             perform_name:
@@ -53,15 +92,19 @@ en:
               taken: Email already taken
             accept_terms:
               blank: You should accept terms of use.
+            slug:
+              taken: ID already taken
         services:
           attributes:
             images_count:
               min: Required at least 4 images
   links:
     work_with_us: Work with Us
-    create_service: Create Service
+    create_service: Create service
+    daily_schedule: Daily schedule
     profile: Profile
     edit_profile: Edit profile
+    payment_info: Payment info
     profile_photos: Profile photos
     services: Services
   home:
@@ -92,36 +135,27 @@ en:
       for_customers: For Customers
       choice: "Know exactly what you're getting"
       transparency: We have a transparent booking process and payment policies. We complete background checks on performers and they are rated on their performances. We have a wide range of choice.
-    search:
-      style: Style
-      price_range: Price range
-      ethnicity: Ethnicity
-      no_results: Your search returned no results.
-  system:
-    users:
+  customer:
+    bookings:
+      create:
+        notice: Booking created successfully.
       edit:
-        siloette_is_all_about: Siloette is all about SERVICES…
-        step1:
-          title: Step 1
-          description: Create your profile. All photos added to your <b>services</b> are added to your profile automatically.
-        step2:
-          title: Step 2
-          description: Create your <b>Services</b>. Select from Party Host, Topless Waitress, Nude Waitress, Fantasy Dance. Create as many as you want!
-        basic_information: Basic information
-        click_to_change: Click to change
-        not_visible_on_profile: This information is <b>not visible</b> on your profile
-        visible_on_profile: This information is <b>visible</b> on your profile
-      show:
-        open_services: Open services
-        no_open_services: No open services yet.
+      initial:
+        not_available: Sorry, the performer is not available this day. Please select another day.
+      new:
+        new_booking: New booking
       update:
-        notice: Profile updated successfully.
-      profile:
-        performer_profile: Performer profile
-        height: Height
-        weight: Weight
-        bust: Bust
-        ethnicity: Ethnicity
+        notice: Booking updated successfully.
+  performer:
+    bookings:
+      calendar:
+        choose_to_reserve: Choose slots to mark as unavailable
+        reserve: Mark as Unavailable
+        reserved: Marked as unavailable
+    reservations:
+      create:
+        choose_slots: Choose slots to mark.
+        notice: Slots marked as unavailable.
     services:
       index:
         create_new_service: Create a New Service
@@ -129,12 +163,6 @@ en:
         invited: Invited
         personal: Personal
         performing: Performing
-      show:
-        performers: Performers
-        edit_service: Edit service
-        close_service: Close service
-        open_service: Open service
-        you_might_like: You might also like
       new:
         new_service: New service
       create:
@@ -147,7 +175,54 @@ en:
         notice: Service closed successfully.
       open:
         notice: Service opened successfully.
-    posts:
-      index:
-        no_posts: No posts yet.
-
+    daily_schedules:
+      set_schedule:
+        alert: Something went wrong. Please make sure end time to be later than start time and try again.
+        notice: Schedule saved successfully.
+  users:
+    show:
+      open_services: Open services
+      no_open_services: No open services yet.
+    edit:
+      basic_information: Basic information
+      click_to_change: Click to change
+      siloette_is_all_about: Siloette is all about SERVICES…
+      step1:
+        title: Step 1
+        description: Create your profile. All photos added to your <b>services</b> are added to your profile automatically.
+      step2:
+        title: Step 2
+        description: Create your <b>Services</b>. Select from Party Host, Topless Waitress, Nude Waitress, Fantasy Dance. Create as many as you want!
+      not_visible_on_profile: This information is <b>not visible</b> on your profile
+      visible_on_profile: This information is <b>visible</b> on your profile
+    update:
+      notice: Profile updated successfully.
+    profile:
+      body_type: Body type
+      performer_profile: Performer profile
+      height: Height
+      weight: Weight
+      bust: Bust
+      ethnicity: Ethnicity
+    stripe_account:
+      receiving_funds: Receiving funds
+      siloette_uses_stripe: Siloette uses Stripe as its payment provider. A <a href="https://stripe.com" target="_blank">Stripe account</a> is required in order to accept payments for your services, and must be connected to Siloette. You will also need to grant Siloette permission to charge a transaction fee.
+      everything_setup: Hooray, everything is set up!
+      ready_to_receive_payment: You can now receive payments for your services.
+      connect_stripe: Connect your Stripe account
+      click_to_connect: Click on the button below to log in to Stripe and connect your Stripe account with Siloette.
+  services:
+    show:
+      performers: Performers
+      edit_service: Edit service
+      close_service: Close service
+      open_service: Open service
+      you_might_like: You might also like
+    search:
+      style: Style
+      price_range: Price range
+      ethnicity: Ethnicity
+      no_results: Your search returned no results.
+  posts:
+    index:
+      no_posts: No posts yet.

@@ -1,0 +1,7 @@
+= simple_form_for [:customer, @booking], html: { class: 'form-horizontal booking-form', 'data-parsley-validate' => true } do |f|
+  = f.error_notification
+  = render @booking.aasm.current_state.to_s, f: f
+
+  %br
+  .actions.text-center
+    = submit_tag t('common.save_and_continue'), class: 'btn btn-primary'

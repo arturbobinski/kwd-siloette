@@ -19,8 +19,16 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-right: 0;
 }
 
+.table .form-group {
+  margin-bottom: 0;
+}
+
 .form-control {
   box-shadow: none;
+}
+
+form .table > tbody > tr > td {
+  vertical-align: middle;
 }
 
 .panel {
@@ -33,6 +41,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .panel-default .panel-heading {
   background-color: white;
+}
+
+.ui-datepicker {
+  width: 100%;
 }
 
 .select2-container {
@@ -72,10 +84,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .text-light-grey {
   color: $text-light-grey;
-}
-
-.text-upper {
-  text-transform: uppercase;
 }
 
 .btn-facebook {
@@ -209,5 +217,25 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   &:after {
     left: -webkit-calc(100% + 1.5em);
     left: calc(100% + 1.5em);
+  }
+}
+
+.triangle-isosceles {
+  position: relative;
+  padding: 9px;
+  margin: 0 0 2em;
+  background: $brand-primary;
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: -webkit-calc(50% - 10px);
+    left: calc(50% - 10px);
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: $brand-primary transparent;
+    display: block;
+    width: 0;
   }
 }

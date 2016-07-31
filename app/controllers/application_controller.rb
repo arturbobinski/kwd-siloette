@@ -10,14 +10,12 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if request.env['omniauth.origin']
-      request.env['omniauth.origin']
-    elsif !(referer = stored_location_for(resource)).blank?
+    if !(referer = stored_location_for(resource)).blank?
       referer
     elsif resource.admin?
       admin_dashboard_path
     elsif resource.dancer? && resource.profile.nil?
-      edit_system_user_path(resource)
+      edit_user_path(resource)
     elsif request.referer == new_user_session_url
       super
     else

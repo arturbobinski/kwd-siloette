@@ -9,8 +9,17 @@ smtp_email_user_name: smtp_email_user_name
 smtp_email_password: smtp_email_password
 smtp_email_domain: smtp_email_domain
 
+stripe_id: stripe_id
+stripe_secret: stripe_secret
+stripe_publishable_key: stripe_publishable_key
 facebook_id: facebook_id
 facebook_secret: facebook_secret
+twitter_id: twitter_id
+twitter_secret: twitter_secret
+google_oauth2_id: google_oauth2_id
+google_oauth2_secret: google_oauth2_secret
+instagram_id: instagram_id
+instagram_secret: instagram_secret
 
 aws_bucket: aws_bucket
 aws_access_key_id: aws_access_key_id

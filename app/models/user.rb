@@ -29,6 +29,10 @@ class User < ActiveRecord::Base
   has_many :service_images, foreign_key: :author_id
   has_many :profile_images, -> { where(profile: true) }, foreign_key: :author_id, class_name: 'ServiceImage'
   has_many :authentications, dependent: :destroy
+  has_many :schedules, class_name: 'DailySchedule', dependent: :destroy
+  has_many :bookings, dependent: :destroy
+  has_many :received_bookings, foreign_key: :performer_id, class_name: 'Booking', dependent: :destroy
+  has_many :reservations, dependent: :destroy
 
   delegate :perform_name, :height, :weight, :bust, :ethnicity, :phone_number, to: :profile
   delegate :address, to: :location
@@ -39,14 +43,32 @@ class User < ActiveRecord::Base
   validates :description, length: { maximum: 250 }
   validates :avatar, file_size: { less_than_or_equal_to: MAX_AVATAR_SIZE.to_i }, file_content_type: { allow: /^image\/.*/ }
   validate :acceptance_terms, on: :create
+  validates_date :birth_date, allow_blank: true
 
   accepts_nested_attributes_for :profile, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :service_images, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :authentications, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :schedules, reject_if: :all_blank, allow_destroy: true
 
-  def self.from_omniauth(auth)
-    if authentication = Authentication.where(provider: auth.provider, uid: auth.uid).first
+  scope :dancer_with_profile, -> { dancer.joins(:profile).group('users.id').having('count(user_id) > 0') }
+
+  def self.from_omniauth(auth, user=nil)
+    attrs = {
+      username: auth.info.try(:nickname),
+      token: auth.credentials.token,
+      secret: auth.credentials.try(:secret),
+      publishable_key: auth.info.try(:stripe_publishable_key)
+    }
+
+    if user
+      if authentication = user.authentications.where(provider: auth.provider, uid: auth.uid).first
+        authentication.update(attrs)
+      else
+        user.authentications.create(attrs.merge(provider: auth.provider, uid: auth.uid))
+      end
+      user
+    elsif authentication = Authentication.where(provider: auth.provider, uid: auth.uid).first
       authentication.update(token: auth.credentials.token, secret: auth.credentials.try(:secret))
       authentication.user
     else
@@ -61,13 +83,7 @@ class User < ActiveRecord::Base
         u.birth_date = auth.extra.raw_info.try(:birthday)
         u.gender = auth.extra.raw_info.try(:gender)
         u.authentications_attributes = {
-          '0' => {
-            provider: auth.provider,
-            uid: auth.uid,
-            token: auth.credentials.token,
-            secret: auth.credentials.try(:secret),
-            username: auth.info.try(:nickname)
-          }
+          '0' => attrs.merge(provider: auth.provider, uid: auth.uid)
         }
         u.is_admin = true
       end
@@ -91,6 +107,10 @@ class User < ActiveRecord::Base
       :name,
       [:name, :email],
     ]
+  end
+
+  def payment_ready?
+    !authentications.where(provider: 'stripe_connect').first.nil?
   end
 
   def acceptance_terms

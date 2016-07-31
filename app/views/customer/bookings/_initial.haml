@@ -1,0 +1,42 @@
+- content_for :extra_script do
+  :javascript
+    window.closedDays = #{raw @performer.schedules.inactive.pluck(:wday).to_json};
+    window.pricePerHour = #{@service.booking_price};
+
+- available_slots = @calendar.available_slots
+
+= f.hidden_field :service_id, value: @service.id
+= f.hidden_field :performer_id, value: @performer.id
+= f.hidden_field :start_at, value: @date
+
+.row
+  .col-sm-6
+    .calendar-datepicker
+  .col-sm-6
+    .today.text-center.triangle-isosceles
+      - if @date == Date.today
+        = t('common.today')
+      = date_format(@date)
+
+    - if available_slots.length > 0
+      = f.input :start_time, as: :select, collection: time_slot_options(available_slots), prompt: t('common.select')
+      = f.input :end_time, as: :select, collection: time_slot_options(available_slots), prompt: t('common.select')
+    - else
+      .alert.alert-warning= t('.not_available')
+
+- if available_slots.length > 0
+  .row
+    .col-sm-6
+      .form-group
+        %label.control-label= t('simple_form.labels.booking.total')
+        #booking-total.text-danger.text-center
+          %span.currency
+            $
+          %span.price
+            = number_with_precision(@booking.total || @service.booking_price, precision: 2)
+    = f.input :number_of_guests, as: :select, collection: (1..20), prompt: t('common.select'), wrapper_html: { class: 'col-sm-6' }
+  .row
+    .col-sm-12
+      = f.input :event_type_id, as: :select, collection: EventType.select(:id, :name), prompt: t('common.select')
+      = f.input :venue_type_id, as: :select, collection: VenueType.select(:id, :name), prompt: t('common.select')
+      = f.input :special_info, input_html: { rows: 5 }

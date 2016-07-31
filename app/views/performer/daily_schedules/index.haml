@@ -1,0 +1,30 @@
+- content_for :sidebar do
+  = render 'shared/sidebar'
+
+.panel.panel-default
+  .panel-body
+    = form_for current_user, url: set_schedule_performer_daily_schedules_path, html: { class: 'form-horizontal', 'data-parsley-validate' => true, method: :put } do |f|
+      %table.table.table-strip
+        %thead
+          %th= t('common.day')
+          %th.text-center= t('common.start')
+          %th.text-center= t('common.end')
+          %th= t('common.on_off')
+        %tbody
+          = f.fields_for :schedules do |s|
+            - schedule = s.object
+            %tr
+              %td.text-uppercase
+                %b= Date::ABBR_DAYNAMES[schedule.wday]
+                = s.hidden_field :wday
+              %td
+                = s.select :start_slot, time_slot_options, {}, required: schedule.active, class: 'form-control', disabled: !schedule.active
+              %td
+                = s.select :end_slot, time_slot_options, {}, required: schedule.active, class: 'form-control', disabled: !schedule.active
+              %td
+                %label.switch
+                  = s.check_box :active, class: 'toggel-schedule'
+                  .switch-slider.round
+
+      .actions.text-center
+        = f.button t('common.save'), class: 'btn btn-primary btn-bordered'

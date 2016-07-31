@@ -6,6 +6,29 @@
   padding-top: 0;
 }
 
+.user_slug {
+  label {
+    position: relative;
+
+    &:after {
+      color: $text-light-grey;
+      content: 'www.siloett.co/users/';
+      font-weight: normal;
+      left: 12px;
+      position: absolute;
+      top: 35px;
+
+      @media (min-width: $screen-sm-min) {
+        top: 39px;
+      }
+    }
+  }
+
+  input {
+    padding-left: 165px;
+  }
+}
+
 .horizontal-line {
   margin: $grid-gutter-width/2 0;
   text-align: center;

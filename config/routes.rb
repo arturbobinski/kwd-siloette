@@ -6,24 +6,31 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :users, only: [] do
-      get :check_email, on: :collection
+      collection do
+        get :check_email
+        get :check_slug
+      end
     end
     resources :profiles, only: [] do
       get :check_perform_name, on: :collection
     end
+    resources :states, only: [:index]
   end
 
-  namespace :system, path: '/' do
-    resources :services do
+  namespace :performer, path: '/' do
+    resources :bookings, only: [:index] do
+      collection do
+        get :calendar
+      end
+    end
+    resources :reservations, only: [:create, :destroy]
+    resources :daily_schedules, only: [:index] do
+      put :set_schedule, on: :collection
+    end
+    resources :services, except: [:show] do
       member do
         get :close
         get :open
-      end
-    end
-    resources :users, only: [:show, :edit, :update] do
-      member do
-        get :become_dancer
-        get :media
       end
     end
     resources :service_invitations, only: [:destroy] do
@@ -34,11 +41,23 @@ Rails.application.routes.draw do
     end
     resources :service_images, only: [:create, :update, :destroy]
     patch :service_images, to: 'service_images#create'
-    resources :pages, only: [:show]
-    resources :posts, only: [:index, :show], path: '/blog'
   end
 
-  get :search, to: 'home#search', as: :search
+  namespace :customer do
+    resources :bookings
+  end
+
+  resources :users, only: [:show, :edit, :update] do
+    member do
+      get :become_dancer
+      get :media
+      get :stripe_account
+    end
+  end
+  resources :services, only: [:show]
+  get :search, to: 'services#search', as: :search
+  resources :pages, only: [:show]
+  resources :posts, only: [:index, :show], path: '/blog'
 
   root to: 'home#index'
 end

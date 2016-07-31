@@ -6,10 +6,31 @@ initializePlugins = ->
   $('.modal').on 'loaded.bs.modal', ->
     initFormValidation $(this)
 
+  $('.toggel-schedule').change ->
+    $this = $(this)
+    $row = $this.closest('tr')
+    $select = $row.find('select')
+    if $this.is(':checked')
+      $select.prop('disabled', false).attr('required', true)
+    else
+      $select.prop('disabled', true).removeAttr('required')
+
   today = new Date()
+  date = $.queryParams().date
+  currentDate = if date then new Date(date) else new Date
+  $('.calendar-datepicker').datepicker
+    defaultDate: currentDate
+    onSelect: (date, obj) ->
+      params = $.queryParams()
+      params.date = moment(date).format('YYYY-MM-DD')
+      window.location.search = $.param(params)
+      return
+    beforeShowDay: (date) ->
+      string = date.getDay()
+      return [window.closedDays.indexOf(string) < 0 && date >= today]
+
   legalAge = 21
   legalYear = today.getFullYear() - legalAge
-
   $('.datepicker').datepicker
     changeMonth: true
     changeYear: true

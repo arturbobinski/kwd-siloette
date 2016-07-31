@@ -9,7 +9,7 @@
           /%p= t('.description')
         .row
           .col-sm-6.col-sm-offset-3
-            = link_to t('.browse_all_services'), search_path, class: 'btn btn-lg btn-primary btn-block text-upper'
+            = link_to t('.browse_all_services'), search_path, class: 'btn btn-lg btn-primary btn-block text-uppercase'
 
 - if @top_services.count > 0
   %section#top-services
@@ -19,7 +19,7 @@
           %h3= t('.top-services')
           .thumbnail-grid-wide
             .thumbnail-grid
-              = render partial: 'home/service', collection: @top_services
+              = render @top_services
 
 %section#whats-new
   .container
@@ -33,7 +33,7 @@
   .container
     .row
       .col-lg-12.text-center
-        %h3.text-upper= t('.how_it_works.title')
+        %h3.text-uppercase= t('.how_it_works.title')
         %br
     .row
       - 3.times do |i|
@@ -50,7 +50,7 @@
     .overlay.bg-half-grey
       .container.text-center
         %h1.title= t('.safety&benefits')
-        %p.lead.text-upper.text-light-grey= t('.for_performers')
+        %p.lead.text-uppercase.text-light-grey= t('.for_performers')
   .container
     .row
       .col-sm-8.col-sm-offset-2
@@ -63,7 +63,7 @@
     .overlay.bg-half-grey
       .container.text-center
         %h1.title= t('.choice&transparency')
-        %p.lead.text-upper.text-light-grey= t('.for_customers')
+        %p.lead.text-uppercase.text-light-grey= t('.for_customers')
   .container
     .row
       .col-sm-8.col-sm-offset-2

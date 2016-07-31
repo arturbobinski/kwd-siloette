@@ -1,0 +1,12 @@
+- if f.object.new_record?
+  - url = performer_service_images_path
+  - method = 'POST'
+- else
+  - url = "#{performer_service_images_path}/#{f.object.id}"
+  - method = 'PUT'
+
+.upload-image-placeholder.nested-fields{ data: { url: url, method: method } }
+  .fileupload-text(style="#{'display: none;' if f.object.uploaded?}")= t('common.upload_picture')
+  = image_tag f.object.file.url(:medium), alt: '', class: 'img-responsive'
+  = file_field_tag :file, class: 'fileupload'
+  = link_to_remove_association fa_stacked_icon('close inverse', base: 'circle', class: 'fa-1x'), f

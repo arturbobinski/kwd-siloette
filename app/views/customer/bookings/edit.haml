@@ -1,0 +1,8 @@
+- content_for :sidebar do
+  = render 'shared/sidebar'
+
+.panel.panel-default
+  .panel-heading
+    = t("activerecord.attributes.booking.states.#{@booking.aasm.current_state}")
+  .panel-body
+    = render 'form'

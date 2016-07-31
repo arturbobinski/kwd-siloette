@@ -1,0 +1,22 @@
+- content_for :sidebar do
+  = render 'shared/sidebar'
+
+.panel.panel-default
+  .panel-heading
+    = t('common.bookings')
+  .panel-body
+    - if @bookings.count > 0
+      %table.table.table-striped
+        %thead
+          %th= t('activerecord.attributes.booking.event_type')
+          %th= t('activerecord.attributes.booking.venue_type')
+          %th= t('activerecord.attributes.booking.service')
+          %th= t('activerecord.attributes.booking.number_of_guests')
+          %th= t('activerecord.attributes.booking.start_at')
+          %th= t('common.state')
+        %tbody
+          = render @bookings
+
+      .text-center= paginate @bookings
+    - else
+      = t('common.empty_bookings')

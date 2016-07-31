@@ -25,6 +25,7 @@ gem 'kaminari', '~> 0.17.0'
 gem 'devise', '~> 4.2.0'
 gem 'cancancan', '~> 1.10'
 gem 'activeadmin', '~> 1.0.0.pre4'
+gem 'omniauth-stripe-connect', '~> 2.3.0'
 gem 'omniauth-facebook', '~> 3.0.0'
 gem 'omniauth-google-oauth2', '~> 0.4.1'
 gem 'omniauth-instagram', '~> 1.0.2'
@@ -43,6 +44,10 @@ gem 'cocoon', '~> 1.2.9'
 gem 'select2-rails', '~> 4.0.3'
 gem 'delayed_job_active_record', '~> 4.1.1'
 gem 'jquery-fileupload-rails', '~> 0.4.7'
+gem 'momentjs-rails', '~> 2.11.1'
+gem 'carmen', '~> 1.0.2'
+gem 'aasm', '~> 4.11.0'
+gem 'validates_timeliness', '~> 4.0.2'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 

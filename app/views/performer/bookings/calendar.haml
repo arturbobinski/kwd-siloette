@@ -1,0 +1,51 @@
+- content_for :sidebar do
+  = render 'shared/sidebar'
+
+- content_for :extra_script do
+  :javascript
+    window.closedDays = #{raw current_user.schedules.inactive.pluck(:wday).to_json};
+
+.panel.panel-default
+  .panel-heading
+    = t('common.calendar')
+  .panel-body
+    .row
+      .col-sm-6
+        .calendar-datepicker
+      .col-sm-6
+        .today.text-center.triangle-isosceles
+          - if @date == Date.today
+            = t('common.today')
+          = date_format(@date)
+
+        - if (reservations = @calendar.reservations).count > 0
+          %p.text-warning= t('.reserved')
+          #reservations.clearfix
+            - reservations.each do |reservation|
+              .time-slot(data-id="#{reservation.id}")
+                = time_format(reservation.start_at)
+                = link_to fa_icon('undo'), performer_reservation_path(reservation), method: :delete, remote: true, title: t('common.undo')
+          %br
+
+        %p.text-danger= t('.choose_to_reserve')
+        = form_tag performer_reservations_path, method: :post do
+          = hidden_field_tag :date, @date
+          #available-slots.clearfix
+            - available_slots = @calendar.available_slots
+            - (0..23).each do |time|
+              .time-slot(style="#{'display: none;' unless available_slots.include?(time)}" data-slot=time)
+                = check_box_tag 'slots[]', time, nil, id: "slots_#{time}"
+                %label(for="slots_#{time}")= slot_to_time(time)
+          %br
+          .actions.text-center
+            = submit_tag t('.reserve'), class: 'btn btn-sm btn-warning'
+
+    - if (bookings = @calendar.bookings).count > 0
+      .row
+        .co-sm-12
+          %h4.text-center= t('common.bookings')
+          %ul#bookings.list-untyled
+            - bookings.each do |booking|
+              %li
+                = booking.service.title
+                = time_format(booking.start_at)

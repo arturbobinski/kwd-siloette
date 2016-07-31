@@ -1,0 +1,8 @@
+- content_for :sidebar do
+  = render 'shared/sidebar'
+
+.panel.panel-default
+  .panel-heading
+    = t('.new_booking')
+  .panel-body
+    = render 'form'

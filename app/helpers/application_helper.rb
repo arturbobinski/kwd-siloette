@@ -21,4 +21,12 @@ module ApplicationHelper
     end
     ret
   end
+
+  def country_options
+    Country.order(:name).select(:id, :name)
+  end
+
+  def parsley_pattern(key)
+    "^#{AppConfig.patterns[key]}$"
+  end
 end

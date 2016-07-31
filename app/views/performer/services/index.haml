@@ -1,0 +1,23 @@
+- content_for :sidebar do
+  = render 'shared/sidebar'
+
+.panel.panel-default
+  .panel-body
+    %ul.nav.nav-tabs{role: 'tablist'}
+      %li{class: ('active' if params[:scope] == 'personal'), role: 'presentation'}
+        = link_to t('.personal'), performer_services_path, role: 'tab'
+      %li{class: ('active' if params[:scope] == 'invited'), role: 'presentation'}
+        = link_to t('.invited'), performer_services_path(scope: 'invited'), role: 'tab'
+      %li{class: ('active' if params[:scope] == 'performing'), role: 'presentation'}
+        = link_to t('.performing'), performer_services_path(scope: 'performing'), role: 'tab'
+    .tab-content
+      .tab-pane.active{id: "#{params[:scope]}-services", role: 'tabpanel'}
+        - if @services.count > 0
+          .thumbnail-grid-narrow
+            .thumbnail-grid
+              = render @services
+        - else
+          = t('.empty_services')
+
+    .text-center
+      = link_to t('.create_new_service'), new_performer_service_path, class: 'btn btn-primary btn-bordered'

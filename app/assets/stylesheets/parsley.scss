@@ -6,7 +6,7 @@ textarea.parsley-error {
 
 .parsley-errors-list {
   color: $brand-danger;
-  margin: 2px 0 3px 0;
+  margin: 0;
   padding: 0;
   list-style-type: none;
   @include opacity(0);
@@ -15,4 +15,5 @@ textarea.parsley-error {
 
 .parsley-errors-list.filled {
   @include opacity(1);
+  margin: 2px 0 3px 0;
 }

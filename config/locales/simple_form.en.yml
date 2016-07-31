@@ -9,16 +9,36 @@ en:
     error_notification:
       default_message: 'Please review the problems below:'
     labels:
+      address:
+        address1: Address line 1
+        address2: Address line 2
+        city: City
+        country_id: Country
+        first_name: First name
+        last_name: Last name
+        phone: Phone
+        state_name: State
+        state_id: State
+        zipcode: Zipcode
+      booking:
+        end_time: End time
+        event_type_id: Event type
+        number_of_guests: Number of guests
+        special_info: Special info
+        start_time: Start time
+        total: Total price
+        venue_type_id: Venue type
       user:
         email: Email
         password: Password
         password_confirmation: Confirm new password
         remember_me: Remember me
         gender: Gender
+        slug: Create you unique URL
       service:
         category_id: What type of service are you performing?
-        invitee_ids: Invite other performers by their perform name
-        description: Description
+        invitee_ids: Invite other performers by their email
+        description: Work history/Description
         price: How much do you want to earn?
       location:
         address: Location
@@ -26,6 +46,7 @@ en:
         link: Video
     placeholders:
       user:
+        birth_date: Birth date
         email: Email
         first_name: First name
         last_name: Last name
@@ -35,7 +56,7 @@ en:
       location:
         address: Location
       profile:
-        birth_date: Birth date
+        body_type: Body type
         phone_number: Phone number
         perform_name: Perform name
         ethnicity: Ethnicity

@@ -1,0 +1,16 @@
+- content_for :sidebar do
+  = render 'shared/sidebar'
+
+.panel.panel-default
+  .panel-heading
+    = t('.receiving_funds')
+  .panel-body
+    = t('.siloette_uses_stripe').html_safe
+
+    - if current_user.payment_ready?
+      %h3.text-success= t('.everything_setup')
+      %p= t('.ready_to_receive_payment')
+    - else
+      %h3= t('.connect_stripe')
+      %p= t('.click_to_connect')
+      = link_to t('.connect_stripe'), user_stripe_connect_omniauth_authorize_path, class: 'btn btn-primary'

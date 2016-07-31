@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require moment
 //= require jquery-ui/datepicker
 //= require jquery-ui/slider
 //= require jquery-fileupload/vendor/jquery.ui.widget
