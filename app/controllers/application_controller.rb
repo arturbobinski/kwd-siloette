@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+
+  http_basic_authenticate_with name: Figaro.env.http_user, password: Figaro.env.http_password if Rails.env.staging?
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
