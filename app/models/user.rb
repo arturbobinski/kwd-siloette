@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   has_many :bookings, dependent: :destroy
   has_many :received_bookings, foreign_key: :performer_id, class_name: 'Booking', dependent: :destroy
   has_many :reservations, dependent: :destroy
+  has_many :credit_cards, dependent: :destroy
 
   delegate :perform_name, :height, :weight, :bust, :ethnicity, :phone_number, to: :profile
   delegate :address, to: :location
@@ -109,8 +110,16 @@ class User < ActiveRecord::Base
     ]
   end
 
+  def connected_stripe_account
+    authentications.where(provider: 'stripe_connect').first
+  end
+
+  def connected_stripe_account_id
+    connected_stripe_account.uid
+  end
+
   def payment_ready?
-    !authentications.where(provider: 'stripe_connect').first.nil?
+    !connected_stripe_account.nil?
   end
 
   def acceptance_terms

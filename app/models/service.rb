@@ -46,9 +46,9 @@ class Service < ActiveRecord::Base
   accepts_nested_attributes_for :invitations, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :video, reject_if: :all_blank, allow_destroy: true
 
-  # def to_param
-  #   "#{title} #{id}".parameterize
-  # end
+  def slug
+    "#{title} #{id}".parameterize
+  end
 
   def booking_price
     price * (100 + Setting.commission_from_seller.to_f) / 100

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160731182938) do
+ActiveRecord::Schema.define(version: 20160801041338) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "first_name", limit: 255
@@ -112,6 +112,25 @@ ActiveRecord::Schema.define(version: 20160731182938) do
     t.datetime "updated_at",                                  null: false
   end
 
+  create_table "credit_cards", force: :cascade do |t|
+    t.integer  "user_id",             limit: 4
+    t.string   "name",                limit: 255
+    t.string   "month",               limit: 255
+    t.string   "year",                limit: 255
+    t.string   "cc_type",             limit: 255
+    t.string   "last_digits",         limit: 255
+    t.string   "customer_profile_id", limit: 255
+    t.string   "payment_profile_id",  limit: 255
+    t.boolean  "default",                         default: false
+    t.datetime "deleted_at"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+  end
+
+  add_index "credit_cards", ["deleted_at"], name: "index_credit_cards_on_deleted_at", using: :btree
+  add_index "credit_cards", ["payment_profile_id"], name: "index_credit_cards_on_payment_profile_id", using: :btree
+  add_index "credit_cards", ["user_id"], name: "index_credit_cards_on_user_id", using: :btree
+
   create_table "daily_schedules", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "wday",       limit: 4
@@ -182,6 +201,8 @@ ActiveRecord::Schema.define(version: 20160731182938) do
   create_table "payments", force: :cascade do |t|
     t.integer  "booking_id",           limit: 4
     t.integer  "amount_cents",         limit: 4
+    t.integer  "fee_cents",            limit: 4
+    t.integer  "total_cents",          limit: 4
     t.integer  "source_id",            limit: 4
     t.string   "source_type",          limit: 255
     t.integer  "payment_method_id",    limit: 4
@@ -191,11 +212,13 @@ ActiveRecord::Schema.define(version: 20160731182938) do
     t.string   "avs_response",         limit: 255
     t.string   "cvv_response_code",    limit: 255
     t.string   "cvv_response_message", limit: 255
+    t.datetime "deleted_at"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
   end
 
   add_index "payments", ["booking_id"], name: "index_payments_on_booking_id", using: :btree
+  add_index "payments", ["deleted_at"], name: "index_payments_on_deleted_at", using: :btree
   add_index "payments", ["payment_method_id"], name: "index_payments_on_payment_method_id", using: :btree
   add_index "payments", ["source_id", "source_type"], name: "index_payments_on_source_id_and_source_type", using: :btree
   add_index "payments", ["state"], name: "index_payments_on_state", using: :btree

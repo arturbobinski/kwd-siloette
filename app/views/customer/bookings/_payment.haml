@@ -1,1 +1,55 @@
-.row
+- content_for :head_script do
+  = javascript_include_tag 'https://js.stripe.com/v2/'
+
+- content_for :extra_script do
+  :javascript
+    Stripe.setPublishableKey('#{Rails.configuration.stripe[:publishable_key]}');
+
+- date = Date.today
+
+.clearfix
+  .pull-right
+    = image_tag 'credit_cards.gif', alt: ''
+
+#accordion.panel-group{'aria-multiselectable' => 'true', role: 'tablist'}
+  - if (cards = current_user.credit_cards).count > 0
+    .panel.panel-info
+      #heading-existing-card.panel-heading{role: 'tab'}
+        %h4.panel-title
+          %a{'aria-controls' => 'existing-card', 'aria-expanded' => 'true', 'data-parent' => '#accordion', 'data-toggle' => 'collapse', href: '#existing-card', role: 'button'}
+            = t('.user_existing_card')
+      #existing-card.panel-collapse.collapse.in{'aria-labelledby' => 'heading-existing-card', role: 'tabpanel'}
+        .panel-body
+          = f.fields_for :payments do |p|
+            = p.hidden_field :source_type, value: 'CreditCard'
+            - cards.each do |card|
+              .form-group
+                = p.radio_button :source_id, card.id, checked: card.default
+                = p.label :source_id, card.to_s, for: "booking_payments_attributes_0_source_id_#{card.id}" 
+
+  .panel.panel-info
+    #heading-new-card.panel-heading{role: 'tab'}
+      %h4.panel-title
+        %a.collapsed{'aria-controls' => 'new-card', 'aria-expanded' => 'false', 'data-parent' => '#accordion', 'data-toggle' => 'collapse', href: '#new-card', role: 'button'}
+          = t('.user_new_card')
+    #new-card.panel-collapse.collapse{class: ('in' unless cards.count > 0), 'aria-labelledby' => 'heading-new-card', role: 'tabpanel'}
+      .panel-body
+        .payment-errors.alert.alert-danger(style="display: none;")
+        .row
+          .col-sm-12
+            .form-group
+              = label_tag :card_number, t('common.card_number'), class: 'control-label'
+              = text_field_tag :number, nil, required: true, autocomplete: :off, data: { stripe: 'number', 'parsley-pattern' => parsley_pattern(:card_number) }, class: 'form-control'
+        .row
+          .col-xs-6.col-sm-3
+            .form-group
+              = label_tag :exp_month, t('common.month'), class: 'control-label'
+              = select_month date, {}, { name: :exp_month, 'data-stripe' => 'exp_month', required: true, class: 'form-control' }
+          .col-xs-6.col-sm-3
+            .form-group
+              = label_tag :exp_year, t('common.year'), class: 'control-label'
+              = select_year date, { start_year: date.year, end_year: date.year + 5 }, { name: :exp_year, 'data-stripe' => 'exp_year', required: true, class: 'form-control' }
+          .col-sm-6
+            .form-group
+              = label_tag :cvc, t('common.cvc'), class: 'control-label'
+              = text_field_tag :cvc, nil, required: true, data: { stripe: 'cvc', 'parsley-pattern' => parsley_pattern(:cvc) }, class: 'form-control'

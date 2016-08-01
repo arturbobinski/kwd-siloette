@@ -1,0 +1,19 @@
+%h3 We are sorry,
+
+%h4 #{@user.name} has canceled booking
+%p
+  <b>Service:</b> #{link_to @service.title, service_url(@service)}
+  %br
+  <b>Event type:</b> #{@booking.event_type}
+  %br
+  <b>Venue type:</b> #{@booking.venue_type}
+  %br
+  <b>Number of guests:</b> #{@booking.number_of_guests}
+  %br
+  <b>Start at:</b> #{datetime_format(@booking.start_at)}
+  %br
+  <b>End at:</b> #{datetime_format(@booking.end_at)}
+  %br
+
+%br
+= render 'button', url: performer_bookings_url, text: 'View', style: 'primary'

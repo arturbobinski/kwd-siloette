@@ -8,15 +8,13 @@
   %td
     %span.label.label-info= t("activerecord.attributes.booking.states.#{booking.state}")
   %td
-    - if booking.editable? || booking.may_cancel? || booking.destroyable?
+    - if booking.may_accept? || booking.may_decline?
       .btn-group.text-left
         %button.btn.btn-default.btn-sm.dropdown-toggle{type: 'button', 'data-toggle' => 'dropdown'}
           = fa_icon 'cog'
           %span.caret
         %ul.dropdown-menu.pull-right{role: 'menu'}
-          - if booking.editable?
-            %li= link_to fa_icon('pen', text: t('common.edit')), edit_customer_booking_path(booking)
-          - if booking.may_cancel?
-            %li= link_to fa_icon('close', text: t('common.cancel')), cancel_customer_booking_path(booking)
-          - if booking.destroyable?
-            %li= link_to fa_icon('trash', text: t('common.delete')), customer_booking_path(booking), method: :delete, data: { confirm: 'Are you sure?' }
+          - if booking.may_accept?
+            %li= link_to fa_icon('check', text: t('common.accept')), accept_performer_booking_path(booking)
+          - if booking.may_decline?
+            %li= link_to fa_icon('close', text: t('common.decline')), decline_performer_booking_path(booking)

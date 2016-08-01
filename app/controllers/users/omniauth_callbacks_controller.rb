@@ -10,15 +10,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         @user.dancer!
       end
 
-      url = if @user.admin?
-        admin_dashboard_path
+      if @user.admin?
+        store_location_for @user, admin_dashboard_path
       elsif provider == :stripe_connect
-        stripe_account_user_path(@user)
-      else
-        @user
+        store_location_for @user, stripe_account_user_path(@user)
       end
 
-      sign_in_and_redirect url, event: :authentication
+      sign_in_and_redirect @user, event: :authentication
       set_flash_message(:notice, :success, kind: provider.to_s.humanize) if is_navigational_format?
     else
       session['devise.omauth_data'] = auth

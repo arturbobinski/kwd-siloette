@@ -3,6 +3,8 @@ class CreatePayments < ActiveRecord::Migration
     create_table :payments do |t|
       t.integer :booking_id
       t.integer :amount_cents
+      t.integer :fee_cents
+      t.integer :total_cents
       t.integer :source_id
       t.string :source_type
       t.integer :payment_method_id
@@ -12,6 +14,7 @@ class CreatePayments < ActiveRecord::Migration
       t.string :avs_response
       t.string :cvv_response_code
       t.string :cvv_response_message
+      t.datetime :deleted_at
 
       t.timestamps null: false
     end
@@ -21,5 +24,6 @@ class CreatePayments < ActiveRecord::Migration
     add_index :payments, :state
     add_index :payments, [:source_id, :source_type]
     add_index :payments, :payment_method_id
+    add_index :payments, :deleted_at
   end
 end

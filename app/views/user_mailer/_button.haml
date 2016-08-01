@@ -1,7 +1,9 @@
+- colors = { default: '#ffffff', primary: '#6deef6', info: '#5bc0de', warning: '#f0ad4e', danger: '#d9534f' }
 - align ||= 'left'
+- style ||= :default
 
 %table
   %tr
     %td{align: align, style: 'padding-top: 15px;'}
-      %a{href: url, target: '_blank', class: 'btn-email', style: 'background-color: #6deef6; color: #ffffff; font-family: Helvetica Neue, Arial, Helvetica, sans-serif; font-size:16px; line-height: 25px; padding: 10px 16px; text-decoration: none;'}
+      %a{href: url, target: '_blank', class: 'btn-email', style: "background-color: #{colors[style.to_sym]}; color: #ffffff; font-family: Helvetica Neue, Arial, Helvetica, sans-serif; font-size:16px; line-height: 25px; padding: 10px 16px; text-decoration: none;"}
         = text

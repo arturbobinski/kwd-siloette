@@ -25,11 +25,13 @@ class Booking < ActiveRecord::Base
 
   has_many :payments, dependent: :destroy
 
+  delegate :full_address, to: :address
+
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :payments
 
   validates_presence_of :performer, :user, :service, :event_type, :venue_type, :special_info
-  validates :number_of_guests, numericality: { only_integer: true, greater_than: 0 }
+  validates :number_of_guests, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates_datetime :start_at, after: lambda { 2.hour.from_now }
   validates_datetime :end_at, after: :start_at
 
@@ -40,7 +42,7 @@ class Booking < ActiveRecord::Base
 
   aasm column: :state do
     state :initial, initial: true
-    state :address, :payment, :pending, :paying, :declined, :canceled, :completed
+    state :address, :payment, :pending, :accepted, :declined, :canceled, :completed
 
     event :initiate do
       transitions from: :initial, to: :address
@@ -50,29 +52,41 @@ class Booking < ActiveRecord::Base
       transitions from: :address, to: :payment
     end
 
-    event :preauthorize, after: :notify_performer do
+    event :authorize, after: :notify do
       transitions from: :payment, to: :pending, guards: :payable?
     end
 
-    event :accept, after: :notify_booker do
-      transitions from: :pending, to: :paying
+    event :accept, after: [:notify, :process_payment] do
+      transitions from: :pending, to: :accepted, guards: :payable?
     end
 
-    event :decline, after: :notify_booker do
+    event :decline, after: :notify do
       transitions from: :pending, to: :declined
     end
 
-    event :complete, after: [:notify_performer, :notify_booker] do
-      transitions from: :paying, to: :completed, guards: :payable?
+    event :complete do
+      transitions from: :accepted, to: :completed
     end
 
-    event :cancel, after: :notify_performer do
+    event :cancel, after: :notify do
       transitions from: [:address, :payment, :pending], to: :canceled
     end
   end
 
+  def current_state
+    aasm.current_state
+  end
+
   def payable?
     service && performer
+  end
+
+  def editable?
+    current_state.in? %i(initial address payment)
+  end
+
+  def destroyable?
+    current_state.in? %i(canceled declined)
   end
 
   def address_attributes=(attrs)
@@ -87,6 +101,30 @@ class Booking < ActiveRecord::Base
     end
   end
 
+  def notify
+    case current_state
+    when :pending
+      UserMailer.new_booking_email(self).deliver_now
+      TwilioService.new.send_sms(performer.phone_number, 'You have a new booking')
+    when :accepted
+      UserMailer.booking_accepted_email(self).deliver_now
+      TwilioService.new.send_sms(address.phone, 'Your booking accepted')
+    when :declined
+      UserMailer.booking_declined_email(self).deliver_now
+      TwilioService.new.send_sms(address.phone, 'Your booking declined')
+    when :canceled
+      UserMailer.booking_canceled_email(self).deliver_now
+      TwilioService.new.send_sms(performer.phone_number, 'Your booking canceled')
+    end
+  end
+  handle_asynchronously :notify
+
+  def process_payment
+    if payment = payments.where(state: 'authorized').first
+      payment.process!
+    end
+  end
+
   private
 
   def prepare
@@ -96,11 +134,5 @@ class Booking < ActiveRecord::Base
     self.hours = ((end_at - start_at) / 3600).round
     self.total_cents = service.booking_price * 100 * hours
     self.currency = 'usd'
-  end
-
-  def notify_performer
-  end
-
-  def notify_booker
   end
 end

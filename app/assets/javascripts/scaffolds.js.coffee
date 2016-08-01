@@ -1,3 +1,6 @@
+window.ParsleyConfig =
+  excluded: 'input[type=button], input[type=submit], input[type=reset], :hidden, .no-validate'
+
 initFormValidation = ($el) ->
   $parsleyForm = $el.find('[data-parsley-validate]')
   $parsleyForm.parsley() if $parsleyForm.length > 0

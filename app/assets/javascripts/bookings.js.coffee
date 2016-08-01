@@ -13,6 +13,7 @@ class @BookingForm
     @$startTime.on 'change', @changeStartTime
     @$endTime.on 'change', @changeEndTime
     @$country.on 'change', @changeCountry
+    @$el.on 'submit', @submitForm
 
   changeStartTime: =>
     selected = @$startTime.find('option:selected')
@@ -43,6 +44,22 @@ class @BookingForm
         _this.$stateInput.closest('.form-group').removeClass('hidden')
         _this.$stateSelect.prop('disabled', true).removeAttr('required')
         _this.$stateSelect.closest('.form-group').addClass('hidden')
+
+  stripeResponseHandler: (status, response) =>
+    if response.error
+      @$el.find('.payment-errors').text(response.error.message).fadeIn()
+      @$el.find('input[type="submit"]').prop('disabled', false)
+    else
+      token = response.id
+      @$el.append($('<input type="hidden" name="stripe_token">').val(token))
+      @$el.get(0).submit()
+
+  submitForm: =>
+    @$el.find('.payment-errors').fadeOut()
+    @$el.find('input[type="submit"]').prop('disabled', true)
+    if @$el.find('#number:visible').length > 0
+      Stripe.card.createToken(@$el, window.siloette.bookingForm.stripeResponseHandler)
+      return false
 
 $ ->
   $(document).on 'ready', ->

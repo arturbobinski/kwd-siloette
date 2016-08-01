@@ -13,8 +13,11 @@ en:
     bookings: Bookings
     book_unavailable: Sorry this performer has no payment setup. Please try another.
     calendar: Calendar
+    cancel: Cancel
+    card_number: Card number
     commission_fee: 'Siloette fee ($<span class="commission-fee"></span>) will be added.'
     confirm: Are your sure?
+    cvc: CVC
     day: Day
     decline: Decline
     delete: Delete
@@ -28,6 +31,8 @@ en:
     location: Location
     male: Male
     menu: Menu
+    month: Month
+    not_allowed: You are not allowed to perform this action.
     number_of_performers: Number of performers
     on_off: On/Off
     payment: Payment
@@ -56,10 +61,12 @@ en:
     undo: Undo
     upload_picture: Upload picture
     update_profile_first: You need to update profile first.
+    year: Year
   activerecord:
     attributes:
       booking:
         event_type: Event
+        full_address: Address
         number_of_guests: Guests
         phone: Phone
         service: Service
@@ -72,7 +79,6 @@ en:
           declined: Declined
           initial: Initial
           payment: Payment
-          paying: Paying
           pending: Pending
         venue_type: Venue
     models:
@@ -140,18 +146,27 @@ en:
       create:
         notice: Booking created successfully.
       edit:
+      destroy:
+        notice: Booking deleted successfully.
       initial:
         not_available: Sorry, the performer is not available this day. Please select another day.
+      payment:
+        user_existing_card: Use an existing card
+        user_new_card: Use a new card / payment method
       new:
         new_booking: New booking
       update:
         notice: Booking updated successfully.
   performer:
     bookings:
+      accept:
+        notice: Booking accepted successfully.
       calendar:
         choose_to_reserve: Choose slots to mark as unavailable
         reserve: Mark as Unavailable
         reserved: Marked as unavailable
+      decline:
+        notice: Booking declined successfully.
     reservations:
       create:
         choose_slots: Choose slots to mark.

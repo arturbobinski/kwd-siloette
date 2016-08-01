@@ -19,8 +19,8 @@
       = date_format(@date)
 
     - if available_slots.length > 0
-      = f.input :start_time, as: :select, collection: time_slot_options(available_slots), prompt: t('common.select')
-      = f.input :end_time, as: :select, collection: time_slot_options(available_slots), prompt: t('common.select')
+      = f.input :start_time, as: :select, collection: time_slot_options(available_slots), required: true, prompt: t('common.select')
+      = f.input :end_time, as: :select, collection: time_slot_options(available_slots), required: true, prompt: t('common.select')
     - else
       .alert.alert-warning= t('.not_available')
 
@@ -37,6 +37,6 @@
     = f.input :number_of_guests, as: :select, collection: (1..20), prompt: t('common.select'), wrapper_html: { class: 'col-sm-6' }
   .row
     .col-sm-12
-      = f.input :event_type_id, as: :select, collection: EventType.select(:id, :name), prompt: t('common.select')
-      = f.input :venue_type_id, as: :select, collection: VenueType.select(:id, :name), prompt: t('common.select')
+      = f.input :event_type_id, as: :select, collection: EventType.select(:id, :name), required: true, prompt: t('common.select')
+      = f.input :venue_type_id, as: :select, collection: VenueType.select(:id, :name), required: true, prompt: t('common.select')
       = f.input :special_info, input_html: { rows: 5 }

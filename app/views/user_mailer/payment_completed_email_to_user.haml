@@ -1,0 +1,14 @@
+%h3 Congrats, payment completed successfully
+
+%h4 Payment detail
+%p
+  <b>Service:</b> #{link_to @service.title, service_url(@service)}
+  %br
+  <b>Price per hour:</b> #{number_to_currency(@service.booking_price)}
+  %br
+  <b>Hours:</b> #{@booking.hours}
+  %br
+  <b>Amount:</b> #{number_to_currency(@payment.total)}
+  %br
+  <b>Card used:</b> #{@source.to_s}
+  %br

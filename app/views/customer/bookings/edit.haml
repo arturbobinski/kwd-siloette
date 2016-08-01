@@ -3,6 +3,6 @@
 
 .panel.panel-default
   .panel-heading
-    = t("activerecord.attributes.booking.states.#{@booking.aasm.current_state}")
+    = t("activerecord.attributes.booking.states.#{@booking.current_state}")
   .panel-body
     = render 'form'

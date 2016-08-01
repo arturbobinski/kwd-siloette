@@ -22,6 +22,10 @@ Rails.application.routes.draw do
       collection do
         get :calendar
       end
+      member do
+        get :accept
+        get :decline
+      end
     end
     resources :reservations, only: [:create, :destroy]
     resources :daily_schedules, only: [:index] do
@@ -44,7 +48,9 @@ Rails.application.routes.draw do
   end
 
   namespace :customer do
-    resources :bookings
+    resources :bookings do
+      get :cancel, on: :member
+    end
   end
 
   resources :users, only: [:show, :edit, :update] do

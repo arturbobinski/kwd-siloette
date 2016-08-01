@@ -17,7 +17,11 @@ class Address < ActiveRecord::Base
   end
 
   def full_name
-    "#{firstname} #{lastname}".strip
+    "#{first_name} #{last_name}".strip
+  end
+
+  def full_address
+    [address1, address2, city].reject(&:blank?).join(' ')
   end
 
   def state_text
