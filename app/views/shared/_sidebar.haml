@@ -23,9 +23,8 @@
             = link_to fa_icon('circle', text: t('common.calendar')), calendar_performer_bookings_path
           %li(class="#{'active' if controller_name == 'bookings' && action_name == 'index'}")
             = link_to fa_icon('circle', text: t('common.bookings')), performer_bookings_path
+          %li(class="#{'active' if controller_name == 'users' && action_name == 'stripe_account'}")
+            = link_to fa_icon('circle', text: t('links.payment_info')), stripe_account_user_path(current_user)
         - else
           %li(class="#{'active' if controller_name == 'bookings'}")
             = link_to fa_icon('circle', text: t('common.bookings')), customer_bookings_path
-
-        %li(class="#{'active' if controller_name == 'users' && action_name == 'stripe_account'}")
-          = link_to fa_icon('circle', text: t('links.payment_info')), stripe_account_user_path(current_user)
