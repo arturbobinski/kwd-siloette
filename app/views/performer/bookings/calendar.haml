@@ -14,9 +14,9 @@
         .calendar-datepicker
       .col-sm-6
         .today.text-center.triangle-isosceles
-          - if @start_at == Date.today
+          - if @start_at.to_date == user_time_zone.now.to_date
             = t('common.today')
-          = date_format(@start_at)
+          = date_format(@start_at.to_date)
 
         - if (reservations = @calendar.reservations).count > 0
           %p.text-warning= t('.reserved')

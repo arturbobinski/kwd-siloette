@@ -1,6 +1,6 @@
 ActiveAdmin.register Service do
 
-  permit_params :category_id, :description, :price, :status, :user_id, invitee_ids: [],
+  permit_params :category_id, :description, :price, :status, :user_id, :open, invitee_ids: [],
     location_attributes: [:id, :address, :country, :postal_code, :lat, :lng],
     images_attributes: [:id, :_destroy, :file, :file_cache],
     video_attributes: [:id, :link]
