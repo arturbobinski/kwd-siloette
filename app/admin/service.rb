@@ -6,13 +6,18 @@ ActiveAdmin.register Service do
     video_attributes: [:id, :link]
 
   index do
-    selectable_column
     id_column
+    column :image do |service|
+      if service.primary_image
+        image_tag service.primary_image.file.url(:small), width: 60
+      end
+    end
     column :show_type do |service|
       service.category
     end
-    column :user
-    column :description
+    column :performer do |service|
+      link_to service.user.name, admin_user_path(service.user)
+    end
     column :price
     column :performers do |service|
       service.performers_count
