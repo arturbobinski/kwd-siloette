@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   namespace :performer, path: '/' do
-    resources :bookings, only: [:index] do
+    resources :bookings, only: [:index, :show] do
       collection do
         get :calendar
       end

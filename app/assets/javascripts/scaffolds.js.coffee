@@ -30,7 +30,6 @@ initializePlugins = ->
       window.location.search = $.param(params)
       return
     beforeShowDay: (date) ->
-      console.log date, today
       string = date.getDay()
       return [window.closedDays.indexOf(string) < 0 && date >= today]
 
@@ -77,6 +76,8 @@ initializePlugins = ->
     readOnly: true
     score: ->
       return $(this).attr('data-score')
+
+  $('[name*="time_zone"]').set_timezone()
 
 $(document).ready initializePlugins
 $(document).on 'turbolinks:load', ->

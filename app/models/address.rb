@@ -2,6 +2,7 @@ class Address < ActiveRecord::Base
 
   belongs_to :country
   belongs_to :state
+  has_many :bookings
 
   validates :country, presence: true
   validates :first_name, :last_name, presence: true, length: { maximum: 50 }
@@ -14,6 +15,21 @@ class Address < ActiveRecord::Base
 
   def self.build_default
     new country: Country.find_by(iso: 'US')
+  end
+
+  def self.from_attributes(attrs)
+    if attrs[:id]
+      address = Address.find(attrs[:id])
+      attrs_without_id = attrs.except(:id)
+      address.assign_attributes attrs_without_id
+      if address.changed?
+        address = Address.create(attrs_without_id)
+      else
+        address
+      end
+    else
+      address = Address.create(attrs)
+    end
   end
 
   def full_name

@@ -1,0 +1,76 @@
+- address = @booking.address
+- source = @booking.payments.first.try(:source)
+- service = @booking.service
+
+- content_for :sidebar do
+  = render 'shared/sidebar'
+
+.panel.panel-default
+  .panel-heading
+    = link_to fa_icon('angle-double-left', text: t('common.back')), :back
+  .panel-body
+    %h3 #{t('common.booking')} #{@booking.token}
+    .row
+      .col-sm-6
+        %h4= t('common.address')
+        %p
+          = address.full_name
+          %br
+          = address.full_address
+          %br
+          = address.state_text
+          %br
+          = address.country.name
+          %br
+          = address.zipcode
+      .col-sm-6
+        %h4= t('.payment_infomation')
+        %p
+          = image_tag "cards/#{source.cc_type.downcase.gsub(/\s+/, '_')}.png", width: 32, alt: source.cc_type
+          %span= t('common.ending_with', digits: source.last_digits)
+    .row
+      .col-sm-6
+        %h4= t('common.service')
+        = link_to service_path(service) do
+          = image_tag service.primary_image.file.url(:small), alt: service.title
+      .col-sm-6
+        %h4 &nbsp;
+        %p
+          %b= t('activerecord.attributes.booking.event_type')
+          = @booking.event_type
+          %br
+          %b= t('activerecord.attributes.booking.venue_type')
+          = @booking.venue_type
+          %br
+          %b= t('activerecord.attributes.booking.number_of_guests')
+          = @booking.number_of_guests
+          %br
+          %b= t('activerecord.attributes.booking.start_at')
+          = datetime_format local_time(@booking.start_at)
+          %br
+          %b= t('activerecord.attributes.booking.end_at')
+          = datetime_format local_time(@booking.end_at)
+          %br
+          %b #{t('activerecord.attributes.booking.special_info')}:
+          %br
+          = @booking.special_info
+
+    .row
+      .col-sm-12
+        %table.table.table-striped
+          %thead
+            %th= t('activerecord.attributes.booking.price')
+            %th= t('activerecord.attributes.booking.hours')
+            %th= t('common.state')
+            %th= t('common.payment_state')
+          %tbody
+            %tr
+              %td= number_to_currency @booking.service.booking_price
+              %td= @booking.hours
+              %td
+                %span.label.label-info= t("activerecord.attributes.booking.states.#{@booking.state}")
+              %td= @booking.payment_state.humanize
+            %tr
+              %td.text-right(colspan='3')
+                %b= t('common.total')
+              %td= number_to_currency @booking.total

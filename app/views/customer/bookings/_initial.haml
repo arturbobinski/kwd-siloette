@@ -2,28 +2,21 @@
   :javascript
     window.closedDays = #{raw @performer.schedules.inactive.pluck(:wday).to_json};
 
-    $(document).ready(function() {
-      window.siloette.bookingForm = new BookingForm({
-        pricePerHour: #{@service.booking_price},
-        hours: #{@booking.hours || 1},
-        guests: #{@booking.number_of_guests}
-      });
-    });
-
 - available_slots = @calendar.available_slots
 
 = f.hidden_field :service_id, value: @service.id
 = f.hidden_field :performer_id, value: @performer.id
-= f.hidden_field :start_at, value: @date
+= f.hidden_field :start_at, value: @start_at
+= f.hidden_field :time_zone
 
 .row
   .col-sm-6
     .calendar-datepicker
   .col-sm-6
     .today.text-center.triangle-isosceles
-      - if @date == Date.today
+      - if @start_at == Date.today
         = t('common.today')
-      = date_format(@date)
+      = date_format(@start_at)
 
     - if available_slots.length > 0
       = f.input :start_time, as: :select, collection: time_slot_options(available_slots), required: true, prompt: t('common.select')

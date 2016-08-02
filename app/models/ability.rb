@@ -17,7 +17,7 @@ class Ability
 
       if user.dancer?
         can [:calendar], Booking
-        can [:index, :accept, :decline], Booking, performer_id: user.id
+        can [:index, :show, :accept, :decline], Booking, performer_id: user.id
         can [:create], DailySchedule
         can [:manage], DailySchedule, user_id: user.id
         can [:create], Reservation

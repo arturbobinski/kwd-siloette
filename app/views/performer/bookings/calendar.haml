@@ -14,22 +14,23 @@
         .calendar-datepicker
       .col-sm-6
         .today.text-center.triangle-isosceles
-          - if @date == Date.today
+          - if @start_at == Date.today
             = t('common.today')
-          = date_format(@date)
+          = date_format(@start_at)
 
         - if (reservations = @calendar.reservations).count > 0
           %p.text-warning= t('.reserved')
           #reservations.clearfix
             - reservations.each do |reservation|
               .time-slot(data-id="#{reservation.id}")
-                = time_format(reservation.start_at)
+                = time_format local_time(reservation.start_at)
                 = link_to fa_icon('undo'), performer_reservation_path(reservation), method: :delete, remote: true, title: t('common.undo')
           %br
 
         %p.text-danger= t('.choose_to_reserve')
         = form_tag performer_reservations_path, method: :post do
-          = hidden_field_tag :date, @date
+          = hidden_field_tag :date, @start_at.to_date
+          = hidden_field_tag :time_zone
           #available-slots.clearfix
             - available_slots = @calendar.available_slots
             - (0..23).each do |time|
@@ -42,10 +43,17 @@
 
     - if (bookings = @calendar.bookings).count > 0
       .row
-        .co-sm-12
+        .col-sm-12
           %h4.text-center= t('common.bookings')
-          %ul#bookings.list-untyled
-            - bookings.each do |booking|
-              %li
-                = booking.service.title
-                = time_format(booking.start_at)
+          %table.table.table-striped
+            %thead
+              %th= t('activerecord.attributes.booking.event_type')
+              %th= t('activerecord.attributes.booking.venue_type')
+              %th= t('activerecord.attributes.booking.service')
+              %th= t('activerecord.attributes.booking.number_of_guests')
+              %th= t('activerecord.attributes.booking.address')
+              %th= t('activerecord.attributes.booking.start_at')
+              %th= t('common.state')
+              %th
+            %tbody
+              = render bookings

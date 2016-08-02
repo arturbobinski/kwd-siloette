@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
   has_many :received_bookings, foreign_key: :performer_id, class_name: 'Booking', dependent: :destroy
   has_many :reservations, dependent: :destroy
   has_many :credit_cards, dependent: :destroy
+  has_many :addresses, through: :bookings
 
   delegate :perform_name, :height, :weight, :ethnicity, :phone_number, to: :profile
   delegate :address, to: :location

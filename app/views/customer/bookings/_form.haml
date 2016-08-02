@@ -1,3 +1,13 @@
+- content_for :extra_script do
+  :javascript
+    $(document).ready(function() {
+      window.siloette.bookingForm = new BookingForm({
+        pricePerHour: #{@service.booking_price},
+        hours: #{@booking.hours || 1},
+        guests: #{@booking.number_of_guests}
+      });
+    });
+
 = simple_form_for [:customer, @booking], html: { class: 'form-horizontal booking-form', 'data-parsley-validate' => true } do |f|
   = f.error_notification
   = render @booking.current_state.to_s, f: f

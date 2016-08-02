@@ -24,6 +24,7 @@ en:
     description: Description
     edit: Edit
     end: End
+    ending_with: ending with %{digits}
     empty_bookings: No bookings yet.
     female: Female
     images: Images
@@ -36,6 +37,7 @@ en:
     number_of_performers: Number of performers
     on_off: On/Off
     payment: Payment
+    payment_state: Payment state
     per_hour: /hr
     price_cents: Price
     rating: Rating
@@ -55,6 +57,7 @@ en:
     instagram: Instagram
     google: Google
     twitter: Twitter
+    show: Show
     sign_out: Log out
     sign_up: Sign up
     submit: Submit
@@ -65,12 +68,15 @@ en:
   activerecord:
     attributes:
       booking:
+        end_at: End at
         event_type: Event
         full_address: Address
+        hours: Hours
         number_of_guests: Guests
         phone: Phone
         service: Service
         start_at: Start at
+        special_info: Special info
         states:
           accepted: Accepted
           address: Address
@@ -81,6 +87,13 @@ en:
           payment: Payment
           pending: Pending
         venue_type: Venue
+      payment:
+        states:
+          authorized: Authorized
+          checkout: Checkout
+          completed: Completed
+          failed: Failed
+          processing: Processing
     models:
     errors:
       models:
@@ -152,11 +165,13 @@ en:
         notice: Booking deleted successfully.
       initial:
         not_available: Sorry, the performer is not available this day. Please select another day.
+      new:
+        new_booking: New booking
       payment:
         user_existing_card: Use an existing card
         user_new_card: Use a new card / payment method
-      new:
-        new_booking: New booking
+      show:
+        payment_infomation: Payment information
       update:
         notice: Booking updated successfully.
   performer:

@@ -39,4 +39,6 @@
 //= require cocoon
 //= require select2
 //= require slick
+//= require detect_timezone
+//= require jquery.detect_timezone
 //= require_tree .

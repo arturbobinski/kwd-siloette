@@ -1,20 +1,22 @@
 %tr
-  %td= booking.event_type
-  %td= booking.venue_type
   %td= link_to booking.service.title, service_path(booking.service)
   %td= booking.number_of_guests
   %td= booking.try(:full_address)
-  %td= datetime_format(booking.start_at)
+  %td= datetime_format local_time(booking.start_at)
+  %td= booking.hours
   %td
     %span.label.label-info= t("activerecord.attributes.booking.states.#{booking.state}")
   %td
-    - if booking.may_accept? || booking.may_decline?
-      .btn-group.text-left
-        %button.btn.btn-default.btn-sm.dropdown-toggle{type: 'button', 'data-toggle' => 'dropdown'}
-          = fa_icon 'cog'
-          %span.caret
-        %ul.dropdown-menu.pull-right{role: 'menu'}
-          - if booking.may_accept?
-            %li= link_to fa_icon('check', text: t('common.accept')), accept_performer_booking_path(booking)
-          - if booking.may_decline?
-            %li= link_to fa_icon('close', text: t('common.decline')), decline_performer_booking_path(booking)
+    %span.label.label-success= t("activerecord.attributes.payment.states.#{booking.payment_state}")
+  %td
+    .btn-group.text-left
+      %button.btn.btn-default.btn-sm.dropdown-toggle{type: 'button', 'data-toggle' => 'dropdown'}
+        = fa_icon 'cog'
+        %span.caret
+      %ul.dropdown-menu.pull-right{role: 'menu'}
+        - if booking.viewable?
+          %li= link_to fa_icon('eye', text: t('common.show')), performer_booking_path(booking)
+        - if booking.may_accept?
+          %li= link_to fa_icon('check', text: t('common.accept')), accept_performer_booking_path(booking)
+        - if booking.may_decline?
+          %li= link_to fa_icon('close', text: t('common.decline')), decline_performer_booking_path(booking)

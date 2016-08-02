@@ -1,7 +1,7 @@
 module Customer
   class BookingsController < Customer::BaseController
 
-    before_filter :load_resources, :get_date, only: [:new, :create, :edit, :update]
+    before_filter :load_resources, :get_start_at, only: [:new, :create, :edit, :update]
     before_filter :ensure_service, :ensure_bookable, only: [:new, :create, :edit, :update]
 
     def index
@@ -9,7 +9,7 @@ module Customer
     end
 
     def new
-      @calendar = Bookings::Calendar.new(@date, @performer)
+      @calendar = Bookings::Calendar.new(@start_at, @performer, user_time_zone)
     end
 
     def create
@@ -19,13 +19,13 @@ module Customer
         @booking.initiate!
         redirect_to edit_customer_booking_path(@booking), notice: t('.notice')
       else
-        @calendar = Bookings::Calendar.new(@booking.start_at.to_date, @performer)
+        @calendar = Bookings::Calendar.new(@booking.start_at, @performer, user_time_zone)
         render :new
       end
     end
 
     def edit
-      @booking.address ||= Address.build_default
+      @booking.address ||= current_user.addresses.order(updated_at: :desc).first || Address.build_default
       @booking.payments.build if @booking.payment? && !@booking.payments.any?
     end
 
@@ -38,7 +38,7 @@ module Customer
           @booking.locate!
           redirect_to edit_customer_booking_path(@booking), notice: t('.notice')
         when :payment
-          @booking.payment.first.authorize!
+          @booking.payments.first.authorize!
           redirect_to customer_bookings_path, notice: t('.notice')
         else
           redirect_to :back, alert: t('common.something_went_wrong')
@@ -65,7 +65,7 @@ module Customer
     def booking_params
       params.require(:booking).permit(
         :email, :event_type_id, :venue_type_id, :performer_id, :service_id, :start_at,
-        :start_time, :end_time, :number_of_guests, :special_info,
+        :start_time, :end_time, :number_of_guests, :special_info, :time_zone,
         address_attributes: [:id, :first_name, :last_name, :address1, :address2, :phone, :country_id,
           :city, :state_name, :state_id, :zipcode],
         payments_attributes: [:id, :source_id, :source_type]
@@ -75,10 +75,6 @@ module Customer
     def load_resources
       @service = @booking.service || Service.find(params[:service_id])
       @performer = @service.try(:user)
-    end
-
-    def get_date
-      @date = params[:date] ? Date.parse(params[:date]) : Time.zone.now.to_date
     end
 
     def ensure_service

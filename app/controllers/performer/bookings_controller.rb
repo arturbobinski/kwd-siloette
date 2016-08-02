@@ -1,14 +1,16 @@
 module Performer
   class BookingsController < Performer::BaseController
 
-    before_filter :get_date, only: [:calendar]
+    before_filter :get_start_at, only: [:calendar]
 
     def index
-      @bookings = current_user.received_bookings.recent.includes(:service, :event_type, :venue_type).page(params[:page])
+      @bookings = current_user.received_bookings.recent
+        .where(state: %w(pending accepted completed))
+        .includes(:service, :event_type, :venue_type).page(params[:page])
     end
 
     def calendar
-      @calendar = Bookings::Calendar.new(@date, current_user)
+      @calendar = Bookings::Calendar.new(@start_at, current_user, user_time_zone)
     end
 
     def accept
@@ -19,12 +21,6 @@ module Performer
     def decline
       @booking.decline!
       redirect_to performer_bookings_path, notice: t('.notice')
-    end
-
-    private
-
-    def get_date
-      @date = params[:date] ? Date.parse(params[:date]) : Time.zone.now.to_date
     end
   end
 end

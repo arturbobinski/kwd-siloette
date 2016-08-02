@@ -7,7 +7,7 @@ class Reservation < ActiveRecord::Base
 
   before_validation :set_ent_at
 
-  scope :by_date, ->(date) { where('DATE(start_at) = ?', date) }
+  scope :by_date, ->(time) { where(start_at: time..time.end_of_day) }
 
   private
 

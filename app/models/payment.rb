@@ -22,7 +22,7 @@ class Payment < ActiveRecord::Base
 
   aasm column: :state do
     state :checkout, initial: true
-    state :authorized, :completed, :processing, :failed, :void
+    state :authorized, :completed, :processing, :failed
 
     after_all_transitions :update_booking_payment_state
 
@@ -38,12 +38,8 @@ class Payment < ActiveRecord::Base
       transitions from: [:authorized, :processing, :failure], to: :failed
     end
 
-    event :complete, after: [:complete_booking, :notify_complete] do
+    event :complete, after: [:notify_complete] do
       transitions from: [:processing, :authorized, :checkout], to: :completed
-    end
-
-    event :void do
-      transitions from: [:authorized, :processing, :completed, :checkout], to: :void
     end
   end
 
@@ -70,10 +66,6 @@ class Payment < ActiveRecord::Base
   rescue Stripe::StripeError => e
     update response_code: nil, cvv_response_message: e.message
     failure!
-  end
-
-  def complete_booking
-    booking.complete
   end
 
   def update_booking_payment_state

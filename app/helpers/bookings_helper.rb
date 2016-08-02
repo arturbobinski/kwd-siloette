@@ -19,4 +19,8 @@ module BookingsHelper
   def datetime_format(time)
     I18n.l time, format: :long
   end
+
+  def local_time(time)
+    time.in_time_zone(user_time_zone)
+  end
 end

@@ -14,7 +14,7 @@ class Booking < ActiveRecord::Base
       less_than_or_equal_to: 1000000
     }
 
-  attr_accessor :start_time, :end_time
+  attr_accessor :start_time, :end_time, :time_zone
 
   belongs_to :performer, class_name: 'User'
   belongs_to :user
@@ -35,8 +35,8 @@ class Booking < ActiveRecord::Base
   validates_datetime :start_at, after: lambda { 2.hour.from_now }
   validates_datetime :end_at, after: :start_at
 
-  scope :by_date, ->(date) { where('DATE(start_at) = ?', date) }
-  scope :recent, -> { order(created_at: :desc) }
+  scope :by_date, ->(time) { where(start_at: time..time.end_of_day) }
+  scope :recent, -> { order(:start_at) }
 
   before_validation :prepare, unless: 'start_time.blank?'
 
@@ -81,6 +81,10 @@ class Booking < ActiveRecord::Base
     service && performer
   end
 
+  def viewable?
+    current_state.in? %i(pending accepted completed)
+  end
+
   def editable?
     current_state.in? %i(initial address payment)
   end
@@ -90,14 +94,10 @@ class Booking < ActiveRecord::Base
   end
 
   def address_attributes=(attrs)
-    if address
-      address.update(attrs)
+    if (addr = Address.from_attributes(attrs)).persisted?
+      self.address = addr
     else
-      if addr = Address.create(attrs)
-        self.address = addr
-      else
-        self.errors.add :base, addr.errors.full_mesages.join(' ')
-      end
+      errors.add :base, addr.errors.full_mesages.join(' ')
     end
   end
 
@@ -113,8 +113,10 @@ class Booking < ActiveRecord::Base
       UserMailer.booking_declined_email(self).deliver_now
       TwilioService.new.send_sms(address.phone, 'Your booking declined')
     when :canceled
-      UserMailer.booking_canceled_email(self).deliver_now
-      TwilioService.new.send_sms(performer.phone_number, 'Your booking canceled')
+      if aasm.from_state == :pending
+        UserMailer.booking_canceled_email(self).deliver_now
+        TwilioService.new.send_sms(performer.phone_number, 'Your booking canceled')
+      end
     end
   end
   handle_asynchronously :notify
@@ -128,9 +130,9 @@ class Booking < ActiveRecord::Base
   private
 
   def prepare
-    date = start_at.to_date
-    self.start_at = date + start_time.to_i.hours
-    self.end_at = date + end_time.to_i.hours
+    beginning_of_day = start_at.in_time_zone(ActiveSupport::TimeZone[time_zone]).beginning_of_day
+    self.start_at = beginning_of_day + start_time.to_i.hours
+    self.end_at = beginning_of_day + end_time.to_i.hours
     self.hours = ((end_at - start_at) / 3600).round
     self.total_cents = service.booking_price * 100 * hours
     self.currency = 'usd'

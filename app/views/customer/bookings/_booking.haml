@@ -1,22 +1,25 @@
 %tr
-  %td= booking.event_type
-  %td= booking.venue_type
   %td= link_to booking.service.title, service_path(booking.service)
   %td= booking.number_of_guests
   %td= booking.try(:full_address)
-  %td= datetime_format(booking.start_at)
+  %td= datetime_format local_time(booking.start_at)
+  %td= booking.hours
   %td
     %span.label.label-info= t("activerecord.attributes.booking.states.#{booking.state}")
   %td
-    - if booking.editable? || booking.may_cancel? || booking.destroyable?
-      .btn-group.text-left
-        %button.btn.btn-default.btn-sm.dropdown-toggle{type: 'button', 'data-toggle' => 'dropdown'}
-          = fa_icon 'cog'
-          %span.caret
-        %ul.dropdown-menu.pull-right{role: 'menu'}
-          - if booking.editable?
-            %li= link_to fa_icon('pencil', text: t('common.edit')), edit_customer_booking_path(booking)
-          - if booking.may_cancel?
-            %li= link_to fa_icon('close', text: t('common.cancel')), cancel_customer_booking_path(booking)
-          - if booking.destroyable?
-            %li= link_to fa_icon('trash', text: t('common.delete')), customer_booking_path(booking), method: :delete, data: { confirm: 'Are you sure?' }
+    - if booking.payment_state
+      %span.label.label-success= t("activerecord.attributes.payment.states.#{booking.payment_state}")
+  %td
+    .btn-group.text-left
+      %button.btn.btn-default.btn-sm.dropdown-toggle{type: 'button', 'data-toggle' => 'dropdown'}
+        = fa_icon 'cog'
+        %span.caret
+      %ul.dropdown-menu.pull-right{role: 'menu'}
+        - if booking.viewable?
+          %li= link_to fa_icon('eye', text: t('common.show')), customer_booking_path(booking)
+        - if booking.editable?
+          %li= link_to fa_icon('pencil', text: t('common.edit')), edit_customer_booking_path(booking)
+        - if booking.may_cancel?
+          %li= link_to fa_icon('close', text: t('common.cancel')), cancel_customer_booking_path(booking)
+        - if booking.destroyable?
+          %li= link_to fa_icon('trash', text: t('common.delete')), customer_booking_path(booking), method: :delete, data: { confirm: 'Are you sure?' }
