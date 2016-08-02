@@ -5,7 +5,7 @@
 %p
   <b>Name:</b> #{@address.full_name}
   %br
-  <b>Address:</b> #{@address.full_address}
+  <b>Address:</b> #{@address.try(:full_address)}
   %br
   <b>Country:</b> #{@address.country.name}
   %br

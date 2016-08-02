@@ -25,7 +25,7 @@ class Booking < ActiveRecord::Base
 
   has_many :payments, dependent: :destroy
 
-  delegate :full_address, to: :address
+  delegate :full_address, to: :address, allow_nil: true
 
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :payments
