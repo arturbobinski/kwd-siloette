@@ -3,25 +3,46 @@ window.siloette = window.siloette || {}
 class @BookingForm
   constructor: (options={}) ->
     @$el = options.$el || $('.booking-form')
+    @hours = options.hours || 1
+    @pricerPerHour = options.pricePerHour
+    @guests = options.guests || 1
+
     @$startTime = $('#booking_start_time')
     @$endTime = $('#booking_end_time')
     @$totalPrice = $('#booking-total .price')
+    @$pricePerGuest = $('#price-per-guest .price')
     @$country = $('#booking_address_attributes_country_id')
     @$stateSelect = $('#booking_address_attributes_state_id')
     @$stateInput = $('#booking_address_attributes_state_name')
+    @$guestsInput = $('#booking_number_of_guests')
 
     @$startTime.on 'change', @changeStartTime
     @$endTime.on 'change', @changeEndTime
     @$country.on 'change', @changeCountry
+    @$guestsInput.on 'change', @changeGuests
     @$el.on 'submit', @submitForm
+
+  getTotal: ->
+    @pricerPerHour * @hours
+
+  showPrices: ->
+    @total = @getTotal()
+    @$totalPrice.text @total.toFixed(2)
+    @$pricePerGuest.text (@total / @guests).toFixed(2)
 
   changeStartTime: =>
     selected = @$startTime.find('option:selected')
     @$endTime.html selected.nextAll().clone()
+    @hours = 1
+    @showPrices()
 
   changeEndTime: =>
-    hours = @$endTime.val() - @$startTime.val()
-    @$totalPrice.text (window.pricePerHour * hours).toFixed(2)
+    @hours = @$endTime.val() - @$startTime.val()
+    @showPrices()
+
+  changeGuests: =>
+    @guests = parseInt @$guestsInput.val()
+    @showPrices()
 
   changeCountry: =>
     countryId = @$country.val()
@@ -60,7 +81,3 @@ class @BookingForm
     if @$el.find('#number:visible').length > 0
       Stripe.card.createToken(@$el, window.siloette.bookingForm.stripeResponseHandler)
       return false
-
-$ ->
-  $(document).on 'ready', ->
-    window.siloette.bookingForm = new BookingForm() if $('.booking-form').length > 0

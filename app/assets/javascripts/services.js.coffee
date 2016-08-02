@@ -3,6 +3,9 @@ window.siloette = window.siloette || {}
 class @ServiceForm
   constructor: (options={}) ->
     @$el = options.$el || $('.service-form')
+    @categories = options.categories || []
+    @commissionFee = options.commissionFee || 0
+
     @id = @$el.data('id')
     @$categorySelect = $('#service_category_id')
     @$priceInput = $('#service_price')
@@ -23,7 +26,7 @@ class @ServiceForm
 
   showCategoryHint: =>
     val = parseInt @$categorySelect.val()
-    result = $.grep window.categories, (e) ->
+    result = $.grep @categories, (e) ->
       return e.id == val
 
     if result.length > 0
@@ -38,7 +41,7 @@ class @ServiceForm
     price = parseFloat val
 
     if !isNaN(price) && isFinite(val) && price > 0
-      commission = price * (window.commissionFee) / 100
+      commission = price * (@commissionFee) / 100
       $('.commission-fee').text(commission)
       $('#price-hint').show()
     else
@@ -112,7 +115,3 @@ class @ServiceForm
       fail: (e, data) ->
         if data.errorThrown == 'abort'
           $msg.fadeOut()
-
-$ ->
-  $(document).on 'ready', ->
-    window.siloette.serviceForm = new ServiceForm() if $('.service-form').length > 0

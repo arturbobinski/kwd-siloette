@@ -24,6 +24,7 @@ en:
         end_time: End time
         event_type_id: Event type
         number_of_guests: Number of guests
+        price_per_guest: Total/Person
         special_info: Special info
         start_time: Start time
         total: Total price

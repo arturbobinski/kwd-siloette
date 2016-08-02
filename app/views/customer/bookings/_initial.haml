@@ -1,7 +1,14 @@
 - content_for :extra_script do
   :javascript
     window.closedDays = #{raw @performer.schedules.inactive.pluck(:wday).to_json};
-    window.pricePerHour = #{@service.booking_price};
+
+    $(document).ready(function() {
+      window.siloette.bookingForm = new BookingForm({
+        pricePerHour: #{@service.booking_price},
+        hours: #{@booking.hours || 1},
+        guests: #{@booking.number_of_guests}
+      });
+    });
 
 - available_slots = @calendar.available_slots
 
@@ -26,14 +33,23 @@
 
 - if available_slots.length > 0
   .row
-    .col-sm-6
-      .form-group
+    .col-xs-3
+      .form-group.text-center
         %label.control-label= t('simple_form.labels.booking.total')
-        #booking-total.text-danger.text-center
+        #booking-total.booking-price.text-danger
           %span.currency
             $
           %span.price
             = number_with_precision(@booking.total || @service.booking_price, precision: 2)
+    .col-xs-3
+      .form-group.text-center
+        %label.control-label= t('simple_form.labels.booking.price_per_guest')
+        #price-per-guest.booking-price.text-danger
+          %span.currency
+            $
+          %span.price
+            = number_with_precision((@booking.total || @service.booking_price) / f.object.number_of_guests, precision: 2)
+
     = f.input :number_of_guests, as: :select, collection: (1..20), prompt: t('common.select'), wrapper_html: { class: 'col-sm-6' }
   .row
     .col-sm-12

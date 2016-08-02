@@ -15,7 +15,7 @@
           %span.caret
         %ul.dropdown-menu.pull-right{role: 'menu'}
           - if booking.editable?
-            %li= link_to fa_icon('pen', text: t('common.edit')), edit_customer_booking_path(booking)
+            %li= link_to fa_icon('pencil', text: t('common.edit')), edit_customer_booking_path(booking)
           - if booking.may_cancel?
             %li= link_to fa_icon('close', text: t('common.cancel')), cancel_customer_booking_path(booking)
           - if booking.destroyable?
