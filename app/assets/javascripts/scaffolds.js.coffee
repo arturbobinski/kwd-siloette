@@ -19,8 +19,9 @@ initializePlugins = ->
       $select.prop('disabled', true).removeAttr('required')
 
   today = new Date()
+  today.setHours(0, 0, 0, 0)
   date = $.queryParams().date
-  currentDate = if date then new Date(date) else new Date
+  currentDate = if date then new Date(date) else today
   $('.calendar-datepicker').datepicker
     defaultDate: currentDate
     onSelect: (date, obj) ->
@@ -29,6 +30,7 @@ initializePlugins = ->
       window.location.search = $.param(params)
       return
     beforeShowDay: (date) ->
+      console.log date, today
       string = date.getDay()
       return [window.closedDays.indexOf(string) < 0 && date >= today]
 
@@ -41,7 +43,8 @@ initializePlugins = ->
     dateFormat: 'yy-mm-dd'
     defaultDate: legalYear + '-1-1'
 
-  $('.select2').select2()
+  $('.select2').select2
+    placehoder: $(this).data('placeholder')
 
   $priceSlider = $('#price-range')
   if $priceSlider.length > 0

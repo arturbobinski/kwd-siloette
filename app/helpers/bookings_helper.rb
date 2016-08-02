@@ -12,11 +12,11 @@ module BookingsHelper
     time.strftime('%I:%M %p')
   end
 
-  def date_format(time)
-    time.strftime('%a, %e %b %Y')
+  def date_format(date)
+    I18n.l date, format: :long
   end
 
   def datetime_format(time)
-    time.strftime('%a, %e %b %I:%M %p')
+    I18n.l time, format: :long
   end
 end

@@ -4,14 +4,24 @@
 %br
 %ul.list-unstyled
   %li
+    %b #{t('.experience_level')}:
+    %span= @profile.experience_level
+  - if @profile.education_level
+    %li
+      %b #{t('.education_level')}:
+      %span= @profile.education_level
+  %li
+    %b #{t('.spoken_languages')}:
+    %span= @profile.languages.pluck(:name).join(', ')
+  %li
     %b #{t('.height')}:
     %span= humanized_height(@profile.height)
   %li
     %b #{t('.body_type')}:
     %span= @profile.body_type
-  %li
-    %b #{t('.bust')}:
-    %span= @profile.bust.humanize
+  / %li
+  /   %b #{t('.bust')}:
+  /   %span= @profile.bust.humanize
   %li
     %b #{t('.ethnicity')}:
     %span= @profile.ethnicity.humanize

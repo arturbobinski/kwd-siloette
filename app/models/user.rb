@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   has_many :reservations, dependent: :destroy
   has_many :credit_cards, dependent: :destroy
 
-  delegate :perform_name, :height, :weight, :bust, :ethnicity, :phone_number, to: :profile
+  delegate :perform_name, :height, :weight, :ethnicity, :phone_number, to: :profile
   delegate :address, to: :location
 
   validates :first_name, presence: true, length: { maximum: 50 }

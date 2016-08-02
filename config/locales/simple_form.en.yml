@@ -58,10 +58,14 @@ en:
         address: Location
       profile:
         body_type: Body type
+        education_level: Education Level
+        experience_level: Experience Level
+        language_ids: Spoken languages
         phone_number: Phone number
         perform_name: Perform name
         ethnicity: Ethnicity
         height: height
+        social_security_number: Social Security Number
         weight: Weight
         bust: Bust
       service:

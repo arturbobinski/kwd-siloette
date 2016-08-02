@@ -216,11 +216,14 @@ en:
       notice: Profile updated successfully.
     profile:
       body_type: Body type
+      education_level: Education Level
+      experience_level: Experience Level
       performer_profile: Performer profile
       height: Height
       weight: Weight
       bust: Bust
       ethnicity: Ethnicity
+      spoken_languages: Spoken language
     stripe_account:
       receiving_funds: Receiving funds
       siloette_uses_stripe: Siloette uses Stripe as its payment provider. A <a href="https://stripe.com" target="_blank">Stripe account</a> is required in order to accept payments for your services, and must be connected to Siloette. You will also need to grant Siloette permission to charge a transaction fee.

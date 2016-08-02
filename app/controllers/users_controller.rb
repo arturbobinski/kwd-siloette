@@ -41,7 +41,8 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(
       :first_name, :last_name, :email, :slug, :gender, :description, :birth_date, :avatar, :avatar_cache,
-      profile_attributes: [:id, :perform_name, :height, :body_type, :bust, :ethnicity, :phone_number],
+      profile_attributes: [:id, :perform_name, :height, :body_type, :ethnicity, :phone_number, :experience_level,
+        :social_security_number, :education_level, language_ids: []],
       location_attributes: [:id, :address, :country, :postal_code, :lat, :lng],
       service_images_attributes: [:id, :profile]
     )
