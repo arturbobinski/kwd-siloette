@@ -55,6 +55,9 @@ module Customer
     end
 
     def cancel
+      redirect_to :back, alert: t('common.not_allowed') and return unless @booking.may_cancel?
+      @booking.cancel!
+      redirect_to :back, notice: t('.notice')
     end
 
     private

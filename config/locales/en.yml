@@ -143,6 +143,8 @@ en:
       transparency: We have a transparent booking process and payment policies. We complete background checks on performers and they are rated on their performances. We have a wide range of choice.
   customer:
     bookings:
+      cancel:
+        notice: Booking canceled successfully.
       create:
         notice: Booking created successfully.
       edit:
