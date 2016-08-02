@@ -5,6 +5,12 @@ initFormValidation = ($el) ->
   $parsleyForm = $el.find('[data-parsley-validate]')
   $parsleyForm.parsley() if $parsleyForm.length > 0
 
+readCookieValue = (cookieName) ->
+  if result = new RegExp("(?:^|; )" + encodeURIComponent(cookieName) + "=([^;]*)").exec(document.cookie)
+    decodeURIComponent(result[1])
+  else
+    null
+
 initializePlugins = ->
   $('.modal').on 'loaded.bs.modal', ->
     initFormValidation $(this)
@@ -78,6 +84,10 @@ initializePlugins = ->
       return $(this).attr('data-score')
 
   $('[name*="time_zone"]').set_timezone()
+  tz = readCookieValue('time_zone')
+  if tz is null or tz is ''
+    $.post '/api/users/set_time_zone',
+      time_zone: jstz.determine_timezone().timezone.olson_tz
 
 $(document).ready initializePlugins
 $(document).on 'turbolinks:load', ->

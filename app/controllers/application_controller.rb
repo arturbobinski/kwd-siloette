@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_filter :load_pages, :set_time_zone
+  before_filter :load_pages
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to main_app.root_url, alert: exception.message
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_time_zone
-    @user_time_zone ||= ActiveSupport::TimeZone[session[:time_zone] || 'Eastern Time (US & Canada)']
+    @user_time_zone ||= ActiveSupport::TimeZone[cookies[:time_zone] || 'Eastern Time (US & Canada)']
   end
   helper_method :user_time_zone
 
@@ -49,10 +49,6 @@ class ApplicationController < ActionController::Base
       flash[:error] = t('common.admin_required')
       redirect_to new_user_session_path(role: :admin)
     end
-  end
-
-  def set_time_zone
-    session[:time_zone] = params[:time_zone] if params[:time_zone].present?
   end
 
   def get_start_at

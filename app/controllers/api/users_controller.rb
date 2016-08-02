@@ -18,5 +18,10 @@ module Api
         render nothing: true, status: 200
       end
     end
+
+    def set_time_zone
+      cookies[:time_zone] = params[:time_zone] unless ActiveSupport::TimeZone[params[:time_zone]].nil?
+      render nothing: true
+    end
   end
 end

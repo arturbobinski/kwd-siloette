@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       collection do
         get :check_email
         get :check_slug
+        post :set_time_zone
       end
     end
     resources :profiles, only: [] do

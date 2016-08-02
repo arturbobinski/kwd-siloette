@@ -3,7 +3,6 @@
 
 .container
   = search_form_for @q, url: search_path, method: :get do |f|
-    = hidden_field_tag :time_zone
     .panel.panel-default
       .panel-body
         .row
