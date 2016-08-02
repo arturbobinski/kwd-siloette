@@ -6,7 +6,7 @@ ActiveAdmin.register Post do
     f.inputs 'Post Details' do
       f.hidden_field :author_id, value: current_user.id
       f.input :title
-      f.input :content, input_html: { class: 'ckeditor' }
+      f.input :content, as: :ckeditor
       f.input :published
     end
     f.actions

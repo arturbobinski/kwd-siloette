@@ -269,4 +269,6 @@ ActiveAdmin.setup do |config|
   # of those filters by default here.
   #
   # config.include_default_association_filters = true
+
+  config.register_javascript 'ckeditor/init.js'
 end

@@ -21,7 +21,7 @@ ActiveAdmin.register Page do
     f.inputs 'Page Details' do
       f.input :title
       f.input :slug
-      f.input :body, input_html: { class: 'ckeditor' }
+      f.input :body, as: :ckeditor
       f.input :active
       f.input :for_dancer
     end
