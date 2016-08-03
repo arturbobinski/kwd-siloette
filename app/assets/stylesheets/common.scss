@@ -115,6 +115,10 @@ form .table > tbody > tr > td {
   @include button-variant($btn-primary-color, $pink-color, transparent);
 }
 
+hr.solid {
+  border-color: $text-color;
+}
+
 .logo {
   text-transform: uppercase;
 }

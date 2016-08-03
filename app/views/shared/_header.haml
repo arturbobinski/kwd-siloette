@@ -5,13 +5,13 @@
         %i.header-logo
     %ul.nav.navbar-nav.navbar-right
       - if current_user.nil?
-        %li= link_to t('links.work_with_us'), new_user_registration_path(bd: true)
+        %li= link_to t('links.work_with_us'), work_with_us_path
         %li= link_to t('common.sign_in'), new_user_session_path
       - else
         - if current_user.dancer?
           %li= link_to t('links.create_service'), new_performer_service_path
         - else
-          %li= link_to t('links.work_with_us'), become_dancer_user_path(current_user)
+          %li= link_to t('links.become_performer'), work_with_us_path
         %li.dropdown
           %a(data-toggle='dropdown' aria-haspopup='true' aria-expanded='true' href='#')
             = image_tag avatar_url(current_user), size: '32x32', alt: '', class: 'round'
