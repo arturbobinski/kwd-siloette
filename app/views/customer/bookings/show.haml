@@ -32,7 +32,10 @@
       .col-sm-6
         %h4= t('common.service')
         = link_to service_path(service) do
-          = image_tag service.primary_image.file.url(:small), alt: service.title
+          - if service.primary_image
+            = image_tag service.primary_image.file.url(:small), alt: service.title
+          - else
+            service.title
       .col-sm-6
         %h4 &nbsp;
         %p

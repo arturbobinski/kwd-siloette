@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802064310) do
+ActiveRecord::Schema.define(version: 20160803040423) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "first_name", limit: 255
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20160802064310) do
     t.datetime "start_at"
     t.datetime "end_at"
     t.text     "special_info",     limit: 65535
-    t.integer  "hours",            limit: 4
+    t.integer  "hours",            limit: 4,     default: 1
     t.integer  "total_cents",      limit: 4
     t.string   "currency",         limit: 255
     t.string   "last_ip_address",  limit: 255

@@ -7,7 +7,8 @@
   %td
     %span.label.label-info= t("activerecord.attributes.booking.states.#{booking.state}")
   %td
-    %span.label.label-success= t("activerecord.attributes.payment.states.#{booking.payment_state}")
+    - if booking.payment_state
+      %span.label.label-success= t("activerecord.attributes.payment.states.#{booking.payment_state}")
   %td
     .btn-group.text-left
       %button.btn.btn-default.btn-sm.dropdown-toggle{type: 'button', 'data-toggle' => 'dropdown'}

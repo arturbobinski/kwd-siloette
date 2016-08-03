@@ -18,9 +18,9 @@
                 %b= Date::ABBR_DAYNAMES[schedule.wday]
                 = s.hidden_field :wday
               %td
-                = s.select :start_slot, time_slot_options, {}, required: schedule.active, class: 'form-control', disabled: !schedule.active
+                = s.select :start_slot, time_slot_options, {}, required: schedule.active, class: 'form-control schedule-start', disabled: !schedule.active
               %td
-                = s.select :end_slot, time_slot_options, {}, required: schedule.active, class: 'form-control', disabled: !schedule.active
+                = s.select :end_slot, time_slot_options(0..29), {}, required: schedule.active, class: 'form-control schedule-end', disabled: !schedule.active
               %td
                 %label.switch
                   = s.check_box :active, class: 'toggel-schedule'

@@ -35,7 +35,7 @@ class Booking < ActiveRecord::Base
   validates_datetime :start_at, after: lambda { 2.hour.from_now }
   validates_datetime :end_at, after: :start_at
 
-  scope :by_date, ->(time) { where(start_at: time..time.end_of_day) }
+  scope :by_date, ->(time) { where('(start_at BETWEEN ? AND ?) OR (end_at BETWEEN ? AND ?)', time, time.end_of_day, time, time.end_of_day) }
   scope :recent, -> { order(:start_at) }
 
   before_validation :prepare, unless: 'start_time.blank?'
@@ -132,8 +132,7 @@ class Booking < ActiveRecord::Base
   def prepare
     beginning_of_day = start_at.in_time_zone(ActiveSupport::TimeZone[time_zone]).beginning_of_day
     self.start_at = beginning_of_day + start_time.to_i.hours
-    self.end_at = beginning_of_day + end_time.to_i.hours
-    self.hours = ((end_at - start_at) / 3600).round
+    self.end_at = self.start_at + hours.to_i.hours
     self.total_cents = service.booking_price * 100 * hours
     self.currency = 'usd'
   end

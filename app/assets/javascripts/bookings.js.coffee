@@ -5,10 +5,12 @@ class @BookingForm
     @$el = options.$el || $('.booking-form')
     @hours = options.hours || 1
     @pricerPerHour = options.pricePerHour
-    @guests = options.guests || 1
+    @total = @getTotal()
+    @availableSlots = window.availableSlots
 
     @$startTime = $('#booking_start_time')
-    @$endTime = $('#booking_end_time')
+    @$hours = $('#booking_hours')
+    # @$endTime = $('#booking_end_time')
     @$totalPrice = $('#booking-total .price')
     @$pricePerGuest = $('#price-per-guest .price')
     @$country = $('#booking_address_attributes_country_id')
@@ -17,32 +19,40 @@ class @BookingForm
     @$guestsInput = $('#booking_number_of_guests')
 
     @$startTime.on 'change', @changeStartTime
-    @$endTime.on 'change', @changeEndTime
-    @$country.on 'change', @changeCountry
+    @$hours.on 'change', @changeHours
     @$guestsInput.on 'change', @changeGuests
+    # @$endTime.on 'change', @changeEndTime
+    @$country.on 'change', @changeCountry
     @$el.on 'submit', @submitForm
 
   getTotal: ->
     @pricerPerHour * @hours
 
-  showPrices: ->
+  showTotal: ->
     @total = @getTotal()
     @$totalPrice.text @total.toFixed(2)
-    @$pricePerGuest.text (@total / @guests).toFixed(2)
+
+  checkAvailable: ->
+
 
   changeStartTime: =>
-    selected = @$startTime.find('option:selected')
-    @$endTime.html selected.nextAll().clone()
-    @hours = 1
-    @showPrices()
+    # selected = @$startTime.find('option:selected')
+    # @$endTime.html selected.nextAll().clone()
+    @checkAvailable()
+    @showTotal()
+
+  changeHours: =>
+    @hours = @$hours.val()
+    @checkAvailable()
+    @showTotal()
 
   changeEndTime: =>
     @hours = @$endTime.val() - @$startTime.val()
-    @showPrices()
+    @showTotal()
 
   changeGuests: =>
-    @guests = parseInt @$guestsInput.val()
-    @showPrices()
+    guests = parseInt @$guestsInput.val()
+    @$pricePerGuest.text (@total / guests).toFixed(2)
 
   changeCountry: =>
     countryId = @$country.val()

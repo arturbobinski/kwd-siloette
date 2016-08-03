@@ -5,7 +5,7 @@ module BookingsHelper
   end
 
   def slot_to_time(slot)
-    time_format(Time.parse("#{slot}:00"))
+    time_format(Time.parse("#{slot % 24}:00"))
   end
 
   def time_format(time)

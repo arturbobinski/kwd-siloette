@@ -3,8 +3,7 @@
     $(document).ready(function() {
       window.siloette.bookingForm = new BookingForm({
         pricePerHour: #{@service.booking_price},
-        hours: #{@booking.hours || 1},
-        guests: #{@booking.number_of_guests}
+        hours: #{@booking.hours || 1}
       });
     });
 

@@ -1,6 +1,7 @@
 - content_for :extra_script do
   :javascript
     window.closedDays = #{raw @performer.schedules.inactive.pluck(:wday).to_json};
+    window.availableSlots = #{@calendar.available_slots.to_json};
 
 - available_slots = @calendar.available_slots
 
@@ -20,7 +21,7 @@
 
     - if available_slots.length > 0
       = f.input :start_time, as: :select, collection: time_slot_options(available_slots), required: true, prompt: t('common.select')
-      = f.input :end_time, as: :select, collection: time_slot_options(available_slots), required: true, prompt: t('common.select')
+      = f.input :hours, as: :select, collection: (1..24), required: true, prompt: t('common.select')
     - else
       .alert.alert-warning= t('.not_available')
 

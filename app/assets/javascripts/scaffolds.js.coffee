@@ -26,13 +26,13 @@ initializePlugins = ->
 
   today = new Date()
   today.setHours(0, 0, 0, 0)
-  date = $.queryParams().date
-  currentDate = if date then new Date(date) else today
+  params = $.queryParams()
+  pDate = params.date
+  currentDate = if pDate then new Date(pDate) else today
   $('.calendar-datepicker').datepicker
     defaultDate: currentDate
     onSelect: (date, obj) ->
-      params = $.queryParams()
-      params.date = moment(date).format('YYYY-MM-DD')
+      params.date = moment(new Date(date)).format('YYYY-MM-DD')
       window.location.search = $.param(params)
       return
     beforeShowDay: (date) ->
@@ -88,6 +88,17 @@ initializePlugins = ->
   if tz is null or tz is ''
     $.post '/api/users/set_time_zone',
       time_zone: jstz.determine_timezone().timezone.olson_tz
+
+  if $('.schedule-start').length > 0
+    $fakeSelect = $('<select class="hidden" />').appendTo('body').html $($('.schedule-end')[0]).html()
+    $('.schedule-start').change ->
+      $this = $(this)
+      $parent = $this.closest('tr')
+      startTime = $(this).val()
+      $endInput = $parent.find('.schedule-end')
+      endTime = $endInput.val()
+      $tmp = $fakeSelect.find('option[value="' + startTime + '"]')
+      $endInput.html($tmp.nextAll().clone()).val(endTime)
 
 $(document).ready initializePlugins
 $(document).on 'turbolinks:load', ->
