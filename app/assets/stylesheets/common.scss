@@ -85,8 +85,12 @@ form .table > tbody > tr > td {
   background-color: rgba(32, 32, 32, .6);
 }
 
+.bg-blue {
+  background-color: rgb(202, 241, 252);
+}
+
 .bg-grey {
-  background-color: rgb(230, 230, 230);
+  background-color: $border-color;
 }
 
 .text-center-m {
@@ -137,6 +141,11 @@ hr.solid {
 
 .round {
   @include border-radius(50%);
+}
+
+section.padded {
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .jumbotron {

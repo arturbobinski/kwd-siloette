@@ -170,11 +170,23 @@ en:
     work_with_us:
       become_siloette: Become a Siloette
       work_on_your_own_terms: Work on your own terms in a safe environment
-      looking_pro: Siloette is looking for professional exotic models, dancers and hosts to join this exciting platform. We verify all performers prior to them creating public profiles to ensure all users on the platform are safe.
+      looking_pro: We want professional exotic models, dancers and hosts to join this exciting platform. We verify all performers prior to them creating public profiles to ensure all users on the platform are safe.
+      schedule: Select the days and hours you want to work. Then just accept or decline bookings.
+      advantages:
+        - icon: calendar-check-o
+          title: Work Your Own Schedule
+          description: Select the days and hours you want to work. Then just accept or decline bookings.
+        - icon: dollar
+          title: Earn What You want
+          description: Create the services you want to provide and the price you want to charge. We have a pricing guide to help you.
+        - icon: lock
+          title: Stay Safety
+          description: We verify customers and provide wearable technology so you can contact us or the police in case of emergency.
+      work_much: Work as much as you can, while you can
+      partnerships: This career doesn't last forever so you need to make it work while you can. We will help you do that through partnerships that will help you stay healthy and beautiful.
+      plan_for_future: Plan for the future
+      prepare_future: Prepare for the future. Start working on the next plan. We will help you transition into another career when the time is right.
       advantage: Once verified, you can optimize your profile and create the services you want to perform. You can create as many as you want and can invite or be invited to perform with others.
-      direct_payment: DIRECT PAYMENTS
-      anonymoust_communication: ANONYMOUS COMMUNICATION
-      customer_verification: CUSTOMER VERIFICATION
       guarantee: We will help you earn as much as you can for a long as you can. We will also help you transition into another career when the time is right.
   customer:
     bookings:
