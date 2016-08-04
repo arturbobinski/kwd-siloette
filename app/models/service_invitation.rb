@@ -23,6 +23,6 @@ class ServiceInvitation < ActiveRecord::Base
 
   def send_invitaton_email
     return if user == service.user
-    UserMailer.service_invitation_email(user, service).deliver_later
+    UserMailer.delay.service_invitation_email(user, service)
   end
 end

@@ -1,6 +1,6 @@
 %h3 Hi,
 
-%p #{@user.name} has invited you to #{link_to @service.title, performer_service_url(@service), target: '_blank'}
+%p #{@user.name} has invited you to #{link_to @service.title, performer_service_url(@service), target: '_blank'}.
 %br
 
 = render 'button', url: performer_services_url, text: 'Join now'

@@ -155,6 +155,6 @@ class User < ActiveRecord::Base
   end
 
   def send_verified_mail
-    UserMailer.user_verified_mail(self).deliver_later if (verified_changed? && verified?)
+    UserMailer.delay.user_verified_mail(self) if (verified_changed? && verified?)
   end
 end

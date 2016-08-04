@@ -1,16 +1,10 @@
-%h3 Congrats, payment completed successfully
+%h3 Congrats,
 
-%h4 Payment detail
+%p payment completed successfully.
+= render 'payment'
+
 %p
-  <b>Service:</b> #{link_to @service.title, service_url(@service)}
-  %br
-  <b>Price per hour:</b> #{number_to_currency(@service.price)}
-  %br
-  <b>Hours:</b> #{@booking.hours}
-  %br
-  <b>Amount:</b> #{number_to_currency(@payment.amount)}
-  %br
   <b>Fee(#{Setting.commission_from_seller}%):</b> #{number_to_currency(@payment.fee)}
   %br
-  <b>Total:</b> #{number_to_currency(@payment.total)}
+  <b>Amount to you:</b> #{number_to_currency(@payment.amount)}
   %br

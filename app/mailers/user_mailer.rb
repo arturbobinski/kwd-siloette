@@ -23,75 +23,87 @@ class UserMailer < ApplicationMailer
 
   def new_booking_email(booking)
     @booking = booking
-    @address = @booking.address
-    @service = @booking.service
-    @performer = @booking.performer
+    load_booking_resoruces
 
     mail(to: @performer.email, subject: 'You have new booking!')
   end
 
   def booking_accepted_email(booking)
     @booking = booking
-    @service = @booking.service
-    @user = @booking.user
-    @performer = @booking.performer
+    load_booking_resoruces
 
     mail(to: @user.email, subject: 'Booking accepted!')
   end
 
   def booking_declined_email(booking)
     @booking = booking
-    @service = @booking.service
-    @user = @booking.user
-    @performer = @booking.performer
+    load_booking_resoruces
 
     mail(to: @user.email, subject: 'Booking declined!')
   end
 
   def booking_canceled_email(booking)
     @booking = booking
-    @service = @booking.service
-    @user = @booking.user
-    @performer = @booking.performer
+    load_booking_resoruces
 
     mail(to: @performer.email, subject: 'Booking cenceled!')
   end
 
+  def booking_start_email_to_performer(booking)
+    @booking = booking
+    load_booking_resoruces
+
+    mail(to: @performer.email, subject: 'Service start soon!')
+  end
+
+  def booking_start_email_to_user(booking)
+    @booking = booking
+    load_booking_resoruces
+
+    mail(to: @user.email, subject: 'Service start soon!')
+  end
+
   def payment_completed_email_to_user(payment)
     @payment = payment
-    @booking = @payment.booking
-    @service = @booking.service
-    @source = @payment.source
-    @user = @booking.user
+    load_payment_resoruces
 
     mail(to: @user.email, subject: 'Payment completed!')
   end
 
   def payment_completed_email_to_performer(payment)
     @payment = payment
-    @booking = @payment.booking
-    @service = @booking.service
-    @performer = @booking.performer
+    load_payment_resoruces
 
     mail(to: @performer.email, subject: 'Payment completed!')
   end
 
   def payment_failed_email_to_user(payment)
     @payment = payment
-    @booking = @payment.booking
-    @service = @booking.service
-    @source = @payment.source
-    @user = @booking.user
+    load_payment_resoruces
 
     mail(to: @user.email, subject: 'Payment failed!')
   end
 
   def payment_failed_email_to_performer(payment)
     @payment = payment
-    @booking = @payment.booking
-    @service = @booking.service
-    @performer = @booking.performer
+    load_payment_resoruces
 
     mail(to: @performer.email, subject: 'Payment failed!')
+  end
+
+  private
+
+  def load_booking_resoruces
+    @service = @booking.service
+    @user = @booking.user
+    @performer = @booking.performer
+  end
+
+  def load_payment_resoruces
+    @booking = @payment.booking
+    @service = @booking.service
+    @source = @payment.source
+    @user = @booking.user
+    @performer = @booking.performer
   end
 end

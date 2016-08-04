@@ -1,29 +1,10 @@
-%h3 Hi,
+%h3 Congrats,
 
-%h4 You have a new booking 
-%h4 Booking detail
-%p
-  <b>Name:</b> #{@address.full_name}
-  %br
-  <b>Address:</b> #{@address.try(:full_address)}
-  %br
-  <b>Country:</b> #{@address.country.name}
-  %br
-  <b>Service:</b> #{link_to @service.title, service_url(@service)}
-  %br
-  <b>Event type:</b> #{@booking.event_type}
-  %br
-  <b>Venue type:</b> #{@booking.venue_type}
-  %br
-  <b>Number of guests:</b> #{@booking.number_of_guests}
-  %br
-  <b>Start at:</b> #{datetime_format(@booking.start_at)}
-  %br
-  <b>End at:</b> #{datetime_format(@booking.end_at)}
-  %br
+%p You have a new booking.
+= render 'booking'
 
 %br
 %table
   %tr
-    %td= render 'button', url: accept_performer_booking_url(@booking), text: 'Accept', style: 'primary'
+    %td= render 'button', url: accept_performer_booking_url(@booking), text: 'Accept'
     %td= render 'button', url: decline_performer_booking_url(@booking), text: 'Decline', style: 'warning'

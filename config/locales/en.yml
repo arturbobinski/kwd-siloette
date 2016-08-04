@@ -109,6 +109,8 @@ en:
       models:
         booking:
           attributes:
+            start_at:
+              after: Start time should be later than 2 hours from now.
             end_at:
               invalid_datetime: End time is invalid datetime.
         profile:
