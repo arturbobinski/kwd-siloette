@@ -9,7 +9,8 @@
         %li= link_to t('common.sign_in'), new_user_session_path
       - else
         - if current_user.dancer?
-          %li= link_to t('links.create_service'), new_performer_service_path
+          - if current_user.verified?
+            %li= link_to t('links.create_service'), new_performer_service_path
         - else
           %li= link_to t('links.become_performer'), work_with_us_path
         %li.dropdown

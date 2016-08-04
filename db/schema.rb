@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160803040423) do
+ActiveRecord::Schema.define(version: 20160803164709) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "first_name", limit: 255
@@ -168,6 +168,10 @@ ActiveRecord::Schema.define(version: 20160803040423) do
     t.datetime "updated_at",                null: false
   end
 
+  create_table "experiences", force: :cascade do |t|
+    t.string "name", limit: 255
+  end
+
   create_table "languages", force: :cascade do |t|
     t.string  "code",        limit: 255
     t.string  "name",        limit: 255
@@ -253,17 +257,28 @@ ActiveRecord::Schema.define(version: 20160803040423) do
     t.integer  "bust",                   limit: 4
     t.float    "height",                 limit: 24
     t.datetime "deleted_at"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
     t.float    "weight",                 limit: 24
     t.string   "body_type",              limit: 255
     t.string   "experience_level",       limit: 255
     t.string   "social_security_number", limit: 255
     t.string   "education_level",        limit: 255
+    t.boolean  "eligible_in_us",                     default: true
+    t.string   "hear_from",              limit: 255
+    t.string   "communing_plan",         limit: 255
   end
 
   add_index "profiles", ["deleted_at"], name: "index_profiles_on_deleted_at", using: :btree
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
+
+  create_table "profiles_experiences", force: :cascade do |t|
+    t.integer "profile_id",    limit: 4
+    t.integer "experience_id", limit: 4
+  end
+
+  add_index "profiles_experiences", ["experience_id"], name: "index_profiles_experiences_on_experience_id", using: :btree
+  add_index "profiles_experiences", ["profile_id"], name: "index_profiles_experiences_on_profile_id", using: :btree
 
   create_table "profiles_languages", force: :cascade do |t|
     t.integer "profile_id",  limit: 4
@@ -365,14 +380,14 @@ ActiveRecord::Schema.define(version: 20160803040423) do
   add_index "states", ["country_id"], name: "index_states_on_country_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255,   default: "", null: false
-    t.string   "encrypted_password",     limit: 255,   default: "", null: false
+    t.string   "email",                  limit: 255,   default: "",    null: false
+    t.string   "encrypted_password",     limit: 255,   default: "",    null: false
     t.string   "first_name",             limit: 255
     t.string   "last_name",              limit: 255
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,     default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,     default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
@@ -387,13 +402,18 @@ ActiveRecord::Schema.define(version: 20160803040423) do
     t.integer  "gender",                 limit: 4
     t.text     "description",            limit: 65535
     t.datetime "deleted_at"
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
     t.date     "birth_date"
+    t.boolean  "verified",                             default: false
+    t.string   "referral_code",          limit: 255
+    t.integer  "referrer_id",            limit: 4
   end
 
   add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["referral_code"], name: "index_users_on_referral_code", using: :btree
+  add_index "users", ["referrer_id"], name: "index_users_on_referrer_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role"], name: "index_users_on_role", using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree

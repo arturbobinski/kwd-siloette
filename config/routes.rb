@@ -59,6 +59,7 @@ Rails.application.routes.draw do
       get :become_dancer
       get :media
       get :stripe_account
+      get :apply
     end
   end
   resources :services, only: [:show]

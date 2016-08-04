@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  before_action :check_verified, unless: :devise_controller?
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_filter :load_pages
 
@@ -17,7 +18,7 @@ class ApplicationController < ActionController::Base
       referer
     elsif resource.admin?
       admin_dashboard_path
-    elsif resource.dancer? && resource.profile.nil?
+    elsif resource.dancer? && (resource.profile.nil? || resource.profile.body_type.nil? )
       edit_user_path(resource)
     elsif request.referer == new_user_session_url
       super
@@ -38,6 +39,12 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def check_verified
+    if current_user && !current_user.verified?
+      redirect_to apply_user_path(current_user) and return
+    end
+  end
 
   def load_pages
     return if request.path =~ /admin/

@@ -16,7 +16,9 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
-  attr_accessor :accept_terms, :is_admin
+  attr_accessor :accept_terms, :consent_check, :referred_by, :is_admin
+
+  belongs_to :referrer, class_name: 'User', foreign_key: :referrer_id
 
   has_one :profile, dependent: :destroy
   has_one :location, as: :owner, dependent: :destroy
@@ -35,6 +37,7 @@ class User < ActiveRecord::Base
   has_many :reservations, dependent: :destroy
   has_many :credit_cards, dependent: :destroy
   has_many :addresses, through: :bookings
+  has_many :referrals, class_name: 'User', foreign_key: :referrer_id
 
   delegate :perform_name, :height, :weight, :ethnicity, :phone_number, to: :profile
   delegate :address, to: :location
@@ -52,6 +55,10 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :service_images, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :authentications, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :schedules, reject_if: :all_blank, allow_destroy: true
+
+  after_validation :set_referrer, if: 'referred_by'
+  before_create :generate_referral_code
+  after_update :send_verified_mail
 
   scope :dancer_with_profile, -> { dancer.joins(:profile).group('users.id').having('count(user_id) > 0') }
 
@@ -123,10 +130,27 @@ class User < ActiveRecord::Base
     !connected_stripe_account.nil?
   end
 
+  private
+
   def acceptance_terms
     return true if is_admin
     unless accept_terms && accept_terms == '1'
       errors.add :accept_terms, I18n.t('activerecord.errors.models.user.attributes.accept_terms.blank')
     end
+  end
+
+  def generate_referral_code
+    self.referral_code = loop do
+      random_code = SecureRandom.hex(6)
+      break random_code unless self.class.exists?(referral_code: random_code)
+    end
+  end
+
+  def set_referrer
+    self.referrer = User.find_by(referral_code: referred_by)
+  end
+
+  def send_verified_mail
+    UserMailer.user_verified_mail(self).deliver_later if (verified_changed? && verified?)
   end
 end

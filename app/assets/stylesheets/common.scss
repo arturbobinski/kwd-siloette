@@ -19,12 +19,20 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-right: 0;
 }
 
+.form-group .form-group {
+  margin-bottom: 0;
+}
+
 .table .form-group {
   margin-bottom: 0;
 }
 
 .form-control {
   box-shadow: none;
+}
+
+.control-label.text-left {
+  text-align: left !important;
 }
 
 form .table > tbody > tr > td {
@@ -192,17 +200,17 @@ hr.solid {
   }
 }
 
-.inline-checkboxes {
+.form-inline {
   position: relative;
 
-  > span {
-    margin-right: $grid-gutter-width;
+  .radio_buttons, .check_boxes {
+    height: auto;
   }
 
   .parsley-errors-list {
-    left: 190px;
+    left: 180px;
     position: absolute;
-    top: 0;
+    top: 8px;
     width: 200px;
   }
 }

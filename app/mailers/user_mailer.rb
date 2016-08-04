@@ -9,6 +9,18 @@ class UserMailer < ApplicationMailer
     mail(to: @invitee.email, subject: 'New invitaion!')
   end
 
+  def user_verification_email(user)
+    @user = user
+
+    mail(to: 'admin@strpprs.com', subject: 'New user verification required!')
+  end
+
+  def user_verified_mail(user)
+    @user = user
+
+    mail(to: @user.email, subject: 'Account verified!')
+  end
+
   def new_booking_email(booking)
     @booking = booking
     @address = @booking.address

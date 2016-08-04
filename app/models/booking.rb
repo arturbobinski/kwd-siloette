@@ -104,22 +104,21 @@ class Booking < ActiveRecord::Base
   def notify
     case current_state
     when :pending
-      UserMailer.new_booking_email(self).deliver_now
+      UserMailer.new_booking_email(self).deliver_later
       TwilioService.new.send_sms(performer.phone_number, 'You have a new booking')
     when :accepted
-      UserMailer.booking_accepted_email(self).deliver_now
+      UserMailer.booking_accepted_email(self).deliver_later
       TwilioService.new.send_sms(address.phone, 'Your booking accepted')
     when :declined
-      UserMailer.booking_declined_email(self).deliver_now
+      UserMailer.booking_declined_email(self).deliver_later
       TwilioService.new.send_sms(address.phone, 'Your booking declined')
     when :canceled
       if aasm.from_state == :pending
-        UserMailer.booking_canceled_email(self).deliver_now
+        UserMailer.booking_canceled_email(self).deliver_later
         TwilioService.new.send_sms(performer.phone_number, 'Your booking canceled')
       end
     end
   end
-  handle_asynchronously :notify
 
   def process_payment
     if payment = payments.where(state: 'authorized').first

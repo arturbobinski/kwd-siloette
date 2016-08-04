@@ -17,6 +17,7 @@ en:
     card_number: Card number
     commission_fee: 'Siloette fee ($<span class="commission-fee"></span>) will be added.'
     confirm: Are your sure?
+    consent_check: I consent to a background check.
     cvc: CVC
     dancing: Dancing
     day: Day
@@ -97,6 +98,12 @@ en:
           completed: Completed
           failed: Failed
           processing: Processing
+      profile:
+        communing_plan:
+          own_car: Own Car
+          public_transport: Public Transport
+          borrowed_car: Borrowed Car
+          other: Other
     models:
     errors:
       models:
@@ -114,6 +121,8 @@ en:
               taken: Email already taken
             accept_terms:
               blank: You should accept terms of use.
+            consent_check:
+              blank: You should consent.
             slug:
               taken: ID already taken
         services:
@@ -225,6 +234,9 @@ en:
         alert: Something went wrong. Please make sure end time to be later than start time and try again.
         notice: Schedule saved successfully.
   users:
+    apply:
+      complete_application: Complete the application process bellow
+      work_experience: Work Experience
     show:
       open_services: Open services
       no_open_services: No open services yet.
@@ -242,6 +254,7 @@ en:
       visible_on_profile: This information is <b>visible</b> on your profile
     update:
       notice: Profile updated successfully.
+      profile_reviewing: We are reviewing your profile and will touch soon after review completed.
     profile:
       body_type: Body type
       education_level: Education Level

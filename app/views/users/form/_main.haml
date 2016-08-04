@@ -1,0 +1,25 @@
+- if @user.dancer?
+  - content_for :head_script do
+    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Figaro.env.googlemap_api_key}&libraries=places&callback=initAutocomplete", async: true, defer: true
+
+.row
+  = f.input :first_name, label: false, input_html: { 'data-parsley-maxlength' => 50 }, wrapper_html: { class: 'col-sm-6' }
+  = f.input :last_name, label: false, require: true, input_html: { 'data-parsley-maxlength' => 50 }, wrapper_html: { class: 'col-sm-6' }
+.row
+  = f.input :email, label: false, input_html: { data: { 'parsley-type' => :email, 'parsley-maxlength' => 50, 'parsley-remote' => check_email_api_users_path, 'parsley-remote-message' => t('activerecord.errors.models.user.attributes.email.taken') } }, wrapper_html: { class: 'col-sm-6' }
+  - if @user.dancer?
+    = f.fields_for :profile do |p|
+      = p.input :phone_number, label: false, input_html: { data: { 'parsley-maxlength' => 20, 'parsley-pattern' => parsley_pattern(:phonenumber) } }, wrapper_html: { class: 'col-sm-6' }
+- if @user.dancer?
+  .row
+    = f.input :birth_date, as: :string, label: false, required: true, input_html: { class: 'datepicker' }, wrapper_html: { class: 'col-sm-6' }
+    = f.fields_for :profile do |p|
+      = p.input :social_security_number, label: false, input_html: { data: { 'parsley-maxlength' => 9, 'parsley-pattern' => parsley_pattern(:social_security_number) } }, wrapper_html: { class: 'col-sm-6' }
+  .row
+    .col-sm-6.location-fields
+      = f.fields_for :location do |l|
+        = l.hidden_field :country
+        = l.hidden_field :postal_code
+        = l.hidden_field :lat
+        = l.hidden_field :lng
+        = l.input :address, label: false, input_html: { class: 'geocomplete', data: { prefix: 'user_location_attributes_' } }

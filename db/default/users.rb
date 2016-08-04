@@ -8,6 +8,7 @@ unless user = User.find_by(email: 'admin@strpprs.com')
     password:               password,
     password_confirmation:  password,
     role:                   'admin',
+    verified:               true,
     is_admin:               true
   })
 end

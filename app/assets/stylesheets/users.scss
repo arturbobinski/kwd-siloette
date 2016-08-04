@@ -1,5 +1,7 @@
-.user_accept_terms abbr {
-  display: none;
+.user_accept_terms, .user_consent_check {
+  abbr {
+    display: none;
+  }
 }
 
 .user_remember_me .checkbox {
@@ -103,4 +105,16 @@
 .language-ids .parsley-errors-list.filled {
   margin-bottom: $grid-gutter-width / 2 ;
   margin-top: -13px;
+}
+
+.user_profile_experiences {
+  span.checkbox {
+    float: left;
+    width: 50%;
+  }
+
+  .parsley-errors-list {
+    left: 10px;
+    top: -10px;
+  }
 }

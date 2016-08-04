@@ -36,6 +36,7 @@ en:
         remember_me: Remember me
         gender: Gender
         slug: Create you unique URL
+        referred_by: If you were referred by a Siloette, enter the referral code.
       service:
         category_id: What type of service are you performing?
         invitee_ids: Invite other performers by their email
@@ -43,6 +44,12 @@ en:
         price: How much do you want to earn?
       location:
         address: Location
+      profile:
+        communing_plan: How do you plan on communing to jobs?
+        eligible_in_us: Are you legally eligible to work in the U.S.?
+        experiences: What services can you perform? Check all that apply.
+        experience_level: How many years experience do you have?
+        hear_from: How did you hear about Siloette?
       video:
         link: Video
     placeholders:

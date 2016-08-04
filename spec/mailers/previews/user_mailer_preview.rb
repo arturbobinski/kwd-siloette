@@ -5,6 +5,14 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.service_invitation_email User.last, Service.last
   end
 
+  def user_verification_email
+    UserMailer.user_verification_email User.last
+  end
+
+  def user_verified_mail
+    UserMailer.user_verified_mail User.last
+  end
+
   def new_booking_email
     UserMailer.new_booking_email Booking.last
   end

@@ -12,7 +12,7 @@ class Ability
       can :read, Page
       can :read, Post
       can :read, Service
-      can [:read, :stripe_account], User
+      can [:read, :stripe_account, :apply], User
       can [:edit, :update, :become_dancer], User, id: user.id
 
       if user.dancer?

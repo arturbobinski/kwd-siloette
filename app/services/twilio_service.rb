@@ -1,10 +1,11 @@
 class TwilioService
 
   def initialize
-    @client = Twilio::REST::Client.new
   end
    
   def send_sms(to, msg)
+    @client = Twilio::REST::Client.new
+
     to = to.gsub(/^0/, '').gsub(/-/, '')
     to = '+' + to unless to[0] == '+'
 
@@ -16,4 +17,5 @@ class TwilioService
   rescue Twilio::REST::RequestError => ex
     return ex.message
   end
+  handle_asynchronously :send_sms
 end
