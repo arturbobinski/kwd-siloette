@@ -85,6 +85,10 @@ form .table > tbody > tr > td {
   background-color: rgba(32, 32, 32, .6);
 }
 
+.bg-grey {
+  background-color: rgb(230, 230, 230);
+}
+
 .text-center-m {
   @media (max-width: $screen-xs-max) {
     text-align: center;
@@ -133,6 +137,11 @@ hr.solid {
 
 .round {
   @include border-radius(50%);
+}
+
+.jumbotron {
+  @extend .bg-cover;
+  position: relative;
 }
 
 .no-top {

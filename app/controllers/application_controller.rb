@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
       referer
     elsif resource.admin?
       admin_dashboard_path
-    elsif resource.dancer? && (resource.profile.nil? || resource.profile.body_type.nil? )
+    elsif resource.dancer? && !resource.profile_ready?
       edit_user_path(resource)
     elsif request.referer == new_user_session_url
       super

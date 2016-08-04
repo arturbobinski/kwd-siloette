@@ -70,7 +70,7 @@ module Performer
     end
 
     def check_profile
-      if current_user.dancer? && current_user.profile.blank?
+      if current_user.dancer? && !current_user.profile_ready?
         flash[:warning] = t('common.update_profile_first')
         redirect_to edit_user_path(current_user) and return
       end

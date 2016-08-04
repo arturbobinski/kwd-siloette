@@ -130,6 +130,10 @@ class User < ActiveRecord::Base
     !connected_stripe_account.nil?
   end
 
+  def profile_ready?
+    profile&.body_type
+  end
+
   private
 
   def acceptance_terms
