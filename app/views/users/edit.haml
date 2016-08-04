@@ -28,6 +28,7 @@
             %small= t('.click_to_change')
         .col-sm-9
           %h2.full-name= @user.name
+          %p <b>#{t('.referral_code')}:</b> #{@user.referral_code}
       %hr
       %p.text-muted= fa_icon 'info-circle', text: t('.not_visible_on_profile').html_safe
       = f.input :gender, as: :radio_buttons, collection: User.genders.keys, label: false, required: true, wrapper: :multi_select
