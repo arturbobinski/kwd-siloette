@@ -1,7 +1,8 @@
 module Customer
   class BookingsController < Customer::BaseController
 
-    before_filter :load_resources, :get_start_at, only: [:new, :create, :edit, :update]
+    before_filter :load_resources, only: [:new, :create, :edit, :update]
+    before_filter :get_start_at, only: [:new]
     before_filter :ensure_service, :ensure_bookable, only: [:new, :create, :edit, :update]
 
     def index

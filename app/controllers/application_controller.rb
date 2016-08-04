@@ -67,5 +67,7 @@ class ApplicationController < ActionController::Base
     else
       @start_at = now
     end
+
+    @start_at += 2.hours if action_name != 'calendar'
   end
 end

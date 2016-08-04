@@ -19,6 +19,7 @@ class Payment < ActiveRecord::Base
   belongs_to :source, polymorphic: true
 
   before_validation :prepare, if: 'amount_cents.blank?'
+  after_create :set_default_card
 
   aasm column: :state do
     state :checkout, initial: true
@@ -31,15 +32,15 @@ class Payment < ActiveRecord::Base
     end
 
     event :process, after: :charge do
-      transitions from: [:checkout, :authorized, :completed], to: :processing
+      transitions from: [:authorized], to: :processing
     end
 
     event :failure, after: :notify_failure do
-      transitions from: [:authorized, :processing, :failure], to: :failed
+      transitions from: [:processing], to: :failed
     end
 
     event :complete, after: [:notify_complete] do
-      transitions from: [:processing, :authorized, :checkout], to: :completed
+      transitions from: [:processing], to: :completed
     end
   end
 
@@ -73,14 +74,15 @@ class Payment < ActiveRecord::Base
   end
 
   def notify_complete
-    UserMailer.delay.payment_completed_email_to_user(self)
+    update_booking_payment_state
+    UserMailer.payment_completed_email_to_user(self).deliver_later
     TwilioService.new.send_sms(booking.address.phone, 'Payment completed')
-    UserMailer.delay.payment_completed_email_to_performer(self)
+    UserMailer.payment_completed_email_to_performer(self).deliver_later
     TwilioService.new.send_sms(booking.performer.phone_number, 'Payment completed')
   end
 
   def notify_failure
-    UserMailer.delay.payment_failed_email_to_user(self)
+    UserMailer.payment_failed_email_to_user(self).deliver_later
     TwilioService.new.send_sms(booking.address.phone, 'Payment failed')
   end
 
@@ -90,5 +92,9 @@ class Payment < ActiveRecord::Base
     self.amount_cents = (booking.service.price_cents * booking.hours).round
     self.fee_cents = (amount_cents * (Setting.commission_from_seller.to_i) / 100).round
     self.total_cents = booking.total_cents
+  end
+
+  def set_default_card
+    source.update default: true
   end
 end

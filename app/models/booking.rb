@@ -112,27 +112,27 @@ class Booking < ActiveRecord::Base
   def notify
     case current_state
     when :pending
-      UserMailer.delay.new_booking_email(self)
+      UserMailer.new_booking_email(self).deliver_later
       TwilioService.new.send_sms(performer.phone_number, 'You have a new booking')
     when :accepted
-      UserMailer.delay.booking_accepted_email(self)
+      UserMailer.booking_accepted_email(self).deliver_later
       TwilioService.new.send_sms(address.phone, 'Your booking accepted')
       Booking.delay(run_at: (start_at - 1.hour)).remind(id)
     when :declined
-      UserMailer.delay.booking_declined_email(self)
+      UserMailer.booking_declined_email(self).deliver_later
       TwilioService.new.send_sms(address.phone, 'Your booking declined')
     when :canceled
       if aasm.from_state == :pending
-        UserMailer.delay.booking_canceled_email(self)
+        UserMailer.booking_canceled_email(self).deliver_later
         TwilioService.new.send_sms(performer.phone_number, 'Your booking canceled')
       end
     end
   end
 
   def remind_start
-    UserMailer.delay.booking_start_email_to_performer(self)
+    UserMailer.booking_start_email_to_performer(self).deliver_later
     TwilioService.new.send_sms(performer.phone_number, 'You have a new booking started in an hour')
-    UserMailer.delay.booking_start_email_to_user(self)
+    UserMailer.booking_start_email_to_user(self).deliver_later
     TwilioService.new.send_sms(address.phone, 'You have a new booking started in an hour')
   end
 
