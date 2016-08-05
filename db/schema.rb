@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804163345) do
+ActiveRecord::Schema.define(version: 20160805101318) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "first_name", limit: 255
@@ -110,7 +110,10 @@ ActiveRecord::Schema.define(version: 20160804163345) do
     t.boolean  "states_required",             default: false
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
+    t.string   "slug",            limit: 255
   end
+
+  add_index "countries", ["slug"], name: "index_countries_on_slug", using: :btree
 
   create_table "credit_cards", force: :cascade do |t|
     t.integer  "user_id",             limit: 4

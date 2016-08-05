@@ -1,5 +1,8 @@
 class Country < ActiveRecord::Base
 
+  extend FriendlyId
+  friendly_id :name, use: [:slugged, :finders]
+
   has_many :states, -> { order(name: :asc) }, dependent: :destroy
 
   validates :name, :iso_name, presence: true

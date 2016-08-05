@@ -68,6 +68,7 @@ Rails.application.routes.draw do
       get :apply
     end
   end
+  resources :countries, path: 'services-in', only: [:show]
   resources :services, only: [:show]
   get :search, to: 'services#search', as: :search
   resources :pages, only: [:show]
