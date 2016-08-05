@@ -101,6 +101,24 @@
               = youtube_embed(video.link) if video.youtube?
               = vimeo_embed(video.link) if video.vimeo?
 
+  - if (count = @testimonials.count) > 0
+    - show_count = 5
+    .panel.panel-default
+      .panel-body
+        .row
+          .col-sm-10.col-sm-offset-1
+            %h4.text-center= t('.feedback_received', count: count)
+            #testimonials
+              = render @testimonials[0..(show_count - 1)]
+              - if count > show_count
+                #testimonials-toggle.collapse
+                  = render @testimonials[show_count..-1]
+            - if count > show_count
+              .text-right
+                = link_to '#testimonials-toggle', data: { toggle: 'collapse' }, 'aria-expanded' => false do
+                  %span.more= fa_icon 'angle-down', text: t('common.more')
+                  %span.less= fa_icon 'angle-up', text: t('common.less')
+
   - if @similar_shows.count > 0
     .panel.panel-default
       .panel-body

@@ -39,7 +39,7 @@ class Payment < ActiveRecord::Base
       transitions from: [:processing], to: :failed
     end
 
-    event :complete, after: [:notify_complete] do
+    event :complete, after: [:after_complete] do
       transitions from: [:processing], to: :completed
     end
   end
@@ -69,12 +69,17 @@ class Payment < ActiveRecord::Base
     failure!
   end
 
+  def after_complete
+    booking.pay!
+    update_booking_payment_state
+    notify_complete
+  end
+
   def update_booking_payment_state
     booking.update_column :payment_state, aasm.current_state
   end
 
   def notify_complete
-    update_booking_payment_state
     UserMailer.payment_completed_email_to_user(self).deliver_later
     TwilioService.new.send_sms(booking.address.phone, 'Payment completed')
     UserMailer.payment_completed_email_to_performer(self).deliver_later

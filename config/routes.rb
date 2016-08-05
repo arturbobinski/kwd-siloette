@@ -50,7 +50,13 @@ Rails.application.routes.draw do
 
   namespace :customer do
     resources :bookings do
-      get :cancel, on: :member
+      member do
+        get :cancel
+        post :complete
+      end
+    end
+    resources :services, only: [] do
+      resources :testimonials, only: [:new, :create]
     end
   end
 

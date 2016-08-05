@@ -1,0 +1,21 @@
+- content_for :sidebar do
+  = render 'shared/sidebar'
+  = render 'shared/service_image', service: @service
+
+.panel.panel-default
+  .panel-heading
+    = t('.give_feedback')
+  .panel-body
+    = simple_form_for [:customer, @service, @testimonial], html: { class: 'form-horizontal booking-form', 'data-parsley-validate' => true } do |f|
+      = f.error_notification
+      .form-group
+        .row
+          .col-sm-3
+            = f.label :rating, t('simple_form.labels.testimonial.rating')
+          .col-sm-8
+            .testimonial-rating{'data-score' => @testimonial.rating}
+      = f.input :text, input_html: { rows: 10, 'data-parsley-maxlength' => 500 }
+      %br
+      .actions.text-center
+        = submit_tag t('common.send'), class: 'btn btn-primary'
+        = link_to t('common.no_thanks'), customer_bookings_path, class: 'btn btn-warning'

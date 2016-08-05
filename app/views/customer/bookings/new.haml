@@ -1,7 +1,6 @@
 - content_for :sidebar do
   = render 'shared/sidebar'
-  - if @service && @service.primary_image
-    = image_tag @service.primary_image.file.url(:medium), alt: @service.title, class: 'img-responsive'
+  = render 'shared/service_image', service: @service
 
 .panel.panel-default
   .panel-heading

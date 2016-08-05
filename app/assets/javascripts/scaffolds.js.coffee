@@ -79,7 +79,12 @@ initializePlugins = ->
     vertical: true
 
   $('[data-score]').raty
+    half: true
     readOnly: true
+    score: ->
+      return $(this).attr('data-score')
+  $('.testimonial-rating').raty
+    scoreName: 'testimonial[rating]'
     score: ->
       return $(this).attr('data-score')
 

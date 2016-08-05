@@ -24,6 +24,8 @@ class Service < ActiveRecord::Base
   has_many :images, class_name: 'ServiceImage', dependent: :destroy
   has_one :primary_image, -> { order(:created_at) }, class_name: 'ServiceImage'
   has_one :video, as: :owner
+  has_many :bookings, dependent: :destroy
+  has_many :testimonials, dependent: :destroy
 
   delegate :address, :country, :lat, :lng, :postal_code, to: :location
 

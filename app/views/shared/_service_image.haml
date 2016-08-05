@@ -1,0 +1,3 @@
+- if service && service.primary_image
+  = link_to service, target: '_blank' do
+    = image_tag service.primary_image.file.url(:medium), alt: service.title, class: 'img-responsive'

@@ -51,6 +51,10 @@ form .table > tbody > tr > td {
   background-color: white;
 }
 
+[aria-expanded="true"] .more, [aria-expanded="false"] .less {
+  display: none;
+}
+
 .calendar-datepicker .ui-datepicker {
   width: 100%;
 }

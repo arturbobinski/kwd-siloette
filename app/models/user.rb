@@ -38,6 +38,8 @@ class User < ActiveRecord::Base
   has_many :credit_cards, dependent: :destroy
   has_many :addresses, through: :bookings
   has_many :referrals, class_name: 'User', foreign_key: :referrer_id
+  has_many :testimonials, foreign_key: :author_id, dependent: :destroy
+  has_many :received_feedbacks, foreign_key: :receiver_id, class_name: 'Testimonial', dependent: :destroy
 
   delegate :perform_name, :height, :weight, :ethnicity, :phone_number, to: :profile
   delegate :address, to: :location

@@ -16,6 +16,7 @@ en:
     cancel: Cancel
     card_number: Card number
     commission_fee: 'Siloette fee ($<span class="commission-fee"></span>) will be added.'
+    complete: Complete
     confirm: Are your sure?
     consent_check: I consent to a background check.
     cvc: CVC
@@ -32,12 +33,15 @@ en:
     hosting: Hosting
     images: Images
     leave_service: Leave service
+    less: Less
     location: Location
     male: Male
     menu: Menu
+    more: More
     modeling: Modeling
     month: Month
     not_allowed: You are not allowed to perform this action.
+    no_thanks: No, thanks
     number_of_performers: Number of performers
     on_off: On/Off
     payment: Payment
@@ -48,6 +52,7 @@ en:
     save: Save
     save_and_continue: Save and Continue
     select: Select…
+    send: Send
     settings: Settings
     sign_in: Sign in
     sort_by: Sort by
@@ -194,6 +199,8 @@ en:
     bookings:
       cancel:
         notice: Booking canceled successfully.
+      complete:
+        notice: Booking completed successfully.
       create:
         notice: Booking created successfully.
       edit:
@@ -210,6 +217,11 @@ en:
         payment_infomation: Payment information
       update:
         notice: Booking updated successfully.
+    testimonials:
+      new:
+        give_feedback: Give feedback
+      create:
+        notice: Feedback sent successfully.
   performer:
     bookings:
       accept:
@@ -293,6 +305,9 @@ en:
       edit_service: Edit service
       close_service: Close service
       open_service: Open service
+      feedback_received:
+        one: 1 Feedback received
+        other: '%{count} Feedbacks received'
       you_might_like: You might also like
     search:
       style: Style

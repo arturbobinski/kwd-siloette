@@ -1,0 +1,13 @@
+.testimonial
+  .heading
+    .row
+      .col-sm-8
+        %span.testimonial-author= testimonial.author.name
+        &nbsp;
+        %span.time-ago.small
+          = fa_icon 'clock-o', text: "#{time_ago_in_words(testimonial.created_at)} ago"
+      .col-sm-4
+        .testimonial-score{'data-score' => testimonial.rating}
+  .testimonial-text
+    = testimonial.text
+  %hr

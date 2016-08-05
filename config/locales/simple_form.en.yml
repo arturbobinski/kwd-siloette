@@ -50,6 +50,9 @@ en:
         experiences: What services can you perform? Check all that apply.
         experience_level: How many years experience do you have?
         hear_from: How did you hear about Siloette?
+      testimonial:
+        rating: Rate the service
+        text: Feedback
       video:
         link: Video
     placeholders:
@@ -79,5 +82,7 @@ en:
         category_id: Please select…
         description: Max. 250 characters
         price: 0
+      testimonial:
+        text: Max. 500 characters
       video:
         link: http://

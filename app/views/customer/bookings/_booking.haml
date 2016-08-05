@@ -23,3 +23,5 @@
           %li= link_to fa_icon('close', text: t('common.cancel')), cancel_customer_booking_path(booking)
         - if booking.destroyable?
           %li= link_to fa_icon('trash', text: t('common.delete')), customer_booking_path(booking), method: :delete, data: { confirm: 'Are you sure?' }
+        - if booking.may_complete?
+          %li= link_to fa_icon('check', text: t('common.complete')), complete_customer_booking_path(booking, authenticity_token: form_authenticity_token), method: :post
