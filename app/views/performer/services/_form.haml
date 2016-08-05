@@ -49,11 +49,7 @@
         = l.hidden_field :lng
         = l.input :address, input_html: { class: 'geocomplete', data: { prefix: 'service_location_attributes_' } }
   = f.input :description, input_html: { rows: 5, 'data-parsley-maxlength' => 250 }
-  .inline-checkboxes.form-group
-    - Service.statuses.keys.each do |status|
-      %span
-        = f.radio_button :status, status
-        = f.label "status_#{status}", status
+  = f.input :status, as: :radio_buttons, collection: Service.statuses.keys, wrapper: :multi_select
 
   .actions.text-center
     = f.button :button, t('common.save'), class: 'btn btn-primary btn-bordered'

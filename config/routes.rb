@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
+  constraints(id: /(miami|las-vegas)/) do
+    resources :locations, path: '/', only: [:show]
+  end
+
   namespace :api do
     resources :users, only: [] do
       collection do
@@ -68,7 +72,7 @@ Rails.application.routes.draw do
       get :apply
     end
   end
-  resources :countries, path: 'services-in', only: [:show]
+  # resources :countries, path: 'services-in', only: [:show]
   resources :services, only: [:show]
   get :search, to: 'services#search', as: :search
   resources :pages, only: [:show]

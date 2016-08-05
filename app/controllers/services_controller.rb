@@ -1,6 +1,6 @@
 class ServicesController < ApplicationController
 
-  before_filter :load_categories, :tweak_price_params, only: [:search]
+  before_filter :load_categories, :tweak_price_params, :check_location, only: [:search]
 
   def search
     @q = Service.open.active.search(params[:q])
@@ -28,6 +28,14 @@ class ServicesController < ApplicationController
 
     if params[:price_max].present?
       params[:q][:price_cents_lteq] = (params[:price_max].to_f * 100).to_i
+    end
+  end
+
+  def check_location
+    if params[:q].present? && params[:q][:location_address_cont].present?
+      if (location_id = params[:q][:location_address_cont]).in?(AppConfig.implemented_locations.keys)
+        redirect_to location_path(location_id)
+      end
     end
   end
 end

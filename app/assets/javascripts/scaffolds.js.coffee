@@ -24,6 +24,9 @@ initializePlugins = ->
     else
       $select.prop('disabled', true).removeAttr('required')
 
+  $('#q_location_address_cont').change ->
+    window.location = '/' + $(this).val()
+
   today = new Date()
   today.setHours(0, 0, 0, 0)
   params = $.queryParams()

@@ -261,7 +261,7 @@ en:
         alert: Something went wrong. Please make sure end time to be later than start time and try again.
         notice: Schedule saved successfully.
   countries:
-    index:
+    show:
       no_services: No services in %{country}.
   users:
     apply:

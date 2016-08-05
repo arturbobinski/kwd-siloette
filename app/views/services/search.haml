@@ -66,7 +66,8 @@
           .panel-heading
             = t('common.location')
           .panel-body
-            = f.text_field :location_address_cont, placeholder: t('common.location'), class: 'geocomplete form-control'
+            =# f.text_field :location_address_cont, placeholder: t('common.location'), class: 'geocomplete form-control'
+            = f.select :location_address_cont, AppConfig.implemented_locations.map { |k,v| [v, k] }, { include_blank: I18n.t('common.select') }, selected: (params[:q][:location_address_cont] if params[:q]), class: 'form-control'
 
         = f.submit t('common.submit'), class: 'btn btn-primary btn-block'
 

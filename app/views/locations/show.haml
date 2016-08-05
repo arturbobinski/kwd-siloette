@@ -1,0 +1,21 @@
+- @title = "Services in #{@county}"
+- @description = @title
+- @url = location_url(params[:id])
+
+- content_for :meta_tags do
+  %meta{name: 'robots', content: 'index, follow'}
+  %meta{name: 'googlebot', content: 'index, follow'}
+
+.container
+  .panle.panel-default
+    .panel-heading
+      = link_to fa_icon('angle-double-left', text: t('common.home')), root_url
+    .panel-body
+      - if @services.count > 0
+        %h3.text-center= @title
+        .thumbnail-grid-wide
+          .thumbnail-grid
+            = render @services
+        .text-center= paginate @services
+      - else
+        = t('countries.show.no_services', country: @county)
