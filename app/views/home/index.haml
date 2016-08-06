@@ -1,3 +1,6 @@
+- content_for :head_script do
+  = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Figaro.env.googlemap_api_key}&libraries=places&callback=initAutocomplete", async: true, defer: true
+
 - @image = { url: asset_path('main-bg.jpg'), width: 1280, height: 720 }
 
 - content_for :meta_tags do
@@ -15,7 +18,9 @@
           /%p= t('.description')
         .row
           .col-sm-6.col-sm-offset-3
-            = link_to t('.browse_all_services'), search_path, class: 'btn btn-lg btn-primary btn-block text-uppercase'
+            = search_form_for @q, url: search_path, method: :get do |f|
+              = f.hidden_field :location_address_cont
+              = f.submit t('.browse_all_services'), class: 'btn btn-lg btn-primary btn-block text-uppercase'
 
 - if @top_services.count > 0
   %section#top-services

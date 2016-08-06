@@ -1,6 +1,7 @@
 placeSearch = undefined
 autocomplete = undefined
 $input = undefined
+locationField = undefined
 
 componentForm = 
   # street_number: 'short_name'
@@ -10,16 +11,32 @@ componentForm =
   country: 'long_name'
   postal_code: 'short_name'
 
+getCurrentLocation = (geolocation)->
+  $.get 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + geolocation.lat + ',' + geolocation.lng + '&sensor=false', (data) ->
+    return if !data.results.length > 0
+    place = data.results[0]
+    i = 0
+    while i < place.address_components.length
+      address_components = place.address_components[i]
+      addressType = address_components.types[0]
+      if addressType == 'locality'
+        locationField.val address_components['long_name']
+        break
+      i++
+    return
+
 geolocate = ->
   if navigator.geolocation
     navigator.geolocation.getCurrentPosition (position) ->
       geolocation = 
         lat: position.coords.latitude
         lng: position.coords.longitude
+      locationField = $('#q_location_address_cont')
+      getCurrentLocation(geolocation) if locationField.length > 0
       circle = new (google.maps.Circle)(
         center: geolocation
         radius: position.coords.accuracy)
-      autocomplete.setBounds circle.getBounds()
+      autocomplete.setBounds circle.getBounds() if autocomplete
       return
   return
 
@@ -45,6 +62,7 @@ fillInAddress = (e) ->
   return
 
 window.initAutocomplete = ->
+  geolocate()
   $input = $('.geocomplete')
   return if $input is undefined or $input.length is 0
 

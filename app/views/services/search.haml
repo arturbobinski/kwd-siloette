@@ -1,5 +1,5 @@
 - content_for :head_script do
-  = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Figaro.env.googlemap_api_key}&libraries=places&callback=initAutocomplete", async: true, defer: true
+  =# javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Figaro.env.googlemap_api_key}&libraries=places&callback=initAutocomplete", async: true, defer: true
 
 .container
   = search_form_for @q, url: search_path, method: :get do |f|
@@ -67,7 +67,7 @@
             = t('common.location')
           .panel-body
             =# f.text_field :location_address_cont, placeholder: t('common.location'), class: 'geocomplete form-control'
-            = f.select :location_address_cont, AppConfig.implemented_locations.map { |k,v| [v, k] }, { include_blank: I18n.t('common.select') }, selected: (params[:q][:location_address_cont] if params[:q]), class: 'form-control'
+            = f.select :location_address_cont, AppConfig.implemented_locations.values, { include_blank: I18n.t('common.select') }, selected: (params[:q][:location_address_cont] if params[:q]), class: 'form-control'
 
         = f.submit t('common.submit'), class: 'btn btn-primary btn-block'
 

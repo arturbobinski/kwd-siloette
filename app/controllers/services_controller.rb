@@ -1,6 +1,6 @@
 class ServicesController < ApplicationController
 
-  before_filter :load_categories, :tweak_price_params, :check_location, only: [:search]
+  before_filter :load_categories, :tweak_price_params, only: [:search]
 
   def search
     @q = Service.open.active.search(params[:q])
