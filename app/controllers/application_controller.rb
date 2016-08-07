@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
   private
 
   def check_verified
-    if current_user && !current_user.verified?
+    if current_user && current_user.dancer? && !current_user.verified?
       redirect_to apply_user_path(current_user) and return
     end
   end
