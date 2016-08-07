@@ -19,7 +19,7 @@ module Customer
     private
 
     def testimonial_params
-      params.require(:testimonial).permit(:rating, :text)
+      params.require(:testimonial).permit(:rating, :delay, :accuracy, :satisfaction, :text)
     end
 
     def load_service

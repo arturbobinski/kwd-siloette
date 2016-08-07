@@ -1,7 +1,7 @@
 - content_for :sidebar do
   = render 'shared/sidebar'
   
-- if @user.dancer?
+- if false # @user.dancer?
   .panel.panel-default
     .panel-body.text-center
       %h5= t('.siloette_is_all_about')
@@ -20,8 +20,8 @@
     = simple_form_for @user, html: { class: 'form-horizontal', 'data-parsley-validate' => true } do |f|
       .row
         .col-sm-3.text-center
-          .avatar-field-container.round
-            = image_tag avatar_url(@user), alt: '', size: '80x80', class: 'round', title: t('.click_to_change')
+          .avatar-field-container
+            = image_tag avatar_url(@user), alt: '', size: '80x80', title: t('.click_to_change')
             = f.input :avatar, as: :file, label: false
             = f.hidden_field :avatar_cache
           %em
@@ -31,13 +31,13 @@
           %p <b>#{t('.referral_code')}:</b> #{@user.referral_code}
       %hr
       %p.text-muted= fa_icon 'info-circle', text: t('.not_visible_on_profile').html_safe
-      = f.input :gender, as: :radio_buttons, collection: User.genders.keys, label: false, required: true, wrapper: :multi_select
+      = f.input :gender, as: :radio_buttons, collection: User.genders.keys, label: false, required: true, wrapper_html: { class: 'text-capitalize' }, wrapper: :multi_select
       = render 'users/form/main', f: f
       - if @user.dancer?
         = render 'users/form/dancer_profile', f: f
       = f.input :description, as: :text, label: false, required: true, input_html: { rows: 5, 'data-parsley-maxlength' => 250 }
       - if @user.dancer?
         .row
-          = f.input :slug, input_html: { data: { 'parsley-pattern' => parsley_pattern(:slug), 'parsley-maxlength' => 50, 'parsley-remote' => check_slug_api_users_path, 'parsley-remote-message' => t('activerecord.errors.models.user.attributes.slug.taken') } }, wrapper_html: { class: 'col-sm-12' }
+          = f.input :slug, input_html: { data: { 'parsley-pattern' => parsley_pattern(:slug), 'parsley-maxlength' => 50, 'parsley-remote' => check_slug_api_users_path, 'parsley-remote-message' => t('activerecord.errors.models.user.attributes.slug.taken') } }, wrapper_html: { class: 'col-sm-12 with-not-editable' }
       .actions.text-center
         = f.button :button, t('common.save'), class: 'btn btn-primary btn-bordered'

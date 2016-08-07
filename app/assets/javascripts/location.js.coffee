@@ -20,18 +20,24 @@ getCurrentLocation = (geolocation)->
       address_components = place.address_components[i]
       addressType = address_components.types[0]
       if addressType == 'locality'
-        locationField.val address_components['long_name']
+        locality = address_components['long_name']
+        sessionStorage.setItem 'locality', locality
+        locationField.val locality
         break
       i++
     return
 
 geolocate = ->
+  locationField = $('#q_location_address_cont')
+
+  if locality = sessionStorage.getItem 'locality'
+    locationField.val locality
+    return
   if navigator.geolocation
     navigator.geolocation.getCurrentPosition (position) ->
       geolocation = 
         lat: position.coords.latitude
         lng: position.coords.longitude
-      locationField = $('#q_location_address_cont')
       getCurrentLocation(geolocation) if locationField.length > 0
       circle = new (google.maps.Circle)(
         center: geolocation
@@ -62,7 +68,7 @@ fillInAddress = (e) ->
   return
 
 window.initAutocomplete = ->
-  geolocate()
+  geolocate() if window.location.pathname == '/'
   $input = $('.geocomplete')
   return if $input is undefined or $input.length is 0
 

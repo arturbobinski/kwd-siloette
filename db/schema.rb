@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160805101318) do
+ActiveRecord::Schema.define(version: 20160807174321) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "first_name", limit: 255
@@ -44,27 +44,29 @@ ActiveRecord::Schema.define(version: 20160805101318) do
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
   create_table "bookings", force: :cascade do |t|
-    t.string   "state",            limit: 255
-    t.integer  "performer_id",     limit: 4
-    t.integer  "user_id",          limit: 4
-    t.integer  "service_id",       limit: 4
-    t.integer  "event_type_id",    limit: 4
-    t.integer  "venue_type_id",    limit: 4
-    t.integer  "address_id",       limit: 4
-    t.string   "email",            limit: 255
-    t.integer  "number_of_guests", limit: 4,     default: 1
+    t.string   "state",                limit: 255
+    t.integer  "performer_id",         limit: 4
+    t.integer  "user_id",              limit: 4
+    t.integer  "service_id",           limit: 4
+    t.integer  "event_type_id",        limit: 4
+    t.integer  "venue_type_id",        limit: 4
+    t.integer  "address_id",           limit: 4
+    t.string   "email",                limit: 255
+    t.integer  "number_of_guests",     limit: 4,     default: 1
     t.datetime "start_at"
     t.datetime "end_at"
-    t.text     "special_info",     limit: 65535
-    t.integer  "hours",            limit: 4,     default: 1
-    t.integer  "total_cents",      limit: 4
-    t.string   "currency",         limit: 255
-    t.string   "last_ip_address",  limit: 255
-    t.string   "token",            limit: 255
-    t.string   "payment_state",    limit: 255
+    t.text     "special_info",         limit: 65535
+    t.integer  "hours",                limit: 4,     default: 1
+    t.integer  "total_cents",          limit: 4
+    t.string   "currency",             limit: 255
+    t.string   "last_ip_address",      limit: 255
+    t.string   "token",                limit: 255
+    t.string   "payment_state",        limit: 255
     t.datetime "deleted_at"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.text     "entry_instructions",   limit: 65535
+    t.text     "parking_instructions", limit: 65535
   end
 
   add_index "bookings", ["deleted_at"], name: "index_bookings_on_deleted_at", using: :btree
@@ -383,13 +385,16 @@ ActiveRecord::Schema.define(version: 20160805101318) do
   add_index "states", ["country_id"], name: "index_states_on_country_id", using: :btree
 
   create_table "testimonials", force: :cascade do |t|
-    t.integer  "author_id",   limit: 4
-    t.text     "text",        limit: 65535
-    t.float    "rating",      limit: 24,    default: 0.0
-    t.integer  "service_id",  limit: 4
-    t.integer  "receiver_id", limit: 4
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.integer  "author_id",    limit: 4
+    t.text     "text",         limit: 65535
+    t.float    "rating",       limit: 24,    default: 0.0
+    t.integer  "service_id",   limit: 4
+    t.integer  "receiver_id",  limit: 4
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "delay",        limit: 4
+    t.integer  "accuracy",     limit: 4
+    t.integer  "satisfaction", limit: 4
   end
 
   add_index "testimonials", ["author_id"], name: "index_testimonials_on_author_id", using: :btree

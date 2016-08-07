@@ -94,9 +94,9 @@ class Payment < ActiveRecord::Base
   private
 
   def prepare
-    self.amount_cents = (booking.service.price_cents * booking.hours).round
-    self.fee_cents = (amount_cents * (Setting.commission_from_seller.to_i) / 100).round
     self.total_cents = booking.total_cents
+    self.fee_cents = (booking.service.price_cents * (Setting.commission_from_seller.to_f) / 100 * booking.hours).round
+    self.amount_cents = total_cents - fee_cents
   end
 
   def set_default_card

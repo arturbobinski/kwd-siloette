@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def mobile?
+    request.variant.include?(:tablet) || request.variant.include?(:phone)
+  end
+
   def bootstrap_class_for(flash_type)
     case flash_type.to_sym
       when :alert

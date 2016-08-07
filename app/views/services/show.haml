@@ -30,6 +30,7 @@
             .col-xs-7
               %h4.service-price
                 = price_with_unit(@service)
+                %small= t('.tips_not_included')
             .col-xs-5.text-right
               - unless is_owner
                 = link_to t('common.book'), new_customer_booking_path(service_id: @service.id), class: 'btn btn-primary'

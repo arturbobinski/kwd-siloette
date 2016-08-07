@@ -23,3 +23,8 @@
         = l.hidden_field :lat
         = l.hidden_field :lng
         = l.input :address, label: false, input_html: { class: 'geocomplete', data: { prefix: 'user_location_attributes_' } }
+    .col-sm-6
+      - if !(authentication = @user.authentications.find_by(provider: 'instagram'))
+        = link_to fa_icon('instagram', text: t('.connect_instagram')), omniauth_authorize_path(:user, :instagram, state: 'dancer'), class: 'btn btn-block btn-instagram text-uppercase'
+      - else
+        = f.input :instagram_handle, label: false, input_html: { value: authentication.username, disabled: true }

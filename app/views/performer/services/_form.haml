@@ -32,13 +32,13 @@
 
   .row
     .col-sm-6
-      .form-group
+      .form-group.with-not-editable
         = f.label :price, "* #{t('simple_form.labels.service.price')}", class: 'control-label'
         .row
           = f.input :price, label: false, input_html: { data: { 'parsley-type' => :number, 'parsley-min' => 10, 'parsley-max' => 2000 } }, wrapper_html: { class: 'col-xs-10' }, hint: raw("<div id='price-hint' class='text-muted' style='display: none;'>#{fa_icon 'info-circle'} <span>#{t('common.commission_fee').html_safe}</span></div>")
-          .col-xs-2
+          .col-xs-2.no-pad
             .price-unit
-              <b>$</b>#{t('common.per_hour')}
+              = t('common.per_hour')
           .col-sm-12.price-description
 
     .col-sm-6.location-fields
@@ -49,7 +49,7 @@
         = l.hidden_field :lng
         = l.input :address, input_html: { class: 'geocomplete', data: { prefix: 'service_location_attributes_' } }
   = f.input :description, input_html: { rows: 5, 'data-parsley-maxlength' => 250 }
-  = f.input :status, as: :radio_buttons, collection: Service.statuses.keys, wrapper: :multi_select
+  = f.input :status, as: :radio_buttons, collection: Service.statuses.keys.map { |x| [t("activerecord.attributes.service.statuses.#{x}"), x] }, wrapper: :multi_select
 
   .actions.text-center
-    = f.button :button, t('common.save'), class: 'btn btn-primary btn-bordered'
+    = f.button :button, t('.save'), class: 'btn btn-primary btn-bordered'

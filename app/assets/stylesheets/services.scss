@@ -197,3 +197,22 @@
     line-height: 48px;
   }
 }
+
+label[for="service_price"]:after {
+  content: '$';
+}
+
+#service_price {
+  padding-left: 22px;
+}
+
+.service-image {
+  border-radius: $border-radius-base;
+  display: block;
+  overflow: hidden;
+  position: relative;
+
+  .overlay {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, transparent 50%);
+  }
+}

@@ -72,7 +72,7 @@ module Customer
     def booking_params
       params.require(:booking).permit(
         :email, :event_type_id, :venue_type_id, :performer_id, :service_id, :start_at,
-        :start_time, :hours, :number_of_guests, :special_info, :time_zone,
+        :start_time, :hours, :number_of_guests, :special_info, :time_zone, :entry_instructions, :parking_instructions,
         address_attributes: [:id, :first_name, :last_name, :address1, :address2, :phone, :country_id,
           :city, :state_name, :state_id, :zipcode],
         payments_attributes: [:id, :source_id, :source_type]

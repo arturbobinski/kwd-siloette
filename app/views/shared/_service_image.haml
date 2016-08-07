@@ -1,3 +1,6 @@
 - if service && service.primary_image
-  = link_to service, target: '_blank' do
-    = image_tag service.primary_image.file.url(:medium), alt: service.title, class: 'img-responsive'
+  = link_to service, target: '_blank', class: 'service-image' do
+    = image_tag service.primary_image.file.url(:medium), alt: service.title, class: 'full-width'
+    .overlay.text-center.text-white
+      %h4= service.title
+      = performer_names(service)

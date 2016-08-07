@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :check_verified, unless: :devise_controller?
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :detect_browser
   before_filter :load_pages
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -55,6 +56,23 @@ class ApplicationController < ActionController::Base
     unless current_user && current_user.admin?
       flash[:error] = t('common.admin_required')
       redirect_to new_user_session_path(role: :admin)
+    end
+  end
+
+  def detect_browser
+    case request.user_agent
+      when /iPad/i
+        request.variant = :tablet
+      when /iPhone/i
+        request.variant = :phone
+      when /Android/i && /mobile/i
+        request.variant = :phone
+      when /Android/i
+        request.variant = :tablet
+      when /Windows Phone/i
+        request.variant = :phone
+      else
+        request.variant = :desktop
     end
   end
 

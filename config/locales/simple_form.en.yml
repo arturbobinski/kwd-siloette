@@ -40,7 +40,7 @@ en:
       service:
         category_id: What type of service are you performing?
         invitee_ids: Invite other performers by their email
-        description: Work history/Description
+        description: Work History/Description
         price: How much do you want to earn?
       location:
         address: Location
@@ -53,28 +53,31 @@ en:
       testimonial:
         rating: Rate the service
         text: Feedback
+        delay: Did the performer arrive on time?
+        accuracy: Was the performer's profile accurate?
+        satisfaction: Are you satisfied with the performance?
       video:
         link: Video
     placeholders:
       user:
-        birth_date: Birth date
+        birth_date: Birth Date
         email: Email
-        first_name: First name
-        last_name: Last name
+        first_name: First Name
+        last_name: Last Name
         password: Password
         password_confirmation: Confirm password
-        description: About you(max. 250 characters)
+        description: About you (max. 250 characters)
       location:
         address: Location
       profile:
-        body_type: Body type
+        body_type: Body Type
         education_level: Education Level
         experience_level: Experience Level
-        language_ids: Spoken languages
-        phone_number: Phone number
-        perform_name: Perform name
+        language_ids: Languages Spoken
+        phone_number: Phone Number
+        perform_name: Performing Name
         ethnicity: Ethnicity
-        height: height
+        height: Height
         social_security_number: Social Security Number
         weight: Weight
         bust: Bust

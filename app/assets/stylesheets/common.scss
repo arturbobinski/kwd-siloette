@@ -152,6 +152,14 @@ section.padded {
   padding-bottom: 40px;
 }
 
+.no-pad {
+  padding: 0;
+}
+
+.full-width {
+  width: 100%;
+}
+
 .jumbotron {
   @extend .bg-cover;
   position: relative;
@@ -280,5 +288,24 @@ section.padded {
     border-color: $brand-primary transparent;
     display: block;
     width: 0;
+  }
+}
+
+.with-not-editable {
+  label {
+    position: relative;
+
+    &:after {
+      color: $text-light-grey;
+      font-weight: normal;
+      left: 12px;
+      position: absolute;
+      top: 35px;
+      z-index: 1;
+
+      @media (min-width: $screen-sm-min) {
+        top: 40px;
+      }
+    }
   }
 }

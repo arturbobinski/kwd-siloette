@@ -33,6 +33,7 @@ en:
     home: Home
     hosting: Hosting
     images: Images
+    information: Information
     leave_service: Leave service
     less: Less
     location: Location
@@ -47,7 +48,7 @@ en:
     on_off: On/Off
     payment: Payment
     payment_state: Payment state
-    per_hour: /hr
+    per_hour: / hour
     price_cents: Price
     rating: Rating
     save: Save
@@ -75,14 +76,19 @@ en:
     upload_picture: Upload picture
     update_profile_first: You need to update profile first.
     year: Year
+  unit:
+    above_size: Above Size
+    below_size: Below Size
   activerecord:
     attributes:
       booking:
+        address: Address
         end_at: End at
+        entry_instructions: Entry Instructions
         event_type: Event
-        full_address: Address
         hours: Hours
         number_of_guests: Guests
+        parking_instructions: Parking Instructions
         phone: Phone
         service: Service
         start_at: Start at
@@ -94,6 +100,7 @@ en:
           completed: Completed
           declined: Declined
           initial: Initial
+          paid: Paid
           payment: Payment
           pending: Pending
         venue_type: Venue
@@ -110,6 +117,40 @@ en:
           public_transport: Public Transport
           borrowed_car: Borrowed Car
           other: Other
+        ethnicities:
+          caucasian: Caucasian
+          african: African
+          american: American
+          latin_american: Latin American
+          asian: Asian
+          middle_eastern: Middle Eastern
+          eastern_asian: Eastern Asian
+          pacific_islander: Pacific Islander
+          first_nation: First Nation
+          other: Other
+      testimonial:
+        delays:
+          did_not_show: Did not show
+          an_hour_late: An hour late
+          half_hour_late: 30 minutes late
+          quarter_hour_late: 15 minutes late
+          on_time: On time
+        accuracies:
+          not_at_all_accurate: Not at all accurate
+          a_little_accurate: A little accurate
+          somewhat_accurate: Somewhat accurate
+          quite_accurate: Quite accurate
+          perfect: Perfect
+        on_times:
+          not_at_all: Not at all
+          bad: Bad
+          okay: Okay
+          very_good: Very Good
+          excellent: Excellent
+      service:
+        statuses:
+          active: Show
+          inactive: Hide
     models:
     errors:
       models:
@@ -256,6 +297,8 @@ en:
         notice: Service closed successfully.
       open:
         notice: Service opened successfully.
+      form:
+        save: Save Service
     daily_schedules:
       set_schedule:
         alert: Something went wrong. Please make sure end time to be later than start time and try again.
@@ -281,8 +324,11 @@ en:
       step2:
         title: Step 2
         description: Create your <b>Services</b>. Select from Party Host, Topless Waitress, Nude Waitress, Fantasy Dance. Create as many as you want!
-      not_visible_on_profile: This information is <b>not visible</b> on your profile
-      visible_on_profile: This information is <b>visible</b> on your profile
+      not_visible_on_profile: Verified information - <b>not visible</b> on your profile
+      connect_instagram: Connect Instagram
+    form:
+      dancer_profile:
+        public_profile_information: Public Profile Information
     update:
       notice: Profile updated successfully.
       profile_reviewing: We are reviewing your profile and will touch soon after review completed.
@@ -312,6 +358,7 @@ en:
       feedback_received:
         one: 1 Feedback received
         other: '%{count} Feedbacks received'
+      tips_not_included: (tips not included)
       you_might_like: You might also like
     search:
       style: Style
