@@ -30,10 +30,11 @@ class Booking < ActiveRecord::Base
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :payments
 
-  validates_presence_of :performer, :user, :service, :event_type, :venue_type, :entry_instructions, :parking_instructions, :special_info
-  validates :number_of_guests, presence: true, numericality: { only_integer: true, greater_than: 0 }
-  validates_datetime :start_at, after: lambda { 2.hour.from_now }
-  validates_datetime :end_at, after: :start_at
+  validates_presence_of :performer, :user, :service, :event_type, :venue_type, :entry_instructions,
+    :parking_instructions, :special_info, on: :create
+  validates :number_of_guests, presence: true, numericality: { only_integer: true, greater_than: 0 }, on: :create
+  validates_datetime :start_at, after: lambda { 2.hour.from_now }, on: :create
+  validates_datetime :end_at, after: :start_at, on: :create
 
   scope :by_date, ->(time) { where('(start_at BETWEEN ? AND ?) OR (end_at BETWEEN ? AND ?)', time, time.end_of_day, time, time.end_of_day) }
   scope :recent, -> { order(:start_at) }
