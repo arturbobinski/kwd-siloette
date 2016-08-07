@@ -25,7 +25,8 @@ initializePlugins = ->
       $select.prop('disabled', true).removeAttr('required')
 
   $('#q_location_address_cont').change ->
-    window.location = '/' + $(this).val()
+    $(this).closest('form').submit()
+    # window.location = '/' + $(this).val()
 
   today = new Date()
   today.setHours(0, 0, 0, 0)
