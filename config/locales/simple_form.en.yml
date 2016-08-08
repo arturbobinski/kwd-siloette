@@ -42,6 +42,7 @@ en:
         invitee_ids: Invite other performers by their email
         description: Work History/Description
         price: How much do you want to earn?
+        location_id: Location
       location:
         address: Location
       profile:

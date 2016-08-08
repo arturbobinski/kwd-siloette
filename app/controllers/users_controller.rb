@@ -55,7 +55,7 @@ class UsersController < ApplicationController
       profile_attributes: [:id, :perform_name, :height, :body_type, :ethnicity, :phone_number, :experience_level,
         :social_security_number, :education_level, :eligible_in_us, :hear_from, :communing_plan,
         language_ids: [], experience_ids: []],
-      location_attributes: [:id, :address, :country, :postal_code, :lat, :lng],
+      location_attributes: [:address, :country, :postal_code, :lat, :lng],
       service_images_attributes: [:id, :profile]
     )
   end

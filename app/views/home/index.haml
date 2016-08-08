@@ -19,7 +19,7 @@
         .row
           .col-sm-6.col-sm-offset-3
             = search_form_for @q, url: search_path, method: :get do |f|
-              = f.hidden_field :location_address_cont
+              = f.hidden_field :location_id_eq
               = f.submit t('.browse_all_services'), class: 'btn btn-lg btn-primary btn-block text-uppercase'
 
 - if @top_services.count > 0

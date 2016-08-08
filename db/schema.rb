@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160807174321) do
+ActiveRecord::Schema.define(version: 20160808060430) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "first_name", limit: 255
@@ -191,15 +191,13 @@ ActiveRecord::Schema.define(version: 20160807174321) do
     t.float    "lat",           limit: 24
     t.float    "lng",           limit: 24
     t.string   "location_type", limit: 255
-    t.integer  "owner_id",      limit: 4
-    t.string   "owner_type",    limit: 255
-    t.datetime "deleted_at"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.boolean  "active",                    default: false
   end
 
-  add_index "locations", ["deleted_at"], name: "index_locations_on_deleted_at", using: :btree
-  add_index "locations", ["owner_id", "owner_type"], name: "index_locations_on_owner_id_and_owner_type", using: :btree
+  add_index "locations", ["active"], name: "index_locations_on_active", using: :btree
+  add_index "locations", ["address"], name: "index_locations_on_address", using: :btree
 
   create_table "pages", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -351,11 +349,13 @@ ActiveRecord::Schema.define(version: 20160807174321) do
     t.datetime "deleted_at"
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
+    t.integer  "location_id",      limit: 4
   end
 
   add_index "services", ["category_id"], name: "index_services_on_category_id", using: :btree
   add_index "services", ["deleted_at"], name: "index_services_on_deleted_at", using: :btree
   add_index "services", ["ethnicity"], name: "index_services_on_ethnicity", using: :btree
+  add_index "services", ["location_id"], name: "index_services_on_location_id", using: :btree
   add_index "services", ["open"], name: "index_services_on_open", using: :btree
   add_index "services", ["performers_count"], name: "index_services_on_performers_count", using: :btree
   add_index "services", ["price_cents"], name: "index_services_on_price_cents", using: :btree
@@ -430,10 +430,12 @@ ActiveRecord::Schema.define(version: 20160807174321) do
     t.boolean  "verified",                             default: false
     t.string   "referral_code",          limit: 255
     t.integer  "referrer_id",            limit: 4
+    t.integer  "location_id",            limit: 4
   end
 
   add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["location_id"], name: "index_users_on_location_id", using: :btree
   add_index "users", ["referral_code"], name: "index_users_on_referral_code", using: :btree
   add_index "users", ["referrer_id"], name: "index_users_on_referrer_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

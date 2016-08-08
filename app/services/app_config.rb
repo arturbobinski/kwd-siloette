@@ -10,11 +10,4 @@ class AppConfig
       zipcode:        '(\d{5}(?:[-\s]\d{4})?|(GIR|[A-Z]\d[A-Z\d]??|[A-Z]{2}\d[A-Z\d]??)[ ]??(\d[A-Z]{2}))',
     }
   end
-
-  def self.implemented_locations
-    {
-      'miami' => 'Miami',
-      'las-vegas' => 'Las Vegas'
-    }
-  end
 end

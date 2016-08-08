@@ -42,6 +42,7 @@ en:
     more: More
     modeling: Modeling
     month: Month
+    no_services_in: No services in %{location}. Please try another location
     not_allowed: You are not allowed to perform this action.
     no_thanks: No, thanks
     number_of_performers: Number of performers
@@ -303,9 +304,6 @@ en:
       set_schedule:
         alert: Something went wrong. Please make sure end time to be later than start time and try again.
         notice: Schedule saved successfully.
-  countries:
-    show:
-      no_services: No services in %{country}.
   users:
     apply:
       complete_application: Complete the application process bellow

@@ -24,7 +24,7 @@ initializePlugins = ->
     else
       $select.prop('disabled', true).removeAttr('required')
 
-  $('#q_location_address_cont').change ->
+  $('#q_location_id_eq').change ->
     $(this).closest('form').submit()
     # window.location = '/' + $(this).val()
 

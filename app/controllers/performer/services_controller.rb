@@ -62,8 +62,7 @@ module Performer
 
     def service_params
       params.require(:service).permit(
-        :category_id, :description, :price, :status, invitee_ids: [],
-        location_attributes: [:id, :address, :country, :postal_code, :lat, :lng],
+        :category_id, :description, :price, :status, :location_id, invitee_ids: [],
         images_attributes: (action_name == 'create' ? [] : [:id, :_destroy]),
         video_attributes: [:id, :link]
       )

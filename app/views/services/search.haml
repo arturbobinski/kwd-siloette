@@ -67,7 +67,7 @@
             = t('common.location')
           .panel-body
             =# f.text_field :location_address_cont, placeholder: t('common.location'), class: 'geocomplete form-control'
-            = f.select :location_address_cont, AppConfig.implemented_locations.values, { include_blank: I18n.t('common.select') }, selected: (params[:q][:location_address_cont] if params[:q]), class: 'form-control'
+            = f.select :location_id_eq, Location.active.map { |x| [x.locality, x.id] }, { include_blank: I18n.t('common.select') }, selected: (params[:q][:location_id_eq] if params[:q]), class: 'form-control'
 
         = f.submit t('common.submit'), class: 'btn btn-primary btn-block'
 
@@ -80,5 +80,7 @@
               = render @services
           .text-center= paginate @services
 
+        - elsif params[:q].present? && params[:q][:location_id_eq].present? && @location.nil?
+          = t('common.no_services_in', location: params[:q][:location_id_eq])
         - else
           = t('.no_results')

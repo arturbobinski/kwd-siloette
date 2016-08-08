@@ -16,7 +16,8 @@ class Service < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :category
-  has_one :location, as: :owner, dependent: :destroy
+  belongs_to :location
+
   has_many :invitations, class_name: 'ServiceInvitation', dependent: :destroy
   has_many :invitees, source: :user, through: :invitations
   has_many :accepted_invitations, -> { accepted }, class_name: 'ServiceInvitation'
@@ -34,6 +35,7 @@ class Service < ActiveRecord::Base
   validates :description, presence: true, length: { maximum: 250 }
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :quantity, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
+  validates :location, presence: true
 
   scope :open, -> { where(open: true) }
   scope :closed, -> { where(open: false) }
@@ -43,7 +45,6 @@ class Service < ActiveRecord::Base
   before_validation :generate_title
   before_save :assign_ethnicity
 
-  accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :images, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :invitations, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :video, reject_if: :all_blank, allow_destroy: true

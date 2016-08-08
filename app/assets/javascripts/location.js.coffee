@@ -28,7 +28,7 @@ getCurrentLocation = (geolocation)->
     return
 
 geolocate = ->
-  locationField = $('#q_location_address_cont')
+  locationField = $('#q_location_id_eq')
 
   if locality = sessionStorage.getItem 'locality'
     locationField.val locality

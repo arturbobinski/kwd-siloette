@@ -1,4 +1,4 @@
-- @title = "Services in #{@county}"
+- @title = "Services in #{@location.try(:address)}"
 - @description = @title
 - @url = location_url(params[:id])
 
@@ -11,11 +11,11 @@
     .panel-heading
       = link_to fa_icon('angle-double-left', text: t('common.home')), root_url
     .panel-body
-      - if @services.count > 0
+      - if @services && @services.count > 0
         %h3.text-center= @title
         .thumbnail-grid-wide
           .thumbnail-grid
             = render @services
         .text-center= paginate @services
       - else
-        = t('countries.show.no_services', country: @county)
+        = t('common.no_services_in', location: @location.try(:address))

@@ -42,12 +42,7 @@
           .col-sm-12.price-description
 
     .col-sm-6.location-fields
-      = f.fields_for :location do |l|
-        = l.hidden_field :country
-        = l.hidden_field :postal_code
-        = l.hidden_field :lat
-        = l.hidden_field :lng
-        = l.input :address, input_html: { class: 'geocomplete', data: { prefix: 'service_location_attributes_' } }
+      = f.input :location_id, as: :select, collection: Location.active.map { |x| [x.address, x.id] }, required: true, prompt: t('common.select')
   = f.input :description, input_html: { rows: 5, 'data-parsley-maxlength' => 250 }
   = f.input :status, as: :radio_buttons, collection: Service.statuses.keys.map { |x| [t("activerecord.attributes.service.statuses.#{x}"), x] }, wrapper: :multi_select
 
