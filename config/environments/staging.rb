@@ -80,6 +80,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { host: Figaro.env.host }
+  config.action_mailer.asset_host = "http://#{Figaro.env.host}"
   config.action_mailer.smtp_settings = {
     address:                Figaro.env.smtp_email_address,
     port:                   Figaro.env.smtp_email_port,
