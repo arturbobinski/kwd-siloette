@@ -39,7 +39,7 @@ module Customer
           @booking.locate!
           redirect_to edit_customer_booking_path(@booking), notice: t('.notice')
         when :payment
-          @booking.payments.first.authorize!
+          @booking.payments.last.authorize!
           redirect_to customer_bookings_path, notice: t('.notice')
         else
           redirect_to :back, alert: t('common.something_went_wrong')

@@ -46,6 +46,7 @@ class Payment < ActiveRecord::Base
 
   def authorize_booking
     booking.authorize!
+    update_booking_payment_state
   end
 
   def charge
