@@ -82,16 +82,6 @@ initializePlugins = ->
     focusOnSelect: true
     vertical: true
 
-  $('[data-score]').raty
-    half: true
-    readOnly: true
-    score: ->
-      return $(this).attr('data-score')
-  $('.testimonial-rating').raty
-    scoreName: 'testimonial[rating]'
-    score: ->
-      return $(this).attr('data-score')
-
   $('[name*="time_zone"]').set_timezone()
   tz = readCookieValue('time_zone')
   if tz is null or tz is ''

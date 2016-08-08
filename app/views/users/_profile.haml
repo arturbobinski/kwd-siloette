@@ -1,7 +1,6 @@
+%h3= @profile.perform_name
 %h5= t('.performer_profile')
 %hr
-%h3= @profile.perform_name
-%br
 %ul.list-unstyled
   %li
     %b #{t('.experience_level')}:
@@ -11,7 +10,7 @@
       %b #{t('.education_level')}:
       %span= @profile.education_level
   %li
-    %b #{t('.spoken_languages')}:
+    %b #{t('.languages_spoken')}:
     %span= @profile.languages.pluck(:name).join(', ')
   %li
     %b #{t('.height')}:

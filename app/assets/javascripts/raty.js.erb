@@ -1,0 +1,24 @@
+$(function() {
+  $('[data-score]').raty({
+    starHalf: '<%= asset_path "star-half.png" %>',
+    starOff: '<%= asset_path "star-off.png" %>',
+    starOn: '<%= asset_path "star-on.png" %>',
+    half: true,
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+
+  $('.testimonial-rating').raty({
+    starHalf: '<%= asset_path "star-half.png" %>',
+    starOff: '<%= asset_path "star-off.png" %>',
+    starOn: '<%= asset_path "star-on.png" %>',
+    scoreName: 'testimonial[rating]',
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+
+  return;
+});

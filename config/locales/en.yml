@@ -341,7 +341,7 @@ en:
       weight: Weight
       bust: Bust
       ethnicity: Ethnicity
-      spoken_languages: Spoken language
+      languages_spoken: Languages Spoken
     stripe_account:
       receiving_funds: Receiving funds
       siloette_uses_stripe: Siloette uses Stripe as its payment provider. A <a href="https://stripe.com" target="_blank">Stripe account</a> is required in order to accept payments for your services, and must be connected to Siloette. You will also need to grant Siloette permission to charge a transaction fee.

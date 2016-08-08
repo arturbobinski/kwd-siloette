@@ -60,7 +60,7 @@
           .panel-heading
             = t('.ethnicity')
           .panel-body
-            = f.select :ethnicity_eq, Profile.ethnicities.map { |k,v| [k, v] }, { include_blank: I18n.t('common.select') }, selected: (params[:q][:ethnicity_eq] if params[:q]), class: 'form-control'
+            = f.select :ethnicity_eq, Profile.ethnicities.map { |k, v| [t("activerecord.attributes.profile.ethnicities.#{k}"), v] }, { include_blank: I18n.t('common.select') }, selected: (params[:q][:ethnicity_eq] if params[:q]), class: 'form-control'
 
         .panel.panel-default
           .panel-heading

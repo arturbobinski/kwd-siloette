@@ -18,9 +18,10 @@
           - else
             %h2= @user.name
 
-          %dl
-            %dt #{t('common.description')}:
-            %dl= @user.description
+          %p
+            %b #{t('common.description')}:
+            %br
+            = @user.description
 
   - if @user.dancer?
     .panel.panel-defult
