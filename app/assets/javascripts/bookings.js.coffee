@@ -45,6 +45,7 @@ class @BookingForm
     @hours = @$hours.val()
     @checkAvailable()
     @showTotal()
+    @changeGuests()
 
   changeEndTime: =>
     @hours = @$endTime.val() - @$startTime.val()
