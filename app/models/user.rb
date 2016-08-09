@@ -49,9 +49,8 @@ class User < ActiveRecord::Base
   validates :role, inclusion: { in: User.roles.keys[0..-2] }, if: 'is_admin.blank?'
   validates :description, length: { maximum: 250 }
   validates :avatar, file_size: { less_than_or_equal_to: MAX_AVATAR_SIZE.to_i }, file_content_type: { allow: /^image\/.*/ }
-  validate :acceptance_terms, on: :create
+  # validate :acceptance_terms, on: :create
   validates_date :birth_date, allow_blank: true
-  validates :location, presence: true
 
   accepts_nested_attributes_for :profile, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
@@ -97,7 +96,6 @@ class User < ActiveRecord::Base
         u.authentications_attributes = {
           '0' => attrs.merge(provider: auth.provider, uid: auth.uid)
         }
-        u.is_admin = true
       end
 
       user
