@@ -94,7 +94,7 @@ class User < ActiveRecord::Base
         u.birth_date = auth.extra.raw_info.try(:birthday)
         u.gender = auth.extra.raw_info.try(:gender)
         u.authentications_attributes = {
-          '0' => attrs.merge(provider: auth.provider, uid: auth.uid)
+          '0' => attrs.merge(provider: auth.provider, uid: auth.uid, username: auth.extra.raw_info.try(:username))
         }
       end
 

@@ -258,11 +258,11 @@ ActiveRecord::Schema.define(version: 20160808060430) do
     t.string   "phone_number",           limit: 255
     t.integer  "ethnicity",              limit: 4
     t.integer  "bust",                   limit: 4
+    t.float    "weight",                 limit: 24
     t.float    "height",                 limit: 24
     t.datetime "deleted_at"
     t.datetime "created_at",                                        null: false
     t.datetime "updated_at",                                        null: false
-    t.float    "weight",                 limit: 24
     t.string   "body_type",              limit: 255
     t.string   "experience_level",       limit: 255
     t.string   "social_security_number", limit: 255

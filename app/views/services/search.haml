@@ -1,5 +1,4 @@
-- content_for :head_script do
-  =# javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Figaro.env.googlemap_api_key}&libraries=places&callback=initAutocomplete", async: true, defer: true
+=# render 'shared/googleapi'
 
 .container
   = search_form_for @q, url: search_path, method: :get do |f|

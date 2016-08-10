@@ -29,6 +29,7 @@ en:
     end: End
     ending_with: ending with %{digits}
     empty_bookings: No bookings yet.
+    extend: Extend
     female: Female
     home: Home
     hosting: Hosting

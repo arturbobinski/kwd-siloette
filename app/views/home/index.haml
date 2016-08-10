@@ -1,5 +1,4 @@
-- content_for :head_script do
-  = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Figaro.env.googlemap_api_key}&libraries=places&callback=initAutocomplete", async: true, defer: true
+= render 'shared/googleapi'
 
 - @image = { url: asset_path('main-bg.jpg'), width: 1280, height: 720 }
 

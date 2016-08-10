@@ -30,10 +30,13 @@
         = link_to fa_icon('pencil', text: t('common.edit')), edit_customer_booking_path(booking), class: 'btn btn-primary btn-block'
       - if booking.may_cancel?
         = link_to fa_icon('close', text: t('common.cancel')), cancel_customer_booking_path(booking), class: 'btn btn-warning btn-block'
+      - if booking.may_extend?
+        = link_to fa_icon('clock-o', text: t('common.extend')), rechedule_customer_booking_path(booking, authenticity_token: form_authenticity_token), method: :post, class: 'btn btn-danger btn-warning'
       - if booking.destroyable?
         = link_to fa_icon('trash', text: t('common.delete')), customer_booking_path(booking, authenticity_token: form_authenticity_token), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-block'
       - if booking.may_complete?
         = link_to fa_icon('check', text: t('common.complete')), complete_customer_booking_path(booking, authenticity_token: form_authenticity_token), method: :post, class: 'btn btn-success btn-block'
+
     %hr
 
 - else

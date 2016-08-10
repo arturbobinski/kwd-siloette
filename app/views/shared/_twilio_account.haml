@@ -1,0 +1,4 @@
+- content_for :extra_script do
+  :javascript
+    window.twilioUsername = '#{Figaro.env.twilio_account_sid}';
+    window.twilioToken = '#{Figaro.env.twilio_auth_token}';

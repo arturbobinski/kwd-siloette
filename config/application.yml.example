@@ -12,6 +12,10 @@ smtp_email_user_name: smtp_email_user_name
 smtp_email_password: smtp_email_password
 smtp_email_domain: smtp_email_domain
 
+twilio_account_sid: twilio_account_sid
+twilio_auth_token: twilio_auth_token
+twillio_admin_number: '15005550006'
+
 stripe_id: stripe_id
 stripe_secret: stripe_secret
 stripe_publishable_key: stripe_publishable_key

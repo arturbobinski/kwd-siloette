@@ -1,6 +1,8 @@
 window.ParsleyConfig =
   excluded: 'input[type=button], input[type=submit], input[type=reset], :hidden, .no-validate'
 
+$phoneNumberInput = undefined
+
 initFormValidation = ($el) ->
   $parsleyForm = $el.find('[data-parsley-validate]')
   $parsleyForm.parsley() if $parsleyForm.length > 0
@@ -11,7 +13,12 @@ readCookieValue = (cookieName) ->
   else
     null
 
+updateTwilioUrl = ->
+  window.ParsleyExtend.asyncValidators['twilio'].url = 'https://lookups.twilio.com/v1/PhoneNumbers/' + $phoneNumberInput.val()
+
 initializePlugins = ->
+  $phoneNumberInput = $('input[type="tel"]')
+
   $('.modal').on 'loaded.bs.modal', ->
     initFormValidation $(this)
 
@@ -98,6 +105,16 @@ initializePlugins = ->
       endTime = $endInput.val()
       $tmp = $fakeSelect.find('option[value="' + startTime + '"]')
       $endInput.html($tmp.nextAll().clone()).val(endTime)
+
+  if $phoneNumberInput.length > 0
+    window.ParsleyExtend.addAsyncValidator 'twilio', ((xhr) ->
+      return xhr.status == 200
+    ), false, headers: { 'Authorization': 'Basic ' + btoa(window.twilioUsername + ':' + window.twilioToken) }
+
+    $phoneNumberInput.change ->
+      updateTwilioUrl()
+
+    updateTwilioUrl()
 
 $(document).ready initializePlugins
 $(document).on 'turbolinks:load', ->
