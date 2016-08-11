@@ -30,6 +30,9 @@ en:
     ending_with: ending with %{digits}
     empty_bookings: No bookings yet.
     extend: Extend
+    feedback_received:
+      one: 1 Feedback received
+      other: '%{count} Feedbacks received'
     female: Female
     home: Home
     hosting: Hosting
@@ -308,6 +311,7 @@ en:
   users:
     apply:
       complete_application: Complete the application process bellow
+      verification_in_progress: Your account is going through our verification process. You will be notified shortly of the result.
       work_experience: Work Experience
     show:
       open_services: Open services
@@ -354,9 +358,6 @@ en:
       edit_service: Edit service
       close_service: Close service
       open_service: Open service
-      feedback_received:
-        one: 1 Feedback received
-        other: '%{count} Feedbacks received'
       tips_not_included: (tips not included)
       you_might_like: You might also like
     search:

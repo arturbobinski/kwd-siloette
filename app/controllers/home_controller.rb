@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
 
+  skip_before_filter :check_verified
+
   def index
     @q = Service.open.active.search(params[:q])
     @top_services = Service.top_rated.limit(4).includes(:category, :primary_image, performers: :profile)

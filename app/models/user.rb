@@ -143,6 +143,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def rating
+    received_feedbacks.average(:rating)
+  end
+
   private
 
   def acceptance_terms

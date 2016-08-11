@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     if @user.dancer?
       @profile = @user.profile
       @services = @user.performing_services.active.open.recent.includes(:category, :primary_image, performers: :profile).limit(6)
+      @testimonials = @user.received_feedbacks
     end
   end
 

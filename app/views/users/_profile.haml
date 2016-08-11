@@ -1,5 +1,9 @@
 %h3= @profile.perform_name
-%h5= t('.performer_profile')
+.row
+  .col-sm-6
+    %h5.text-center.text-left-sm.no-top= t('.performer_profile')
+  .col-sm-6
+    .text-center.text-right-sm{'data-score' => @user.rating}
 %hr
 %ul.list-unstyled
   %li
