@@ -5,7 +5,7 @@ class Profile < ActiveRecord::Base
   HEIGHTS = [4.9, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.0, 6.1, 6.2, 6.3, 6.4]
   BODY_TYPES = ['Short/Petite', 'Short/Voluptuous', 'Athletic', 'Full Figure', 'Tall/Slim', 'Tall/Voluptuous']
   EXPERIENCE_LEVELS = ['Less than 1 year', '1-3 Years', '3-5 Years', 'More than 5 years']
-  SOURCES = %w(friend web)
+  SOURCES = ['Another Performer', 'Google', 'Instagram', 'Twitter', 'Facebook', 'Friend']
   COMMUNING_PLANS = %w(own_car public_transport borrowed_car other)
   # WEIGHTS = (90..210).step(10)
 

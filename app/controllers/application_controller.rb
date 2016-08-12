@@ -19,8 +19,8 @@ class ApplicationController < ActionController::Base
       referer
     elsif resource.admin?
       admin_dashboard_path
-    elsif resource.dancer? && !resource.profile_ready?
-      edit_user_path(resource)
+    elsif path = next_path(resource)
+      path
     elsif request.referer == new_user_session_url
       super
     else
@@ -73,6 +73,22 @@ class ApplicationController < ActionController::Base
         request.variant = :phone
       else
         request.variant = :desktop
+    end
+  end
+
+  def next_path(user=current_user)
+    return unless user.dancer?
+
+    if !user.profile_ready?
+      edit_user_path(user)
+    elsif !user.services.any?
+      new_performer_service_path
+    elsif !user.payment_ready?
+      flash[:alert] = t('common.payment_not_ready')
+      stripe_account_user_path(user)
+    elsif !user.schedules.any?
+      flash[:alert] = t('common.no_daily_schedule')
+      performer_daily_schedules_path
     end
   end
 

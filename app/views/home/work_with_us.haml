@@ -1,4 +1,4 @@
-- @title = 'Work with Us'
+- @title = 'Become a Siloette'
 - @description = 'We want professional exotic models, dancers and hosts to join this exciting platform'
 - @url = work_with_us_url
 - @image = { url: asset_path('girls.jpg'), width: 1920, height: 764 }
@@ -27,7 +27,7 @@
         %br
         - if current_user
           - unless current_user.dancer?
-            = link_to t('links.become_performer'), become_dancer_user_path(current_user), class: 'btn btn-block btn-primary text-uppercase'
+            = link_to t('links.become_siloette'), become_dancer_user_path(current_user), class: 'btn btn-block btn-primary text-uppercase'
         - else
           %h5.text-center= t('.sign_in_with_social_accounts')
           = link_to fa_icon('instagram', text: t('common.instagram')), omniauth_authorize_path(:user, :instagram, state: :dancer), class: 'btn btn-block btn-instagram text-uppercase'

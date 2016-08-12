@@ -11,7 +11,7 @@ module Performer
       @user = current_user
 
       if @user.update(user_params)
-        redirect_to :back, notice: t('.notice')
+        redirect_to calendar_performer_bookings_path, notice: t('.notice')
       else
         redirect_to :back, alert: t('.alert')
       end

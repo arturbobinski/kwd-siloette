@@ -46,21 +46,23 @@ en:
     more: More
     modeling: Modeling
     month: Month
+    no_daily_schedule: Please add daily schedule to allow customers booking your service.
     no_services_in: No services in %{location}. Please try another location
     not_allowed: You are not allowed to perform this action.
     no_thanks: No, thanks
     number_of_performers: Number of performers
     on_off: On/Off
     payment: Payment
+    payment_not_ready: Please add payment details to receive payments for your serivce.
     payment_state: Payment state
     per_hour: / hour
+    per_hr: /hr
     price_cents: Price
     rating: Rating
     save: Save
     save_and_continue: Save and Continue
     select: Select…
     send: Send
-    settings: Settings
     sign_in: Sign in
     sort_by: Sort by
     something_went_wrong: Something went wrong, please try later.
@@ -184,8 +186,7 @@ en:
             images_count:
               min: Required at least 4 images
   links:
-    become_performer: Become performer
-    work_with_us: Work with Us
+    become_siloette: Become a Siloette
     create_service: Create service
     daily_schedule: Daily schedule
     profile: Profile

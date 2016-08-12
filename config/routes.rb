@@ -78,6 +78,6 @@ Rails.application.routes.draw do
   resources :pages, only: [:show]
   resources :posts, only: [:index, :show], path: '/blog'
 
-  get 'work-with-us', to: 'home#work_with_us', as: :work_with_us
+  get 'become-a-siloette', to: 'home#work_with_us', as: :work_with_us
   root to: 'home#index'
 end

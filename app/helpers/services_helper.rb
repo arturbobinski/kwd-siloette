@@ -5,7 +5,7 @@ module ServicesHelper
   end
 
   def price_with_unit(service)
-    "#{humanized_money_with_symbol(service.booking_price)}#{t('common.per_hour')}"
+    "#{humanized_money_with_symbol(service.booking_price)}#{t('common.per_hr')}"
   end
 
   def performer_names(service)

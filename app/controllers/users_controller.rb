@@ -21,8 +21,10 @@ class UsersController < ApplicationController
       if !@user.verified?
         UserMailer.user_verification_email(@user).deliver_later
         redirect_to :back
+      elsif path = next_path
+        redirect_to path
       else
-        redirect_to (@user.dancer? && !@user.services.any? ? new_performer_service_path : edit_user_path(@user)), notice: t('.notice')
+        redirect_to edit_user_path(@user), notice: t('.notice')
       end
     else
       if !@user.verified?

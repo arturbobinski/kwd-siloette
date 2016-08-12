@@ -25,7 +25,11 @@ module Performer
       if @service.save
         @service.image_ids = @image_ids
         accept_invitation
-        redirect_to performer_services_path(scope: 'performing')
+        if path = next_path
+          redirect_to path
+        else
+          redirect_to performer_services_path(scope: 'personal'), notice: t('.notice')
+        end
       else
         render :new
       end
@@ -37,7 +41,11 @@ module Performer
     def update
       if @service.update(service_params)
         accept_invitation
-        redirect_to :back, notice: t('.notice')
+        if path = next_path
+          redirect_to path
+        else
+          redirect_to :back, notice: t('.notice')
+        end
       else
         render :edit
       end
