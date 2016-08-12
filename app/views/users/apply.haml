@@ -5,7 +5,7 @@
         - if @user.profile.persisted?
           .col-sm-10.col-sm-offset-1.text-center
             %hr.invisible
-            %p.alert.alert-info
+            %p.alert.alert-success
               = t('.verification_in_progress')
             %br
             = link_to t('common.home'), root_path, class: 'btn btn-lg btn-primary'

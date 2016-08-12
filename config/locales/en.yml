@@ -104,10 +104,10 @@ en:
           canceled: Canceled
           completed: Completed
           declined: Declined
-          initial: Initial
           paid: Paid
           payment: Payment
           pending: Pending
+          scheduling: Scheduling
         venue_type: Venue
       payment:
         states:
@@ -234,7 +234,7 @@ en:
           title: Earn What You want
           description: Create the services you want to provide and the price you want to charge. We have a pricing guide to help you.
         - icon: lock
-          title: Stay Safety
+          title: Stay Safe
           description: We verify customers and provide wearable technology so you can contact us or the police in case of emergency.
       work_much: Work as much as you can, while you can
       partnerships: This career doesn't last forever so you need to make it work while you can. We will help you do that through partnerships that will help you stay healthy and beautiful.
@@ -334,7 +334,6 @@ en:
         public_profile_information: Public Profile Information
     update:
       notice: Profile updated successfully.
-      profile_reviewing: We are reviewing your profile and will touch soon after review completed.
     profile:
       body_type: Body type
       education_level: Education Level

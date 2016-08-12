@@ -17,7 +17,7 @@ module Customer
       @booking = current_user.bookings.new(booking_params)
 
       if @booking.save
-        @booking.initiate!
+        @booking.locate!
         redirect_to edit_customer_booking_path(@booking), notice: t('.notice')
       else
         @calendar = Bookings::Calendar.new(@booking.start_at, @performer, user_time_zone)
@@ -26,7 +26,18 @@ module Customer
     end
 
     def edit
-      @booking.address ||= current_user.addresses.order(updated_at: :desc).first || Address.build_default
+      if params[:event].present?
+        event = params[:event]
+        @booking.send("#{event}!") if @booking.send("may_#{event}?")
+
+        if event == 'schedule'
+          now = user_time_zone.now
+          @start_at = @booking.start_at.in_time_zone(user_time_zone)
+          @start_at = now if @start_at < now
+          @calendar = Bookings::Calendar.new(@booking.start_at, @performer, user_time_zone)
+        end
+      end
+      @booking.address ||= current_user.addresses.recent.first || Address.build_default
       @booking.payments.build if @booking.payment? && !@booking.payments.any?
     end
 
@@ -35,11 +46,14 @@ module Customer
         authorize
       elsif @booking.update(booking_params)
         case @booking.current_state
-        when :address
+        when :scheduling
           @booking.locate!
           redirect_to edit_customer_booking_path(@booking), notice: t('.notice')
+        when :address
+          @booking.checkout!
+          redirect_to edit_customer_booking_path(@booking), notice: t('.notice')
         when :payment
-          @booking.payments.last.authorize!
+          @booking.payments.recent.first.authorize!
           redirect_to customer_bookings_path, notice: t('.notice')
         else
           redirect_to :back, alert: t('common.something_went_wrong')

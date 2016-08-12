@@ -7,10 +7,28 @@
       });
     });
 
-= simple_form_for [:customer, @booking], html: { class: 'form-horizontal booking-form', 'data-parsley-validate' => true } do |f|
-  = f.error_notification
-  = render @booking.current_state.to_s, f: f
+%ul.nav.nav-tabs{role: 'tablist'}
+  %li{class: ('active' if @booking.scheduling?), role: 'presentation'}
+    - if @booking.persisted? && @booking.may_schedule?
+      = link_to t("activerecord.attributes.booking.states.scheduling"), edit_customer_booking_path(@booking, event: 'schedule'), role: 'tab'
+    - else
+      = link_to t("activerecord.attributes.booking.states.scheduling"), 'javascript: void(0);', role: 'tab'
+  %li{class: ('active' if @booking.address?), role: 'presentation'}
+    - if @booking.persisted? && @booking.may_locate?
+      = link_to t("activerecord.attributes.booking.states.address"), edit_customer_booking_path(@booking, event: 'locate'), role: 'tab'
+    - else
+      = link_to t("activerecord.attributes.booking.states.address"), 'javascript: void(0);', role: 'tab'
+  %li{class: ('active' if @booking.payment?), role: 'presentation'}
+    - if @booking.persisted? && @booking.may_checkout?
+      = link_to t("activerecord.attributes.booking.states.payment"), edit_customer_booking_path(@booking, event: 'checkout'), role: 'tab'
+    - else
+      = link_to t("activerecord.attributes.booking.states.payment"), 'javascript: void(0);', role: 'tab'
+.tab-content
+  .tab-pane.active{role: 'tabpanel'}
+    = simple_form_for [:customer, @booking], html: { class: 'form-horizontal booking-form', 'data-parsley-validate' => true } do |f|
+      = f.error_notification
+      = render @booking.current_state.to_s, f: f
 
-  %br
-  .actions.text-center
-    = submit_tag t('common.save_and_continue'), class: 'btn btn-primary'
+      %br
+      .actions.text-center
+        = submit_tag t('common.save_and_continue'), class: 'btn btn-primary'

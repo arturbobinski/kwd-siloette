@@ -23,7 +23,7 @@
             %br
             = @user.description
 
-  - if (count = @testimonials.count) > 0
+  - if @testimonials && (count = @testimonials.count) > 0
     - show_count = 5
     .panel.panel-default
       .panel-body

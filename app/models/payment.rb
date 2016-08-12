@@ -21,6 +21,8 @@ class Payment < ActiveRecord::Base
   before_validation :prepare, if: 'amount_cents.blank?'
   after_create :set_default_card
 
+  scope :recent, -> { order(updated_at: :desc) }
+
   aasm column: :state do
     state :checkout, initial: true
     state :authorized, :completed, :processing, :failed

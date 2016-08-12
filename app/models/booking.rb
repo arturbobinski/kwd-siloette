@@ -42,15 +42,19 @@ class Booking < ActiveRecord::Base
   before_validation :prepare, unless: 'start_time.blank?'
 
   aasm column: :state do
-    state :initial, initial: true
+    state :scheduling, initial: true
     state :address, :payment, :pending, :accepted, :declined, :canceled, :paid, :completed
 
-    event :initiate do
-      transitions from: :initial, to: :address
+    event :schedule do
+      transitions from: [:address, :payment], to: :scheduling
     end
 
     event :locate do
-      transitions from: :address, to: :payment
+      transitions from: [:scheduling, :payment], to: :address
+    end
+
+    event :checkout do
+      transitions from: [:address], to: :payment
     end
 
     event :authorize, after: :notify do
@@ -81,7 +85,7 @@ class Booking < ActiveRecord::Base
   def self.remind(id)
     return if (booking = find(id)).nil?
 
-    if booking.current_state == :accepted && booking.payment_state == :completed
+    if booking.accepted? && booking.payment_state == :completed
       booking.remind_start
     end
   end
@@ -99,7 +103,7 @@ class Booking < ActiveRecord::Base
   end
 
   def editable?
-    current_state.in? %i(initial address payment)
+    current_state.in? %i(scheduling address payment)
   end
 
   def destroyable?

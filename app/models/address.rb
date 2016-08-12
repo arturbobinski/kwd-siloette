@@ -13,6 +13,8 @@ class Address < ActiveRecord::Base
     format: { with: Regexp.new("\\A#{AppConfig.patterns[:zipcode]}\\z") }
   validate :state_validate
 
+  scope :recent, -> { order(updated_at: :desc) }
+
   def self.build_default
     new country: Country.find_by(iso: 'US')
   end

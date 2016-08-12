@@ -20,7 +20,7 @@
       = date_format(@start_at.to_date)
 
     - if available_slots.length > 0
-      = f.input :start_time, as: :select, collection: time_slot_options(available_slots), required: true, prompt: t('common.select')
+      = f.input :start_time, as: :select, collection: time_slot_options(available_slots), selected: @booking.new_record? ? nil : @booking.start_at.in_time_zone(user_time_zone).hour, required: true, prompt: t('common.select')
       = f.input :hours, as: :select, collection: (1..24), required: true, prompt: t('common.select')
     - else
       .alert.alert-warning= t('.not_available')
@@ -45,9 +45,12 @@
           %span.price
             = number_with_precision((@booking.total || @service.booking_price) / f.object.number_of_guests, precision: 2)
   .row
-    .col-sm-12
+    .col-sm-6
       = f.input :event_type_id, as: :select, collection: EventType.select(:id, :name), required: true, prompt: t('common.select')
+    .col-sm-6
       = f.input :venue_type_id, as: :select, collection: VenueType.select(:id, :name), required: true, prompt: t('common.select')
-      = f.input :entry_instructions, label: t('activerecord.attributes.booking.entry_instructions'), input_html: { rows: 5 }
-      = f.input :parking_instructions, label: t('activerecord.attributes.booking.parking_instructions'), input_html: { rows: 5 }
-      = f.input :special_info, input_html: { rows: 5 }
+  .row
+    .col-sm-12
+      = f.input :entry_instructions, label: t('activerecord.attributes.booking.entry_instructions'), input_html: { rows: 3 }
+      = f.input :parking_instructions, label: t('activerecord.attributes.booking.parking_instructions'), input_html: { rows: 3 }
+      = f.input :special_info, input_html: { rows: 3 }
