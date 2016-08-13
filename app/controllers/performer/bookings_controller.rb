@@ -7,7 +7,7 @@ module Performer
       @bookings = current_user.received_bookings.recent
         .where(state: %w(pending accepted paid completed))
         .where(payment_state: %w(authorized processing completed))
-        .includes(:service, :event_type, :venue_type).page(params[:page])
+        .includes(:service, :event_type, :venue_type, :extensions).page(params[:page])
     end
 
     def calendar

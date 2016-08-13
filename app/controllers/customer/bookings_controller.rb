@@ -6,7 +6,7 @@ module Customer
     before_filter :ensure_service, :ensure_bookable, only: [:new, :create, :edit, :update]
 
     def index
-      @bookings = current_user.bookings.recent.includes(:service, :event_type, :venue_type).page(params[:page])
+      @bookings = current_user.bookings.recent.includes(:service, :event_type, :venue_type, :extensions).page(params[:page])
     end
 
     def new
@@ -38,7 +38,7 @@ module Customer
         end
       end
       @booking.address ||= current_user.addresses.recent.first || Address.build_default
-      @booking.payments.build if @booking.payment? && !@booking.payments.any?
+      @booking.build_payment unless @booking.payment
     end
 
     def update
@@ -53,7 +53,7 @@ module Customer
           @booking.checkout!
           redirect_to edit_customer_booking_path(@booking), notice: t('.notice')
         when :payment
-          @booking.payments.recent.first.authorize!
+          @booking.payment.authorize!
           redirect_to customer_bookings_path, notice: t('.notice')
         else
           redirect_to :back, alert: t('common.something_went_wrong')
@@ -86,10 +86,10 @@ module Customer
     def booking_params
       params.require(:booking).permit(
         :email, :event_type_id, :venue_type_id, :performer_id, :service_id, :start_at,
-        :start_time, :hours, :number_of_guests, :special_info, :time_zone, :entry_instructions, :parking_instructions,
+        :start_time, :hours, :number_of_guests, :special_info, :entry_instructions, :parking_instructions,
         address_attributes: [:id, :first_name, :last_name, :address1, :address2, :phone, :country_id,
           :city, :country_code, :state_name, :state_id, :zipcode],
-        payments_attributes: [:id, :source_id, :source_type]
+        payment_attributes: [:id, :source_id, :source_type]
       ).merge(last_ip_address: request.remote_ip)
     end
 
@@ -108,7 +108,7 @@ module Customer
 
     def authorize
       if (credit_card = CreditCard.from_stripe_token(params[:stripe_token], current_user)).persisted?
-        if payment = @booking.payments.create(source: credit_card)
+        if payment = @booking.create_payment(source: credit_card)
           payment.authorize!
           redirect_to customer_bookings_path, notice: t('.notice')
         else

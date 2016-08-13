@@ -1,0 +1,9 @@
+- context ||= nil
+- button_class = context && context == :mobile ? 'btn btn-primary btn-block' : nil
+
+- if booking.viewable?
+  %li= link_to fa_icon('eye', text: t('common.show')), performer_booking_path(booking), class: button_class
+- if booking.may_accept?
+  %li= link_to fa_icon('check', text: t('common.accept')), accept_performer_booking_path(booking), class: button_class
+- if booking.may_decline?
+  %li= link_to fa_icon('close', text: t('common.decline')), decline_performer_booking_path(booking), class: button_class

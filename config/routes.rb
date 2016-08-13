@@ -57,6 +57,7 @@ Rails.application.routes.draw do
         get :cancel
         post :complete
       end
+      resources :booking_extensions, only: [:new, :create], path: '/extensions'
     end
     resources :services, only: [] do
       resources :testimonials, only: [:new, :create]

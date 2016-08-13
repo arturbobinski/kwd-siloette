@@ -100,10 +100,10 @@ class UserMailer < ApplicationMailer
   end
 
   def load_payment_resoruces
-    @booking = @payment.booking
-    @service = @booking.service
+    @payable = @payment.payable
+    @service = @payable.service
     @source = @payment.source
-    @user = @booking.user
-    @performer = @booking.performer
+    @user = @payable.user
+    @performer = @payable.performer
   end
 end

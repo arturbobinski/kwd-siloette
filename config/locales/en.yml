@@ -36,6 +36,9 @@ en:
     female: Female
     home: Home
     hosting: Hosting
+    hours:
+      one: '%{count} hour'
+      other: '%{count} hours'
     images: Images
     information: Information
     leave_service: Leave service
@@ -265,6 +268,12 @@ en:
         payment_infomation: Payment information
       update:
         notice: Booking updated successfully.
+    booking_extensions:
+      new:
+        booking_end_at: Current booking end at
+        extra_payment: Required extra payment
+      create:
+        notice: Booking time extended successfully.
     testimonials:
       new:
         give_feedback: Give feedback

@@ -23,4 +23,18 @@ module BookingsHelper
   def local_time(time)
     time.in_time_zone(user_time_zone)
   end
+
+  def extend_time_options(slots)
+    options = []
+    prev = slots.first
+    slots.each_with_index do |x, i|
+      hours = i + 1
+      if x > prev + 1
+        break
+      end
+      options << ["#{slot_to_time(x + 1)}(#{t('common.hours', count: hours)})", hours]
+      prev = x
+    end
+    options
+  end
 end

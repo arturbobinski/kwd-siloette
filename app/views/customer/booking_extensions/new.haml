@@ -1,0 +1,41 @@
+- content_for :extra_script do
+  :javascript
+    $(document).ready(function() {
+      window.siloette.extensionForm = new ExtensionForm({
+        pricePerHour: #{@service.booking_price}
+      });
+    });
+
+- content_for :sidebar do
+  = render 'shared/sidebar'
+  = render 'shared/service_image', service: @service
+
+.panel.panel-default
+  .panel-heading
+    = t('common.extend')
+  .panel-body
+    .row
+      .col-sm-8.col-sm-offset-2
+        - if (available_slots = @calendar.available_slots).length > 0
+          = simple_form_for [:customer, @booking, @booking_extension], html: { class: 'form-horizontal booking-extension-form', 'data-parsley-validate' => true } do |f|
+            .today.text-center.triangle-isosceles
+              - if @start_at.to_date == user_time_zone.now.to_date
+                = t('common.today')
+              = date_format(@start_at.to_date)
+            .row
+              .col-sm-6
+                .form-group
+                  %label.control-label= t('.booking_end_at')
+                  .text-center= time_format(@booking.last_end_at.in_time_zone(user_time_zone))
+              .col-sm-6
+                .form-group
+                  %label.control-label= t('.extra_payment')
+                  #extra-price.text-center.text-danger
+                    %span.currency $
+                    %span.price 0
+            = f.input :hours, as: :select, collection: extend_time_options(available_slots), required: true, prompt: t('common.select')
+
+            .actions.text-center
+              = f.submit t('common.submit'), class: 'btn btn-primary'
+        - else
+          .alert.alert-warning= t('.not_available')

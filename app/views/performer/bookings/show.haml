@@ -40,7 +40,7 @@
           = datetime_format local_time(@booking.start_at)
           %br
           %b= t('activerecord.attributes.booking.end_at')
-          = datetime_format local_time(@booking.end_at)
+          = datetime_format local_time(@booking.last_end_at)
           %br
           %b #{t('activerecord.attributes.booking.entry_instructions')}:
           %br
@@ -62,10 +62,10 @@
             = number_to_currency @booking.service.booking_price
             %br
             %b= t('activerecord.attributes.booking.hours')
-            = @booking.hours
+            = @booking.total_hours
             %br
             %b= t('common.total')
-            = number_to_currency @booking.total
+            = number_to_currency @booking.total_with_extensions
             %br
             %b= t('common.state')
             = t("activerecord.attributes.booking.states.#{@booking.state}")
@@ -84,7 +84,7 @@
             %tbody
               %tr
                 %td= number_to_currency @booking.service.booking_price
-                %td= @booking.hours
+                %td= @booking.total_hours
                 %td
                   %span.label.label-info= t("activerecord.attributes.booking.states.#{@booking.state}")
                 %td
@@ -93,4 +93,4 @@
               %tr
                 %td.text-right(colspan='3')
                   %b= t('common.total')
-                %td= number_to_currency @booking.total
+                %td= number_to_currency @booking.total_with_extensions

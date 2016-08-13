@@ -14,7 +14,7 @@
       %dd= datetime_format local_time(booking.start_at)
     %dl.dl-horizontal
       %dt= t('activerecord.attributes.booking.hours')
-      %dd= booking.hours
+      %dd= booking.total_hours
     %dl.dl-horizontal
       %dt= t('common.state')
       %dd= t("activerecord.attributes.booking.states.#{booking.state}")
@@ -24,19 +24,8 @@
         - if booking.payment_state
           = t("activerecord.attributes.payment.states.#{booking.payment_state}")
     .actions
-      - if booking.viewable?
-        = link_to fa_icon('eye', text: t('common.show')), customer_booking_path(booking), class: 'btn btn-primary btn-block'
-      - if booking.editable?
-        = link_to fa_icon('pencil', text: t('common.edit')), edit_customer_booking_path(booking), class: 'btn btn-primary btn-block'
-      - if booking.may_cancel?
-        = link_to fa_icon('close', text: t('common.cancel')), cancel_customer_booking_path(booking), class: 'btn btn-warning btn-block'
-      - if booking.may_extend?
-        = link_to fa_icon('clock-o', text: t('common.extend')), rechedule_customer_booking_path(booking, authenticity_token: form_authenticity_token), method: :post, class: 'btn btn-danger btn-warning'
-      - if booking.destroyable?
-        = link_to fa_icon('trash', text: t('common.delete')), customer_booking_path(booking, authenticity_token: form_authenticity_token), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-block'
-      - if booking.may_complete?
-        = link_to fa_icon('check', text: t('common.complete')), complete_customer_booking_path(booking, authenticity_token: form_authenticity_token), method: :post, class: 'btn btn-success btn-block'
-
+      %ul.list-unstyled
+        = render 'booking_actions', booking: booking, context: :mobile
     %hr
 
 - else
@@ -45,7 +34,7 @@
     %td= booking.number_of_guests
     %td= booking.try(:full_address)
     %td= datetime_format local_time(booking.start_at)
-    %td= booking.hours
+    %td= booking.total_hours
     %td
       %span.label.label-info= t("activerecord.attributes.booking.states.#{booking.state}")
     %td
@@ -57,13 +46,4 @@
           = fa_icon 'cog'
           %span.caret
         %ul.dropdown-menu.pull-right{role: 'menu'}
-          - if booking.viewable?
-            %li= link_to fa_icon('eye', text: t('common.show')), customer_booking_path(booking)
-          - if booking.editable?
-            %li= link_to fa_icon('pencil', text: t('common.edit')), edit_customer_booking_path(booking)
-          - if booking.may_cancel?
-            %li= link_to fa_icon('close', text: t('common.cancel')), cancel_customer_booking_path(booking)
-          - if booking.destroyable?
-            %li= link_to fa_icon('trash', text: t('common.delete')), customer_booking_path(booking, authenticity_token: form_authenticity_token), method: :delete, data: { confirm: 'Are you sure?' }
-          - if booking.may_complete?
-            %li= link_to fa_icon('check', text: t('common.complete')), complete_customer_booking_path(booking, authenticity_token: form_authenticity_token), method: :post
+          = render 'booking_actions', booking: booking

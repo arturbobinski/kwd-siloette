@@ -13,7 +13,7 @@ module Bookings
         bookings.each do |booking|
           start_at = local_time(booking.start_at)
           start_slot = start_at.to_date < @start_at_in_zone.to_date ? 0 : start_at.hour
-          end_at = local_time(booking.end_at)
+          end_at = local_time(booking.last_end_at)
           end_slot = end_at.to_date > @start_at_in_zone.to_date ? 24 : end_at.hour
           slots += (start_slot..end_slot - 1).to_a
         end
@@ -31,7 +31,7 @@ module Bookings
     end
 
     def bookings
-      @bookings ||= @performer.received_bookings.where.not(state: %w(completed canceled declined)).by_date(@start_at)
+      @bookings ||= @performer.received_bookings.where.not(state: %w(completed canceled declined)).includes(:extensions).by_date(@start_at)
     end
 
     def reservations

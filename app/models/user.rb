@@ -49,7 +49,6 @@ class User < ActiveRecord::Base
   validates :role, inclusion: { in: User.roles.keys[0..-2] }, if: 'is_admin.blank?'
   validates :description, length: { maximum: 250 }
   validates :avatar, file_size: { less_than_or_equal_to: MAX_AVATAR_SIZE.to_i }, file_content_type: { allow: /^image\/.*/ }
-  # validate :acceptance_terms, on: :create
   validates_date :birth_date, allow_blank: true
 
   accepts_nested_attributes_for :profile, reject_if: :all_blank, allow_destroy: true
@@ -146,14 +145,12 @@ class User < ActiveRecord::Base
     received_feedbacks.average(:rating)
   end
 
-  private
-
-  def acceptance_terms
-    return true if is_admin
-    unless accept_terms && accept_terms == '1'
-      errors.add :accept_terms, I18n.t('activerecord.errors.models.user.attributes.accept_terms.blank')
-    end
+  def available? start_at, tz
+    calendar = Bookings::Calendar.new(start_at, self, ActiveSupport::TimeZone[tz])
+    calendar.available_slots.length > 0
   end
+
+  private
 
   def generate_referral_code
     self.referral_code = loop do

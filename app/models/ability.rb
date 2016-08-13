@@ -9,6 +9,7 @@ class Ability
     else
       can [:create], Booking
       can [:manage], Booking, user_id: user.id
+      can [:new, :create], BookingExtension
       can :read, Page
       can :read, Post
       can :read, Service

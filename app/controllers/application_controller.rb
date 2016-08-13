@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :check_verified, unless: :devise_controller?
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :detect_browser
+  before_action :detect_browser, :set_time_zone
   before_filter :load_pages
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_time_zone
-    @user_time_zone ||= ActiveSupport::TimeZone[cookies[:time_zone] || 'Eastern Time (US & Canada)']
+    @user_time_zone ||= ActiveSupport::TimeZone[@current_time_zone]
   end
   helper_method :user_time_zone
 
@@ -73,6 +73,13 @@ class ApplicationController < ActionController::Base
         request.variant = :phone
       else
         request.variant = :desktop
+    end
+  end
+
+  def set_time_zone
+    @current_time_zone = cookies[:time_zone] || current_user.try(:time_zone) || 'Eastern Time (US & Canada)'
+    if current_user && current_user.time_zone != @current_time_zone
+      current_user.update(time_zone: @current_time_zone)
     end
   end
 

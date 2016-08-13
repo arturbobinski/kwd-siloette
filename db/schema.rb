@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160813072321) do
+ActiveRecord::Schema.define(version: 20160813103633) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "first_name",   limit: 255
@@ -44,6 +44,24 @@ ActiveRecord::Schema.define(version: 20160813072321) do
   add_index "authentications", ["provider", "uid"], name: "index_authentications_on_provider_and_uid", using: :btree
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
+  create_table "booking_extensions", force: :cascade do |t|
+    t.integer  "booking_id",    limit: 4
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.integer  "hours",         limit: 4
+    t.integer  "total_cents",   limit: 4
+    t.integer  "fee_cents",     limit: 4
+    t.integer  "amount_cents",  limit: 4
+    t.string   "currency",      limit: 255
+    t.string   "payment_state", limit: 255
+    t.datetime "deleted_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "booking_extensions", ["booking_id"], name: "index_booking_extensions_on_booking_id", using: :btree
+  add_index "booking_extensions", ["deleted_at"], name: "index_booking_extensions_on_deleted_at", using: :btree
+
   create_table "bookings", force: :cascade do |t|
     t.string   "state",                limit: 255
     t.integer  "performer_id",         limit: 4
@@ -68,6 +86,8 @@ ActiveRecord::Schema.define(version: 20160813072321) do
     t.datetime "updated_at",                                     null: false
     t.text     "entry_instructions",   limit: 65535
     t.text     "parking_instructions", limit: 65535
+    t.integer  "fee_cents",            limit: 4
+    t.integer  "amount_cents",         limit: 4
   end
 
   add_index "bookings", ["deleted_at"], name: "index_bookings_on_deleted_at", using: :btree
@@ -215,7 +235,7 @@ ActiveRecord::Schema.define(version: 20160813072321) do
   add_index "pages", ["slug"], name: "index_pages_on_slug", using: :btree
 
   create_table "payments", force: :cascade do |t|
-    t.integer  "booking_id",           limit: 4
+    t.integer  "payable_id",           limit: 4
     t.integer  "amount_cents",         limit: 4
     t.integer  "fee_cents",            limit: 4
     t.integer  "total_cents",          limit: 4
@@ -231,10 +251,11 @@ ActiveRecord::Schema.define(version: 20160813072321) do
     t.datetime "deleted_at"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.string   "payable_type",         limit: 255
   end
 
-  add_index "payments", ["booking_id"], name: "index_payments_on_booking_id", using: :btree
   add_index "payments", ["deleted_at"], name: "index_payments_on_deleted_at", using: :btree
+  add_index "payments", ["payable_id", "payable_type"], name: "index_payments_on_payable_id_and_payable_type", using: :btree
   add_index "payments", ["payment_method_id"], name: "index_payments_on_payment_method_id", using: :btree
   add_index "payments", ["source_id", "source_type"], name: "index_payments_on_source_id_and_source_type", using: :btree
   add_index "payments", ["state"], name: "index_payments_on_state", using: :btree
@@ -434,6 +455,7 @@ ActiveRecord::Schema.define(version: 20160813072321) do
     t.string   "referral_code",          limit: 255
     t.integer  "referrer_id",            limit: 4
     t.integer  "location_id",            limit: 4
+    t.string   "time_zone",              limit: 255
   end
 
   add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree

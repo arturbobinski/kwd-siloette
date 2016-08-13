@@ -29,6 +29,8 @@ en:
         start_time: Start time
         total: Total price
         venue_type_id: Venue type
+      booking_extension:
+        hours: How many hours will you extend?
       user:
         email: Email
         password: Password

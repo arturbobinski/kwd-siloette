@@ -20,12 +20,12 @@
             = t('.user_existing_card')
       #existing-card.panel-collapse.collapse.in{'aria-labelledby' => 'heading-existing-card', role: 'tabpanel'}
         .panel-body
-          = f.fields_for :payments do |p|
+          = f.fields_for :payment do |p|
             = p.hidden_field :source_type, value: 'CreditCard'
             - cards.each do |card|
               .form-group
                 = p.radio_button :source_id, card.id, checked: card.default
-                = p.label :source_id, card.to_s, for: "booking_payments_attributes_0_source_id_#{card.id}" 
+                = p.label :source_id, card.to_s, for: "booking_payment_attributes_source_id_#{card.id}"
 
   .panel.panel-info
     #heading-new-card.panel-heading{role: 'tab'}

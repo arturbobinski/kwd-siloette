@@ -8,13 +8,14 @@ class Booking < ActiveRecord::Base
 
   acts_as_paranoid
 
-  monetize :total_cents, allow_nil: false,
+  monetize :total_cents, :fee_cents, :amount_cents,
+    allow_nil: false,
     numericality: {
       greater_than_or_equal_to: 0,
       less_than_or_equal_to: 1000000
     }
 
-  attr_accessor :start_time, :end_time, :time_zone
+  attr_accessor :start_time, :end_time
 
   belongs_to :performer, class_name: 'User'
   belongs_to :user
@@ -22,17 +23,19 @@ class Booking < ActiveRecord::Base
   belongs_to :event_type
   belongs_to :venue_type
   belongs_to :address
-
-  has_many :payments, dependent: :destroy
+  has_one :payment, as: :payable, dependent: :destroy
+  has_many :extensions, class_name: 'BookingExtension', dependent: :destroy
 
   delegate :full_address, to: :address, allow_nil: true
+  delegate :booking_price, :price_cents, to: :service
 
   accepts_nested_attributes_for :address
-  accepts_nested_attributes_for :payments
+  accepts_nested_attributes_for :payment
 
   validates_presence_of :performer, :user, :service, :event_type, :venue_type, :entry_instructions,
     :parking_instructions, :special_info, on: :create
   validates :number_of_guests, presence: true, numericality: { only_integer: true, greater_than: 0 }, on: :create
+  validates :hours, presence: true, numericality: { only_integer: true, greater_than: 0 }, on: :create
   validates_datetime :start_at, after: lambda { 2.hour.from_now }, on: :create
   validates_datetime :end_at, after: :start_at, on: :create
 
@@ -95,7 +98,7 @@ class Booking < ActiveRecord::Base
   end
 
   def payable?
-    service && performer
+    service && performer&.payment_ready?
   end
 
   def viewable?
@@ -108,6 +111,10 @@ class Booking < ActiveRecord::Base
 
   def destroyable?
     current_state.in? %i(canceled declined)
+  end
+
+  def extendable?
+    performer.available?(end_at, user.time_zone)
   end
 
   def address_attributes=(attrs)
@@ -146,18 +153,38 @@ class Booking < ActiveRecord::Base
   end
 
   def process_payment
-    if payment = payments.where(state: 'authorized').first
-      payment.process!
-    end
+    payment.process!
+  end
+
+  def metadata
+    "bk#{token}"
+  end
+
+  def description
+    "Payment on #{service.slug}"
+  end
+
+  def total_with_extensions
+    (total_cents + extensions.paid.sum(:total_cents)) / 100
+  end
+
+  def total_hours
+    hours + extensions.paid.sum(:hours)
+  end
+
+  def last_end_at
+    extensions.recent.first.try(:end_at) || end_at
   end
 
   private
 
   def prepare
-    beginning_of_day = start_at.in_time_zone(ActiveSupport::TimeZone[time_zone]).beginning_of_day
+    beginning_of_day = start_at.in_time_zone(ActiveSupport::TimeZone[user.time_zone]).beginning_of_day
     self.start_at = beginning_of_day + start_time.to_i.hours
     self.end_at = self.start_at + hours.to_i.hours
-    self.total_cents = service.booking_price * 100 * hours
+    self.total_cents = booking_price * 100 * hours
+    self.fee_cents = (price_cents * (Setting.commission_from_seller.to_f) / 100 * hours).round
+    self.amount_cents = total_cents - fee_cents
     self.currency = 'usd'
   end
 end
