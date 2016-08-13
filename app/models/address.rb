@@ -7,8 +7,7 @@ class Address < ActiveRecord::Base
   validates :country, presence: true
   validates :first_name, :last_name, presence: true, length: { maximum: 50 }
   validates :address1, :city, presence: true, length: { maximum: 255 }
-  validates :phone, presence: true, length: { maximum: 20 },
-    format: { with: Regexp.new("\\A#{AppConfig.patterns[:phonenumber]}\\z") }
+  validates :phone, presence: true, format: { with: Regexp.new("\\A#{AppConfig.patterns[:phonenumber]}\\z") }
   validates :zipcode, presence: true, length: { maximum: 10 },
     format: { with: Regexp.new("\\A#{AppConfig.patterns[:zipcode]}\\z") }
   validate :state_validate
@@ -46,17 +45,8 @@ class Address < ActiveRecord::Base
     state.try(:abbr) || state.try(:name) || state_name
   end
 
-  def active_merchant_hash
-    {
-      name: full_name,
-      address1: address1,
-      address2: address2,
-      city: city,
-      state: state_text,
-      zip: zipcode,
-      country: country.try(:iso),
-      phone: phone
-    }
+  def full_phone_number
+    "#{country_code}#{phone.gsub(/(^0|\-|\(|\)|\s+)/, '')}"
   end
 
   private

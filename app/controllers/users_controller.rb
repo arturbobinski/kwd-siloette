@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      if !@user.verified?
+      if @user.dancer? && !@user.verified?
         UserMailer.user_verification_email(@user).deliver_later
         redirect_to :back
       elsif path = next_path
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(
       :first_name, :last_name, :email, :slug, :gender, :description, :birth_date, :avatar, :avatar_cache, :referred_by,
       profile_attributes: [:id, :perform_name, :height, :body_type, :ethnicity, :phone_number, :experience_level,
-        :social_security_number, :education_level, :eligible_in_us, :hear_from, :communing_plan,
+        :social_security_number, :education_level, :eligible_in_us, :hear_from, :communing_plan, :country_code,
         language_ids: [], experience_ids: []],
       location_attributes: [:address, :country, :postal_code, :lat, :lng],
       service_images_attributes: [:id, :profile]

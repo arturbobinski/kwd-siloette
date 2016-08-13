@@ -11,21 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808060430) do
+ActiveRecord::Schema.define(version: 20160813072321) do
 
   create_table "addresses", force: :cascade do |t|
-    t.string   "first_name", limit: 255
-    t.string   "last_name",  limit: 255
-    t.string   "phone",      limit: 255
-    t.string   "address1",   limit: 255
-    t.string   "address2",   limit: 255
-    t.string   "city",       limit: 255
-    t.string   "zipcode",    limit: 255
-    t.integer  "country_id", limit: 4
-    t.string   "state_name", limit: 255
-    t.integer  "state_id",   limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "first_name",   limit: 255
+    t.string   "last_name",    limit: 255
+    t.string   "phone",        limit: 255
+    t.string   "address1",     limit: 255
+    t.string   "address2",     limit: 255
+    t.string   "city",         limit: 255
+    t.string   "zipcode",      limit: 255
+    t.integer  "country_id",   limit: 4
+    t.string   "state_name",   limit: 255
+    t.integer  "state_id",     limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "country_code", limit: 255
   end
 
   create_table "authentications", force: :cascade do |t|
@@ -113,6 +114,7 @@ ActiveRecord::Schema.define(version: 20160808060430) do
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
     t.string   "slug",            limit: 255
+    t.string   "dial_code",       limit: 255
   end
 
   add_index "countries", ["slug"], name: "index_countries_on_slug", using: :btree
@@ -270,6 +272,7 @@ ActiveRecord::Schema.define(version: 20160808060430) do
     t.boolean  "eligible_in_us",                     default: true
     t.string   "hear_from",              limit: 255
     t.string   "communing_plan",         limit: 255
+    t.string   "country_code",           limit: 255
   end
 
   add_index "profiles", ["deleted_at"], name: "index_profiles_on_deleted_at", using: :btree

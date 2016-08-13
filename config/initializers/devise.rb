@@ -251,7 +251,7 @@ Devise.setup do |config|
 
   config.omniauth :stripe_connect, Figaro.env.stripe_id, Figaro.env.stripe_secret, scope: 'read_write', stripe_landing: 'register'
   config.omniauth :facebook, Figaro.env.facebook_id, Figaro.env.facebook_secret, scope: 'email,user_birthday'
-  config.omniauth :google_oauth2, Figaro.env.google_oauth2_id, Figaro.env.google_oauth2_secret
+  config.omniauth :google_oauth2, Figaro.env.google_oauth2_id, Figaro.env.google_oauth2_secret, skip_jwt: true
   config.omniauth :instagram, Figaro.env.instagram_id, Figaro.env.instagram_secret, scope: 'basic public_content'
   config.omniauth :twitter, Figaro.env.twitter_id, Figaro.env.twitter_secret, image_size: :original
 

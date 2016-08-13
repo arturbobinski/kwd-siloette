@@ -84,14 +84,14 @@ class Payment < ActiveRecord::Base
 
   def notify_complete
     UserMailer.payment_completed_email_to_user(self).deliver_later
-    TwilioService.new.send_sms(booking.address.phone, 'Payment completed')
+    TwilioService.new.send_sms(booking.address.full_phone_number, 'Payment completed')
     UserMailer.payment_completed_email_to_performer(self).deliver_later
-    TwilioService.new.send_sms(booking.performer.phone_number, 'Payment completed')
+    TwilioService.new.send_sms(booking.performer.full_phone_number, 'Payment completed')
   end
 
   def notify_failure
     UserMailer.payment_failed_email_to_user(self).deliver_later
-    TwilioService.new.send_sms(booking.address.phone, 'Payment failed')
+    TwilioService.new.send_sms(booking.address.full_phone_number, 'Payment failed')
   end
 
   private

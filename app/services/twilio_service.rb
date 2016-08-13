@@ -5,8 +5,6 @@ class TwilioService
    
   def send_sms(to, msg)
     @client = Twilio::REST::Client.new
-
-    to = to.gsub(/^0/, '').gsub(/-/, '')
     to = '+' + to unless to[0] == '+'
 
     message = @client.messages.create(

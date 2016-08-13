@@ -14,9 +14,9 @@
             = f.label :rating, t('simple_form.labels.testimonial.rating')
           .col-sm-8
             .testimonial-rating{'data-score' => @testimonial.rating}
-      = f.input :delay, as: :radio_buttons, collection: Testimonial.delays.keys.map { |x| [t("activerecord.attributes.testimonial.delays.#{x}"), x] }, wrapper: :multi_select
-      = f.input :accuracy, as: :radio_buttons, collection: Testimonial.accuracies.keys.map { |x| [t("activerecord.attributes.testimonial.accuracies.#{x}"), x] }, wrapper: :multi_select
-      = f.input :satisfaction, as: :radio_buttons, collection: Testimonial.satisfactions.keys.map { |x| [t("activerecord.attributes.testimonial.satisfactions.#{x}"), x] }, wrapper: :multi_select
+      = f.input :delay, as: :radio_buttons, collection: t('activerecord.attributes.testimonial.delays').map.with_index(1) { |x, i| [x, i] }, input_html: { class: 'rating-input' }, wrapper: :multi_select
+      = f.input :accuracy, as: :radio_buttons, collection: t('activerecord.attributes.testimonial.accuracies').map.with_index(1) { |x, i| [x, i] }, input_html: { class: 'rating-input' }, wrapper: :multi_select
+      = f.input :satisfaction, as: :radio_buttons, collection: t('activerecord.attributes.testimonial.satisfactions').map.with_index(1) { |x, i| [x, i] }, input_html: { class: 'rating-input' }, wrapper: :multi_select
       = f.input :text, input_html: { rows: 10, 'data-parsley-maxlength' => 500 }
       %br
       .actions.text-center

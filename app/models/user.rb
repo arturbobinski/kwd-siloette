@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   has_many :testimonials, foreign_key: :author_id, dependent: :destroy
   has_many :received_feedbacks, foreign_key: :receiver_id, class_name: 'Testimonial', dependent: :destroy
 
-  delegate :perform_name, :height, :weight, :ethnicity, :phone_number, to: :profile
+  delegate :perform_name, :height, :weight, :ethnicity, :full_phone_number, to: :profile, allow_nil: true
   delegate :address, to: :location
 
   validates :first_name, presence: true, length: { maximum: 50 }
@@ -114,8 +114,7 @@ class User < ActiveRecord::Base
 
   def slug_candidates
     [
-      :name,
-      [:name, :email],
+      :perform_name
     ]
   end
 

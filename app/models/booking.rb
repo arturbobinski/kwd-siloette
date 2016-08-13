@@ -122,27 +122,27 @@ class Booking < ActiveRecord::Base
     case current_state
     when :pending
       UserMailer.new_booking_email(self).deliver_later
-      TwilioService.new.send_sms(performer.phone_number, 'You have a new booking')
+      TwilioService.new.send_sms(performer.full_phone_number, 'You have a new booking')
     when :accepted
       UserMailer.booking_accepted_email(self).deliver_later
-      TwilioService.new.send_sms(address.phone, 'Your booking accepted')
+      TwilioService.new.send_sms(address.full_phone_number, 'Your booking accepted')
       Booking.delay(run_at: (start_at - 1.hour)).remind(id)
     when :declined
       UserMailer.booking_declined_email(self).deliver_later
-      TwilioService.new.send_sms(address.phone, 'Your booking declined')
+      TwilioService.new.send_sms(address.full_phone_number, 'Your booking declined')
     when :canceled
       if aasm.from_state == :pending
         UserMailer.booking_canceled_email(self).deliver_later
-        TwilioService.new.send_sms(performer.phone_number, 'Your booking canceled')
+        TwilioService.new.send_sms(performer.full_phone_number, 'Your booking canceled')
       end
     end
   end
 
   def remind_start
     UserMailer.booking_start_email_to_performer(self).deliver_later
-    TwilioService.new.send_sms(performer.phone_number, 'You have a new booking started in an hour')
+    TwilioService.new.send_sms(performer.full_phone_number, 'You have a new booking started in an hour')
     UserMailer.booking_start_email_to_user(self).deliver_later
-    TwilioService.new.send_sms(address.phone, 'You have a new booking started in an hour')
+    TwilioService.new.send_sms(address.full_phone_number, 'You have a new booking started in an hour')
   end
 
   def process_payment

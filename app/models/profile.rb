@@ -9,8 +9,8 @@ class Profile < ActiveRecord::Base
   COMMUNING_PLANS = %w(own_car public_transport borrowed_car other)
   # WEIGHTS = (90..210).step(10)
 
-  enum ethnicity: { caucasian: 0, african: 1, american: 2, latin_american: 3, asian: 4, middle_eastern: 5,
-    eastern_asian: 6, pacific_islander: 7, first_nation: 8, other: 9 }
+  enum ethnicity: %i(african american asian caucasian eastern_asian first_nation latin_american middle_eastern
+    pacific_islander other)
   # enum bust: %i(bee grape mandarin peach orange cantaloupe watermelon)
 
   belongs_to :user, touch: true
@@ -24,14 +24,17 @@ class Profile < ActiveRecord::Base
   # validates :bust, presence: true, inclusion: { in: Profile.busts.keys }
   validates :ethnicity, presence: true, inclusion: { in: Profile.ethnicities.keys }, if: 'user.verified?'
   validates :education_level, length: { maximum: 255 }, if: 'user.verified?'
-  validates :phone_number, presence: true, length: { maximum: 20 },
-    format: { with: Regexp.new("\\A#{AppConfig.patterns[:phonenumber]}\\z") }
+  validates :phone_number, presence: true, format: { with: Regexp.new("\\A#{AppConfig.patterns[:phonenumber]}\\z") }
   validates :social_security_number, presence: true, length: { maximum: 9 },
     format: { with: Regexp.new("\\A#{AppConfig.patterns[:social_security_number]}\\z") }
   validates :hear_from, inclusion: { in: SOURCES }, if: 'hear_from'
   validates :communing_plan, inclusion: { in: COMMUNING_PLANS }, if: 'communing_plan'
 
   after_save :update_services
+
+  def full_phone_number
+    "#{country_code}#{phone_number.gsub(/(^0|\-|\(|\)|\s+)/, '')}"
+  end
 
   private
 

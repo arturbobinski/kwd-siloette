@@ -1,23 +1,25 @@
 window.ParsleyConfig =
   excluded: 'input[type=button], input[type=submit], input[type=reset], :hidden, .no-validate'
 
+$countryCodeInput = undefined
 $phoneNumberInput = undefined
 
 initFormValidation = ($el) ->
   $parsleyForm = $el.find('[data-parsley-validate]')
   $parsleyForm.parsley() if $parsleyForm.length > 0
 
-readCookieValue = (cookieName) ->
+window.readCookieValue = (cookieName) ->
   if result = new RegExp("(?:^|; )" + encodeURIComponent(cookieName) + "=([^;]*)").exec(document.cookie)
     decodeURIComponent(result[1])
   else
     null
 
 updateTwilioUrl = ->
-  window.ParsleyExtend.asyncValidators['twilio'].url = 'https://lookups.twilio.com/v1/PhoneNumbers/' + $phoneNumberInput.val()
+  window.ParsleyExtend.asyncValidators['twilio'].url = 'https://lookups.twilio.com/v1/PhoneNumbers/' + $countryCodeInput.val() + $phoneNumberInput.val()
 
 initializePlugins = ->
   $phoneNumberInput = $('input[type="tel"]')
+  $countryCodeInput = $('select.country-code')
 
   $('.modal').on 'loaded.bs.modal', ->
     initFormValidation $(this)
@@ -92,8 +94,7 @@ initializePlugins = ->
   $('[name*="time_zone"]').set_timezone()
   tz = readCookieValue('time_zone')
   if tz is null or tz is ''
-    $.post '/api/users/set_time_zone',
-      time_zone: jstz.determine_timezone().timezone.olson_tz
+    document.cookie = 'time_zone=' + jstz.determine_timezone().timezone.olson_tz;
 
   if $('.schedule-start').length > 0
     $fakeSelect = $('<select class="hidden" />').appendTo('body').html $($('.schedule-end')[0]).html()

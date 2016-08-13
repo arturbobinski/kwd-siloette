@@ -137,23 +137,23 @@ en:
           other: Other
       testimonial:
         delays:
-          did_not_show: Did not show
-          an_hour_late: An hour late
-          half_hour_late: 30 minutes late
-          quarter_hour_late: 15 minutes late
-          on_time: On time
+          - Did not show
+          - An hour late
+          - 30 minutes late
+          - 15 minutes late
+          - On time
         accuracies:
-          not_at_all_accurate: Not at all accurate
-          a_little_accurate: A little accurate
-          somewhat_accurate: Somewhat accurate
-          quite_accurate: Quite accurate
-          perfect: Perfect
-        on_times:
-          not_at_all: Not at all
-          bad: Bad
-          okay: Okay
-          very_good: Very Good
-          excellent: Excellent
+          - Not at all accurate
+          - A little accurate
+          - Somewhat accurate
+          - Quite accurate
+          - Perfect
+        satisfactions:
+          - Not at all
+          - Bad
+          - Okay
+          - Very Good
+          - Excellent
       service:
         statuses:
           active: Show
@@ -189,8 +189,8 @@ en:
     become_siloette: Become a Siloette
     create_service: Create service
     daily_schedule: Daily schedule
+    dashboard: Dashboard
     profile: Profile
-    edit_profile: Edit profile
     payment_info: Payment info
     profile_photos: Profile photos
     services: Services
@@ -254,7 +254,7 @@ en:
       edit:
       destroy:
         notice: Booking deleted successfully.
-      initial:
+      scheduling:
         not_available: Sorry, the performer is not available this day. Please select another day.
       new:
         new_booking: New booking

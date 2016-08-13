@@ -14,11 +14,25 @@ $(function() {
     starHalf: '<%= asset_path "star-half.png" %>',
     starOff: '<%= asset_path "star-off.png" %>',
     starOn: '<%= asset_path "star-on.png" %>',
+    half: true,
+    readOnly: true,
     scoreName: 'testimonial[rating]',
     score: function() {
       return $(this).attr('data-score');
     }
   });
+
+  $('.rating-input').change(function (e) {
+    var $this = $(this);
+    var $form = $this.closest('form');
+    var rating = 0;
+
+    $.each($form.find('.rating-input:checked'), function(index, el) {
+      rating += parseFloat($(el).val());
+    });
+    rating = rating / 3;
+    $('.testimonial-rating').raty({ score: rating, scoreName: 'testimonial[rating]' });
+  })
 
   return;
 });

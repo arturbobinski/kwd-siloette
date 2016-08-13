@@ -7,4 +7,12 @@ module UsersHelper
   def dancers_collection
     User.dancer_with_profile.order(:email).collect {|p| [ p.email, p.id ] }
   end
+
+  def country_code_collection
+    Country.order(:name).pluck(:name, :dial_code).map { |x| ["#{x[0]}(#{x[1]})", x[1]] }
+  end
+
+  def country_code_value(obj)
+    obj.country_code.blank? ? Country.find_by(iso: cookies[:country]).try(:dial_code) : obj.country_code
+  end
 end

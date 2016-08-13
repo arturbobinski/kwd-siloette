@@ -30,13 +30,13 @@
           %h2.full-name= @user.name
           %p <b>#{t('.referral_code')}:</b> #{@user.referral_code}
       %hr
-      %p.text-muted= fa_icon 'info-circle', text: t('.not_visible_on_profile').html_safe
-      = f.input :gender, as: :radio_buttons, collection: User.genders.keys, label: false, required: true, wrapper: :multi_select
+      - if @user.dancer?
+        %p.text-muted= fa_icon 'info-circle', text: t('.not_visible_on_profile').html_safe
+        = f.input :gender, as: :radio_buttons, collection: User.genders.keys, label: false, required: true, wrapper: :multi_select
       = render 'users/form/main', f: f
       - if @user.dancer?
         = render 'users/form/dancer_profile', f: f
-      = f.input :description, as: :text, label: false, required: true, input_html: { rows: 5, 'data-parsley-maxlength' => 250 }
-      - if @user.dancer?
+        = f.input :description, as: :text, label: false, required: true, input_html: { rows: 5, 'data-parsley-maxlength' => 250 }
         .row
           = f.input :slug, input_html: { data: { 'parsley-pattern' => parsley_pattern(:slug), 'parsley-maxlength' => 50, 'parsley-remote' => check_slug_api_users_path, 'parsley-remote-message' => t('activerecord.errors.models.user.attributes.slug.taken') } }, wrapper_html: { class: 'col-sm-12 with-not-editable' }
       .actions.text-center

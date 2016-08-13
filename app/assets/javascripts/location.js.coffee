@@ -21,16 +21,18 @@ getCurrentLocation = (geolocation)->
       addressType = address_components.types[0]
       if addressType == 'locality'
         locality = address_components['long_name']
-        sessionStorage.setItem 'locality', locality
+        document.cookie = 'locality=' + locality;
         locationField.val locality
-        break
+      else if addressType == 'country'
+        country = address_components['short_name']
+        document.cookie = 'country=' + country;
       i++
     return
 
 geolocate = ->
   locationField = $('#q_location_id_eq')
 
-  if locality = sessionStorage.getItem 'locality'
+  if locality = readCookieValue 'locality'
     locationField.val locality
     return
   if navigator.geolocation
