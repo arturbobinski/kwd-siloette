@@ -32,6 +32,10 @@
     .container {
       padding-top: 270px;
     }
+
+    h1, .h1 {
+      font-size: 60px;
+    }
   }
 
   .flash-container {
@@ -207,6 +211,18 @@
   .banner {
     background-image: image-url('choice&transparency.jpg');
     min-height: 500px;
+  }
+
+  i.fa {
+    font-size: 90px;
+  }
+
+  .fa-shield {
+    color: $text-light-grey;
+  }
+
+  .fa-star {
+    color: $yello-color;
   }
 }
 

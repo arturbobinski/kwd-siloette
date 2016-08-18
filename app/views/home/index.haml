@@ -10,13 +10,13 @@
   .overlay.bg-half-grey
   .container
     .row
-      .col-sm-10.col-sm-offset-1
+      .col-sm-12
         .text-center
           %p= t('.launching_soon')
           %h1.text-light= t('.slogan')
           /%p= t('.description')
         .row
-          .col-sm-6.col-sm-offset-3
+          .col-sm-4.col-sm-offset-4
             = search_form_for @q, url: search_path, method: :get do |f|
               = f.hidden_field :location_id_eq
               = f.submit t('.browse_all_services'), class: 'btn btn-lg btn-primary btn-block text-uppercase'
@@ -40,33 +40,7 @@
           %p.lead.text-light= t('.why')
 
 %section#how-it-works
-  .container
-    .row
-      .col-lg-12.text-center
-        %h3.text-uppercase= t('.how_it_works.title')
-        %br
-    .row
-      - 3.times do |i|
-        - content = t('.how_it_works.content')[i]
-        .col-sm-4.text-center
-          .box
-            = image_tag content[:image], alt: '', class: 'img-responsive'
-            %h4= content[:title]
-            %p.text-light.text-light-grey= content[:text]
-    %hr.invisible
 
-%section#performers
-  .banner
-    .overlay.bg-half-grey
-      .container.text-center
-        %h1.title= t('.safety&benefits')
-        %p.lead.text-uppercase.text-light-grey= t('.for_performers')
-  .container
-    .row
-      .col-sm-8.col-sm-offset-2
-        .section-content.text-center
-          %h2.text-light= t('.performers_first')
-          %p.text-light= t('.performers_benefit')
 
 %section#customers
   .banner
@@ -74,13 +48,18 @@
       .container.text-center
         %h1.title= t('.choice&transparency')
         %p.lead.text-uppercase.text-light-grey= t('.for_customers')
-  .container
+
+  .container.section-content
     .row
       .col-sm-8.col-sm-offset-2
-        .section-content.text-center
+        .text-center
           %h2.text-light= t('.choice')
           %p.text-light= t('.transparency')
     .row
-      .col-sm-12
-        = image_tag 'performance.jpg', alt: '', class: 'img-responsive'
-    %hr.invisible
+      - 3.times do |i|
+        - content = t('.how_it_works.content')[i]
+        .col-sm-4.text-center
+          .box
+            =# image_tag content[:image], alt: '', class: 'img-responsive'
+            %h1= fa_icon content[:icon]
+            %p.text-light= content[:text]

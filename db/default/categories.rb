@@ -5,13 +5,13 @@ descriptions = {
   'Waiter' => 'Serving food, drinks at parties and events'
 }
 
-['Party Host', 'Model'].each do |name|
+['GoGo Dancer', 'Model'].each do |name|
   Category.find_or_create_by(name: name) do |category|
     category.description = descriptions[name]
   end
 end
 
-['Waitress'].each do |name|
+['Lingerie Waitress', 'Topless Waitress'].each do |name|
   Category.find_or_create_by(name: name) do |category|
     category.kind = 2
     category.description = descriptions[name]

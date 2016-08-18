@@ -200,23 +200,27 @@ en:
   home:
     index:
       launching_soon: LAUNCHING SOON IN MIAMI
-      slogan: Exotic Dancers. Models. Hosts.
+      slogan: Lingerie & Topless Waitresses, GoGo Dancers, Models.
       description: Book them for your party, event or club
       browse_all_services: Browse All Services
-      whats_new: Siloette is reforming the industry by providing exotic dancers, models and hosts with professional marketing, the opportunity to earn what they want, without paying huge agency fees.
-      why: We created an online platform that allows exotic performers to safely manage their careers on their own terms.
+      whats_new: Siloette is an online platform to book lingerie and topless waitresses, gogo dancers and models on demand.
+      why: Simply search for the type of performer you want for you party, event or club and you can book them from your device in two minutes.
       how_it_works:
-        title: How it works
+        title: Know exactly what you're getting.
+        description: We have a transparent booking process and payment policies. We complete background checks on performers and they are rated on their performances. We have a wide range of choice.
         content:
           - image: profile.jpg
+            icon: search
             title: CREATE A PROFILE
-            text: Performers can sign up and create profile in 3 minutes. We verify identification and all profiles prior to publicity.
+            text: Search from a wide range of beautiful waitresses, dancers and models.
           - image: service.jpg
+            icon: shield
             title: CREATE SERVICES
-            text: Performers add services to their profile. They can choose from Party Host, Topless Waitress, Nude Waitress and Exotic Dancer. They can create as many as they want.
+            text: Select your choice based on location, price, service type or rating.
           - image: booking.jpg
+            icon: star
             title: BOOKINGS
-            text: Performers are sent booking requests directly to their device. They can screen the customer and accept or decline.
+            text: All customers submit ratings on the service provided. We want to make sure you are happy.
       safety&benefits: Safety & Benefits
       for_perormers: For Performers
       performers_first: We are putting performers first
