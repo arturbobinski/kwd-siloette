@@ -47,6 +47,7 @@ ActiveAdmin.register User do
             profile.perform_name
           end
           column :phone_number
+          column :instagram_handle
           column :ethnicity
           column :height
           column :body_type

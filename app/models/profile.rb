@@ -17,6 +17,8 @@ class Profile < ActiveRecord::Base
   has_and_belongs_to_many :experiences, join_table: :profiles_experiences
   has_and_belongs_to_many :languages, join_table: :profiles_languages
 
+  delegate :instagram_handle, to: :user
+
   validates :perform_name, presence: true, length: { maximum: 20 }, if: 'user.verified?'#, uniqueness: { case_sensitive: false }
   validates :height, presence: true, inclusion: { in: HEIGHTS }, if: 'user.verified?'
   validates :body_type, presence: true, inclusion: { in: BODY_TYPES }, if: 'user.verified?'
