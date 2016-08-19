@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160813103633) do
+ActiveRecord::Schema.define(version: 20160819051438) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "first_name",   limit: 255
@@ -269,6 +269,7 @@ ActiveRecord::Schema.define(version: 20160813103633) do
     t.boolean  "published",                default: false
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.string   "image",      limit: 255
   end
 
   add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree

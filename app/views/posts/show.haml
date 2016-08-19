@@ -1,18 +1,32 @@
 - @title = @post.title
 - @description = first_words(@post.content, 99)
 - @url = post_url(@post)
+- @image = { url: @post.image.url(:huge), width: 1280, height: 768 }
 
 - content_for :meta_tags do
   %meta{name: 'robots', content: 'index, follow'}
   %meta{name: 'googlebot', content: 'index, follow'}
 
+%section.jumbotron
+  .overlay{style: "background-image: url(#{@image[:url]})"}
+  .container
+    .row
+      .col-sm-10.col-sm-offset-1
+        %h2.text-white= @post.title
+
 .container
-  .post-title
-    .title= @post.title
-    %span.time-ago
-      = fa_icon 'clock-o', text: "#{time_ago_in_words(@post.created_at)} ago"
-    %span.post-author
-      %em by
-      #{@post.author.name}
-  .post-content
-    = @post.content.html_safe
+  .row
+    .col-sm-9
+      .post-title
+        %span.time-ago
+          = fa_icon 'clock-o', text: "#{time_ago_in_words(@post.created_at)} ago"
+        %span.post-author
+          %em by
+          #{@post.author.name}
+      %hr.invisible
+      .post-content
+        = @post.content.html_safe
+
+    .col-sm-3
+      %h4= t('.more-posts')
+      = render @posts

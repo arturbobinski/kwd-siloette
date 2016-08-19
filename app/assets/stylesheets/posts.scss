@@ -1,5 +1,12 @@
 .post {
-  margin-bottom: 10px;
+  color: $text-color;
+  display: block;
+
+  .post-content {
+    height: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .post-title {
@@ -13,6 +20,68 @@
   }
 }
 
-.post-content {
-  padding: 10px 0;
+#featuerd-posts {
+  .col-sm-6, .col-sm-3 {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .post {
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 10px;
+
+    &:hover {
+      img {
+        @include transform(scale(1.1));
+        @include transition(all .3s ease-out);
+      }
+    }
+
+    &.first {
+      footer {
+        padding-left: 20px;
+      }
+    }
+
+    footer {
+      background-color: rgba(0,0,0,0.5);
+      bottom: 0;
+      color: white;
+      left: 0;
+      padding: 10px;
+      position: absolute;
+      width: 100%;
+    }
+  }
+}
+
+#posts {
+  border-top: 1px solid $border-color;
+
+  .col-sm-4 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .post {
+    border-bottom: 1px solid $border-color;
+    border-right: 1px solid $border-color;
+    padding: 3em;
+
+    &:hover {
+      background-color: white;
+    }
+  }
+}
+
+.posts-show {
+  #main-nav {
+    margin-bottom: 0;
+  }
+
+  .jumbotron .container {
+    padding-top: 18em;
+    padding-bottom: 5em;
+  }
 }

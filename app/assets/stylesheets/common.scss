@@ -55,6 +55,10 @@ form .table > tbody > tr > td {
   background-color: white;
 }
 
+.full-width {
+  width: 100%;
+}
+
 [aria-expanded="true"] .more, [aria-expanded="false"] .less {
   display: none;
 }

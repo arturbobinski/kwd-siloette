@@ -6,19 +6,37 @@
   %meta{name: 'robots', content: 'index, follow'}
   %meta{name: 'googlebot', content: 'index, follow'}
 
-.container
+.container-fulid
   - if @posts.count > 0
-    %ul.list-unstyled
-      - @posts.each do |post|
-        %li.post
-          .post-title
-            = link_to post.title, post_path(post), class: 'title'
-            %span.time-ago
-              = fa_icon 'clock-o', text: "#{time_ago_in_words(post.created_at)} ago"
-            %span.post-author
-              %em by
-              #{post.author.name}
-          .post-content
+    #featuerd-posts.row
+      .col-sm-6
+        - post = @posts.first
+        = link_to post, class: 'post first' do
+          %fugure= image_tag post.image.url(:large), class: 'full-width'
+          %footer
+            %h4= post.title
             = first_words(post.content)
+      .col-sm-3
+        - @posts[1..2].each_with_index do |post, i|
+          = link_to post, class: 'post' do
+            %fugure= image_tag post.image.url(i > 0 ? :short : :long), class: 'full-width'
+            %footer
+              %h4= post.title
+              = first_words(post.content)
+      .col-sm-3
+        - @posts[3..4].each_with_index do |post, i|
+          = link_to post, class: 'post' do
+            %fugure= image_tag post.image.url(i > 0 ? :long : :short), class: 'full-width'
+            %footer
+              %h4= post.title
+              = first_words(post.content)
+
+    %hr.invisible
+
+    #posts.row
+      - @posts[5..-1].each do |post|
+        .col-sm-4
+          = render post
   - else
-    = t('.no_posts')
+    .container
+      = t('.no_posts')

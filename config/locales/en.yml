@@ -381,3 +381,5 @@ en:
   posts:
     index:
       no_posts: No posts yet.
+    show:
+      more_posts: More posts

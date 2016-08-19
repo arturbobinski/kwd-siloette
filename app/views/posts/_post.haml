@@ -1,0 +1,4 @@
+= link_to post, class: 'post' do
+  %fugure= image_tag post.image.url(:thumb), class: 'img-responsive'
+  %h4.text-light= post.title
+  .post-content.text-light= first_words(post.content)
