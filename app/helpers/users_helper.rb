@@ -9,8 +9,8 @@ module UsersHelper
   end
 
   def country_code_collection
-    Rails.cache.fetch('siloette.country_codes', expires_in: 1.day) do
-      Country.order(:name).pluck(:name, :dial_code).map { |x| ["#{x[0]}(#{x[1]})", x[1]] }
+    Rails.cache.fetch('siloette.allowd_country_codes', expires_in: 1.day) do
+      Country.where.not(dial_code: nil).order(:name).pluck(:name, :dial_code).map { |x| ["#{x[0]}(#{x[1]})", x[1]] }
     end
   end
 

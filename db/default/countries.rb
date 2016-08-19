@@ -1,6 +1,8 @@
 require 'carmen'
 
-country_codes = JSON::parse(IO.read("/#{Rails.root}/db/data/country_codes.json"))
+country_code_allowed = %w(AU CA DE ES FR GB NL NZ US)
+file = "/#{Rails.root}/db/data/country_codes.json"
+country_codes = JSON::parse(IO.read(file)).select { |x| x['iso'].in? country_code_allowed }
 
 Carmen::Country.all.each do |country|
   Country.where(iso: country.alpha_2_code).first_or_create do |c|
