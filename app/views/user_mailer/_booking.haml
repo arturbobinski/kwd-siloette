@@ -9,25 +9,25 @@ Service Type: #{@service.title}
 %br
 Date: #{datetime_format(@booking.start_at)}
 %br
-Time start: #{time_format(@booking.start_at)}
+Time Start: #{time_format(@booking.start_at)}
 %br
 Hours: #{@booking.hours}
 %br
 
 - if role == :performer
   %br
-  Customer name: #{@booking.user.name}
+  Customer Name: #{@address.full_name}
   %br
   Age: #{@booking.user.age}
 
 %br
-Street Address: #{@booking.full_address}
+Street Address: #{@address.full_address}
 %br
-City: #{@booking.city}
+City: #{@address.city}
 %br
-State: #{@booking.state}
+State: #{@address.state}
 %br
-Zip: #{@booking.zipcode}
+Zip: #{@address.zipcode}
 %br
 Event Type: #{@booking.event_type}
 %br

@@ -129,8 +129,7 @@ en:
           other: Other
         ethnicities:
           caucasian: Caucasian
-          african: African
-          american: American
+          african_american: African American
           latin_american: Latin American
           asian: Asian
           middle_eastern: Middle Eastern

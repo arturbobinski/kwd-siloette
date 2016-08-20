@@ -26,7 +26,6 @@ class Booking < ActiveRecord::Base
   has_one :payment, as: :payable, dependent: :destroy
   has_many :extensions, class_name: 'BookingExtension', dependent: :destroy
 
-  delegate :full_address, :city, :state, :zipcode, to: :address, allow_nil: true
   delegate :booking_price, :price_cents, to: :service
 
   accepts_nested_attributes_for :address

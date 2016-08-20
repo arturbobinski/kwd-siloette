@@ -9,7 +9,7 @@ class Profile < ActiveRecord::Base
   COMMUNING_PLANS = %w(own_car public_transport borrowed_car other)
   # WEIGHTS = (90..210).step(10)
 
-  enum ethnicity: %i(african american asian caucasian eastern_asian first_nation latin_american middle_eastern
+  enum ethnicity: %i(african_american asian caucasian eastern_asian first_nation latin_american middle_eastern
     pacific_islander other)
   # enum bust: %i(bee grape mandarin peach orange cantaloupe watermelon)
 

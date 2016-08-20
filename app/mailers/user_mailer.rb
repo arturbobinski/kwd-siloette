@@ -103,6 +103,7 @@ class UserMailer < ApplicationMailer
 
   def load_booking_resoruces
     @service = @booking.service
+    @address = @booking.address
     @user = @booking.user
     @performer = @booking.performer
   end
