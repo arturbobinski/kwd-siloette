@@ -4,7 +4,6 @@ class @ServiceForm
   constructor: (options={}) ->
     @$el = options.$el || $('.service-form')
     @categories = options.categories || []
-    @commissionFee = options.commissionFee || 0
 
     @id = @$el.data('id')
     @$categorySelect = $('#service_category_id')
@@ -41,8 +40,7 @@ class @ServiceForm
     price = parseFloat val
 
     if !isNaN(price) && isFinite(val) && price > 0
-      commission = price * (@commissionFee) / 100
-      $('.commission-fee').text(commission)
+      $('.earn').text(price)
       $('#price-hint').show()
     else
       $('#price-hint').hide()

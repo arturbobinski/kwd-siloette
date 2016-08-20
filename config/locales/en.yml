@@ -15,7 +15,6 @@ en:
     calendar: Calendar
     cancel: Cancel
     card_number: Card number
-    commission_fee: 'Siloette fee ($<span class="commission-fee"></span>) will be added.'
     complete: Complete
     confirm: Are your sure?
     consent_check: I consent to a background check.
@@ -86,6 +85,7 @@ en:
     upload_picture: Upload picture
     update_profile_first: You need to update profile first.
     year: Year
+    you_will_earn: 'You will earn $(<span class="earn">%{amount}</span> - 5%)'
   unit:
     above_size: Above Size
     below_size: Below Size

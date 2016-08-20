@@ -1,7 +1,8 @@
 descriptions = {
-  'Party Host' => 'Work at parties or clubs to greet guests, manage the guest list or serve bottles.',
+  'GoGo Dancer' => 'Dance at events or clubs wearing sexy costumes or lingerie.',
   'Model' => 'Work on photo or video shoots and promotional events',
-  'Waitress' => 'Serving food, drinks at parties and events',
+  'Lingerie Waitress' => 'Serving food, drinks or hosting at parties and events wearing lingerie',
+  'Topless Waitress' => 'Serving food, drinks or hosting at parties and events wearing lingerie on the bottom and nothing on top.',
   'Waiter' => 'Serving food, drinks at parties and events'
 }
 
@@ -18,9 +19,9 @@ end
   end
 end
 
-['Waiter'].each do |name|
-  Category.find_or_create_by(name: name) do |category|
-    category.kind = 0
-    category.description = descriptions[name]
-  end
-end
+# ['Waiter'].each do |name|
+#   Category.find_or_create_by(name: name) do |category|
+#     category.kind = 0
+#     category.description = descriptions[name]
+#   end
+# end

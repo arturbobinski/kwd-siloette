@@ -43,7 +43,7 @@ en:
         category_id: What type of service are you performing?
         invitee_ids: Invite other performers by their email
         description: Work History/Description
-        price: How much do you want to earn?
+        price: Price
         location_id: Location
       location:
         address: Location

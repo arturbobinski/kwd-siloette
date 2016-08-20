@@ -5,8 +5,7 @@
   :javascript
     $(document).ready(function() {
       window.siloette.serviceForm = new ServiceForm({
-        categories: #{raw categories.to_json},
-        commissionFee: #{Setting.commission_from_seller}
+        categories: #{raw categories.to_json}
       });
     });
 
@@ -34,7 +33,7 @@
       .form-group.with-not-editable
         = f.label :price, "* #{t('simple_form.labels.service.price')}", class: 'control-label'
         .row
-          = f.input :price, label: false, input_html: { data: { 'parsley-type' => :number, 'parsley-min' => 10, 'parsley-max' => 2000 } }, wrapper_html: { class: 'col-xs-10' }, hint: raw("<div id='price-hint' class='text-muted' style='display: none;'>#{fa_icon 'info-circle'} <span>#{t('common.commission_fee').html_safe}</span></div>")
+          = f.input :price, label: false, input_html: { data: { 'parsley-type' => :number, 'parsley-min' => 10, 'parsley-max' => 2000 } }, wrapper_html: { class: 'col-xs-10' }, hint: raw("<div id='price-hint' class='text-muted' style='display: none;'>#{fa_icon 'info-circle'} #{t('common.you_will_earn').html_safe}</div>")
           .col-xs-2.no-pad
             .price-unit
               = t('common.per_hour')
