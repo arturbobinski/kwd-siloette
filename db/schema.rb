@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160819051438) do
+ActiveRecord::Schema.define(version: 20160820041448) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "first_name",   limit: 255
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20160819051438) do
     t.text     "parking_instructions", limit: 65535
     t.integer  "fee_cents",            limit: 4
     t.integer  "amount_cents",         limit: 4
+    t.integer  "verification_code",    limit: 4
   end
 
   add_index "bookings", ["deleted_at"], name: "index_bookings_on_deleted_at", using: :btree

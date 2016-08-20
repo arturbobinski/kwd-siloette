@@ -1,24 +1,42 @@
-%h4 Booking detail:
-%p
-  <b>Service:</b> #{link_to @service.title, service_url(@service)}
+- role ||= :user
+
+Service Type: #{@service.title}
+
+- if role == :performer
   %br
-  <b>Price:</b> #{number_to_currency(@service.booking_price)} / hour
+  Amount you will earn: #{number_to_currency(@booking.amount)}
+
+%br
+Date: #{datetime_format(@booking.start_at)}
+%br
+Time start: #{time_format(@booking.start_at)}
+%br
+Hours: #{@booking.hours}
+%br
+
+- if role == :performer
   %br
-  <b>Start at:</b> #{datetime_format(@booking.start_at)}
+  Customer name: #{@booking.user.name}
   %br
-  <b>End at:</b> #{datetime_format(@booking.end_at)}
+  Age: #{@booking.user.age}
+
+%br
+Street Address: #{@booking.full_address}
+%br
+City: #{@booking.city}
+%br
+State: #{@booking.state}
+%br
+Zip: #{@booking.zipcode}
+%br
+Event Type: #{@booking.event_type}
+%br
+Venue Type: #{@booking.venue_type}
+%br
+Number of Guests: #{@booking.number_of_guests}
+
+- if role == :performer
   %br
-  <b>Name of Customer:</b> #{@booking.user.name}
+  Parking Instructions: #{@booking.parking_instructions}
   %br
-  <b>Address:</b> #{@booking.full_address}
-  %br
-  <b>Event type:</b> #{@booking.event_type}
-  %br
-  <b>Venue type:</b> #{@booking.venue_type}
-  %br
-  <b>Number of guests:</b> #{@booking.number_of_guests}
-  %br
-  <b>Parking Instructions:</b> #{@booking.parking_instructions}
-  %br
-  <b>Entry Instructions:</b> #{@booking.entry_instructions}
-  %br
+  Entry Instructions: #{@booking.entry_instructions}

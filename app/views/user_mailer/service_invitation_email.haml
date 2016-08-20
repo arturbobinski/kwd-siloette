@@ -1,7 +1,8 @@
-%h3 Hi,
+%p Dear #{@invitee.first_name},
 
-%p #{@user.name} has invited you to #{link_to @service.title, performer_service_url(@service), target: '_blank'}.
-%br
+%p #{@user.name} has invited you to join their #{link_to @service.title, performer_service_url(@service), target: '_blank'} service on Siloette. Please click the button below to join and start earning money!
 
 = render 'button', url: performer_services_url, text: 'Join now'
 
+%br
+%p Love,

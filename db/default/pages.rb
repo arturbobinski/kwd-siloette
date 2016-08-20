@@ -1,6 +1,6 @@
 pages = [
   {
-    title: 'Terms of Use',
+    title: 'Terms and Conditions',
     slug: 'terms-of-use',
     body: 'Please edit me <a href="/admin/pages/terms-of-use/edit">here</a>.'
   },

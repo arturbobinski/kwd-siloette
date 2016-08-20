@@ -117,6 +117,13 @@ class User < ActiveRecord::Base
     ]
   end
 
+  def age
+    if birth_date
+      age = Date.today.year - birth_date.year
+      age -= 1 if Date.today < birth_date + age.years
+    end
+  end
+
   def connected_instagram_account
     authentications.where(provider: 'instagram').first
   end

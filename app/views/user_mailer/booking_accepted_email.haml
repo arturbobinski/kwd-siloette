@@ -1,7 +1,17 @@
-%h3 Congrats,
+%p Dear #{@user.first_name},
 
-%p #{@performer.name} has accepted your booking.
-= render 'booking'
+%p Congratulations! #{@performer.perform_name} has accepted your booking! They will be performing the following service:
 
-%br
-= render 'button', url: customer_booking_url(@booking), text: 'View'
+= render 'booking', role: :user
+
+%p
+  %strong Important Information
+
+%p
+  When #{@performer.perform_name} arrives, please give her this code: #{@booking.verification_code}. This helps us ensure you are receiving a good service.
+  %br
+  All the information you entered must be accurate. Please read our #{link_to 'Terms and Conditions', page_url(@terms_page)} carefully.
+  %br
+  Treat the performers with respect and manners at all times.
+
+%p Enjoy your party!

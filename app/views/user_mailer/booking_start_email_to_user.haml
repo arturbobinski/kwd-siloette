@@ -1,7 +1,16 @@
-%h3 Hurry up,
+%p Hurry up,
 
 %p You have a booked service start in an hour.
 = render 'booking'
 
+%p
+  %strong Important Information
+
+%p
+  When #{@performer.perform_name} arrives, please give her this code: #{@booking.verification_code}. This helps us ensure you are receiving a good service.
+
 %br
 = render 'button', url: performer_booking_url(@booking), text: 'View'
+
+%br
+%p Love,

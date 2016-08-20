@@ -1,6 +1,7 @@
-/ %h3 Congrats,
+%p Congratulations #{@performer.first_name},
 
-/ %p You have a new booking.
+%p You have received a new booking! The details are below:
+
 = render 'booking'
 
 %br
@@ -8,3 +9,6 @@
   %tr
     %td= render 'button', url: accept_performer_booking_url(@booking), text: 'Accept'
     %td= render 'button', url: decline_performer_booking_url(@booking), text: 'Decline', style: 'warning'
+
+%br
+%p Love,

@@ -1,7 +1,10 @@
-%h3 We are sorry,
+%p We are sorry,
 
-%p #{@user.name} has canceled booking.
+%p #{@user.first_name} has canceled booking.
 = render 'booking'
 
 %br
 = render 'button', url: performer_booking_url(@booking), text: 'View'
+
+%br
+%p Love,

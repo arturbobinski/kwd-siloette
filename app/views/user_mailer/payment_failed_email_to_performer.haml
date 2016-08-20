@@ -1,10 +1,12 @@
-%h3 We are sorry,
+%p We are sorry,
 
 %p Payment to book your service was failed.
 = render 'payment'
 
 %p
-  <b>Fee(#{Setting.commission_from_seller}%):</b> #{number_to_currency(@payment.fee)}
+  Fee(#{Setting.commission_from_seller}%): #{number_to_currency(@payment.fee)}
   %br
-  <b>Amount to you:</b> #{number_to_currency(@payment.amount)}
-  %br
+  Amount to you: #{number_to_currency(@payment.amount)}
+
+%br
+%p Love,

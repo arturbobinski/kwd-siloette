@@ -1,7 +1,10 @@
-%h3 Congrats,
+%p Congratulations #{@user.first_name},
 
 %p payment completed successfully.
 = render 'payment'
 
 %p
-  <b>Card used:</b> #{@source.to_s}
+  Card used: #{@source.to_s}
+
+%br
+%p Love,

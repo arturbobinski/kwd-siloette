@@ -1,7 +1,18 @@
-%h3 We are sorry,
+%p Dear #{@user.first_name},
 
-%p #{@performer.name} has declined your booking.
-= render 'booking'
+%p Unfortunately #{@performer.perform_name} is unable to accept your request. However we have some other services that you might like:
+
+%table
+  %tr
+    - @services.each do |service|
+      %td
+        = link_to service_url(service) do
+          = image_tag service.primary_image.file.url(:small)
+
+%p Click on any of these to complete your booking. We have not processed the payment.
 
 %br
 = render 'button', url: customer_booking_url(@booking), text: 'View'
+
+%br
+%p Love,

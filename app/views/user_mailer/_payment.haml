@@ -1,10 +1,9 @@
 %h4 Payment detail
 %p
-  <b>Service:</b> #{link_to @service.title, service_url(@service)}
+  Service: #{link_to @service.title, service_url(@service)}
   %br
-  <b>Price per hour:</b> #{number_to_currency(@service.booking_price)}
+  Price per hour: #{number_to_currency(@service.booking_price)}
   %br
-  <b>Hours:</b> #{@payable.hours}
+  Hours: #{@payable.hours}
   %br
-  <b>total:</b> #{number_to_currency(@payment.total)}
-  %br
+  Total: #{number_to_currency(@payment.total)}

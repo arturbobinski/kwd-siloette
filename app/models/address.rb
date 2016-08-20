@@ -38,7 +38,7 @@ class Address < ActiveRecord::Base
   end
 
   def full_address
-    [address1, address2, city].reject(&:blank?).join(' ')
+    [address1, address2].reject(&:blank?).join(' ')
   end
 
   def state_text

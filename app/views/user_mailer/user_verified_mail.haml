@@ -1,7 +1,19 @@
-%h3 Congrats,
+%p Congratulations #{@user.first_name},
 
-%p Your account has been verified successfully.
+%p Your application to become a Siloette has been approved! You can now login and complete your profile, create the services you want to perform and start earning money.
+%p Siloette requires you to have a Stripe account to be paid and you can set this up when you create your profile.
+
+%p
+  %strong Important things to remember!
+
+%ol
+  %li Use professional photos. Great photos = great money!
+  %li Check your spelling. Great grammar = great money!
+  %li Keep your schedule and your calendar up to date to ensure you don’t miss any jobs.
+
+%p We are very excited to have you on the team! Login below to get started.
+
+= render 'button', url: edit_user_url(@user), text: 'Login'
+
 %br
-
-= render 'button', url: edit_user_url(@user), text: 'View'
-
+%p Love,

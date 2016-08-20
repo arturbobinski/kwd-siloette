@@ -9,6 +9,12 @@ class UserMailer < ApplicationMailer
     mail(to: @invitee.email, subject: 'New invitaion!')
   end
 
+  def user_verifying_email(user)
+    @user = user
+
+    mail(to: @user.email, subject: 'Account is being verified!')
+  end
+
   def user_verification_email(user)
     @user = user
 
@@ -31,6 +37,7 @@ class UserMailer < ApplicationMailer
   def booking_accepted_email(booking)
     @booking = booking
     load_booking_resoruces
+    @terms_page = Page.find_by(slug: 'terms-of-use')
 
     mail(to: @user.email, subject: 'Booking accepted!')
   end
@@ -38,6 +45,7 @@ class UserMailer < ApplicationMailer
   def booking_declined_email(booking)
     @booking = booking
     load_booking_resoruces
+    @services = Service.active.open.where(category_id: @service.category_id).where.not(id: @service.id).limit(4)
 
     mail(to: @user.email, subject: 'Booking declined!')
   end
@@ -104,6 +112,6 @@ class UserMailer < ApplicationMailer
     @service = @payable.service
     @source = @payment.source
     @user = @payable.user
-    @performer = @payable.performer
+    @performer = @service.performer
   end
 end

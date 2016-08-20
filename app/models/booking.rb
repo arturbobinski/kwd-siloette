@@ -26,7 +26,7 @@ class Booking < ActiveRecord::Base
   has_one :payment, as: :payable, dependent: :destroy
   has_many :extensions, class_name: 'BookingExtension', dependent: :destroy
 
-  delegate :full_address, to: :address, allow_nil: true
+  delegate :full_address, :city, :state, :zipcode, to: :address, allow_nil: true
   delegate :booking_price, :price_cents, to: :service
 
   accepts_nested_attributes_for :address
@@ -186,5 +186,6 @@ class Booking < ActiveRecord::Base
     self.fee_cents = (price_cents * (Setting.commission_from_seller.to_f) / 100 * hours).round
     self.amount_cents = total_cents - fee_cents
     self.currency = 'usd'
+    self.verification_code = rand(1000...9999)
   end
 end

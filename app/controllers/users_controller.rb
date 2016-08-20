@@ -20,6 +20,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       if @user.dancer? && !@user.verified?
         UserMailer.user_verification_email(@user).deliver_later
+        UserMailer.user_verifying_email(@user).deliver_later
         redirect_to :back
       elsif path = next_path
         redirect_to path

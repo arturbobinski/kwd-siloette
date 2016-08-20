@@ -1,10 +1,12 @@
-%h3 We are sorry,
+%p We are sorry,
 
 %p Your payment ##{@payment.token} was failed.
 = render 'payment'
 
 %p
-  <b>Card used:</b> #{@source.to_s}
+  Card used: #{@source.to_s}
   %br
-  <b>Failed reason:</b> #{@payment.cvv_response_message}
-  %br
+  Failed reason: #{@payment.cvv_response_message}
+
+%br
+%p Love,
