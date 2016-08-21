@@ -13,7 +13,7 @@ module BookingsHelper
   end
 
   def date_format(date)
-    I18n.l date, format: :long
+    I18n.l date.to_date, format: :long
   end
 
   def datetime_format(time)

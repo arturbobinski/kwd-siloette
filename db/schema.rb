@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160820041448) do
+ActiveRecord::Schema.define(version: 20160821164540) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "first_name",   limit: 255
@@ -278,24 +278,25 @@ ActiveRecord::Schema.define(version: 20160820041448) do
   add_index "posts", ["slug"], name: "index_posts_on_slug", using: :btree
 
   create_table "profiles", force: :cascade do |t|
-    t.integer  "user_id",                limit: 4
-    t.string   "perform_name",           limit: 255
-    t.string   "phone_number",           limit: 255
-    t.integer  "ethnicity",              limit: 4
-    t.integer  "bust",                   limit: 4
-    t.float    "weight",                 limit: 24
-    t.float    "height",                 limit: 24
+    t.integer  "user_id",                    limit: 4
+    t.string   "perform_name",               limit: 255
+    t.string   "phone_number",               limit: 255
+    t.integer  "ethnicity",                  limit: 4
+    t.integer  "bust",                       limit: 4
+    t.float    "weight",                     limit: 24
+    t.float    "height",                     limit: 24
     t.datetime "deleted_at"
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
-    t.string   "body_type",              limit: 255
-    t.string   "experience_level",       limit: 255
-    t.string   "social_security_number", limit: 255
-    t.string   "education_level",        limit: 255
-    t.boolean  "eligible_in_us",                     default: true
-    t.string   "hear_from",              limit: 255
-    t.string   "communing_plan",         limit: 255
-    t.string   "country_code",           limit: 255
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
+    t.string   "body_type",                  limit: 255
+    t.string   "experience_level",           limit: 255
+    t.string   "social_security_number",     limit: 255
+    t.string   "education_level",            limit: 255
+    t.boolean  "eligible_in_us",                         default: true
+    t.string   "hear_from",                  limit: 255
+    t.string   "communing_plan",             limit: 255
+    t.string   "country_code",               limit: 255
+    t.string   "alcohol_awareness_training", limit: 255
   end
 
   add_index "profiles", ["deleted_at"], name: "index_profiles_on_deleted_at", using: :btree

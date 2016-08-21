@@ -48,6 +48,7 @@ en:
       location:
         address: Location
       profile:
+        alcohol_awareness_training: Have you done alcohol awareness training? If so, with whom?
         communing_plan: How do you plan on communing to jobs?
         eligible_in_us: Are you legally eligible to work in the U.S.?
         experiences: What services can you perform? Check all that apply.

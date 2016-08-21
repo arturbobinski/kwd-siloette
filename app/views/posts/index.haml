@@ -16,27 +16,30 @@
           %footer
             %h4= post.title
             = first_words(post.content)
-      .col-sm-3
-        - @posts[1..2].each_with_index do |post, i|
-          = link_to post, class: 'post' do
-            %fugure= image_tag post.image.url(i > 0 ? :short : :long), class: 'full-width'
-            %footer
-              %h4= post.title
-              = first_words(post.content)
-      .col-sm-3
-        - @posts[3..4].each_with_index do |post, i|
-          = link_to post, class: 'post' do
-            %fugure= image_tag post.image.url(i > 0 ? :long : :short), class: 'full-width'
-            %footer
-              %h4= post.title
-              = first_words(post.content)
+      - if @posts[1]
+        .col-sm-3
+          - @posts[1..2].each_with_index do |post, i|
+            = link_to post, class: 'post' do
+              %fugure= image_tag post.image.url(i > 0 ? :short : :long), class: 'full-width'
+              %footer
+                %h4= post.title
+                = first_words(post.content)
+      - if @posts[3]
+        .col-sm-3
+          - @posts[3..4].each_with_index do |post, i|
+            = link_to post, class: 'post' do
+              %fugure= image_tag post.image.url(i > 0 ? :long : :short), class: 'full-width'
+              %footer
+                %h4= post.title
+                = first_words(post.content)
 
     %hr.invisible
 
-    #posts.row
-      - @posts[5..-1].each do |post|
-        .col-sm-4
-          = render post
+    - if @posts[5]
+      #posts.row
+        - @posts[5..-1].each do |post|
+          .col-sm-4
+            = render post
   - else
     .container
       = t('.no_posts')

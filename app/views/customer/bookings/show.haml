@@ -4,63 +4,61 @@
 
 - content_for :sidebar do
   = render 'shared/sidebar'
+  = render 'shared/service_image', service: service
 
 .panel.panel-default
   .panel-heading
     = link_to fa_icon('angle-double-left', text: t('common.back')), :back
   .panel-body
-    %h3 #{t('common.booking')} #{@booking.token}
     .row
       .col-sm-6
-        %h4= t('common.address')
+        %h4.text-light= t('common.booking_request')
+        %h4= t('common.service_information')
+        %p
+          #{t('common.sevice_type')}: #{link_to service.title, service}
+          %br
+          #{t('common.performers')}: #{service.performers.map(&:name).join(', ')}
+          %br
+          #{t('common.date')}: #{date_format(@booking.start_at)}
+          %br
+          #{t('common.start_time')}: #{time_format(@booking.start_at)}
+          %br
+          #{t('common.duration')}: #{t('common.hours', count: @booking.hours)}
+        %h4= t('common.customer_information')
         %address
-          = address.full_name
+          #{t('common.name')}: #{address.full_name}
           %br
-          = address.full_address
+          #{t('common.address')}: #{address.full_address}
           %br
-          = address.state_text
+          #{t('common.city')}: #{address.state_text}
           %br
-          = address.country.name
+          #{t('common.zip_code')}: #{address.zipcode}
           %br
-          = address.zipcode
+          #{t('common.date_of_birth')}:
+
       .col-sm-6
+        %h4.text-light #{t('common.referenece_number')}: <b>#{@booking.token}</b>
         %h4= t('.payment_infomation')
         %p
           = image_tag "cards/#{source.cc_type.downcase.gsub(/\s+/, '_')}.png", width: 32, alt: source.cc_type
           %span= t('common.ending_with', digits: source.last_digits)
-    .row
-      .col-sm-6
-        %h4= t('common.service')
-        = render 'shared/service_image', service: @booking.service
-      .col-sm-6
-        %h4 &nbsp;
+        %h4= t('common.event_information')
         %p
-          %b= t('activerecord.attributes.booking.event_type')
-          = @booking.event_type
+          #{t('activerecord.attributes.booking.event_type')}: #{@booking.event_type}
           %br
-          %b= t('activerecord.attributes.booking.venue_type')
-          = @booking.venue_type
+          #{t('activerecord.attributes.booking.venue_type')}: #{@booking.venue_type}
           %br
-          %b= t('activerecord.attributes.booking.number_of_guests')
-          = @booking.number_of_guests
+          #{t('activerecord.attributes.booking.number_of_guests')}: #{@booking.number_of_guests}
           %br
-          %b= t('activerecord.attributes.booking.start_at')
-          = datetime_format local_time(@booking.start_at)
+          #{t('activerecord.attributes.booking.start_at')}: #{datetime_format local_time(@booking.start_at)}
           %br
-          %b= t('activerecord.attributes.booking.end_at')
-          = datetime_format local_time(@booking.last_end_at)
+          #{t('activerecord.attributes.booking.end_at')}: #{datetime_format local_time(@booking.last_end_at)}
           %br
-          %b #{t('activerecord.attributes.booking.entry_instructions')}:
+          #{t('activerecord.attributes.booking.entry_instructions')}: #{@booking.entry_instructions}
           %br
-          = @booking.entry_instructions
+          #{t('activerecord.attributes.booking.parking_instructions')}: #{@booking.parking_instructions}
           %br
-          %b #{t('activerecord.attributes.booking.parking_instructions')}:
-          %br
-          = @booking.parking_instructions
-          %br
-          %b #{t('activerecord.attributes.booking.special_info')}:
-          %br
-          = @booking.special_info
+          #{t('activerecord.attributes.booking.special_info')}: #{@booking.special_info}
 
     .row
       .col-sm-12

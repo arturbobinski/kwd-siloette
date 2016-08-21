@@ -25,7 +25,7 @@
             = f.input :avatar, as: :file, label: false
             = f.hidden_field :avatar_cache
           %em
-            %small= t('.click_to_change')
+            %small= t('.update_profile_picture')
         .col-sm-9
           %h2.full-name= @user.name
           %p <b>#{t('.referral_code')}:</b> #{@user.referral_code}
@@ -35,6 +35,7 @@
         = f.input :gender, as: :radio_buttons, collection: User.genders.keys, label: false, required: true, wrapper: :multi_select
       = render 'users/form/main', f: f
       - if @user.dancer?
+        %hr
         = render 'users/form/dancer_profile', f: f
         = f.input :description, as: :text, label: false, required: true, input_html: { rows: 5, 'data-parsley-maxlength' => 250 }
         .row

@@ -11,23 +11,30 @@ en:
     blog: Blog
     book: Book
     bookings: Bookings
+    booking_request: Booking Request
     book_unavailable: Sorry this performer has no payment setup. Please try another.
     calendar: Calendar
     cancel: Cancel
     card_number: Card number
+    city: City
     complete: Complete
     confirm: Are your sure?
     consent_check: I consent to a background check.
+    customer_information: Customer Information
     cvc: CVC
     dancing: Dancing
+    date: Date
+    date_of_birth: Date of Birth
     day: Day
     decline: Decline
     delete: Delete
     description: Description
+    duration: Duration
     edit: Edit
     end: End
     ending_with: ending with %{digits}
     empty_bookings: No bookings yet.
+    event_information: Event Information
     extend: Extend
     feedback_received:
       one: 1 Feedback received
@@ -48,6 +55,7 @@ en:
     more: More
     modeling: Modeling
     month: Month
+    name: Name
     no_daily_schedule: Please add daily schedule to allow customers booking your service.
     no_services_in: No services in %{location}. Please try another location
     not_allowed: You are not allowed to perform this action.
@@ -57,18 +65,24 @@ en:
     payment: Payment
     payment_not_ready: Please add payment details to receive payments for your serivce.
     payment_state: Payment state
+    performers: Performers
     per_hour: / hour
     per_hr: /hr
     price_cents: Price
     rating: Rating
+    referenece_number: Reference Number
     save: Save
     save_and_continue: Save and Continue
     select: Select…
     send: Send
+    service: Service
+    service_information: Service Information
+    sevice_type: Sevice Type
     sign_in: Sign in
     sort_by: Sort by
     something_went_wrong: Something went wrong, please try later.
     start: Start
+    atart_time: Start Time
     state: State
     status: Status
     terms_of_use: terms of use
@@ -86,6 +100,7 @@ en:
     update_profile_first: You need to update profile first.
     year: Year
     you_will_earn: 'You will earn $(<span class="earn">%{amount}</span> - 5%)'
+    zip_code: Zip Code
   unit:
     above_size: Above Size
     below_size: Below Size
@@ -342,6 +357,7 @@ en:
         description: Create your <b>Services</b>. Select from Party Host, Topless Waitress, Nude Waitress, Fantasy Dance. Create as many as you want!
       not_visible_on_profile: Verified information - <b>not visible</b> on your profile
       connect_instagram: Connect Instagram
+      update_profile_picture: Update Profile Picture
     form:
       dancer_profile:
         public_profile_information: Public Profile Information
