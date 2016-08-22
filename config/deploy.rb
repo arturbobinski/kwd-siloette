@@ -19,3 +19,10 @@ set :rvm_ruby_version, '2.3.1'
 
 # Default value for keep_releases is 5
 set :keep_releases, 3
+
+after 'deploy:publishing', 'deploy:restart'
+namespace :deploy do
+  task :restart do
+    invoke 'delayed_job:restart'
+  end
+end
