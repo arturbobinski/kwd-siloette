@@ -172,6 +172,7 @@ class Booking < ActiveRecord::Base
   def prepare
     beginning_of_day = start_at.in_time_zone(ActiveSupport::TimeZone[user.time_zone]).beginning_of_day
     self.start_at = beginning_of_day + start_time.to_i.hours
+    self.total_hours = hours
     self.end_at = self.start_at + hours.to_i.hours
     self.total_cents = booking_price * 100 * hours
     self.fee_cents = (price_cents * (Setting.commission_from_seller.to_f) / 100 * hours).round
