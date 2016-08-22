@@ -26,7 +26,7 @@
               .col-sm-6
                 .form-group
                   %label.control-label= t('.booking_end_at')
-                  .text-center= time_format(@booking.last_end_at.in_time_zone(user_time_zone))
+                  .text-center= time_format(@booking.end_at.in_time_zone(user_time_zone))
               .col-sm-6
                 .form-group
                   %label.control-label= t('.extra_payment')

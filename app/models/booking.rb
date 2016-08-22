@@ -167,14 +167,6 @@ class Booking < ActiveRecord::Base
     (total_cents + extensions.paid.sum(:total_cents)) / 100
   end
 
-  def total_hours
-    hours + extensions.paid.sum(:hours)
-  end
-
-  def last_end_at
-    extensions.recent.first.try(:end_at) || end_at
-  end
-
   private
 
   def prepare

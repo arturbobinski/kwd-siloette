@@ -38,7 +38,7 @@ class BookingExtension < ActiveRecord::Base
   private
 
   def prepare
-    self.start_at = booking.last_end_at.in_time_zone(ActiveSupport::TimeZone[user.time_zone])
+    self.start_at = booking.end_at.in_time_zone(ActiveSupport::TimeZone[user.time_zone])
     self.end_at = self.start_at + hours.to_i.hours
     self.total_cents = booking_price * 100 * hours
     self.fee_cents = (price_cents * (Setting.commission_from_seller.to_f) / 100 * hours).round
@@ -52,5 +52,9 @@ class BookingExtension < ActiveRecord::Base
     else
       errors.add :base, payment.errors.full_messages.join(' ')
     end
+  end
+
+  def change_booking_time
+    booking.update end_at: end_at, total_hours: booking.total_hours + hours
   end
 end

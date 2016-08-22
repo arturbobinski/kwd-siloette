@@ -36,8 +36,8 @@ module Customer
     end
 
     def get_start_at
-      @start_at = @booking.last_end_at.in_time_zone(user_time_zone)
-      @calendar = Bookings::Calendar.new(@booking.last_end_at, @performer, user_time_zone)
+      @start_at = @booking.end_at.in_time_zone(user_time_zone)
+      @calendar = Bookings::Calendar.new(@booking.end_at, @performer, user_time_zone)
     end
   end
 end

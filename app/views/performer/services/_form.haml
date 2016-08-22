@@ -33,7 +33,7 @@
       .form-group.with-not-editable
         = f.label :price, "* #{t('simple_form.labels.service.price')}", class: 'control-label'
         .row
-          = f.input :price, label: false, input_html: { data: { 'parsley-type' => :number, 'parsley-min' => 10, 'parsley-max' => 2000 } }, wrapper_html: { class: 'col-xs-10' }, hint: raw("<div id='price-hint' class='text-muted' style='display: none;'>#{fa_icon 'info-circle'} #{t('common.you_will_earn').html_safe}</div>")
+          = f.input :price, label: false, input_html: { data: { 'parsley-type' => :number, 'parsley-min' => 10, 'parsley-max' => 2000 } }, wrapper_html: { class: 'col-xs-10' }, hint: raw("<div id='price-hint' class='text-muted' style='display: none;'>#{fa_icon 'info-circle'} #{t('common.you_will_earn', amount: (f.object.price * 95 / 100).round(2)).html_safe}</div>")
           .col-xs-2.no-pad
             .price-unit
               = t('common.per_hour')

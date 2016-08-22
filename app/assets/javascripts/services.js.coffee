@@ -12,7 +12,7 @@ class @ServiceForm
     @authenticityToken = $('[name="authenticity_token"]').val()
 
     @$categorySelect.on 'change', @showCategoryHint
-    @$priceInput.on 'change', @showPriceHint
+    @$priceInput.on 'change keyup', @showPriceHint
     @$serviceImages.on 'cocoon:before-insert', @beforeInsertImage
     @$serviceImages.on 'cocoon:after-insert', @afterInsertImage
     @$serviceImages.on 'cocoon:before-remove', @beforeRemoveImage
@@ -39,8 +39,8 @@ class @ServiceForm
     val = @$priceInput.val()
     price = parseFloat val
 
-    if !isNaN(price) && isFinite(val) && price > 0
-      $('.earn').text(price)
+    if !isNaN(price) && isFinite(val)
+      $('.earn').text((price * 95 / 100).toFixed(2))
       $('#price-hint').show()
     else
       $('#price-hint').hide()

@@ -99,7 +99,7 @@ en:
     upload_picture: Upload picture
     update_profile_first: You need to update profile first.
     year: Year
-    you_will_earn: 'You will earn $(<span class="earn">%{amount}</span> - 5%)'
+    you_will_earn: 'You will earn $<span class="earn">%{amount}</span>'
     zip_code: Zip Code
   unit:
     above_size: Above Size
