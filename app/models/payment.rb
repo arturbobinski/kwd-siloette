@@ -54,10 +54,8 @@ class Payment < ActiveRecord::Base
         amount:           total_cents,
         currency:         payable.currency,
         customer:         source.customer_profile_id,
-        application_fee:  fee_cents,
         description:      payable.description,
-        metadata:         { order_id: payable.metadata },
-        destination:      payable.performer.connected_stripe_account_id
+        metadata:         { order_id: payable.metadata }
       })
       update response_code: chrg.id, cvv_response_message: nil
       complete!

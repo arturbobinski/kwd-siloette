@@ -45,7 +45,7 @@ class Booking < ActiveRecord::Base
 
   aasm column: :state do
     state :scheduling, initial: true
-    state :address, :payment, :pending, :accepted, :declined, :canceled, :paid, :completed
+    state :address, :payment, :pending, :accepted, :declined, :canceled, :paid, :verified, :completed
 
     event :schedule do
       transitions from: [:address, :payment], to: :scheduling
@@ -73,6 +73,10 @@ class Booking < ActiveRecord::Base
 
     event :decline, after: :notify do
       transitions from: :pending, to: :declined
+    end
+
+    event :verify, after: :transfer_payment do
+      transitions from: :paid, to: :verified
     end
 
     event :complete do
