@@ -18,6 +18,26 @@
   .jumbotron {
     color: white;
 
+    .container {
+      padding-top: 100px;
+    }
+
+    h1, .h1 {
+      padding-bottom: 50px;
+    }
+
+    .btn-trans {
+      display: block;
+      font-family: $montserrat;
+      font-size: 20px;
+      padding: 5px 12px;
+      text-transform: uppercase;
+    }
+
+    #categories li {
+      margin-bottom: 5px;
+    }
+
     @media (max-width: $screen-xs-max) {
       background-image: image-url('main-bg-small.jpg');
     }
@@ -27,14 +47,25 @@
       height: 0;
       padding-bottom: 56.25%;
       padding-top: 0;
-    }
 
-    .container {
-      padding-top: 270px;
-    }
+      #categories {
+        li {
+          display: inline-block;
+          margin-right: 30px;
 
-    h1, .h1 {
-      font-size: 60px;
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+
+      h1, .h1 {
+        padding-bottom: 150px;
+      }
+
+      p {
+        font-size: 28px;
+      }
     }
   }
 

@@ -17,9 +17,9 @@
           %br
           #{t('common.performers')}: #{service.performers.map(&:name).join(', ')}
           %br
-          #{t('common.date')}: #{date_format(@booking.start_at)}
+          #{t('common.date')}: #{date_format local_time(@booking.start_at)}
           %br
-          #{t('common.start_time')}: #{time_format(@booking.start_at)}
+          #{t('common.start_time')}: #{time_format local_time(@booking.start_at)}
           %br
           #{t('common.duration')}: #{t('common.hours', count: @booking.hours)}
         %h4= t('common.customer_information')

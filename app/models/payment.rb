@@ -15,6 +15,8 @@ class Payment < ActiveRecord::Base
       less_than_or_equal_to: 1000000
     }
 
+  serialize :cvv_response_message, Hash
+
   belongs_to :payable, polymorphic: true
   belongs_to :source, polymorphic: true
 
@@ -57,7 +59,7 @@ class Payment < ActiveRecord::Base
         description:      payable.description,
         metadata:         { order_id: payable.metadata }
       })
-      update response_code: chrg.id, cvv_response_message: nil
+      update response_code: chrg.id, cvv_response_message: chrg
       complete!
     end
   rescue Stripe::CardError => e

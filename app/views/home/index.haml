@@ -12,9 +12,14 @@
     .row
       .col-sm-12
         .text-center
-          /%p= t('.launching_soon')
-          %h1.text-light= t('.slogan')
-          /%p= t('.description')
+          %h1.text-uppercase= t('.slogan')
+          %ul#categories.list-unstyled
+            - Category.female.each do |category|
+              %li
+                %span.btn.btn-trans= category.name
+          %hr.invisible
+          %p.text-uppercase= t('.description')
+          %hr.invisible
         .row
           .col-sm-4.col-sm-offset-4
             = search_form_for @q, url: search_path, method: :get do |f|

@@ -123,6 +123,17 @@ form .table > tbody > tr > td {
   color: $text-light-grey;
 }
 
+.btn-trans {
+  background-color: transparent;
+  border-color: $brand-primary;
+  border-width: 2px;
+
+  &:hover {
+    border-color: darken($brand-primary, 12%);
+    color: $brand-primary;
+  }
+}
+
 .btn-facebook {
   @include button-variant($btn-primary-color, $btn-facebook-bg, $btn-default-border);
 }
