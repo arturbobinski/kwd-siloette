@@ -41,6 +41,13 @@ class Address < ActiveRecord::Base
     [address1, address2].reject(&:blank?).join(' ')
   end
 
+  def age
+    if dob
+      age = Date.today.year - dob.year
+      age -= 1 if Date.today < dob + age.years
+    end
+  end
+
   def state_text
     state.try(:abbr) || state.try(:name) || state_name
   end

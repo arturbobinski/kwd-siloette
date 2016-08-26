@@ -88,7 +88,7 @@ module Customer
         :email, :event_type_id, :venue_type_id, :performer_id, :service_id, :start_at,
         :start_time, :hours, :number_of_guests, :special_info, :entry_instructions, :parking_instructions,
         address_attributes: [:id, :first_name, :last_name, :address1, :address2, :phone, :country_id,
-          :city, :country_code, :state_name, :state_id, :zipcode],
+          :city, :country_code, :state_name, :state_id, :zipcode, :dob],
         payment_attributes: [:id, :source_id, :source_type]
       ).merge(last_ip_address: request.remote_ip)
     end

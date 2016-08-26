@@ -14,6 +14,7 @@ en:
         address2: Address line 2
         city: City
         country_id: Country
+        dob: Date of Birth
         first_name: First name
         last_name: Last name
         phone: Phone
