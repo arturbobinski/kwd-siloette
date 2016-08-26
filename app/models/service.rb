@@ -57,6 +57,10 @@ class Service < ActiveRecord::Base
     price * (100 + (Setting.commission_from_seller.to_f - 5)) / 100
   end
 
+  def performers_list
+    performers.map(&:name).join(', ')
+  end
+
   private
 
   def generate_title

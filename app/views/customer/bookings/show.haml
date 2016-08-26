@@ -17,11 +17,11 @@
         %p
           #{t('common.sevice_type')}: #{link_to service.title, service}
           %br
-          #{t('common.performers')}: #{service.performers.map(&:name).join(', ')}
+          #{t('common.performers')}: #{service.performers_list}
           %br
-          #{t('common.date')}: #{date_format local_time(@booking.start_at)}
+          #{t('common.date')}: #{@booking.decorate.start_date_for_customer}
           %br
-          #{t('common.start_time')}: #{time_format local_time(@booking.start_at)}
+          #{t('common.start_time')}: #{@booking.decorate.start_time_for_customer}
           %br
           #{t('common.duration')}: #{t('common.hours', count: @booking.hours)}
         %h4= t('common.customer_information')
@@ -50,9 +50,9 @@
           %br
           #{t('activerecord.attributes.booking.number_of_guests')}: #{@booking.number_of_guests}
           %br
-          #{t('activerecord.attributes.booking.start_at')}: #{datetime_format local_time(@booking.start_at)}
+          #{t('activerecord.attributes.booking.start_at')}: #{@booking.decorate.start_at_for_customer}
           %br
-          #{t('activerecord.attributes.booking.end_at')}: #{datetime_format local_time(@booking.end_at)}
+          #{t('activerecord.attributes.booking.end_at')}: #{@booking.decorate.end_at_for_customer}
           %br
           #{t('activerecord.attributes.booking.entry_instructions')}: #{@booking.entry_instructions}
           %br

@@ -6,7 +6,7 @@ class Profile < ActiveRecord::Base
   BODY_TYPES = ['Short/Petite', 'Short/Voluptuous', 'Athletic', 'Full Figure', 'Tall/Slim', 'Tall/Voluptuous']
   EXPERIENCE_LEVELS = ['Less than 1 year', '1-3 Years', '3-5 Years', 'More than 5 years']
   SOURCES = ['Another Performer', 'Google', 'Instagram', 'Twitter', 'Facebook', 'Friend']
-  COMMUNING_PLANS = %w(own_car public_transport borrowed_car other)
+  COMMUNING_PLANS = %w(own_car public_transport borrowed_car ride_sharing)
   # WEIGHTS = (90..210).step(10)
 
   enum ethnicity: %i(african_american asian caucasian eastern_asian first_nation latin_american middle_eastern

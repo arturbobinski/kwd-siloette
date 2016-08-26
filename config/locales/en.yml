@@ -141,7 +141,7 @@ en:
           own_car: Own Car
           public_transport: Public Transport
           borrowed_car: Borrowed Car
-          other: Other
+          ride_sharing: Ride Sharing
         ethnicities:
           caucasian: Caucasian
           african_american: African American
@@ -217,7 +217,7 @@ en:
       slogan: On Demand
       description: For Your Next Party or Event
       browse_all_services: Browse All Services
-      whats_new: Siloette is an online platform to book lingerie and topless waitresses, gogo dancers and models on demand.
+      whats_new: Siloette is an online platform to book lingerie waitresses, gogo dancers and models on demand.
       why: Simply search for the type of performer you want for you party, event or club and you can book them from your device in two minutes.
       how_it_works:
         title: Know exactly what you're getting.
@@ -338,7 +338,7 @@ en:
         notice: Schedule saved successfully.
   users:
     apply:
-      complete_application: Complete the application process bellow
+      complete_application: Please complete the application process below
       verification_in_progress: Your account is going through our verification process. You will be notified shortly of the result.
       work_experience: Work Experience
     show:

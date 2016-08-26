@@ -51,6 +51,7 @@ gem 'carmen', '~> 1.0.2'
 gem 'aasm', '~> 4.11.0'
 gem 'validates_timeliness', '~> 4.0.2'
 gem 'detect_timezone_rails', '~> 0.0.5'
+gem 'draper', '~> 2.1.0'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 
