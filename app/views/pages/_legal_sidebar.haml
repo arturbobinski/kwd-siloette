@@ -1,0 +1,9 @@
+#sidebar
+  .panel.panel-default
+    .panel-heading
+      = t('common.legal')
+    .panel-body
+      %ul.list-unstyled
+        - Page.legal.each do |page|
+          %li(class="#{'active' if params[:id] == page.slug}")
+            = link_to fa_icon('circle', text: page.title), page_path(page)

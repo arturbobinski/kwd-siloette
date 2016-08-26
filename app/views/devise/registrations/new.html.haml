@@ -24,7 +24,7 @@
           = f.input :password, label: false, required: true, input_html: { 'data-parsley-minlength' => 6 }
           = f.input :password_confirmation, label: false, required: true, input_html: { data: { 'parsley-minlength' => 6, 'parsley-equalto' => '#user_password' } }
           .form-group
-            =# f.input :accept_terms, as: :boolean, label: t('common.accept_terms', link: link_to(t('common.terms_of_use'), page_path('terms-of-use', md: 1), data: { toggle: 'modal', target: '#common-modal' })).html_safe, required: true, input_html: { 'data-parsley-required-message' => I18n.t('activerecord.errors.models.user.attributes.accept_terms.blank') }
+            =# f.input :accept_terms, as: :boolean, label: t('common.accept_terms', link: link_to(t('common.terms_of_use_and_privacy'), page_path('terms-of-use', md: 1), data: { toggle: 'modal', target: '#common-modal' })).html_safe, required: true, input_html: { 'data-parsley-required-message' => I18n.t('activerecord.errors.models.user.attributes.accept_terms.blank') }
             %br
             %p.text-muted= fa_icon 'info-circle', text: t('common.agree_terms_conditions').html_safe
           .actions

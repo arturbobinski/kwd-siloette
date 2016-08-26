@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822041214) do
+ActiveRecord::Schema.define(version: 20160826171557) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "first_name",   limit: 255
@@ -228,12 +228,13 @@ ActiveRecord::Schema.define(version: 20160822041214) do
     t.text     "body",       limit: 65535
     t.string   "slug",       limit: 255
     t.boolean  "active",                   default: true
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
-    t.boolean  "for_dancer",               default: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "page_type",  limit: 4,     default: 0
   end
 
   add_index "pages", ["active"], name: "index_pages_on_active", using: :btree
+  add_index "pages", ["page_type"], name: "index_pages_on_page_type", using: :btree
   add_index "pages", ["slug"], name: "index_pages_on_slug", using: :btree
 
   create_table "payments", force: :cascade do |t|

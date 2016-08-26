@@ -1,0 +1,9 @@
+#sidebar
+  .panel.panel-default
+    .panel-heading
+      = t('common.faqs')
+    .panel-body
+      %ul.list-unstyled
+        - Page.faq.each do |page|
+          %li(class="#{'active' if params[:id] == page.slug}")
+            = link_to fa_icon('circle', text: page.title.gsub('FAQs for ', '')), page_path(page)

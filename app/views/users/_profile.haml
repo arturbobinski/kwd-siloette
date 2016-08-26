@@ -22,9 +22,10 @@
   %li
     %b #{t('.languages_spoken')}:
     %span= @profile.languages.pluck(:name).join(', ')
-  %li
-    %b #{t('.education_level')}:
-    %span= @profile.education_level
+  - unless @profile.education_level.blank?
+    %li
+      %b #{t('.education_level')}:
+      %span= @profile.education_level
   / %li
   /   %b #{t('.bust')}:
   /   %span= @profile.bust.humanize

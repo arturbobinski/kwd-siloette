@@ -36,6 +36,7 @@ en:
     empty_bookings: No bookings yet.
     event_information: Event Information
     extend: Extend
+    faqs: FAQs
     feedback_received:
       one: 1 Feedback received
       other: '%{count} Feedbacks received'
@@ -48,6 +49,7 @@ en:
     images: Images
     information: Information
     leave_service: Leave service
+    legal: Legal
     less: Less
     location: Location
     male: Male
@@ -85,7 +87,7 @@ en:
     atart_time: Start Time
     state: State
     status: Status
-    terms_of_use: terms of use
+    terms_of_use_and_privacy: Terms and Use and Privacy
     today: Today
     facebook: Facebook
     instagram: Instagram

@@ -13,10 +13,16 @@
     %meta{name: 'robots', content: 'index, follow'}
     %meta{name: 'googlebot', content: 'index, follow'}
 
-  %div{class: ('container' unless @page.for_dancer)}
+  %div{class: ('container' unless @page.legal? || @page.faq? || @page.for_dancer?)}
     %h4= @page.title
     = @page.body.html_safe
 
-  - if @page.for_dancer
+  - if @page.legal?
+    - content_for :sidebar do
+      = render 'legal_sidebar'
+  - elsif @page.faq?
+    - content_for :sidebar do
+      = render 'faq_sidebar'
+  - elsif @page.for_dancer?
     - content_for :sidebar do
       = render 'shared/sidebar'
