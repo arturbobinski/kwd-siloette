@@ -47,6 +47,7 @@ class @ServiceForm
       $('#price-hint').hide()
 
   setPrimayPhoto: ->
+    @$el.find('.upload-image-placeholder').removeClass 'primary'
     images = @$el.find('.upload-image-placeholder img:visible')
     console.log images
     i = 0
