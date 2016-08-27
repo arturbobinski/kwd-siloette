@@ -10,6 +10,7 @@ class @ServiceForm
     @$priceInput = $('#service_price')
     @$serviceImages = $('#service-images')
     @authenticityToken = $('[name="authenticity_token"]').val()
+    @setPrimayPhoto()
 
     @$categorySelect.on 'change', @showCategoryHint
     @$priceInput.on 'change keyup', @showPriceHint
@@ -45,6 +46,17 @@ class @ServiceForm
     else
       $('#price-hint').hide()
 
+  setPrimayPhoto: ->
+    images = @$el.find('.upload-image-placeholder img:visible')
+    console.log images
+    i = 0
+    while i < images.length
+      $img = $(images[i])
+      unless $img.attr('src') == ''
+        $img.closest('.upload-image-placeholder').addClass 'primary'
+        break
+      i++
+
   beforeInsertImage: (e, item) =>
 
   afterInsertImage: (e, item) =>
@@ -65,13 +77,15 @@ class @ServiceForm
           return
     return
 
-  afterRemoveImage: (e, item) ->
+  afterRemoveImage: (e, item) =>
     $el = $(e.target)
     if $el.find('.upload-image-placeholder:visible').length < 4
       $el.find('.add_fields').click()
     $('#service_images_count').val($el.find('img:visible').length)
+    @setPrimayPhoto()
 
   fileUpload: ($el) ->
+    _this = @
     serviceId = @id
     $msg = $el.find('.fileupload-text')
     token = @authenticityToken
@@ -104,6 +118,7 @@ class @ServiceForm
           $idInput.attr('id', $idInput.attr('id').replace('_destroy', 'id'))
           $idInput.val(id).insertAfter($el)
         $('#service_images_count').val(parseInt($('#service_images_count').val()) + 1)
+        _this.setPrimayPhoto()
       progress: (e, data) ->
         progress = parseInt(data.loaded / data.total * 100, 10)
         $msg.text(progress + '%').css(color: 'white').fadeIn()

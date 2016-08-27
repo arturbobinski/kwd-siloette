@@ -12,6 +12,7 @@
   background-image: image-url('upload.png');
   background-position: center;
   background-repeat: no-repeat;
+  border: 2px solid transparent;
   @include border-radius($border-radius-base);
   height: 0;
   float: left;
@@ -20,16 +21,20 @@
   margin-bottom: 15px;
   margin-right: 15px;
   position: relative;
-  padding-bottom: -webkit-calc(66.66667% - 20px);
-  padding-bottom: calc(66.66667% - 20px);
+  padding-bottom: -webkit-calc(66.66667% - 24px);
+  padding-bottom: calc(66.66667% - 24px);
   width: -webkit-calc(50% - 15px);
   width: calc(50% - 15px);
 
   @media (min-width: $screen-sm-min) {
-    padding-bottom: -webkit-calc(33.33333% - 20px);
-    padding-bottom: calc(33.33333% - 20px);
+    padding-bottom: -webkit-calc(33.33333% - 24px);
+    padding-bottom: calc(33.33333% - 24px);
     width: -webkit-calc(25% - 15px);
     width: calc(25% - 15px);
+  }
+
+  &.primary {
+    border-color: $brand-primary;
   }
 
   &:hover {
