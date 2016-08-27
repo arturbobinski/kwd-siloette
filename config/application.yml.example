@@ -1,6 +1,7 @@
 http_user: http_user
 http_password: http_password
 
+default_admin_email: admin@siloette.co
 default_admin_passowrd: password
 host: siloette.com
 

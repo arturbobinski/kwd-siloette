@@ -24,9 +24,10 @@
         = l.hidden_field :lat
         = l.hidden_field :lng
         = l.input :address, label: false, input_html: { class: 'geocomplete', data: { prefix: 'user_location_attributes_' } }
-    .col-sm-6
-      - if @user.instagram_handle.blank?
-        = link_to fa_icon('instagram', text: t('.connect_instagram')), omniauth_authorize_path(:user, :instagram, state: 'dancer'), class: 'btn btn-block btn-instagram text-uppercase'
-        = f.input :instagram_handle, label: false, required: true, input_html: { class: 'hidden-virtural' }
-      - else
-        = f.input :instagram_handle, label: false, input_html: { value: @user.instagram_handle, disabled: true }
+    - unless Rails.env.production?
+      .col-sm-6
+        - if @user.instagram_handle.blank?
+          = link_to fa_icon('instagram', text: t('.connect_instagram')), omniauth_authorize_path(:user, :instagram, state: 'dancer'), class: 'btn btn-block btn-instagram text-uppercase'
+          = f.input :instagram_handle, label: false, required: true, input_html: { class: 'hidden-virtural' }
+        - else
+          = f.input :instagram_handle, label: false, input_html: { value: @user.instagram_handle, disabled: true }

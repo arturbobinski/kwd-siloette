@@ -22,7 +22,7 @@ class UsersController < ApplicationController
         UserMailer.user_verification_email(@user).deliver_later
         UserMailer.user_verifying_email(@user).deliver_later
         redirect_to :back
-      elsif path = next_path
+      elsif path = next_path(@user)
         redirect_to path
       else
         redirect_to edit_user_path(@user), notice: t('.notice')

@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
 
-  default from: 'admin@strpprs.com'
+  default from: Figaro.env.default_admin_email
   layout 'mailer'
 end

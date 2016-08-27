@@ -83,7 +83,7 @@ class @ServiceForm
       autoUpload: true
       acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
       formData: { authenticity_token: token, service_id: serviceId }
-      maxFileSize: 3 * 1000 * 1000 # 3Mb
+      maxFileSize: 30 * 1000 * 1000 # 30Mb
       dropZone: $el
       processalways: (e, data) ->
         index = data.index

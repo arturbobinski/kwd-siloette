@@ -32,7 +32,7 @@
                 = price_with_unit(@service)
                 %small= t('.tips_not_included')
             .col-xs-5.text-right
-              - unless is_owner
+              - unless is_owner || Rails.env.production?
                 = link_to t('common.book'), new_customer_booking_path(service_id: @service.id), class: 'btn btn-primary'
           .row
             .col-sm-12
