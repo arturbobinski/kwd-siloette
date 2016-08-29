@@ -17,12 +17,13 @@
 .container
   .row
     .col-sm-9
-      .post-title
-        %span.time-ago
-          = fa_icon 'clock-o', text: "#{time_ago_in_words(@post.created_at)} ago"
-        %span.post-author
-          %em by
-          #{@post.author.name}
+      - if false
+        .post-title
+          %span.time-ago
+            = fa_icon 'clock-o', text: "#{time_ago_in_words(@post.created_at)} ago"
+          %span.post-author
+            %em by
+            #{@post.author.name}
       %hr.invisible
       .post-content
         = @post.content.html_safe

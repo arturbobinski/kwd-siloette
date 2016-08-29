@@ -18,7 +18,7 @@ class UserMailer < ApplicationMailer
   def user_verification_email(user)
     @user = user
 
-    mail(to: Figaro.env.default_admin_email, subject: 'New user verification required!')
+    mail(to: 'rs@siloette.co', subject: 'New user verification required!')
   end
 
   def user_verified_mail(user)
