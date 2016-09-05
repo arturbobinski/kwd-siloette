@@ -204,6 +204,16 @@ en:
           attributes:
             images_count:
               min: Required at least 4 images
+  api:
+    surveys:
+      connect_call:
+        questions:
+          - Please input verification code you received from our site and then press star.
+          - Did the performer arrive on time?
+          - Was the performer's profile accurate?
+          - Are you satisfied with the performance?
+        servey_success: Thank you for giving feedback. In appreciation we will be sending you something special. Yours truly, The Siloette team.
+        invalid_phone: Sorry, you seem at wrong place. Good bye!
   links:
     become_siloette: Become a Siloette
     create_service: Create service

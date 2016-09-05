@@ -13,6 +13,7 @@ class Address < ActiveRecord::Base
   validate :state_validate
 
   scope :recent, -> { order(updated_at: :desc) }
+  scope :by_phone_number, ->(number) { where('CONCAT(country_code, phone) = ?', number) }
 
   def self.build_default
     new country: Country.find_by(iso: 'US')

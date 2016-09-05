@@ -19,6 +19,9 @@ Rails.application.routes.draw do
       get :check_perform_name, on: :collection
     end
     resources :states, only: [:index]
+
+    match 'connect_call' => 'surveys#connect_call', via: [:get, :post]
+    match 'get_answer' => 'surveys#get_answer', via: [:get, :post]
   end
 
   namespace :performer, path: '/' do

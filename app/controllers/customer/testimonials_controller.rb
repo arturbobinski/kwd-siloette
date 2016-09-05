@@ -7,7 +7,7 @@ module Customer
     end
 
     def create
-      @testimonial = current_user.testimonials.new(testimonial_params.merge(service: @service, receiver: @service.user))
+      @testimonial = current_user.testimonials.new(testimonial_params.merge(service: @service))
 
       if @testimonial.save
         redirect_to customer_bookings_path, notice: t('.notice')
