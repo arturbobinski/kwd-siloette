@@ -33,7 +33,7 @@ module Api
         session[:servey]['score'] << params[:Digits].to_i if session[:servey]['step'] > 0
         complete_servey if session[:servey]['step'] > 3
       else
-        if @booking = Booking.find_by(verification_code: params[:Digits].to_i)
+        if @booking = @address.bookings.find_by(verification_code: params[:Digits].to_i)
           session[:servey] = {
             'booking_id' => @booking.id,
             'step' => 1,

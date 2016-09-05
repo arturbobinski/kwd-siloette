@@ -1,0 +1,15 @@
+%p Dear #{@user.first_name},
+
+%p Congratulations! Your booking for #{@service.title} was completed. Here are booking details;
+              
+= render 'booking', role: :user
+
+%p
+  %strong Give feedback
+
+%p
+  It will be helpful for us to hear about #{@performer.perform_name}.
+  %br
+  Please visit #{link_to 'here', new_customer_service_testimonial_url(service_id: @booking.service_id)} or simply call on #{Figaro.env.twillio_admin_number} and use this code #{@booking.verification_code} to give feedback.
+
+%p Enjoy your party!

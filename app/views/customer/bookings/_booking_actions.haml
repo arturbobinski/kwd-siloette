@@ -11,5 +11,5 @@
   %li= link_to fa_icon('clock-o', text: t('common.extend')), new_customer_booking_booking_extension_path(booking), class: button_class
 - if booking.destroyable?
   %li= link_to fa_icon('trash', text: t('common.delete')), customer_booking_path(booking, authenticity_token: form_authenticity_token), method: :delete, data: { confirm: 'Are you sure?' }, class: button_class
-- if booking.may_complete?
-  %li= link_to fa_icon('check', text: t('common.complete')), complete_customer_booking_path(booking, authenticity_token: form_authenticity_token), method: :post, class: button_class
+- if booking.completed? && !current_user.testimonials.where(service_id: booking.service_id).where('created_at > ?', booking.end_at).present?
+  %li= link_to fa_icon('thumbs-up', text: t('common.feedback')), new_customer_service_testimonial_path(service_id: booking.service_id)

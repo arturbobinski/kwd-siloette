@@ -46,7 +46,7 @@ class UserMailer < ApplicationMailer
     @booking = booking
     load_booking_resoruces
 
-    mail(to: @performer.email, subject: 'You have new booking!')
+    mail(to: @performer.email, subject: 'Booking verified!')
   end
 
   def booking_declined_email(booking)
@@ -76,6 +76,13 @@ class UserMailer < ApplicationMailer
     load_booking_resoruces
 
     mail(to: @user.email, subject: 'Service start soon!')
+  end
+
+  def booking_completed_email(booking)
+    @booking = booking
+    load_booking_resoruces
+
+    mail(to: @user.email, subject: 'Booking completed!')
   end
 
   def payment_completed_email_to_user(payment)
@@ -117,9 +124,16 @@ class UserMailer < ApplicationMailer
 
   def load_payment_resoruces
     @payable = @payment.payable
-    @service = @payable.service
     @source = @payment.source
-    @user = @payable.user
-    @performer = @service.performer
+    if @payable.is_a?(Booking)
+      @service = @payable.service
+      @user = @payable.user
+      @performer = @payable.performer
+    elsif @payable.is_a?(BookingExtension)
+      @booking = @payable.booking
+      @service = @booking.service
+      @user = @booking.user
+      @performer = @booking.performer
+    end
   end
 end

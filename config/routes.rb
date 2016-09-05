@@ -59,7 +59,6 @@ Rails.application.routes.draw do
     resources :bookings do
       member do
         get :cancel
-        post :complete
       end
       resources :booking_extensions, only: [:new, :create], path: '/extensions'
     end

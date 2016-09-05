@@ -75,12 +75,6 @@ module Customer
       redirect_to :back, notice: t('.notice')
     end
 
-    def complete
-      redirect_to :back, alert: t('common.not_allowed') and return unless @booking.may_complete?
-      @booking.complete!
-      redirect_to new_customer_service_testimonial_path(service_id: @booking.service_id), notice: t('.notice')
-    end
-
     private
 
     def booking_params

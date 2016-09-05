@@ -45,6 +45,10 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.booking_start_email_to_user Booking.last
   end
 
+  def booking_completed_email
+    UserMailer.booking_completed_email Booking.last
+  end
+
   def payment_completed_email_to_user
     UserMailer.payment_completed_email_to_user Payment.last
   end

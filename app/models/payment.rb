@@ -59,7 +59,7 @@ class Payment < ActiveRecord::Base
         description:      payable.description,
         metadata:         { order_id: payable.metadata }
       })
-      update response_code: chrg.id, cvv_response_message: chrg
+      update response_code: chrg.id
       complete!
     end
   rescue Stripe::CardError => e

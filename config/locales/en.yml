@@ -37,6 +37,7 @@ en:
     event_information: Event Information
     extend: Extend
     faqs: FAQs
+    feedback: Feedback
     feedback_received:
       one: 1 Feedback received
       other: '%{count} Feedbacks received'
