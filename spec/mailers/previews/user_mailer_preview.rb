@@ -25,6 +25,10 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.booking_accepted_email Booking.last
   end
 
+  def booking_verified_email
+    UserMailer.booking_verified_email Booking.last
+  end
+
   def booking_declined_email
     UserMailer.booking_declined_email Booking.last
   end

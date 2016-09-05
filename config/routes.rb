@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
     match 'connect_call' => 'surveys#connect_call', via: [:get, :post]
     match 'get_answer' => 'surveys#get_answer', via: [:get, :post]
+    post :get_sms, to: 'messages#get_sms'
   end
 
   namespace :performer, path: '/' do

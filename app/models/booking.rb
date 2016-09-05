@@ -75,7 +75,7 @@ class Booking < ActiveRecord::Base
       transitions from: :pending, to: :declined
     end
 
-    event :verify, after: :transfer_payment do
+    event :verify, after: [:notify, :transfer_payment] do
       transitions from: :paid, to: :verified
     end
 
@@ -144,6 +144,10 @@ class Booking < ActiveRecord::Base
             "Love the Siloette Team xo"
       TwilioService.new.send_sms(address.full_phone_number, msg)
       Booking.delay(run_at: (start_at - 1.hour)).remind(id)
+    when :verified
+      UserMailer.booking_verified_email(self).deliver_later
+      msg = "Your booking was successfully verified and you will receive payment in 36 hours."
+      TwilioService.new.send_sms(performer.full_phone_number, msg)
     when :declined
       UserMailer.booking_declined_email(self).deliver_later
       msg = "Unfortunately #{performer.perform_name} isn’t available for your booking. " \
@@ -169,6 +173,9 @@ class Booking < ActiveRecord::Base
     msg = "You have a new booking started in an hour\n" \
           "It’s almost showtime. #{performer.perform_name} will arrive in one hour."
     TwilioService.new.send_sms(address.full_phone_number, msg)
+  end
+
+  def transfer_payment
   end
 
   def process_payment

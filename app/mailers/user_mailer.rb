@@ -42,6 +42,13 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Booking accepted!')
   end
 
+  def booking_verified_email(booking)
+    @booking = booking
+    load_booking_resoruces
+
+    mail(to: @performer.email, subject: 'You have new booking!')
+  end
+
   def booking_declined_email(booking)
     @booking = booking
     load_booking_resoruces

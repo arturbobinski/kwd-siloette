@@ -32,6 +32,8 @@ class Profile < ActiveRecord::Base
   validates :hear_from, inclusion: { in: SOURCES }, if: 'hear_from'
   validates :communing_plan, inclusion: { in: COMMUNING_PLANS }, if: 'communing_plan'
 
+  scope :by_phone_number, ->(number) { where('CONCAT(country_code, phone_number) = ?', number) }
+
   after_save :update_services
 
   def full_phone_number
