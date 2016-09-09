@@ -5,7 +5,7 @@ en:
     add_more: Add more
     address: Address
     admin_required: You need admin privilege to continue. Please login as admin and try again.
-    agree_terms_conditions: 'By signing up, I agree to Siloette’s <a href="/pages/terms-of-use" target="_blank">Terms of Service</a>, <a href="javascript: void(0);">Content Policy</a>, <a href="javascript: void(0);">Privacy Policy</a> and <a href="javascript: void(0);">Software License Agreement</a>.'
+    agree_terms_conditions: 'By signing up, I agree to Siloette’s <a href="/pages/terms-of-use" target="_blank">Terms of Service</a>, <a href="/pages/content-policy">Content Policy</a>, <a href="/pages/privacy-policy">Privacy Policy</a> and <a href="/pages/software-license-agreement">Software License Agreement</a>.'
     all: All
     back: Back
     blog: Blog
