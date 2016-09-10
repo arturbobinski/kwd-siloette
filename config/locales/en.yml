@@ -42,6 +42,7 @@ en:
       one: 1 Feedback received
       other: '%{count} Feedbacks received'
     female: Female
+    gender: Gender
     home: Home
     hosting: Hosting
     hours:
@@ -89,6 +90,7 @@ en:
     state: State
     status: Status
     terms_of_use_and_privacy: Terms and Use and Privacy
+    transgender: Transgender
     today: Today
     facebook: Facebook
     instagram: Instagram

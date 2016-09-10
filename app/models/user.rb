@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   MAX_AVATAR_SIZE = 30.megabytes
 
   enum role: %i(customer dancer company admin)
-  enum gender: %i(male female)
+  enum gender: %i(male female transgender)
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

@@ -21,7 +21,7 @@ end
 
 # ['Waiter'].each do |name|
 #   Category.find_or_create_by(name: name) do |category|
-#     category.kind = 0
+#     category.kind = 1
 #     category.description = descriptions[name]
 #   end
 # end
