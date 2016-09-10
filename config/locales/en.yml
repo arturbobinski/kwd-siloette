@@ -196,9 +196,9 @@ en:
             email:
               taken: Email already taken
             accept_terms:
-              blank: You should accept terms of use.
+              blank: You must agree to the terms and conditions.
             consent_check:
-              blank: You should consent.
+              blank: We require all performers to consent to a background check to ensure safety of all parties.
             slug:
               taken: ID already taken
         services:
@@ -352,6 +352,7 @@ en:
   users:
     apply:
       complete_application: Please complete the application process below
+      description: Please fill out the following information and a representative will contact you within 24 hours to complete a short interview.
       verification_in_progress: Your account is going through our verification process. You will be notified shortly of the result.
       work_experience: Work Experience
     show:
