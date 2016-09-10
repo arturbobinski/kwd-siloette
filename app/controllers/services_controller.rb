@@ -4,7 +4,7 @@ class ServicesController < ApplicationController
 
   def search
     @q = Service.open.active.search(params[:q])
-    @q.sorts = 'rating desc' if @q.sorts.empty?
+    @q.sorts = 'price_cents desc' if @q.sorts.empty?
 
     @services = @q.result.includes(:category, :primary_image, performers: :profile).page(params[:page])
   end
