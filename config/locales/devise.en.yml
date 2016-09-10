@@ -59,6 +59,7 @@ en:
         or_with_email: '…or with your email:'
         forgot_password: Forgot your password?
         create_account: 'Or create new <a href="%{link}">account</a>'
+        not_received_confirmation: Didn't receive confirmation instructions?
     unlocks:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."

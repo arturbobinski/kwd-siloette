@@ -32,3 +32,6 @@
         %br
         .text-center
           = t('.create_account', link: new_user_registration_path).html_safe
+          %br
+          - if resource && !resource.confirmed?
+            = link_to t('.not_received_confirmation'), new_confirmation_path(resource_name)
