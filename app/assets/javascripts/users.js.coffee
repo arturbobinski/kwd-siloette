@@ -12,3 +12,5 @@ $ ->
     reader.readAsDataURL @files[0]
     return
 
+  $('.profile-image-select input[type="checkbox"]').change ->
+    $(this).closest('.profile-image-select').toggleClass 'active'

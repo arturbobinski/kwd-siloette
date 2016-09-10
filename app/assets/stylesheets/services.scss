@@ -21,19 +21,19 @@
   margin-bottom: 15px;
   margin-right: 15px;
   position: relative;
-  padding-bottom: -webkit-calc(66.66667% - 24px);
-  padding-bottom: calc(66.66667% - 24px);
+  padding-bottom: -webkit-calc(66.66667% - 26px);
+  padding-bottom: calc(66.66667% - 26px);
   width: -webkit-calc(50% - 15px);
   width: calc(50% - 15px);
 
   @media (min-width: $screen-sm-min) {
-    padding-bottom: -webkit-calc(33.33333% - 24px);
-    padding-bottom: calc(33.33333% - 24px);
+    padding-bottom: -webkit-calc(33.33333% - 26px);
+    padding-bottom: calc(33.33333% - 26px);
     width: -webkit-calc(25% - 15px);
     width: calc(25% - 15px);
   }
 
-  &.primary {
+  &.primary, &.active {
     border-color: $brand-primary;
   }
 

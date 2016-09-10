@@ -8,7 +8,7 @@
     = simple_form_for @user, html: { class: 'form-horizontal', 'data-parsley-validate' => true } do |f|
       #service-images.uploader-container
         = f.fields_for :service_images do |i|
-          .upload-image-placeholder.profile-image-select
+          .upload-image-placeholder.profile-image-select{class: i.object.profile && 'active'}
             = image_tag i.object.file.url(:medium), alt: '', class: 'img-responsive'
             = i.check_box :profile
             .profile-image-status
