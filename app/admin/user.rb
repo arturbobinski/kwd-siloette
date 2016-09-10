@@ -12,7 +12,9 @@ ActiveAdmin.register User do
     column :verified
     column :sign_in_count
     column :created_at
-    actions
+    actions do |user|
+      link_to 'Profile', edit_user_path(user, is_admin: true), target: '_blank'
+    end
   end
 
   filter :email

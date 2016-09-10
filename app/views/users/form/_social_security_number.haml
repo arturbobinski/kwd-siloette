@@ -1,0 +1,2 @@
+= f.fields_for :profile do |p|
+  = p.input :social_security_number, label: false, input_html: { data: { 'parsley-maxlength' => 9, 'parsley-pattern' => parsley_pattern(:social_security_number) } }

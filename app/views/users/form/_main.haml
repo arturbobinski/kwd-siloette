@@ -11,23 +11,3 @@
     = f.fields_for :profile do |p|
       = p.input :country_code, as: :select, collection: country_code_collection, required: true, label: false, selected: country_code_value(p.object), prompt: t('common.select'), input_html: { class: 'country-code' }, wrapper_html: { class: 'col-sm-3 col-xs-6' }
       = p.input :phone_number, label: false, input_html: { data: { 'parsley-pattern' => parsley_pattern(:phonenumber), 'parsley-remote' => '', 'parsley-remote-validator' => 'twilio' } }, wrapper_html: { class: 'col-sm-3 col-xs-6' }
-- if @user.dancer?
-  .row
-    = f.input :birth_date, as: :string, label: false, required: true, input_html: { class: 'datepicker' }, wrapper_html: { class: 'col-sm-6' }
-    = f.fields_for :profile do |p|
-      = p.input :social_security_number, label: false, input_html: { data: { 'parsley-maxlength' => 9, 'parsley-pattern' => parsley_pattern(:social_security_number) } }, wrapper_html: { class: 'col-sm-6' }
-  .row
-    .col-sm-6.location-fields
-      = f.fields_for :location do |l|
-        = l.hidden_field :country
-        = l.hidden_field :postal_code
-        = l.hidden_field :lat
-        = l.hidden_field :lng
-        = l.input :address, label: false, input_html: { class: 'geocomplete', data: { prefix: 'user_location_attributes_' } }
-    - unless Rails.env.production?
-      .col-sm-6
-        - if @user.instagram_handle.blank?
-          = link_to fa_icon('instagram', text: t('.connect_instagram')), omniauth_authorize_path(:user, :instagram, state: 'dancer'), class: 'btn btn-block btn-instagram text-uppercase'
-          = f.input :instagram_handle, label: false, required: true, input_html: { class: 'hidden-virtural' }
-        - else
-          = f.input :instagram_handle, label: false, input_html: { value: @user.instagram_handle, disabled: true }

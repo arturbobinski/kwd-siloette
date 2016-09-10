@@ -1,0 +1,5 @@
+- if false # @user.instagram_handle.blank?
+  = link_to fa_icon('instagram', text: t('.connect_instagram')), omniauth_authorize_path(:user, :instagram, state: 'dancer'), class: 'btn btn-block btn-instagram text-uppercase'
+  = f.input :instagram_handle, label: false, required: true, input_html: { class: 'hidden-virtural' }
+- else
+  = f.input :instagram_handle, label: false, required: true

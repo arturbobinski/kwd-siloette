@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    session[:role_user_id] = params[:id] if current_user.admin? && params[:is_admin].present?
     build_resources
   end
 
@@ -55,9 +56,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(
-      :first_name, :last_name, :email, :slug, :gender, :description, :birth_date, :avatar, :avatar_cache, :referred_by,
+      :first_name, :last_name, :email, :slug, :gender, :description, :birth_date, :avatar, :avatar_cache,
+      :referred_by, :instagram_handle,
       profile_attributes: [:id, :perform_name, :height, :body_type, :ethnicity, :phone_number, :experience_level,
-        :social_security_number, :education_level, :eligible_in_us, :hear_from, :communing_plan, :country_code,
+        :social_security_number, :education_level, :country_code,
         language_ids: [], experience_ids: []],
       location_attributes: [:address, :country, :postal_code, :lat, :lng],
       service_images_attributes: [:id, :profile]

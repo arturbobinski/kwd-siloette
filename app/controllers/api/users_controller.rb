@@ -3,8 +3,8 @@ module Api
 
     def check_email
       user = User.find_by(email: params[:user][:email])
-      if user && user != current_user
-        render nothing: true, status: 422
+      if user && user != current_role_user
+        render nothing: true, status: 404
       else
         render nothing: true, status: 200
       end
@@ -12,8 +12,8 @@ module Api
 
     def check_slug
       user = User.find_by(slug: params[:user][:slug])
-      if user && user != current_user
-        render nothing: true, status: 422
+      if user && user != current_role_user
+        render nothing: true, status: 404
       else
         render nothing: true, status: 200
       end

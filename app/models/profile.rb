@@ -22,13 +22,13 @@ class Profile < ActiveRecord::Base
   validates :perform_name, presence: true, length: { maximum: 20 }, if: 'user.verified?'#, uniqueness: { case_sensitive: false }
   validates :height, presence: true, inclusion: { in: HEIGHTS }, if: 'user.verified?'
   validates :body_type, presence: true, inclusion: { in: BODY_TYPES }, if: 'user.verified?'
-  validates :experience_level, presence: true, inclusion: { in: EXPERIENCE_LEVELS }
+  validates :experience_level, presence: true, inclusion: { in: EXPERIENCE_LEVELS }, if: 'user.verified?'
   # validates :bust, presence: true, inclusion: { in: Profile.busts.keys }
   validates :ethnicity, presence: true, inclusion: { in: Profile.ethnicities.keys }, if: 'user.verified?'
   validates :education_level, length: { maximum: 255 }, if: 'user.verified?'
   validates :phone_number, presence: true, format: { with: Regexp.new("\\A#{AppConfig.patterns[:phonenumber]}\\z") }
-  validates :social_security_number, presence: true, length: { maximum: 9 },
-    format: { with: Regexp.new("\\A#{AppConfig.patterns[:social_security_number]}\\z") }
+  # validates :social_security_number, presence: true, length: { maximum: 9 },
+  #   format: { with: Regexp.new("\\A#{AppConfig.patterns[:social_security_number]}\\z") }
   validates :hear_from, inclusion: { in: SOURCES }, if: 'hear_from'
   validates :communing_plan, inclusion: { in: COMMUNING_PLANS }, if: 'communing_plan'
 

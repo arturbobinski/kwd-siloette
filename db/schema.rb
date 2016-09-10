@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160826190706) do
+ActiveRecord::Schema.define(version: 20160910030900) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "first_name",   limit: 255
@@ -462,6 +462,7 @@ ActiveRecord::Schema.define(version: 20160826190706) do
     t.integer  "referrer_id",            limit: 4
     t.integer  "location_id",            limit: 4
     t.string   "time_zone",              limit: 255
+    t.string   "instagram_handle",       limit: 255
   end
 
   add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree

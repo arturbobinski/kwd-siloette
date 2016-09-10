@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
 
+  include ActAsUser
+
   # http_basic_authenticate_with name: Figaro.env.http_user, password: Figaro.env.http_password if Rails.env.staging?
 
   # Prevent CSRF attacks by raising an exception.
@@ -9,6 +11,8 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :detect_browser, :set_time_zone
   before_filter :load_pages
+
+  helper_method :current_role_user
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to main_app.root_url, alert: exception.message

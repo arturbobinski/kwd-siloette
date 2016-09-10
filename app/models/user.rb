@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
-  attr_accessor :accept_terms, :consent_check, :referred_by, :instagram_handle, :is_admin
+  attr_accessor :accept_terms, :consent_check, :referred_by, :is_admin
 
   belongs_to :referrer, class_name: 'User', foreign_key: :referrer_id
   belongs_to :location
@@ -122,14 +122,6 @@ class User < ActiveRecord::Base
       age = Date.today.year - birth_date.year
       age -= 1 if Date.today < birth_date + age.years
     end
-  end
-
-  def connected_instagram_account
-    authentications.where(provider: 'instagram').first
-  end
-
-  def instagram_handle
-    connected_instagram_account.try(:username)
   end
 
   def connected_stripe_account

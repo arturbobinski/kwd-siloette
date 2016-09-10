@@ -15,42 +15,11 @@
             %h4= t('.complete_application')
             = simple_form_for @user, html: { class: 'form-horizontal', 'data-parsley-validate' => true } do |f|
               = render 'users/form/main', f: f
-              - if @user.dancer?
-                = f.fields_for :profile do |p|
-                  %h5= t('.work_experience')
-                  = p.association :experiences, as: :check_boxes, required: true, wrapper: :multi_select
-                  .row
-                    .col-sm-6
-                      = p.label :experience_level, t('simple_form.labels.profile.experience_level'), class: 'control-label text-left'
-                    .col-sm-6
-                      = p.input :experience_level, as: :select, collection: Profile::EXPERIENCE_LEVELS, label: false
-                  .row
-                    .col-sm-6
-                      = p.label :alcohol_awareness_training, t('simple_form.labels.profile.alcohol_awareness_training'), class: 'control-label text-left'
-                    .col-sm-6
-                      = p.input :alcohol_awareness_training, label: false, input_html: { data: { 'parsley-maxlength' => '255' } }
-                  .row
-                    .col-sm-6
-                      = p.label :communing_plan, t('simple_form.labels.profile.communing_plan'), class: 'control-label text-left'
-                    .col-sm-6
-                      = p.input :communing_plan, as: :radio_buttons, collection: Profile::COMMUNING_PLANS.map { |x| [t("activerecord.attributes.profile.communing_plan.#{x}"), x] }, label: false, wrapper: :multi_select
-                  .row
-                    .col-sm-6
-                      = p.label :hear_from, t('simple_form.labels.profile.hear_from'), class: 'control-label text-left'
-                    .col-sm-6
-                      = p.input :hear_from, as: :select, collection: Profile::SOURCES, label: false
               .row
                 .col-sm-6
-                  = f.label :referred_by, t('simple_form.labels.user.referred_by'), class: 'control-label text-left'
+                  = render 'users/form/birthday', f: f
                 .col-sm-6
-                  = f.input :referred_by, label: false, input_html: { data: { 'parsley-maxlength' => '12', 'parsley-minlength' => '12', 'parsley-type' => 'alphanum' } }
-              - if false # @user.dancer?
-                = f.fields_for :profile do |p|
-                  .row
-                    .col-sm-6
-                      = p.label :eligible_in_us, t('simple_form.labels.profile.eligible_in_us'), class: 'control-label text-left'
-                    .col-sm-6
-                      = p.input :eligible_in_us, as: :radio_buttons, label: false, wrapper: :multi_select
+                  = render 'users/form/instagram', f: f
               = f.input :accept_terms, as: :boolean, label: t('common.accept_terms', link: link_to(t('common.terms_of_use_and_privacy'), page_path('terms-of-use', md: 1), data: { toggle: 'modal', target: '#common-modal' })).html_safe, required: true, input_html: { 'data-parsley-required-message' => I18n.t('activerecord.errors.models.user.attributes.accept_terms.blank') }
               = f.input :consent_check, as: :boolean, label: t('common.consent_check'), required: true, input_html: { 'data-parsley-required-message' => I18n.t('activerecord.errors.models.user.attributes.consent_check.blank') }
               .row

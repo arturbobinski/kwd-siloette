@@ -1,0 +1,7 @@
+.location-fields
+  = f.fields_for :location do |l|
+    = l.hidden_field :country
+    = l.hidden_field :postal_code
+    = l.hidden_field :lat
+    = l.hidden_field :lng
+    = l.input :address, label: false, input_html: { class: 'geocomplete', data: { prefix: 'user_location_attributes_' } }
