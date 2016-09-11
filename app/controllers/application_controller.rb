@@ -45,6 +45,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def load_categories
+    @categories = Category.female.select(:id, :name)
+  end
+
   def check_verified
     if current_user && current_user.dancer? && !current_user.verified?
       redirect_to apply_user_path(current_user) and return

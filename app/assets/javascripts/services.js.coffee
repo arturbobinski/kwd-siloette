@@ -49,7 +49,6 @@ class @ServiceForm
   setPrimayPhoto: ->
     @$el.find('.upload-image-placeholder').removeClass 'primary'
     images = @$el.find('.upload-image-placeholder img:visible')
-    console.log images
     i = 0
     while i < images.length
       $img = $(images[i])

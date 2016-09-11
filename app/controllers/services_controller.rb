@@ -17,10 +17,6 @@ class ServicesController < ApplicationController
 
   private
 
-  def load_categories
-    @categories = Category.female.select(:id, :name)
-  end
-
   def tweak_price_params
     if params[:price_min].present?
       params[:q][:price_cents_gteq] = (params[:price_min].to_f * 100).to_i

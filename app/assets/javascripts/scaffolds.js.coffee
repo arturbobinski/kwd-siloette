@@ -33,7 +33,7 @@ initializePlugins = ->
     else
       $select.prop('disabled', true).removeAttr('required')
 
-  $('#q_location_id_eq').change ->
+  $('#service_search').find('input, select').change ->
     $(this).closest('form').submit()
     # window.location = '/' + $(this).val()
 

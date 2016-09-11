@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
 
   skip_before_filter :check_verified
+  before_filter :load_categories
 
   def index
     @q = Service.open.active.search(params[:q])

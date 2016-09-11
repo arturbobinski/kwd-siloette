@@ -14,7 +14,7 @@
         .text-center
           %h1.text-uppercase= t('.slogan')
           %ul#categories.list-unstyled
-            - Category.female.each do |category|
+            - @categories.each do |category|
               %li
                 %span.btn.btn-trans= category.name
           %hr.invisible
@@ -31,7 +31,7 @@
     .container
       .panel.panel-default
         .text-center
-          %h3= t('.top-services')
+          %h3= t('.top_services')
           .thumbnail-grid-wide
             .thumbnail-grid
               = render @top_services
