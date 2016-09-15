@@ -1,5 +1,7 @@
 class Service < ActiveRecord::Base
- 
+
+  include Localable
+
   acts_as_paranoid
 
   enum status: %i(active inactive)
@@ -16,7 +18,6 @@ class Service < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :category
-  belongs_to :location
 
   has_many :invitations, class_name: 'ServiceInvitation', dependent: :destroy
   has_many :invitees, source: :user, through: :invitations

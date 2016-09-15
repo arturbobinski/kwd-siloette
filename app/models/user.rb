@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  include Localable
+
   acts_as_paranoid
   extend FriendlyId
   friendly_id :slug_candidates, use: [:slugged, :finders]
@@ -19,7 +21,6 @@ class User < ActiveRecord::Base
   attr_accessor :accept_terms, :consent_check, :referred_by, :is_admin
 
   belongs_to :referrer, class_name: 'User', foreign_key: :referrer_id
-  belongs_to :location
 
   has_one :profile, dependent: :destroy
   has_many :services, dependent: :destroy
@@ -52,7 +53,6 @@ class User < ActiveRecord::Base
   validates_date :birth_date, allow_blank: true
 
   accepts_nested_attributes_for :profile, reject_if: :all_blank, allow_destroy: true
-  accepts_nested_attributes_for :location, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :service_images, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :authentications, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :schedules, reject_if: :all_blank, allow_destroy: true
@@ -138,14 +138,6 @@ class User < ActiveRecord::Base
 
   def profile_ready?
     profile&.body_type
-  end
-
-  def location_attributes=(attrs)
-    if (loc = Location.from_attributes(attrs)).persisted?
-      self.location = loc
-    else
-      errors.add :base, loc.errors.full_mesages.join(' ')
-    end
   end
 
   def rating

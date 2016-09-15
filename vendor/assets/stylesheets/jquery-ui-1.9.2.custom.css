@@ -50,10 +50,10 @@
 .ui-accordion .ui-accordion-header .ui-accordion-header-icon { position: absolute; left: .5em; top: 50%; margin-top: -8px; }
 .ui-accordion .ui-accordion-content { padding: 1em 2.2em; border-top: 0; overflow: auto; zoom: 1; }
 .ui-autocomplete {
-	position: absolute;
-	top: 0;
-	left: 0;
-	cursor: default;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: default;
 }
 
 /* workarounds */
@@ -201,8 +201,8 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 
 /* TR overrides */
 .ui-spinner .ui-icon-triangle-1-s {
-	/* need to fix icons sprite */
-	background-position:-65px -16px;
+  /* need to fix icons sprite */
+  background-position:-65px -16px;
 }
 .ui-tabs { position: relative; padding: .2em; zoom: 1; } /* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
 .ui-tabs .ui-tabs-nav { margin: 0; padding: .2em .2em 0; }
@@ -213,16 +213,16 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 .ui-tabs .ui-tabs-nav li a, .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
 .ui-tabs .ui-tabs-panel { display: block; border-width: 0; padding: 1em 1.4em; background: none; }
 .ui-tooltip {
-	padding: 8px;
-	position: absolute;
-	z-index: 9999;
-	max-width: 300px;
-	-webkit-box-shadow: 0 0 5px #aaa;
-	box-shadow: 0 0 5px #aaa;
+  padding: 8px;
+  position: absolute;
+  z-index: 9999;
+  max-width: 300px;
+  -webkit-box-shadow: 0 0 5px #aaa;
+  box-shadow: 0 0 5px #aaa;
 }
 /* Fades and background-images don't work well together in IE6, drop the image */
 * html .ui-tooltip {
-	background-image: none;
+  background-image: none;
 }
 body .ui-tooltip { border-width: 2px; }
 
@@ -231,25 +231,25 @@ body .ui-tooltip { border-width: 2px; }
 .ui-widget { font-family: Lucida Grande,Lucida Sans,Arial,sans-serif; font-size: 1.1em; }
 .ui-widget .ui-widget { font-size: 1em; }
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Lucida Grande,Lucida Sans,Arial,sans-serif; font-size: 1em; }
-.ui-widget-content { border: 1px solid #e6e6e6; background: #fcfdfd url("css_themes/ui-bg_inset-hard_100_fcfdfd_1x100.png") 50% bottom repeat-x; color: #3c3c3c; }
+.ui-widget-content { border: 1px solid #e6e6e6; background: #fcfdfd image-url("css_themes/ui-bg_inset-hard_100_fcfdfd_1x100.png") 50% bottom repeat-x; color: #3c3c3c; }
 .ui-widget-content a { color: #3c3c3c; }
-.ui-widget-header { border: 1px solid #e6e6e6; background: #6deef6 url("css_themes/ui-bg_gloss-wave_55_6deef6_500x100.png") 50% 50% repeat-x; color: #ffffff; font-weight: normal; }
+.ui-widget-header { border: 1px solid #e6e6e6; background: #6deef6 image-url("css_themes/ui-bg_gloss-wave_55_6deef6_500x100.png") 50% 50% repeat-x; color: #ffffff; font-weight: normal; }
 .ui-widget-header a { color: #ffffff; }
 
 /* Interaction states
 ----------------------------------*/
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #e6e6e6; background: #f6fefe url("css_themes/ui-bg_glass_85_f6fefe_1x400.png") 50% 50% repeat-x; font-weight: normal; color: #3c3c3c; }
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #e6e6e6; background: #f6fefe image-url("css_themes/ui-bg_glass_85_f6fefe_1x400.png") 50% 50% repeat-x; font-weight: normal; color: #3c3c3c; }
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #3c3c3c; text-decoration: none; }
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: 1px solid #25e6f2; background: #f6fefe url("css_themes/ui-bg_glass_75_f6fefe_1x400.png") 50% 50% repeat-x; font-weight: normal; color: #25e6f2; }
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: 1px solid #25e6f2; background: #f6fefe image-url("css_themes/ui-bg_glass_75_f6fefe_1x400.png") 50% 50% repeat-x; font-weight: normal; color: #25e6f2; }
 .ui-state-hover a, .ui-state-hover a:hover, .ui-state-hover a:link, .ui-state-hover a:visited { color: #25e6f2; text-decoration: none; }
-.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 1px solid #25e6f2; background: #f6fefe url("css_themes/ui-bg_inset-hard_100_f6fefe_1x100.png") 50% 50% repeat-x; font-weight: normal; color: #25e6f2; }
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 1px solid #25e6f2; background: #f6fefe image-url("css_themes/ui-bg_inset-hard_100_f6fefe_1x100.png") 50% 50% repeat-x; font-weight: normal; color: #25e6f2; }
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #25e6f2; text-decoration: none; }
 
 /* Interaction Cues
 ----------------------------------*/
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight  {border: 1px solid #fad42e; background: #fbec88; color: #363636; }
 .ui-state-highlight a, .ui-widget-content .ui-state-highlight a,.ui-widget-header .ui-state-highlight a { color: #363636; }
-.ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {border: 1px solid #cd0a0a; background: #fef1ec url("css_themes/ui-bg_glass_95_fef1ec_1x400.png") 50% 50% repeat-x; color: #cd0a0a; }
+.ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {border: 1px solid #cd0a0a; background: #fef1ec image-url("css_themes/ui-bg_glass_95_fef1ec_1x400.png") 50% 50% repeat-x; color: #cd0a0a; }
 .ui-state-error a, .ui-widget-content .ui-state-error a, .ui-widget-header .ui-state-error a { color: #cd0a0a; }
 .ui-state-error-text, .ui-widget-content .ui-state-error-text, .ui-widget-header .ui-state-error-text { color: #cd0a0a; }
 .ui-priority-primary, .ui-widget-content .ui-priority-primary, .ui-widget-header .ui-priority-primary { font-weight: normal; }
@@ -261,14 +261,14 @@ body .ui-tooltip { border-width: 2px; }
 ----------------------------------*/
 
 /* states and images */
-.ui-icon { width: 16px; height: 16px; background-image: url("css_themes/ui-icons_3c3c3c_256x240.png"); }
-.ui-widget-content .ui-icon {background-image: url("css_themes/ui-icons_3c3c3c_256x240.png"); }
-.ui-widget-header .ui-icon {background-image: url("css_themes/ui-icons_ffffff_256x240.png"); }
-.ui-state-default .ui-icon { background-image: url("css_themes/ui-icons_3c3c3c_256x240.png"); }
-.ui-state-hover .ui-icon, .ui-state-focus .ui-icon {background-image: url("css_themes/ui-icons_25e6f2_256x240.png"); }
-.ui-state-active .ui-icon {background-image: url("css_themes/ui-icons_25e6f2_256x240.png"); }
-.ui-state-highlight .ui-icon {background-image: url("css_themes/ui-icons_2e83ff_256x240.png"); }
-.ui-state-error .ui-icon, .ui-state-error-text .ui-icon {background-image: url("css_themes/ui-icons_cd0a0a_256x240.png"); }
+.ui-icon { width: 16px; height: 16px; background-image: image-url("css_themes/ui-icons_3c3c3c_256x240.png"); }
+.ui-widget-content .ui-icon {background-image: image-url("css_themes/ui-icons_3c3c3c_256x240.png"); }
+.ui-widget-header .ui-icon {background-image: image-url("css_themes/ui-icons_ffffff_256x240.png"); }
+.ui-state-default .ui-icon { background-image: image-url("css_themes/ui-icons_3c3c3c_256x240.png"); }
+.ui-state-hover .ui-icon, .ui-state-focus .ui-icon {background-image: image-url("css_themes/ui-icons_25e6f2_256x240.png"); }
+.ui-state-active .ui-icon {background-image: image-url("css_themes/ui-icons_25e6f2_256x240.png"); }
+.ui-state-highlight .ui-icon {background-image: image-url("css_themes/ui-icons_2e83ff_256x240.png"); }
+.ui-state-error .ui-icon, .ui-state-error-text .ui-icon {background-image: image-url("css_themes/ui-icons_cd0a0a_256x240.png"); }
 
 /* positioning */
 .ui-icon-carat-1-n { background-position: 0 0; }
