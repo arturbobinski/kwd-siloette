@@ -34,11 +34,11 @@ module Booking::States
         transitions from: :pending, to: :declined
       end
 
-      event :verify, after: [:notify, :transfer_payment] do
+      event :verify, after: :notify do
         transitions from: :paid, to: :verified
       end
 
-      event :complete do
+      event :complete, after: :notify, guards: :transfer_payment do
         transitions from: :verified, to: :completed
       end
 

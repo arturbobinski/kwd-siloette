@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160910053907) do
+ActiveRecord::Schema.define(version: 20160921123284) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "first_name",   limit: 255
@@ -430,6 +430,23 @@ ActiveRecord::Schema.define(version: 20160910053907) do
   add_index "testimonials", ["author_id"], name: "index_testimonials_on_author_id", using: :btree
   add_index "testimonials", ["receiver_id"], name: "index_testimonials_on_receiver_id", using: :btree
   add_index "testimonials", ["service_id"], name: "index_testimonials_on_service_id", using: :btree
+
+  create_table "transferences", force: :cascade do |t|
+    t.integer  "user_id",          limit: 4
+    t.integer  "booking_id",       limit: 4
+    t.integer  "amount_cents",     limit: 4
+    t.string   "currency",         limit: 255
+    t.string   "transaction_id",   limit: 255
+    t.string   "transfer_id",      limit: 255
+    t.string   "status",           limit: 255
+    t.text     "response_message", limit: 65535
+    t.text     "info",             limit: 65535
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "transferences", ["booking_id"], name: "index_transferences_on_booking_id", using: :btree
+  add_index "transferences", ["user_id"], name: "index_transferences_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255,   default: "",    null: false

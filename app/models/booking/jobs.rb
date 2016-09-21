@@ -23,7 +23,7 @@ module Booking::Jobs
         UserMailer.booking_verified_email(self).deliver_later
         msg = "Your booking was successfully verified and you will receive payment in 36 hours."
         TwilioService.new.send_sms(performer.full_phone_number, msg)
-        Booking.delay(run_at: (end_at + 24.hour)).perform_async(id, :complete)
+        Booking.delay(run_at: (end_at + 36.hour)).perform_async(id, :complete)
       when :completed
         UserMailer.booking_completed_email(self).deliver_later
         msg = "Your booking for #{service.title} was completed. " \

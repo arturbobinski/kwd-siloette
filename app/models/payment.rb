@@ -15,7 +15,7 @@ class Payment < ActiveRecord::Base
       less_than_or_equal_to: 1000000
     }
 
-  serialize :cvv_response_message, Hash
+  serialize :cvv_response_message
 
   belongs_to :payable, polymorphic: true
   belongs_to :source, polymorphic: true

@@ -26,6 +26,7 @@ class Booking < ActiveRecord::Base
   belongs_to :venue_type
   belongs_to :address
   has_one :payment, as: :payable, dependent: :destroy
+  has_one :transference
   has_many :extensions, class_name: 'BookingExtension', dependent: :destroy
 
   delegate :booking_price, :price_cents, to: :service
@@ -83,6 +84,11 @@ class Booking < ActiveRecord::Base
   end
 
   def transfer_payment
+    if transference
+      true
+    else
+      create_transference
+    end
   end
 
   def process_payment
