@@ -23,10 +23,8 @@ You should have ruby 2.3.1 and mysql installed on your machine
 
 6. Run rails server.
     rails server
-Please append -b 127.0.0.1 for testing twitter login
 
 7. Visit http://localhost:3000/ with your favourite browser.
-Please visit http://127.0.0.1:3000/ for testing twitter login
 
 That's all yet. ;)
 
