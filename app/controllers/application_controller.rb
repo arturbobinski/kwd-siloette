@@ -50,6 +50,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_verified
+    return true # Remove this line to allow dancer application
     if current_user && current_user.dancer? && !current_user.verified?
       redirect_to apply_user_path(current_user) and return
     end

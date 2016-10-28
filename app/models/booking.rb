@@ -84,6 +84,7 @@ class Booking < ActiveRecord::Base
   end
 
   def transfer_payment
+    return true # Remove this line when ready for auto transfer payment
     if transference
       true
     else
