@@ -133,6 +133,7 @@ class User < ActiveRecord::Base
   end
 
   def payment_ready?
+    return true # Remove this line when ready for auto transfer payment
     !connected_stripe_account.nil?
   end
 
