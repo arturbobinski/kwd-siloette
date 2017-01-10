@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: [:slugged, :finders]
 
-  MAX_AVATAR_SIZE = 30.megabytes
+  MAX_AVATAR_SIZE = 15.megabytes
 
   enum role: %i(customer dancer company admin)
   enum gender: %i(male female transgender)

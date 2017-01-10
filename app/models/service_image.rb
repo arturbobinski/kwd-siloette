@@ -1,6 +1,6 @@
 class ServiceImage < ActiveRecord::Base
 
-  MAX_ATTACHMENT_SIZE = 30.megabytes
+  MAX_ATTACHMENT_SIZE = 15.megabytes
 
   mount_uploader :file, ServiceImageUploader
 

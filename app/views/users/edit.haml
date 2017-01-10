@@ -2,7 +2,7 @@
 
 - content_for :sidebar do
   = render 'shared/sidebar'
-  
+
 - if false # @user.dancer?
   .panel.panel-default
     .panel-body.text-center
@@ -34,14 +34,15 @@
       %hr
       - if @user.dancer?
         %p.text-muted= fa_icon 'info-circle', text: t('.not_visible_on_profile').html_safe
-        = f.input :gender, as: :radio_buttons, collection: User.genders.keys, label: false, required: true, wrapper: :multi_select
+        / The reject removes transgender from the gender list for the time being
+        = f.input :gender, as: :radio_buttons, collection: User.genders.keys.reject{|gender| gender == "transgender"}, label: false, required: true, wrapper: :multi_select
       = render 'users/form/main', f: f
       - if @user.dancer?
         .row
           .col-sm-6
             = render 'users/form/birthday', f: f
-          .col-sm-6
-            = render 'users/form/social_security_number', f: f
+          -#.col-sm-6
+          -#  = render 'users/form/social_security_number', f: f
         .row
           .col-sm-6
             = render 'users/form/location', f: f

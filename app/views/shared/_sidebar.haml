@@ -10,19 +10,21 @@
         - if current_role_user&.dancer?
           %li(class="#{'active' if controller_name == 'services'}")
             = link_to fa_icon('circle', text: t('links.services')), performer_services_path
-          %li(class="#{'active' if controller_name == 'daily_schedules'}")
-            = link_to fa_icon('circle', text: t('links.daily_schedule')), performer_daily_schedules_path
+          -#%li(class="#{'active' if controller_name == 'daily_schedules'}")
+          -#  = link_to fa_icon('circle', text: t('links.daily_schedule')), performer_daily_schedules_path
           %li(class="#{'active' if controller_name == 'bookings' && action_name == 'calendar'}")
             = link_to fa_icon('circle', text: t('common.calendar')), calendar_performer_bookings_path
           %li(class="#{'active' if controller_name == 'users' && action_name == 'media'}")
             = link_to fa_icon('circle', text: t('links.profile_photos')), media_user_path(current_role_user)
-          %li(class="#{'active' if controller_name =~ /booking/ && action_name != 'calendar'}")
-            = link_to fa_icon('circle', text: t('common.bookings')), performer_bookings_path
+          -#%li(class="#{'active' if controller_name =~ /booking/ && action_name != 'calendar'}")
+          -#  = link_to fa_icon('circle', text: t('common.bookings')), performer_bookings_path
           %li(class="#{'active' if controller_name == 'users' && action_name == 'stripe_account'}")
             = link_to fa_icon('circle', text: t('links.payment_info')), stripe_account_user_path(current_role_user)
           - Page.for_dancer.each do |page|
-            %li(class="#{'active' if controller_name == 'pages' && params[:id] == page.slug}")
-              = link_to fa_icon('circle', text: page.title), page_path(page)
+            / Temporarily hiding the deals section
+            - unless page.slug == "deals"
+              %li(class="#{'active' if controller_name == 'pages' && params[:id] == page.slug}")
+                = link_to fa_icon('circle', text: page.title), page_path(page)
         - else
           %li(class="#{'active' if controller_name =~ /booking/}")
             = link_to fa_icon('circle', text: t('common.bookings')), customer_bookings_path
