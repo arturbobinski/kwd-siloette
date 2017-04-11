@@ -1,6 +1,6 @@
 = render 'shared/googleapi'
 
-
+- categories = Category.send(current_user.id)
 - content_for :extra_script do
   :javascript
     $(document).ready(function() {
