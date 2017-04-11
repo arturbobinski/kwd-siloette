@@ -56,7 +56,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(
-      :first_name, :last_name, :email, :slug, :gender, :description, :birth_date, :avatar, :avatar_cache,
+      :first_name, :last_name, :email, :slug, :description, :birth_date, :avatar, :avatar_cache,
       :referred_by, :instagram_handle,
       profile_attributes: [:id, :perform_name, :height, :body_type, :ethnicity, :phone_number, :experience_level,
         :social_security_number, :education_level, :country_code,

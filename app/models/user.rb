@@ -9,7 +9,6 @@ class User < ActiveRecord::Base
   MAX_AVATAR_SIZE = 15.megabytes
 
   enum role: %i(customer dancer company admin)
-  enum gender: %i(male female transgender)
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -91,7 +90,6 @@ class User < ActiveRecord::Base
         u.name = auth.info.name
         u.remote_avatar_url = auth.info.image.gsub('http://', 'https://')
         u.birth_date = auth.extra.raw_info.try(:birthday)
-        u.gender = auth.extra.raw_info.try(:gender)
         u.authentications_attributes = {
           '0' => attrs.merge(provider: auth.provider, uid: auth.uid, username: auth.extra.raw_info.try(:username))
         }

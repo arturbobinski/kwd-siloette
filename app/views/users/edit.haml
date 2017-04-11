@@ -34,7 +34,7 @@
       %hr
       - if @user.dancer?
         %p.text-muted= fa_icon 'info-circle', text: t('.not_visible_on_profile').html_safe
-        / The reject removes transgender from the gender list for the time being
+        / The reject removes transder from the gender list for the time being
         = f.input :gender, as: :radio_buttons, collection: User.genders.keys.reject{|gender| gender == "transgender"}, label: false, required: true, wrapper: :multi_select
       = render 'users/form/main', f: f
       - if @user.dancer?

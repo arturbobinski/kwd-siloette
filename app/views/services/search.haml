@@ -24,15 +24,6 @@
       .col-sm-3#filters.collapse
         .panel.panel-default
           .panel-heading
-            = t('common.gender')
-          .panel-body
-            - User.genders.each do |gender, val|
-              - unless gender == "transgender"
-                .check-box
-                  = check_box_tag 'q[user_gender_in][]', val, params[:q] && params[:q][:user_gender_in] && params[:q][:user_gender_in].include?(val.to_s), id: "q_user_gender_in_#{val}"
-                  = f.label "user_gender_in_#{val}", t("common.#{gender}")
-        .panel.panel-default
-          .panel-heading
             = t('.style')
           .panel-body
             - @categories.each do |category|
