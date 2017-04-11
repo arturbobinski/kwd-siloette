@@ -1,13 +1,5 @@
 = render 'shared/googleapi'
 
-- content_for :extra_script do
-  :javascript
-    $(document).ready(function() {
-      window.siloette.serviceForm = new ServiceForm({
-        categories: #{raw categories.to_json}
-      });
-    });
-
 = simple_form_for [:performer, @service], html: { class: 'form-horizontal service-form', data: { id: @service.id, 'parsley-validate' => true } } do |f|
   = f.input :invitee_ids, as: :select, collection: dancers_collection, selected: (f.object.invitee_ids << current_user.id), input_html: { multiple: true, class: 'select2' }
   = f.input :images_count, label: t('common.images'), input_html: { value: @service.images.count, data: { 'parsley-min' => 4, 'parsley-min-message' => t('activerecord.errors.models.services.attributes.images_count.min') }, class: 'hidden-virtural' }
