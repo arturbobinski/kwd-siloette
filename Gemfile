@@ -12,7 +12,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails', '~> 4.1.1'
 gem 'jquery-ui-rails', '~> 5.0.5'
 gem 'bootstrap-sass', '~> 3.3.6'
-
+gem 'google-analytics-rails', '1.1.0'
 # gem 'turbolinks', '~> 5.0.0'
 gem 'jbuilder', '~> 2.0'
 gem 'haml', '~> 4.0.7'
