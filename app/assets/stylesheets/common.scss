@@ -6,6 +6,10 @@ b, strong {
   font-family: $montserrat;
 }
 
+.ui-datepicker .ui-datepicker-title select {
+  color: #333 !important;
+}
+
 *:focus {
   outline: none;
 }
