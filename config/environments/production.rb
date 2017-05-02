@@ -76,6 +76,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  
+  # Google Analytics ID
+  GA.tracker = "UA-78259376-1"
 
   config.action_controller.default_url_options = { host: 'wildebeest.siloette.c66.me' }
   config.action_mailer.delivery_method = :smtp
