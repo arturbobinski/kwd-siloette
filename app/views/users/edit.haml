@@ -26,8 +26,7 @@
             = image_tag avatar_url(@user), alt: '', size: '80x80', title: t('.click_to_change')
             = f.input :avatar, as: :file, label: false
             = f.hidden_field :avatar_cache
-          %p
-            %small= <b>#{t('.update_profile_picture')}</b>
+          %p <b>#{t('.update_profile_picture')}</b>
         .col-sm-9
           %h2.full-name= @user.name
           %p <b>#{t('.referral_code')}:</b> #{@user.referral_code}
