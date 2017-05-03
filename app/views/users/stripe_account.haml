@@ -9,9 +9,13 @@
     
     #p When a client books you, we charge them and hold the money in escrow until after you have completed the engagement. Once the client has submitted your rating we release the funds to you.
     
-    = f.input :routing_number, label: "Routing Number", required: true, input_html: { 'data-parsley-maxlength' => 50 }
+    = simple_form_for @user, html: { class: 'form-horizontal', 'data-parsley-validate' => true } do |f|
     
-    = f.input :account_number, label: "Account Number", required: true, input_html: { 'data-parsley-maxlength' => 50 }
+      = f.input :routing_number, label: "Routing Number", required: true, input_html: { 'data-parsley-maxlength' => 50 }
+    
+      = f.input :account_number, label: "Account Number", required: true, input_html: { 'data-parsley-maxlength' => 50 }
+      
+      = f.submit t('common.sign_up'), class: 'btn btn-primary btn-block'
     
     =# t('.siloette_uses_stripe').html_safe
 
