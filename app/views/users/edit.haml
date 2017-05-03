@@ -46,9 +46,8 @@
         .row
           .col-sm-6
             = render 'users/form/location', f: f
-          - unless Rails.env.production?
-            .col-sm-6
-              = render 'users/form/instagram', f: f
+          .col-sm-6
+            = render 'users/form/instagram', f: f
         %hr
         = render 'users/form/dancer_profile', f: f
         = f.input :description, as: :text, label: false, required: true, input_html: { rows: 5, 'data-parsley-maxlength' => 250 }
