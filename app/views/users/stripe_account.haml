@@ -13,7 +13,7 @@
     
       = f.input :routing_number, label: "Routing Number", required: true, input_html: { 'data-parsley-maxlength' => 50 }
     
-      = f.input :account_number, label: "Account Number", required: true, input_html: { 'data-parsley-maxlength' => 50 }
+      = f.input :account_number, label: "Account Number", required: true, input_html: { 'data-parsley-maxlength' => 50, 'type' => 'text' }
       
       = f.submit "Submit", class: 'btn btn-primary btn-block'
     
