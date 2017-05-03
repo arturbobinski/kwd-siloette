@@ -9,12 +9,9 @@
 }
 
 .user_slug {
-  label:after {
-    content: 'www.siloette.co/users/';
-  }
 
   input {
-    padding-left: 174px;
+    text-align: center;
   }
 }
 
