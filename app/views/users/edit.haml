@@ -53,6 +53,6 @@
         = render 'users/form/dancer_profile', f: f
         = f.input :description, as: :text, label: false, required: true, input_html: { rows: 5, 'data-parsley-maxlength' => 250 }
         .row
-          = f.input :slug, input_html: { data: { 'parsley-pattern' => parsley_pattern(:slug), 'parsley-maxlength' => 50, 'parsley-remote' => check_slug_api_users_path, 'parsley-remote-message' => t('activerecord.errors.models.user.attributes.slug.taken') }, disabled: true, value: user_path("www.siloette.co", current_role_user) }, wrapper_html: { class: 'col-sm-12 with-not-editable' }
+          = f.input :slug, input_html: { data: { 'parsley-pattern' => parsley_pattern(:slug), 'parsley-maxlength' => 50, 'parsley-remote' => check_slug_api_users_path, 'parsley-remote-message' => t('activerecord.errors.models.user.attributes.slug.taken') }, disabled: true, value: ("www.siloette.co", user_path(current_role_user)) }, wrapper_html: { class: 'col-sm-12 with-not-editable' }
       .actions.text-center
         = f.button :button, t('common.save'), class: 'btn btn-primary btn-bordered'
