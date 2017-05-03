@@ -41,13 +41,14 @@
         .row
           .col-sm-6
             = render 'users/form/birthday', f: f
-          -#.col-sm-6
-          -#  = render 'users/form/social_security_number', f: f
+          .col-sm-6
+            = render 'users/form/instagram', f: f
         .row
           .col-sm-6
             = render 'users/form/location', f: f
           .col-sm-6
-            = render 'users/form/instagram', f: f
+          -#  = render 'users/form/social_security_number', f: f
+      
         %hr
         = render 'users/form/dancer_profile', f: f
         = f.input :description, as: :text, label: false, required: true, input_html: { rows: 5, 'data-parsley-maxlength' => 250 }
