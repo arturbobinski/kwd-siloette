@@ -6,6 +6,9 @@
     = t('.receiving_funds')
   .panel-body
     When we launch you will add your bank details here so you can get paid.
+    
+    When a client books you, we charge them and hold the money in escrow until after you have completed the engagement. Once the client has submitted your rating we release the funds to you.
+    
     =# t('.siloette_uses_stripe').html_safe
 
     -# if current_user.payment_ready?
