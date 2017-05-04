@@ -1,5 +1,6 @@
 = f.fields_for :profile do |p|
-  %p.text-muted= fa_icon 'info-circle', text: t('.public_profile_information').html_safe
+  .panel-heading
+    = t('.public_profile_information').html_safe
   .row
     = p.input :perform_name, label: false, required: true, input_html: { data: { 'parsley-maxlength' => 20 } }, wrapper_html: { class: 'col-sm-6' }
     = p.input :ethnicity, as: :select, label: false, collection: Profile.ethnicities.keys.map { |x| [t("activerecord.attributes.profile.ethnicities.#{x}"), x] }, required: true, prompt: t('simple_form.placeholders.profile.ethnicity'), wrapper_html: { class: 'col-sm-6' }
