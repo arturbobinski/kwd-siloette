@@ -12,6 +12,8 @@
 = simple_form_for [:performer, @service], html: { class: 'form-horizontal service-form', data: { id: @service.id, 'parsley-validate' => true } } do |f|
   = f.input :category_id, as: :select, collection: categories, required: true, prompt: t('simple_form.placeholders.service.category_id'), hint: raw("<div id='category-hint' class='text-muted' style='display: none;'>#{fa_icon 'info-circle'} <span></span></div>")
   = f.input :invitee_ids, as: :select, collection: dancers_collection, selected: (f.object.invitee_ids << current_user.id), input_html: { multiple: true, class: 'select2' }
+  
+  %p.bg-primary photos that are not high quality or contain nudity will prevent your services from being displayed.
     
   = f.input :images_count, label: t('common.images'), input_html: { value: @service.images.count, data: { 'parsley-min' => 4, 'parsley-min-message' => t('activerecord.errors.models.services.attributes.images_count.min') }, class: 'hidden-virtural' }
   #service-images.uploader-container
