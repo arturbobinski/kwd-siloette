@@ -9,7 +9,9 @@
 }
 
 .user_slug {
-
+  input:before {
+    content: "http://siloette.co";
+  }
   input {
     text-align: center;
   }
