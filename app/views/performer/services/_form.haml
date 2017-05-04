@@ -21,7 +21,8 @@
     .upload-image-placeholder.links
       = link_to_add_association f, :images do
         .fileupload-text= t('common.add_more')
-
+        
+  %p.bg-primary.note Please ensure you pay attention to spelling and grammar.
   = f.fields_for :video do |v|
     = v.label :link, t('simple_form.labels.video.link'), class: 'control-label'
     - if (video = v.object).link.present?
