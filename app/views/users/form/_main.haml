@@ -10,4 +10,4 @@
   - if @user.dancer?
     = f.fields_for :profile do |p|
       = p.input :country_code, as: :select, collection: country_code_collection, required: true, label: false, selected: country_code_value(p.object), prompt: t('common.select'), input_html: { class: 'country-code' }, wrapper_html: { class: 'col-sm-3 col-xs-6' }
-      = p.input :phone_number, label: false, input_html: { data: { 'parsley-pattern' => parsley_pattern(:phonenumber), 'parsley-remote' => '', 'parsley-remote-validator' => 'twilio' } }, wrapper_html: { class: 'col-sm-3 col-xs-6' }
+      = p.input :phone_number, label: false, input_html: { data: { 'parsley-remote' => '', 'parsley-remote-validator' => 'twilio' } }, wrapper_html: { class: 'col-sm-3 col-xs-6' }
