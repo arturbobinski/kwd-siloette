@@ -14,7 +14,7 @@
   = f.input :invitee_ids, as: :select, collection: dancers_collection, selected: (f.object.invitee_ids << current_user.id), input_html: { multiple: true, class: 'select2' }
   
  .row
-  %p.bg-primary photos that are not high quality or contain nudity will prevent your services from being displayed.
+ %p.bg-primary photos that are not high quality or contain nudity will prevent your services from being displayed.
     
   = f.input :images_count, label: t('common.images'), input_html: { value: @service.images.count, data: { 'parsley-min' => 4, 'parsley-min-message' => t('activerecord.errors.models.services.attributes.images_count.min') }, class: 'hidden-virtural' }
   #service-images.uploader-container
