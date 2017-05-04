@@ -1,16 +1,17 @@
 .panel-heading
- = t('.public_profile_information').html_safe
-= f.fields_for :profile do |p|
-  .row
-    = p.input :perform_name, label: false, required: true, input_html: { data: { 'parsley-maxlength' => 20 } }, wrapper_html: { class: 'col-sm-6' }
-    = p.input :ethnicity, as: :select, label: false, collection: Profile.ethnicities.keys.map { |x| [t("activerecord.attributes.profile.ethnicities.#{x}"), x] }, required: true, prompt: t('simple_form.placeholders.profile.ethnicity'), wrapper_html: { class: 'col-sm-6' }
-  .row
-    = p.input :height, as: :select, label: false, collection: Profile::HEIGHTS.map { |x| [humanized_height(x), x] }, required: true, prompt: t('simple_form.placeholders.profile.height'), wrapper_html: { class: 'col-sm-6' }
-    = p.input :body_type, as: :select, label: false, collection: Profile::BODY_TYPES, required: true, prompt: t('simple_form.placeholders.profile.body_type'), wrapper_html: { class: 'col-sm-6' }
-    =# p.input :bust, as: :select, label: false, collection: Profile.busts.keys, prompt: t('simple_form.placeholders.profile.bust'), wrapper_html: { class: 'col-sm-4' }
-  .row
-    = p.input :experience_level, as: :select, collection: Profile::EXPERIENCE_LEVELS, label: false, required: true, prompt: t('simple_form.placeholders.profile.experience_level'), wrapper_html: { class: 'col-sm-6' }
-    = p.input :education_level, label: false, input_html: { data: { 'parsley-maxlength' => 255 } }, wrapper_html: { class: 'col-sm-6' }
-  .row
-    .col-sm-12.language-ids
-      = p.input :language_ids, as: :select, collection: Language.all, label: false, required: true, input_html: { multiple: true, class: 'select2', 'data-placeholder': t('simple_form.placeholders.profile.language_ids') }
+  = t('.public_profile_information').html_safe
+ 
+  = f.fields_for :profile do |p|
+    .row
+      = p.input :perform_name, label: false, required: true, input_html: { data: { 'parsley-maxlength' => 20 } }, wrapper_html: { class: 'col-sm-6' }
+      = p.input :ethnicity, as: :select, label: false, collection: Profile.ethnicities.keys.map { |x| [t("activerecord.attributes.profile.ethnicities.#{x}"), x] }, required: true, prompt: t('simple_form.placeholders.profile.ethnicity'), wrapper_html: { class: 'col-sm-6' }
+    .row
+      = p.input :height, as: :select, label: false, collection: Profile::HEIGHTS.map { |x| [humanized_height(x), x] }, required: true, prompt: t('simple_form.placeholders.profile.height'), wrapper_html: { class: 'col-sm-6' }
+      = p.input :body_type, as: :select, label: false, collection: Profile::BODY_TYPES, required: true, prompt: t('simple_form.placeholders.profile.body_type'), wrapper_html: { class: 'col-sm-6' }
+      =# p.input :bust, as: :select, label: false, collection: Profile.busts.keys, prompt: t('simple_form.placeholders.profile.bust'), wrapper_html: { class: 'col-sm-4' }
+    .row
+      = p.input :experience_level, as: :select, collection: Profile::EXPERIENCE_LEVELS, label: false, required: true, prompt: t('simple_form.placeholders.profile.experience_level'), wrapper_html: { class: 'col-sm-6' }
+      = p.input :education_level, label: false, input_html: { data: { 'parsley-maxlength' => 255 } }, wrapper_html: { class: 'col-sm-6' }
+    .row
+      .col-sm-12.language-ids
+        = p.input :language_ids, as: :select, collection: Language.all, label: false, required: true, input_html: { multiple: true, class: 'select2', 'data-placeholder': t('simple_form.placeholders.profile.language_ids') }
