@@ -13,4 +13,4 @@
     = p.input :education_level, label: false, input_html: { data: { 'parsley-maxlength' => 255 } }, wrapper_html: { class: 'col-sm-6' }
   .row
     .col-sm-12.language-ids
-    = p.input :language_ids, as: :select, collection: Language.all, label: false, required: true, input_html: { multiple: true, class: 'select2', 'data-placeholder': t('simple_form.placeholders.profile.language_ids') }
+      = p.input :language_ids, as: :select, collection: Language.all, label: false, required: true, input_html: { multiple: true, class: 'select2', 'data-placeholder': t('simple_form.placeholders.profile.language_ids') }
