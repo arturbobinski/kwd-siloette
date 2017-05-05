@@ -131,6 +131,9 @@
 
 .avatar_img {
   border: 1px solid #c4c7ce;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
 .avatar-img-overlay {
@@ -149,6 +152,9 @@
   opacity:0.5;
   position:absolute;
   display: none;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
 .avatar-field-container:hover .avatar-img-overlay {
