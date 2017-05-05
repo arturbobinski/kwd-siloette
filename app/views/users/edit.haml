@@ -23,7 +23,7 @@
       .row
         .col-sm-3.text-center
           .avatar-field-container
-            .avatar-img-overlay
+            .avatar-img-overlay click to change
             = image_tag avatar_url(@user), alt: '', size: '118x118', title: t('.click_to_change'), class: 'avatar_img'
             = f.input :avatar, as: :file, label: false
             = f.hidden_field :avatar_cache
