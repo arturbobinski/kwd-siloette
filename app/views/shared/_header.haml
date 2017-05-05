@@ -19,6 +19,6 @@
             = current_role_user.first_name
             %span.caret
           %ul.dropdown-menu
-            %li= link_to fa_icon('user', text: t('links.profile')), user_path(current_role_user)
+            %li= link_to fa_icon('user', text: 'View Profile', user_path(current_role_user)
             %li= link_to fa_icon('cog', text: t('links.dashboard')), edit_user_path(current_role_user)
             %li= link_to fa_icon('sign-out', text: t('common.sign_out')), destroy_user_session_path
