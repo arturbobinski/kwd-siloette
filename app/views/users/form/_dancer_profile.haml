@@ -1,6 +1,6 @@
   = f.fields_for :profile do |p|
-    .panel-heading
-      .heading
+  .panel-heading
+    .heading
       = t('.public_profile_information').html_safe
     .row
       = p.input :perform_name, label: false, required: true, input_html: { data: { 'parsley-maxlength' => 20 } }, wrapper_html: { class: 'col-sm-6' }
