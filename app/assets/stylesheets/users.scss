@@ -135,3 +135,18 @@
   -moz-border-radius: 300px;
   border-radius: 300px;
 }
+
+.avatar-img-overlay {
+  width:118px;
+  height:118px;
+  margin-left:12px;
+  background-color:#959aa7;
+  color:#FFF;
+  opacity:0.5;
+  position:absolute;
+  display: none;
+}
+
+.avatar-img-overlay:hover {
+  display: block;
+}
