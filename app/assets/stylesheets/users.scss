@@ -137,10 +137,11 @@
 }
 
 .avatar-img-overlay {
-  width:118px;
-  height:118px;
+  width: 116px;
+  height: 116px;
+  margin-top: 1px;
   padding-top: 85px;
-  margin-left:12px;
+  margin-left: 13px;
   background: image-url('photo-camera.png');
   background-color: #FFF;
   background-repeat: no-repeat;
@@ -149,8 +150,8 @@
   font-weight: bold;
   color: #333 !important;
   color:#FFF;
-  opacity:0.8;
-  position:absolute;
+  opacity: 0.8;
+  position: absolute;
   display: none;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
