@@ -238,12 +238,12 @@ en:
       why: Simply search for the type of performer you want for you party, event or club. You book them from your device in two minutes.
       how_it_works:
         title: Know exactly what you're getting.
-        description: We have a transparent booking process and payment policies. We complete background checks on performers and they are rated on their performances. We have a wide range of choice.
+        description: We have a transparent booking process and payment policies.
         content:
           - image: profile.jpg
             icon: search
             title: CREATE A PROFILE
-            text: Search from a wide range of beautiful waitresses, dancers and models.
+            text: Search from a wide range of beautiful entertainers.
           - image: service.jpg
             icon: shield
             title: CREATE SERVICES
@@ -251,7 +251,7 @@ en:
           - image: booking.jpg
             icon: star
             title: BOOKINGS
-            text: All customers submit ratings on the service provided. We want to make sure you are happy.
+            text: All customers submit ratings on the service provided.
       safety&benefits: Safety & Benefits
       for_perormers: For Performers
       performers_first: We are putting performers first
