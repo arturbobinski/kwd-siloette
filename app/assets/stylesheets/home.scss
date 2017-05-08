@@ -276,6 +276,10 @@
   .jumbotron {
     background-image: image-url('girls.jpg');
     margin-bottom: 40px;
+    
+  .jumbotron .container {
+    min-height: 1000px; 
+  }
 
     .main-title {
       font-size: 40px;
