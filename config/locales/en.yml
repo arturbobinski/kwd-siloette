@@ -219,6 +219,7 @@ en:
         invalid_phone: Sorry, you seem at wrong place. Good bye!
   links:
     become_siloette: Become a Siloette
+    signup_siloette: Sign Up
     create_service: Create service
     daily_schedule: Daily schedule
     dashboard: Dashboard
