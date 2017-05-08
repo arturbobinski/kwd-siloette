@@ -10,10 +10,11 @@
 %section.jumbotron
   .overlay.bg-half-grey
   .container
-    .col-sm-6
+    .col-sm-12
       %p Siloette is an online platform to book high-class adult entertainment.
-      %h1 Work on your own terms. Set your own prices.%br Work at the best clubs and parties in the world.
+      %h1 Work on your own terms. Set your own prices. Work at the best clubs and parties in the world.
       %h1 Launching July 1, 2017.
       %p.signup-note Sign up now. It's free.
-      .main-title.bg-grey.text-center
-        = t('.become_siloette')
+      - if current_user
+          - unless current_user.dancer?
+            = link_to t('links.signup_siloette'), become_dancer_user_path(current_user), class: 'btn btn-block btn-primary text-uppercase'
