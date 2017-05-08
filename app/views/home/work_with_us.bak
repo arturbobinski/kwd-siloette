@@ -1,0 +1,59 @@
+- @title = 'Become a Siloette'
+- @description = 'We want professional exotic models, dancers and hosts to join this exciting platform'
+- @url = work_with_us_url
+- @image = { url: asset_path('girls.jpg'), width: 1920, height: 764 }
+
+- content_for :meta_tags do
+  %meta{name: 'robots', content: 'index, follow'}
+  %meta{name: 'googlebot', content: 'index, follow'}
+
+%section.jumbotron
+  .overlay.bg-half-grey
+  .container
+    .col-sm-6
+      .main-title.bg-grey.text-center
+        = t('.become_siloette')
+
+%section.padded
+  .container
+    .row
+      .col-sm-7
+        %h3= t('.we_put_you_first')
+        %br
+        %h4= t('.work_on_your_own_terms')
+        %br
+        %p= t('.looking_pro')
+      .col-sm-5
+        %br
+        - if current_user
+          - unless current_user.dancer?
+            = link_to t('links.become_siloette'), become_dancer_user_path(current_user), class: 'btn btn-block btn-primary text-uppercase'
+        - else
+          =# link_to fa_icon('instagram', text: t('common.instagram')), omniauth_authorize_path(:user, :instagram, state: :dancer), class: 'btn btn-block btn-instagram text-uppercase'
+          =# link_to fa_icon('facebook', text: t('common.facebook')), omniauth_authorize_path(:user, :facebook, state: :dancer), class: 'btn btn-block btn-facebook text-uppercase'
+          = link_to fa_icon('sign-in', text: t('common.sign_up')), new_user_registration_path(bd: true), class: 'btn btn-block btn-primary text-uppercase'
+          =# link_to fa_icon('google', text: t('common.google')), omniauth_authorize_path(:user, :google_oauth2, state: :dancer), class: 'btn btn-block btn-google text-uppercase'
+          =# link_to fa_icon('twitter', text: t('common.twitter')), omniauth_authorize_path(:user, :twitter, state: :dancer), class: 'btn btn-block btn-twitter text-uppercase'
+
+%section.padded.bg-blue
+  .container
+    .row
+      - 3.times do |i|
+        - advantage = t('.advantages')[i]
+        .text-center.col-sm-4
+          %h1= fa_icon advantage[:icon]
+          %h3(style="min-height: 56px;")= advantage[:title]
+          %p.text-justify= advantage[:description]
+
+%section.padded
+  .container
+    .row
+      .col-sm-7
+        %h3= t('.work_much')
+        %p= t('.partnerships')
+        %hr.invisible
+        %h3= t('.plan_for_future')
+        %p= t('.prepare_future')
+
+      .col-sm-5
+        = image_tag 'become_performer.jpg', alt: 'Become performer', class: 'img-responsive'
