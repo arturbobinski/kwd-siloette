@@ -6,14 +6,7 @@
       .panel-heading
         = t('common.sign_up')
       .panel-body
-        =# link_to fa_icon('instagram', text: t('common.instagram')), omniauth_authorize_path(:user, :instagram, state), class: 'btn btn-block btn-instagram text-uppercase'
-        =# link_to fa_icon('facebook', text: t('common.facebook')), omniauth_authorize_path(:user, :facebook, state), class: 'btn btn-block btn-facebook text-uppercase'
-        =# link_to fa_icon('google', text: t('common.google')), omniauth_authorize_path(:user, :google_oauth2, state), class: 'btn btn-block btn-google text-uppercase'
-        =# link_to fa_icon('twitter', text: t('common.twitter')), omniauth_authorize_path(:user, :twitter, state), class: 'btn btn-block btn-twitter text-uppercase'
-
-        .horizontal-line
-          .inner or
-
+      
         = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-horizontal', 'data-parsley-validate' => true }) do |f|
           =# devise_error_messages!
           - if params[:bd].present?
