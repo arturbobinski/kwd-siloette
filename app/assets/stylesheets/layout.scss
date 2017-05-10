@@ -13,3 +13,19 @@ html, body {
 #categories {
   margin-top: 100px;
 }
+
+.sessions-new {
+  
+  #main-content {
+    min-height: 1000px;
+    padding-top: 250px;
+    background-image: image-url('girls.jpg');
+  }
+  
+  @media (max-width: $screen-xs-max) {
+    #main-content {
+      padding-top: 0;
+    }
+  }
+  
+}
