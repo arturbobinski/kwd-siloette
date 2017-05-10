@@ -4,16 +4,7 @@
       .panel-heading
         = t('common.sign_in')
       .panel-body
-        =# link_to fa_icon('instagram', text: t('common.instagram')), user_instagram_omniauth_authorize_path, class: 'btn btn-block btn-instagram text-uppercase'
-        =# link_to fa_icon('facebook', text: t('common.facebook')), user_facebook_omniauth_authorize_path, class: 'btn btn-block btn-facebook text-uppercase'
-        =# link_to fa_icon('google', text: t('common.google')), user_google_oauth2_omniauth_authorize_path, class: 'btn btn-block btn-google text-uppercase'
-        =# link_to fa_icon('twitter', text: t('common.twitter')), user_twitter_omniauth_authorize_path, class: 'btn btn-block btn-twitter text-uppercase'
-
-        %br
-        = t('.or_with_email')
-        .clearfix
-        %br
-
+        
         = simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal', 'data-parsley-validate' => true }) do |f|
           = f.input :email, autofocus: true, label: false, required: true, input_html: { 'data-parsley-type' => :email }
           = f.input :password, label: false, required: true
