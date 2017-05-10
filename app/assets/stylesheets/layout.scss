@@ -57,4 +57,11 @@ html, body {
       height: 1055px;
     }
   }
+  
+  @media (max-width: $screen-xs-max) {
+    #main-content {
+      padding-top: 25px;
+    }
+  }
+  
 }
