@@ -41,6 +41,8 @@
   .home-index & {
     @media (max-width: $screen-xs-max) {
       background-image: image-url('logo-small-white.png');
+      width: 10px;
+      height: 55px;
     }
 
     @media (min-width: $screen-sm-min) {
