@@ -15,6 +15,11 @@ html, body {
 }
 
 .sessions-new {
+  background: none !important;
+  
+  .navbar {
+    margin-bottom: 21px;
+  }
   
   #main-content {
     min-height: 1000px;
