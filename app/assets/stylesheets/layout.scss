@@ -39,3 +39,22 @@ html, body {
   }
   
 }
+
+.registrations-new {
+  background: none !important;
+  
+  .navbar {
+    margin-bottom: 0px;
+  }
+  
+  #main-content {
+    min-height: 1000px;
+    padding-top: 250px;
+    background-image: image-url('girls2.jpg');
+    background-position: center;
+    
+    .overlay {
+      height: 1055px;
+    }
+  }
+}
