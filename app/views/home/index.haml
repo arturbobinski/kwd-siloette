@@ -12,6 +12,7 @@
     .row
       .col-sm-12
         .text-center
+          %p.lead.text-light= t('.whats_new')
           %ul#categories.list-unstyled
             - @categories.each do |category|
               %li
@@ -33,13 +34,6 @@
           .thumbnail-grid-wide
             .thumbnail-grid
               = render @top_services
-
-%section#whats-new
-  .container
-    .row
-      .col-sm-10.col-sm-offset-1
-        .section-content.text-center
-          %p.lead.text-light= t('.whats_new')
 
 %section#how-it-works
 
