@@ -21,6 +21,6 @@
         - else
           =# link_to fa_icon('instagram', text: t('common.instagram')), omniauth_authorize_path(:user, :instagram, state: :dancer), class: 'btn btn-block btn-instagram text-uppercase'
           =# link_to fa_icon('facebook', text: t('common.facebook')), omniauth_authorize_path(:user, :facebook, state: :dancer), class: 'btn btn-block btn-facebook text-uppercase'
-          = link_to new_user_registration_path(bd: true), class: 'btn btn-lg btn-block btn-primary text-uppercase'
+          = link_to t('common.sign_up'), new_user_registration_path(bd: true), class: 'btn btn-lg btn-block btn-primary text-uppercase'
           =# link_to fa_icon('google', text: t('common.google')), omniauth_authorize_path(:user, :google_oauth2, state: :dancer), class: 'btn btn-block btn-google text-uppercase'
           =# link_to fa_icon('twitter', text: t('common.twitter')), omniauth_authorize_path(:user, :twitter, state: :dancer), class: 'btn btn-block btn-twitter text-uppercase'
