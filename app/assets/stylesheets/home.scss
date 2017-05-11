@@ -19,7 +19,7 @@
     color: white;
 
     .container {
-      padding-top: 100px;
+      padding-top: 200px;
     }
 
     h1, .h1 {
@@ -36,6 +36,10 @@
       &:hover {
         color: white;
       }
+    }
+    
+    #categories {
+      margin-top: 50px !important;
     }
 
     #categories li {
