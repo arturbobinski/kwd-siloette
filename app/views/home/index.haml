@@ -32,7 +32,7 @@
           %h3= t('.top_services')
           .thumbnail-grid-wide
             .thumbnail-grid
-              = render @top_services
+              = render @top_services.pluralize(1)
 
 %section#whats-new
   .container
