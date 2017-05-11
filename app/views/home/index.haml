@@ -15,7 +15,7 @@
           %ul#categories.list-unstyled
             - @categories.each do |category|
               %li
-                %span.btn.btn-trans= category.name
+                %span.btn.btn-trans= category.name.pluralize(2) 
           %hr.invisible
           %hr.invisible
         .row
