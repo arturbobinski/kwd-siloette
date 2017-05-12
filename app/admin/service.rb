@@ -55,7 +55,7 @@ ActiveAdmin.register Service do
       row :location
       row :image do |service|
         service.images.each do |img|
-          image_tag(img.url(:small))
+          image_tag img.file.url(:small), width: 60
         end
       end
     end
