@@ -54,8 +54,12 @@ ActiveAdmin.register Service do
       row :updated_at
       row :location
       row :image do |service|
-        service.images.each do |img|
-          image_tag img.file.url(:small), width: 60
+        ul do
+          service.images.each do |img|
+            li do
+              image_tag img.image.url(:small), width: 60
+            end
+          end
         end
       end
     end
