@@ -52,7 +52,7 @@ ActiveAdmin.register Service do
       row :location
       row :image do |service|
         service.images.each do |img|
-          image_tag img.file.url(:large)
+          image_tag(img.image.url(:small))
         end
       end
     end
