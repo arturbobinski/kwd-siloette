@@ -31,6 +31,7 @@ ActiveAdmin.register Service do
   end
   
   show do
+    default_main_content
     attributes_table do 
       row "Image" do
         image_tag service.primary_image.file.url(:small), width: 60
