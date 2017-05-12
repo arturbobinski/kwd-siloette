@@ -54,7 +54,7 @@ ActiveAdmin.register Service do
       row :updated_at
       row :location
       row :image do |service|
-        ul, class: 'service_images' do
+        ul do
           service.images.each do |img|
             li do
               image_tag img.file.url(:large)
