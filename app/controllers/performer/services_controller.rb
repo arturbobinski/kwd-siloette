@@ -25,11 +25,7 @@ module Performer
       if @service.save
         @service.image_ids = @image_ids
         accept_invitation
-        if path = next_path
-          redirect_to path
-        else
-          redirect_to performer_services_path(scope: 'personal'), notice: t('.notice')
-        end
+        redirect_to performer_services_path(scope: 'personal'), notice: t('.notice')
       else
         render :new
       end
