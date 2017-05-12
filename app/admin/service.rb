@@ -32,11 +32,11 @@ ActiveAdmin.register Service do
   
   show do
     attributes_table(*resource.attributes.keys) do
-      row "Images" do
+      row "Images" do |service|
         ul do
-          @user.service_images.each do |img|
+          service.file.url.each do |img|
             li do 
-              image_tag(img.image.url)
+              image_tag img.file.url(:large)
             end
           end
         end
