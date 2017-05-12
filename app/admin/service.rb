@@ -31,8 +31,8 @@ ActiveAdmin.register Service do
   end
   
   show do
-    column :image do |service|
-      if service.primary_image
+    attributes_table do 
+      row "Image" do
         image_tag service.primary_image.file.url(:small), width: 60
       end
     end
