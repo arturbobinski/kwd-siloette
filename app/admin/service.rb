@@ -33,9 +33,10 @@ ActiveAdmin.register Service do
   show do
     attributes_table do
       row :id
-      row link_to service.user.name, admin_user_path(service.user)
+      row :user
       row :title
       row :description
+      row :category
       row :open
       row :status
       row :rating
