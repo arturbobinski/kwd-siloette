@@ -10,7 +10,7 @@
       - else
         - if current_role_user.dancer?
           - if current_role_user.verified?
-            %li= link_to t('links.create_service'), new_performer_service_path
+            %li= link_to t('links.create_service'), class: 'new-service', new_performer_service_path
         - else
           %li= link_to t('links.become_siloette'), work_with_us_path
         %li.dropdown

@@ -18,6 +18,17 @@
   line-height: 32px;
 }
 
+.navbar-nav > li > a.new-service {
+  border: 1px solid #8E44AD;
+  -webkit-border-radius: 300px;
+  -moz-border-radius: 300px;
+  border-radius: 300px;
+  margin-top: 8px;
+  /* margin-bottom: 10px; */
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
 .navbar-brand {
   height: auto;
   text-transform: uppercase;
