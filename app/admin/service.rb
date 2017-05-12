@@ -32,8 +32,14 @@ ActiveAdmin.register Service do
   
   show do
     attributes_table(*resource.attributes.keys) do
-      row "Image" do
-        image_tag service.primary_image.file.url(:small), width: 60
+      row "Images" do
+        ul do
+          @user.profile_images.each do |img|
+            li do 
+              image_tag(img.image.url)
+            end
+          end
+        end
       end
     end
   end
