@@ -21,15 +21,18 @@
   overflow: hidden;
 }
 
-ul {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
+.row-image {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    
+    li {
+      border: 1px solid #DDD;
+      margin-right: 15px;
+      margin-bottom: 15px;
+      float: left;
+    }
   
-  li {
-    border: 1px solid #DDD;
-    margin-right: 15px;
-    float: left;
   }
-
 }
