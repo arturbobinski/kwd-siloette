@@ -34,7 +34,7 @@ ActiveAdmin.register Service do
     attributes_table(*resource.attributes.keys) do
       row "Images" do |service|
         ul do
-          service.file.each do |img|
+          service.service_images.each do |img|
             li do 
               image_tag img.file.url(:large)
             end
