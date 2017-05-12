@@ -29,6 +29,14 @@ ActiveAdmin.register Service do
     column :status
     actions
   end
+  
+  show do
+    column :image do |service|
+      if service.primary_image
+        image_tag service.primary_image.file.url(:small), width: 60
+      end
+    end
+  end
 
   filter :category
   filter :user
