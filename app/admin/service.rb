@@ -54,10 +54,10 @@ ActiveAdmin.register Service do
       row :updated_at
       row :location
       row :image do |service|
-        ul do
+        ul.service_images do
           service.images.each do |img|
             li do
-              image_tag img.file.url(:small)
+              image_tag img.file.url(:large)
             end
           end
         end
