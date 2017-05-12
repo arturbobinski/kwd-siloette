@@ -31,13 +31,13 @@ ActiveAdmin.register Service do
   end
   
   show do
-    attributes_table(*resource.attributes.keys) do
+    
       row :image do |service|
         service.images.each do |img|
           image_tag img.file.url(:large)
         end
       end
-    end
+    
   end
 
   filter :category
