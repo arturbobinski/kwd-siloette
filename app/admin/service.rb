@@ -31,13 +31,30 @@ ActiveAdmin.register Service do
   end
   
   show do
-    
+    attributes_table do
+      row :id
+      row :title
+      row :description
+      row :open
+      row :status
+      row :rating
+      row :price_cents
+      row :currency
+      row :quantity
+      row :views_count
+      row :comments_count
+      row :performers_count
+      row :ethnicity
+      row :deleted_at
+      row :created_at
+      row :updated_at
+      row :location
       row :image do |service|
         service.images.each do |img|
           image_tag img.file.url(:large)
         end
       end
-    
+    end
   end
 
   filter :category
