@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   attr_accessor :accept_terms, :consent_check, :referred_by, :is_admin
+  after_create :send_welcome_mail
+
 
   belongs_to :referrer, class_name: 'User', foreign_key: :referrer_id
 
@@ -164,4 +166,9 @@ class User < ActiveRecord::Base
   def send_verified_mail
     UserMailer.user_verified_mail(self).deliver_later if (verified_changed? && verified?)
   end
+  
+  def send_welcome_mail
+    UserMailer.send_welcome_mail(self).deliver
+  end
+  
 end

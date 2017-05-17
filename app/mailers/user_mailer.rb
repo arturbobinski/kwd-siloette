@@ -26,6 +26,18 @@ class UserMailer < ApplicationMailer
 
     mail(to: @user.email, subject: 'Account verified!')
   end
+  
+  def send_welcome_mail(user)
+    @user = user
+
+    mail(to: @user.email, subject: 'Welcome!')
+  end
+  
+  def send_profile_approved(user)
+    @user = user
+
+    mail(to: @user.email, subject: 'Profile Approved!')
+  end
 
   def new_booking_email(booking)
     @booking = booking
