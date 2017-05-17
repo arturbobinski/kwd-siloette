@@ -32,7 +32,7 @@ ActiveAdmin.register User do
     update! do |format|
       
       if resource.valid?
-        UserMailer.send_profile_approved(User.find(resource.id)).deliver
+        UserMailer.send_profile_approved(resource).deliver
         format.html { redirect_to collection_path }
       end
     end
