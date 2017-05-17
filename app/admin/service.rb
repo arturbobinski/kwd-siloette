@@ -39,7 +39,6 @@ ActiveAdmin.register Service do
         else
          UserMailer.send_service_close(User.find(resource.user_id)).deliver  
         end
-      end
         
         format.html { redirect_to collection_path }
       end
