@@ -14,6 +14,8 @@ class UserMailer < ApplicationMailer
 
     mail(to: @user.email, subject: 'Account is being verified!')
   end
+  
+  
 
   def user_verification_email(user)
     @user = user
@@ -25,6 +27,16 @@ class UserMailer < ApplicationMailer
     @user = user
 
     mail(to: @user.email, subject: 'Account verified!')
+  end
+  
+  def send_service_open(user)
+    @user = user
+    mail(to: @user.email, subject: 'Service Open!')
+  end
+  
+  def send_service_close(user)
+    @user = user
+    mail(to: @user.email, subject: 'Service Closed!')
   end
   
   def send_welcome_mail(user)

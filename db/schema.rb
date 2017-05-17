@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170517160854) do
+ActiveRecord::Schema.define(version: 20170503161341) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "first_name",   limit: 255
@@ -482,7 +482,6 @@ ActiveRecord::Schema.define(version: 20170517160854) do
     t.string   "instagram_handle",       limit: 255
     t.string   "routing_number",         limit: 255
     t.string   "account_number",         limit: 255
-    t.boolean  "approved",                             default: false
   end
 
   add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree

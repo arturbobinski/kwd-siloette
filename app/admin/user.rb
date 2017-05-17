@@ -1,7 +1,7 @@
 ActiveAdmin.register User do
 
   permit_params :email, :first_name, :last_name, :password, :password_confirmation, :role, :description,
-    :is_admin, :verified, :approved ,:referral_code
+    :is_admin, :verified ,:referral_code
 
   index do
     selectable_column
@@ -10,7 +10,6 @@ ActiveAdmin.register User do
     column :name
     column :role
     column :verified
-    column :approved
     column :sign_in_count
     column :created_at
     actions do |user|
@@ -23,7 +22,6 @@ ActiveAdmin.register User do
   filter :last_name
   filter :role, as: :select, collection: User.roles
   filter :verified
-  filter :approved
   filter :current_sign_in_at
   filter :sign_in_count
   filter :created_at
@@ -32,7 +30,7 @@ ActiveAdmin.register User do
     update! do |format|
       
       if resource.valid?
-        UserMailer.send_profile_approved(resource).deliver
+        # UserMailer.send_profile_approved(User.find(resource.id)).deliver
         format.html { redirect_to collection_path }
       end
     end
@@ -47,7 +45,6 @@ ActiveAdmin.register User do
       f.input :role
       f.input :description
       f.input :verified
-      f.input :approved
     end
     f.actions
   end

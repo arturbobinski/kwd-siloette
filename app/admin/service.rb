@@ -30,6 +30,22 @@ ActiveAdmin.register Service do
     actions
   end
   
+   def update
+    update! do |format|
+      
+      if resource.valid?
+        if resource.open
+         UserMailer.send_service_open(User.find(resource.user_id)).deliver  
+        else
+         UserMailer.send_service_close(User.find(resource.user_id)).deliver  
+        end
+      end
+        
+        format.html { redirect_to collection_path }
+      end
+    end
+  end
+  
   show do
     attributes_table do
       row :id
