@@ -1,6 +1,9 @@
 .service-status-close{
-    border: 1px solid transparent;
+    border: 4px solid transparent;
     border-color: #d9534f !important;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 10px;
 }
 
 .thumbnail-grid-item {
