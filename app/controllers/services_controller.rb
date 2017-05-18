@@ -12,8 +12,14 @@ class ServicesController < ApplicationController
   def show
     
     @service = Service.find(params[:id])
-    @testimonials = @service.testimonials
-    @similar_shows = Service.top_rated.where(category_id: @service.category_id).where.not(id: @service.id).limit(3)
+    
+    if @service.open
+      @testimonials = @service.testimonials
+      @similar_shows = Service.top_rated.where(category_id: @service.category_id).where.not(id: @service.id).limit(3)
+    else
+      redirect_to root_path, notice: 'Service not available.'
+    end
+    
   end
 
   private

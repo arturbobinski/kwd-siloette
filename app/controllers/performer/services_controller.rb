@@ -21,9 +21,12 @@ module Performer
 
     def create
       @service = current_user.services.new(service_params)
+      @service.open = false
 
       if @service.save
         @service.image_ids = @image_ids
+        UserMailer.new_service_created(current_user).deliver
+        UserMailer.new_service_created_admin(User.where(role: 3).first).deliver
         accept_invitation
         redirect_to performer_services_path(scope: 'personal'), notice: t('.notice')
       else

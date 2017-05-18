@@ -1,4 +1,4 @@
-.thumbnail-grid-item
+.thumbnail-grid-item{:class => ("service-status-close" unless @service.open?)}
   .thumbnail-grid-inner
     = image_tag service.primary_image.file.url(:medium), alt: service.category, class: 'thumbnail-grid-image'
     .thumbnail-grid-overlay

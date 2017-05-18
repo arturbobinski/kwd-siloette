@@ -12,7 +12,7 @@
 - is_owner = @service.user == current_user
 
 .container
-  .panel.panel-default
+  .panel.panel-default{:class => ("status-close" unless @service.open?)}
     .panel-heading
       = link_to fa_icon('angle-double-left', text: t('common.back')), :back
     .panel-body

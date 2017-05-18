@@ -29,21 +29,25 @@ ActiveAdmin.register Service do
     column :status
     actions
   end
-  
-   def update
-    update! do |format|
-      
-      if resource.valid?
-        if resource.open
-         UserMailer.send_service_open(User.find(resource.user_id)).deliver  
-        else
-         UserMailer.send_service_close(User.find(resource.user_id)).deliver  
-        end
-        
-        format.html { redirect_to collection_path }
+
+
+  controller do
+     def update(options={}, &block)
+
+      if resource.open
+        UserMailer.send_service_open(User.find(resource.user_id)).deliver  
+      else
+        UserMailer.send_service_close(User.find(resource.user_id)).deliver  
       end
-    end
+      
+      super do |success, failure| 
+        block.call(success, failure) if block
+        failure.html { render :edit }
+      end
+     end
   end
+
+
   
   show do
     attributes_table do

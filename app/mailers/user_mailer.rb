@@ -29,6 +29,18 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Account verified!')
   end
   
+  def new_service_created_admin(user)
+    @user = user
+
+    mail(to: @user.email, subject: 'Service created, waiting approval!')
+  end
+  
+  def new_service_created(user)
+    @user = user
+
+    mail(to: @user.email, subject: 'Service created, waiting approval!')
+  end
+  
   def send_service_open(user)
     @user = user
     mail(to: @user.email, subject: 'Service Open!')
