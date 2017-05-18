@@ -34,14 +34,19 @@ ActiveAdmin.register Service do
   controller do
      def update(options={}, &block)
 
-      if resource.open
-        UserMailer.send_service_open(User.find(resource.user_id)).deliver  
-      else
-        UserMailer.send_service_close(User.find(resource.user_id)).deliver  
-      end
+      # if resource.open
+      #   UserMailer.send_service_open(User.find(resource.user_id)).deliver  
+      # else
+      #   UserMailer.send_service_close(User.find(resource.user_id)).deliver  
+      # end
       
       super do |success, failure| 
         block.call(success, failure) if block
+        if resource.open
+          UserMailer.send_service_open(User.find(resource.user_id)).deliver  
+        else
+          UserMailer.send_service_close(User.find(resource.user_id)).deliver  
+        end
         failure.html { render :edit }
       end
      end
