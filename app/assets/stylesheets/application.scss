@@ -20,5 +20,11 @@
 @import "services";
 @import "slider";
 @import "posts";
-@import "bookings"
+@import "bookings";
+
+@media  (max-width: 420px) {
+    .thumbnail-grid-item {
+        width: 45% !important;
+    }
+}
 
