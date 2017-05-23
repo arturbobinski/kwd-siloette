@@ -18,7 +18,21 @@ class UsersController < ApplicationController
   end
 
   def update
-    
+    if @user.update(user_params)
+      if @user.dancer? && !@user.verified?
+        UserMailer.user_verification_email(@user).deliver_later
+        UserMailer.user_verifying_email(@user).deliver_later
+        redirect_to :back
+      else
+        redirect_to edit_user_path(@user), notice: t('.notice')
+      end
+    else
+      if !@user.verified?
+        render 'users/apply'
+      else
+        render :edit
+      end
+    end
   end
 
   def become_dancer
