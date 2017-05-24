@@ -26,15 +26,15 @@ ActiveAdmin.register User do
   filter :sign_in_count
   filter :created_at
   
-  def update
-    update! do |format|
+  # def update
+  #   update! do |format|
       
-      if resource.valid?
-        # UserMailer.send_profile_approved(User.find(resource.id)).deliver
-        format.html { redirect_to collection_path }
-      end
-    end
-  end
+  #     if resource.valid?
+  #       # UserMailer.send_profile_approved(User.find(resource.id)).deliver
+  #       format.html { redirect_to collection_path }
+  #     end
+  #   end
+  # end
 
   form do |f|
     f.inputs 'User Details' do

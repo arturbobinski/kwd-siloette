@@ -28,3 +28,8 @@
     }
 }
 
+@media (max-width: 767px) {
+.navbar-nav .open .dropdown-menu {
+    left: -42px;
+}
+
