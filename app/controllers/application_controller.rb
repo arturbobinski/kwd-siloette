@@ -20,9 +20,9 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.admin?
-      user_path(current_role_user)
+      admin_dashboard_path
     else
-      root_path
+      user_path(current_role_user)
     end
   end
 
