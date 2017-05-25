@@ -19,14 +19,8 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if !(referer = stored_location_for(resource)).blank?
-      referer
-    elsif resource.admin?
-      admin_dashboard_path
-    elsif path = next_path(resource)
-      path
-    elsif request.referer == new_user_session_url
-      super
+    if resource.admin?
+      user_path(current_role_user)
     else
       root_path
     end
