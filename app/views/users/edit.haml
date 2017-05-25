@@ -25,7 +25,7 @@
           .avatar-field-container
             .avatar-img-overlay click to change
             = image_tag avatar_url(@user), alt: '', size: '118x118', title: t('.click_to_change'), class: 'avatar_img'
-            = f.input :avatar, as: :file, label: false
+            = f.input :avatar, as: :file, required: true, label: false
             = f.hidden_field :avatar_cache
         .col-sm-9
           %h2.full-name= @user.name
