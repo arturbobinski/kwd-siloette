@@ -26,11 +26,21 @@
     .thumbnail-grid-item {
         width: 44% !important;
     }
+    
+    .user_slug {
+        label:after {
+        content: '/';
+    }
+    
+    input {
+        text-align: right;
+    }
 }
 
 @media (max-width: 767px) {
-.navbar-nav .open .dropdown-menu {
-    left: -42px;
+    .navbar-nav .open .dropdown-menu {
+        left: -42px;
+    }
 }
-}
+
 
