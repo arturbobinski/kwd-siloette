@@ -29,12 +29,12 @@
     
     .user_slug {
         label:after {
-        content: '/';
+            content: '/';
         }
-    }
     
-    input {
-        text-align: right;
+        input {
+            text-align: right;
+        }
     }
 }
 
