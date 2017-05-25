@@ -19,9 +19,7 @@ class UsersController < ApplicationController
 
  def update
     if @user.update(user_params)
-      if @user.dancer? && path = next_path(@user)
-        redirect_to path
-      else
+      if @user.dancer? 
         redirect_to edit_user_path(@user), notice: t('.notice')
       end
     end
