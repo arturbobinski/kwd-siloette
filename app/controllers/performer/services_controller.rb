@@ -40,11 +40,7 @@ module Performer
     def update
       if @service.update(service_params)
         accept_invitation
-        if path = next_path
-          redirect_to path
-        else
-          redirect_to :back, notice: t('.notice')
-        end
+        redirect_to :back, notice: t('.notice')
       else
         render :edit
       end
