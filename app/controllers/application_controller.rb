@@ -19,11 +19,12 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if resource.admin?
-      admin_dashboard_path
-    else
-      edit_user_path(current_role_user)
-    end
+    edit_user_path(current_user)
+    # if resource.admin?
+    #   admin_dashboard_path
+    # else
+    #   edit_user_path(current_role_user)
+    # end
   end
 
   def user_time_zone
@@ -87,7 +88,7 @@ class ApplicationController < ActionController::Base
   end
 
   def next_path(user=current_user)
-    # return unless user.dancer?
+    return unless user.dancer?
 
     if !user.profile_ready?
       edit_user_path(user)
