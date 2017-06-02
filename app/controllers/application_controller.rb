@@ -22,8 +22,7 @@ class ApplicationController < ActionController::Base
     if resource.admin?
       admin_dashboard_path
     else
-      # edit_user_path(current_role_user)
-      edit_user_path(resource)
+      edit_user_path(current_role_user)
     end
   end
 
@@ -88,7 +87,7 @@ class ApplicationController < ActionController::Base
   end
 
   def next_path(user=current_user)
-    return unless user.dancer?
+    # return unless user.dancer?
 
     if !user.profile_ready?
       edit_user_path(user)
