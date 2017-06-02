@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       end
     else
       if @user.dancer?
-        format.html { render :edit }
+        # format.html { render :edit }
       end
     end
   end

@@ -22,7 +22,8 @@ class ApplicationController < ActionController::Base
     if resource.admin?
       admin_dashboard_path
     else
-      edit_user_path(current_role_user)
+      # edit_user_path(current_role_user)
+      edit_user_path(resource)
     end
   end
 
