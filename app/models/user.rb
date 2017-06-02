@@ -51,6 +51,8 @@ class User < ActiveRecord::Base
   validates :role, inclusion: { in: User.roles.keys[0..-2] }, if: 'is_admin.blank?'
   validates :description, length: { maximum: 250 }
   validates :avatar, file_size: { less_than_or_equal_to: MAX_AVATAR_SIZE.to_i }, file_content_type: { allow: /^image\/.*/ }
+  validates :avatar, presence: true, on: :update
+
   validates_date :birth_date, allow_blank: true
   # validates_presence_of :avatar, :on => :update
 

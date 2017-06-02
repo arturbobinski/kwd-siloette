@@ -22,6 +22,10 @@ class UsersController < ApplicationController
       if @user.dancer? 
         redirect_to edit_user_path(@user), notice: t('.notice')
       end
+    else
+      if @user.dancer?
+        format.html { render :edit }
+      end
     end
   end
 
