@@ -17,14 +17,29 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to main_app.root_url, alert: exception.message
   end
-
-  def after_sign_in_path_for(resource)
-    if resource.admin?
-      admin_dashboard_path
-    else
-      edit_user_path(current_role_user)
+  
+  after_filter :store_action
+  
+  def store_action
+    return unless request.get? 
+    if (request.path != "/users/sign_in" &&
+        request.path != "/users/sign_up" &&
+        request.path != "/users/password/new" &&
+        request.path != "/users/password/edit" &&
+        request.path != "/users/confirmation" &&
+        request.path != "/users/sign_out" &&
+        !request.xhr?) # don't store ajax calls
+      store_location_for(:user, root_path)
     end
   end
+
+  # def after_sign_in_path_for(resource)
+  #   if resource.admin?
+  #     admin_dashboard_path
+  #   else
+  #     edit_user_path(current_role_user)
+  #   end
+  # end
 
   def user_time_zone
     @user_time_zone ||= ActiveSupport::TimeZone[@current_time_zone]
