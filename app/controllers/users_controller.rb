@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  #skip_before_action :check_verified, only: [:apply, :update]
+  skip_before_action :check_verified, only: [:apply, :update]
   before_filter :authenticate_user!, except: [:show]
   load_and_authorize_resource
 
@@ -17,34 +17,14 @@ class UsersController < ApplicationController
     build_resources
   end
 
- #def update
- #   if @user.update(user_params)
-#      if @user.dancer? 
-#        redirect_to edit_user_path(@user), notice: t('.notice')
-#      end
-#    else
-#      if @user.dancer?
-#        # format.html { render :edit }
-#      end
-#    end
-#  end
-
-  def update
+ def update
     if @user.update(user_params)
-      if @user.dancer?
-        UserMailer.user_verification_email(@user).deliver_later
-        UserMailer.user_verifying_email(@user).deliver_later
-        redirect_to :back
-      elsif path = next_path(@user)
-        redirect_to path
-      else
+      if @user.dancer? 
         redirect_to edit_user_path(@user), notice: t('.notice')
       end
     else
-      if !@user.verified?
-        render 'users/apply'
-      else
-        render :edit
+      if @user.dancer?
+        # format.html { render :edit }
       end
     end
   end
