@@ -18,20 +18,24 @@ class ApplicationController < ActionController::Base
     redirect_to main_app.root_url, alert: exception.message
   end
 
-  def after_sign_in_path_for(resource)
-    if !(referer = stored_location_for(resource)).blank?
-      referer
-    elsif resource.admin?
-      admin_dashboard_path
-    elsif path = next_path(resource)
-      path
-    elsif request.referer == new_user_session_url
-      super
-    else
-      root_path
-    end
-  end
+  #def after_sign_in_path_for(resource)
+  #  if !(referer = stored_location_for(resource)).blank?
+  #    referer
+  #  elsif resource.admin?
+  #    admin_dashboard_path
+  #  elsif path = next_path(resource)
+  #    path
+  #  elsif request.referer == new_user_session_url
+  #    super
+  #  else
+  #    root_path
+  #  end
+  #end
 
+  def after_sign_in_path_for(resource)
+    :redirect_to edit_user_path(current_role_user)
+  end
+  
   def user_time_zone
     @user_time_zone ||= ActiveSupport::TimeZone[@current_time_zone]
   end
