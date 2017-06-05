@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   #end
 
   def after_sign_in_path_for(resource)
-    :redirect_to edit_user_path(current_role_user)
+    edit_user_path(current_role_user)
   end
   
   def user_time_zone
