@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  skip_before_action :check_verified, only: [:apply, :update]
+  #skip_before_action :check_verified, only: [:apply, :update]
   before_filter :authenticate_user!, except: [:show]
   load_and_authorize_resource
 
